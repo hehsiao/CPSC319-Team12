@@ -1,1 +1,63 @@
-<h1>This is dashboard</h1>
+<% if !flash[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="dashboard index">
+  <h2>Dashboard</h2>
+
+  <%= link_to("Add New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
+<br><br>
+  <table class="listing" summary="Idea list">
+    <tr class="header">
+
+      <th>Idea</th>
+      <th>Actions</th>
+    </tr>
+    <% @ideas.each do |idea| %>
+    <tr>
+      <td><%= idea.title %></td>
+      <td class="actions">
+        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<br><br>
+  <table class="listing" summary=" My Idea list">
+    <tr class="header">
+
+      <th>My Idea</th>
+      <th>Actions</th>
+    </tr>
+    <% @ideas.each do |idea| %>
+    <tr>
+      <td><%= idea.title %></td>
+      <td class="actions">
+        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
+        <%= link_to("Edit", {:action => 'edit', :id => idea.id}, :class => 'action edit') %>
+        <%= link_to("Delete", {:action => 'delete', :id => idea.id}, :class => 'action delete') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<br><br>
+  <table class="listing" summary="Subscription list">
+    <tr class="header">
+
+      <th>My Subscriptions</th>
+      <th>Actions</th>
+    </tr>
+    <% @ideas.each do |idea| %>
+    <tr>
+      <td><%= idea.title %></td>
+      <td class="actions">
+        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+<br><br>
+  Notifications
+</div>

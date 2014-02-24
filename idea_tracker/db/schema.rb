@@ -11,7 +11,62 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140222061952) do
+ActiveRecord::Schema.define(version: 20140223201026) do
+
+  create_table "categories", force: true do |t|
+    t.integer  "idea_id"
+    t.string   "name"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "categories", ["idea_id"], name: "index_categories_on_idea_id", using: :btree
+
+  create_table "clients", force: true do |t|
+    t.string   "c_name"
+    t.string   "c_email"
+    t.integer  "c_phone_num"
+    t.string   "taker"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "comments", force: true do |t|
+    t.integer  "idea_id"
+    t.integer  "user_id"
+    t.string   "message"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "comments", ["idea_id"], name: "index_comments_on_idea_id", using: :btree
+
+  create_table "ideas", force: true do |t|
+    t.integer  "client_id"
+    t.integer  "user_id"
+    t.integer  "comment_id"
+    t.integer  "category_id"
+    t.integer  "tag_association_id"
+    t.integer  "tag_subscription_id"
+    t.integer  "tag_keyword_id"
+    t.string   "title"
+    t.string   "details"
+    t.string   "reference_source"
+    t.string   "status"
+    t.string   "taker_name"
+    t.string   "taker_email"
+    t.integer  "taker_phone_num"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "ideas", ["category_id"], name: "index_ideas_on_category_id", using: :btree
+  add_index "ideas", ["client_id"], name: "index_ideas_on_client_id", using: :btree
+  add_index "ideas", ["comment_id"], name: "index_ideas_on_comment_id", using: :btree
+  add_index "ideas", ["tag_association_id"], name: "index_ideas_on_tag_association_id", using: :btree
+  add_index "ideas", ["tag_keyword_id"], name: "index_ideas_on_tag_keyword_id", using: :btree
+  add_index "ideas", ["tag_subscription_id"], name: "index_ideas_on_tag_subscription_id", using: :btree
+  add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
