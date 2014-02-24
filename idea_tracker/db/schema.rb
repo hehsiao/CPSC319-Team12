@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140223201026) do
+ActiveRecord::Schema.define(version: 20140224012259) do
 
   create_table "categories", force: true do |t|
     t.integer  "idea_id"
@@ -67,6 +67,26 @@ ActiveRecord::Schema.define(version: 20140223201026) do
   add_index "ideas", ["tag_keyword_id"], name: "index_ideas_on_tag_keyword_id", using: :btree
   add_index "ideas", ["tag_subscription_id"], name: "index_ideas_on_tag_subscription_id", using: :btree
   add_index "ideas", ["user_id"], name: "index_ideas_on_user_id", using: :btree
+
+  create_table "notifications", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tag_associations", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tag_keywords", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  create_table "tag_subscriptions", force: true do |t|
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
