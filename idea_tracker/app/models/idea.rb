@@ -4,5 +4,5 @@ class Idea < ActiveRecord::Base
 	has_many :comments
 
 	scope :search, lambda {|query|
-    	where(["name LIKE ?", "%#{query}%"])
+    	where(["name LIKE ?", "%#{query}%"]) }
 end
