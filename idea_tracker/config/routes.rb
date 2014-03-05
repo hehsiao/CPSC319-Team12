@@ -1,4 +1,8 @@
 IdeaTracker::Application.routes.draw do
+  resources :partners
+
+  resources :ideas
+
   get "comments/index"
   get "comments/show"
   get "comments/new"

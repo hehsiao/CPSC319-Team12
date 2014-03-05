@@ -1,2 +1,39 @@
-<h1>Ideas#show</h1>
-<p>Find me in app/views/ideas/show.html.erb</p>
+<p id="notice"><%= notice %></p>
+
+<p>
+  <strong>User:</strong>
+  <%= @idea.user_id %>
+</p>
+
+<p>
+  <strong>Description:</strong>
+  <%= @idea.description %>
+</p>
+
+<p>
+  <strong>Provider:</strong>
+  <%= @idea.provider_id %>
+</p>
+
+<p>
+  <strong>Receiver:</strong>
+  <%= @idea.receiver_id %>
+</p>
+
+<p>
+  <strong>Submission date:</strong>
+  <%= @idea.submission_date %>
+</p>
+
+<p>
+  <strong>Last modified:</strong>
+  <%= @idea.last_modified %>
+</p>
+
+<p>
+  <strong>Status date change:</strong>
+  <%= @idea.status_date_change %>
+</p>
+
+<%= link_to 'Edit', edit_idea_path(@idea) %> |
+<%= link_to 'Back', ideas_path %>
