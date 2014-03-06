@@ -1,5 +1,3 @@
-<%= link_to("<< Back to List", {:action => 'index'}, :class => 'back-link') %>
-
 <div class="users delete">
   <h2>Delete User</h2>
 
@@ -10,8 +8,9 @@
     <p class="reference-name"><%= @user.email %></p>
 
     <div class="form-buttons">
-      <%= submit_tag("Delete User") %>
+      <%= submit_tag "Delete User" %>  <%= link_to("Cancel", {:action => 'index'}, :class => 'back-link') %>
     </div>
 
   <% end %>
+
 </div>

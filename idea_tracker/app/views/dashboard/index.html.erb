@@ -7,53 +7,59 @@
 <div class="dashboard index">
   <h2>Dashboard</h2>
 
-  <%= link_to("Add New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
+  <%= link_to("Submit a New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
 <br><br>
-  <table class="listing" summary="Idea list">
+  <table class="table" summary="Idea list">
     <tr class="header">
 
       <th>Idea</th>
-      <th>Actions</th>
+      <th><p class="text-right">Actions</p></th>
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.title %></td>
+      <td><%= idea.description %></td>
       <td class="actions">
+        <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
+        </p>
       </td>
     </tr>
     <% end %>
   </table>
 <br><br>
-  <table class="listing" summary=" My Idea list">
+  <table class="table" summary=" My Idea list">
     <tr class="header">
 
       <th>My Idea</th>
-      <th>Actions</th>
+      <th><p class="text-right">Actions</p></th>
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.title %></td>
+      <td><%= idea.description %></td>
       <td class="actions">
+        <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
         <%= link_to("Edit", {:action => 'edit', :id => idea.id}, :class => 'action edit') %>
         <%= link_to("Delete", {:action => 'delete', :id => idea.id}, :class => 'action delete') %>
+        </p>
       </td>
     </tr>
     <% end %>
   </table>
 <br><br>
-  <table class="listing" summary="Subscription list">
+  <table class="table" summary="Subscription list">
     <tr class="header">
 
       <th>My Subscriptions</th>
-      <th>Actions</th>
+      <th><p class="text-right">Actions</p></th>
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.title %></td>
+      <td><%= idea.description %></td>
       <td class="actions">
+        <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
+      </p>
       </td>
     </tr>
     <% end %>

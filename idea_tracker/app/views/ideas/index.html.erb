@@ -1,6 +1,8 @@
-<h1>Listing ideas</h1>
+<h1>Ideas</h1>
 
-<table>
+<%= link_to 'Submit a New Idea', new_idea_path %>
+
+<table class="table">
   <thead>
     <tr>
       <th>User</th>
@@ -21,8 +23,8 @@
       <tr>
         <td><%= idea.user_id %></td>
         <td><%= idea.description %></td>
-        <td><%= idea.provider_id %></td>
-        <td><%= idea.receiver_id %></td>
+        <td><%= idea.provider_partner_id %></td>
+        <td><%= idea.receiver_partner_id %></td>
         <td><%= idea.submission_date %></td>
         <td><%= idea.last_modified %></td>
         <td><%= idea.status_date_change %></td>
@@ -34,6 +36,3 @@
   </tbody>
 </table>
 
-<br>
-
-<%= link_to 'New Idea', new_idea_path %>

@@ -3,6 +3,8 @@ IdeaTracker::Application.routes.draw do
 
   resources :ideas
 
+  devise_for :users
+
   get "comments/index"
   get "comments/show"
   get "comments/new"
@@ -11,7 +13,6 @@ IdeaTracker::Application.routes.draw do
   get "users/index"
   get "users/show"
   get "users/new"
-  get "users/edit"
   get "users/delete"
   get "ideas/index"
   get "ideas/show"
@@ -23,7 +24,6 @@ IdeaTracker::Application.routes.draw do
   get "clients/new"
   get "clients/edit"
   get "clients/delete"
-  devise_for :users
   resources :dashboard
   resources :admin
 
