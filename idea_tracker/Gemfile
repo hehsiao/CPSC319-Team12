@@ -6,6 +6,9 @@ gem 'rails', '4.0.2'
 #User authentication
 gem 'devise'
 
+# Twitter Bootstrap
+gem 'twitter-bootstrap-rails'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
 
