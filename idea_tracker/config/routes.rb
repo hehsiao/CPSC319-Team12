@@ -1,4 +1,34 @@
 IdeaTracker::Application.routes.draw do
+  resources :partners
+
+  resources :ideas
+
+  devise_for :users
+
+  get "comments/index"
+  get "comments/show"
+  get "comments/new"
+  get "comments/edit"
+  get "comments/delete"
+  get "users/index"
+  get "users/show"
+  get "users/new"
+  get "users/delete"
+  get "ideas/index"
+  get "ideas/show"
+  get "ideas/new"
+  get "ideas/edit"
+  get "ideas/delete"
+  get "clients/index"
+  get "clients/show"
+  get "clients/new"
+  get "clients/edit"
+  get "clients/delete"
+  resources :dashboard
+  resources :admin
+
+  root to: "home#index"
+  match ':controller(/:action(/:id))', :via => [:get, :post]
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 

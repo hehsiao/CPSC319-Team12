@@ -1,0 +1,34 @@
+<% if !flash[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+
+<div class="users index">
+  <h2>Users</h2>
+<!-- 
+  <%= link_to("Add New User", {:action => 'new'}, :class => 'action new') %>
+ -->
+  <table class="table" summary="User list">
+    <tr class="header">
+      <th>Name</th>
+      <th>Email</th>
+      <th>Admin</th>
+      <th>Remove</th>
+    </tr>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name + " " + user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><%= user.admin ? glyph(:ok) : glyph(:remove)%></td>
+      <td class="actions">
+      <!-- ## Implement edit if time permits
+        <%= link_to glyph(:pencil), {:action => 'edit', :id => user.id}, :class => "action delete" %> 
+      -->
+        <%= link_to glyph(:trash), {:action => 'delete', :id => user.id}, :class => "action delete" %>
+      </td>
+    </tr>
+    <% end %>
+  </table>
+</div>

@@ -3,6 +3,12 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+#User authentication
+gem 'devise'
+
+# Twitter Bootstrap
+gem 'twitter-bootstrap-rails'
+
 # Use mysql as the database for Active Record
 gem 'mysql2'
 

@@ -1,0 +1,17 @@
+<% if !flash[:notice].blank? %>
+  <div class="notice">
+    <%= flash[:notice] %>
+  </div>
+<% end %>
+
+<div class="admin index">
+	<h1>This is admin's dashboard</h1>
+
+	<tr>      
+		<td class="actions">
+		    <%= link_to("Show Users", {:controller => 'users', :action => 'index'}, :class => 'action show') %>
+		    <%= link_to("Show Regular Dashboard", {:controller => 'dashboard', :action => 'index'}) %>
+		</td> 
+	</tr>
+</div>
+

@@ -1,0 +1,38 @@
+<h1>Ideas</h1>
+
+<%= link_to 'Submit a New Idea', new_idea_path %>
+
+<table class="table">
+  <thead>
+    <tr>
+      <th>User</th>
+      <th>Description</th>
+      <th>Provider</th>
+      <th>Receiver</th>
+      <th>Submission date</th>
+      <th>Last modified</th>
+      <th>Status date change</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @ideas.each do |idea| %>
+      <tr>
+        <td><%= idea.user_id %></td>
+        <td><%= idea.description %></td>
+        <td><%= idea.provider_partner_id %></td>
+        <td><%= idea.receiver_partner_id %></td>
+        <td><%= idea.submission_date %></td>
+        <td><%= idea.last_modified %></td>
+        <td><%= idea.status_date_change %></td>
+        <td><%= link_to 'Show', idea %></td>
+        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+

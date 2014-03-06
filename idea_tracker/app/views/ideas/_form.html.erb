@@ -1,0 +1,45 @@
+<%= form_for(@idea) do |f| %>
+  <% if @idea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+
+      <ul>
+      <% @idea.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+  <div class="field">
+    <%= f.label :provider_partner_id %><br>
+    <%= f.number_field :provider_partner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :receiver_partner_id %><br>
+    <%= f.number_field :receiver_partner_id %>
+  </div>
+  <div class="field">
+    <%= f.label :submission_date %><br>
+    <%= f.date_select :submission_date %>
+  </div>
+  <div class="field">
+    <%= f.label :last_modified %><br>
+    <%= f.date_select :last_modified %>
+  </div>
+  <div class="field">
+    <%= f.label :status_date_change %><br>
+    <%= f.date_select :status_date_change %>
+  </div>
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
