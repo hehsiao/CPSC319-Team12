@@ -10,10 +10,19 @@ Things you may want to cover:
 * System dependencies
 
 * Configuration
+run 'bundle install'
 
 * Database creation
+For Development Environment:
+You would need to create a database named:
+- idea_tracker_development
+
+Currently, the default user is set as 'root' with no password.
+It is recommeneded that you create a seperate user and password for production, you can modify the mysql configurations in /config/database.yml
 
 * Database initialization
+Once you've configure your MySQL database with proper access.
+run 'rake db:migrate'
 
 * How to run the test suite
 
