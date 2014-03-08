@@ -1,11 +1,4 @@
-<% if !flash[:notice].blank? %>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-
-<div class="users index">
+<div id="page-wrapper">
   <h2>Users</h2>
 <!-- 
   <%= link_to("Add New User", {:action => 'new'}, :class => 'action new') %>
@@ -17,6 +10,7 @@
       <th>Admin</th>
       <th>Remove</th>
     </tr>
+    <% if @users %>
     <% @users.each do |user| %>
     <tr>
       <td><%= user.first_name + " " + user.last_name %></td>
@@ -29,6 +23,7 @@
         <%= link_to glyph(:trash), {:action => 'delete', :id => user.id}, :class => "action delete" %>
       </td>
     </tr>
+    <% end %>
     <% end %>
   </table>
 </div>

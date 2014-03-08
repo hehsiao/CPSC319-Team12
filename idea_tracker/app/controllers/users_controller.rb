@@ -1,8 +1,13 @@
 class UsersController < ApplicationController
-  # layout false
 
   def index
-    @users = User.all
+    # Assure current user is admin to show list
+    # otherwise redirects to sign in.
+    if current_user.try(:admin?)
+      @users = User.all
+    else
+      redirect_to new_user_session_path
+    end
   end
 
   def show
@@ -52,4 +57,6 @@ class UsersController < ApplicationController
   def user_params
     params.require(:user).permit(:email)
   end
+
+  
 end

@@ -1,4 +1,5 @@
 IdeaTracker::Application.routes.draw do
+  
   resources :partners
 
   resources :ideas

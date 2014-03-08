@@ -1,18 +1,12 @@
-<% if !flash[:notice].blank? %>
-  <div class="notice">
-    <%= flash[:notice] %>
-  </div>
-<% end %>
-
-<div class="dashboard index">
+<div id="page-wrapper">
   <h2>Dashboard</h2>
 
   <%= link_to("Submit a New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
 <br><br>
-  <table class="table" summary="Idea list">
+  <table class="table" summary="Recent Ideas">
     <tr class="header">
 
-      <th>Idea</th>
+      <th>Recent Idea</th>
       <th><p class="text-right">Actions</p></th>
     </tr>
     <% @ideas.each do |idea| %>
@@ -27,7 +21,7 @@
     <% end %>
   </table>
 <br><br>
-  <table class="table" summary=" My Idea list">
+  <table class="table" summary="My Idea">
     <tr class="header">
 
       <th>My Idea</th>
