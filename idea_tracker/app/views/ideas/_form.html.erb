@@ -15,6 +15,11 @@
                         </div>
                         <div class="panel-body">
                           <div class="form-group">
+                            <select class="form-control">
+                              <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
+                            </select>
+                          </div>
+                          <div class="form-group">
                               <label>Organization Name</label>
                               <input class="form-control" placeholder="Enter Organization">
                           </div>
@@ -35,21 +40,25 @@
                       </div>
                       <!-- /.Idea Information Panel -->
                     </div>
-                    <!-- Information col-lg-6 -->
+                    <!-- Category col-lg-6 -->
                     <div class="col-lg-6">
-                      <!-- Information Panel -->
+                      <!-- Category Panel -->
                       <div class="panel panel-default">
                         <div class="panel-heading">
-                          Idea Information
+                          Idea Category
                         </div>
                         <div class="panel-body">
                           <div class="form-group">
-                              <label>Idea Title</label>
-                              <input class="form-control" placeholder="The One-Line summary">
+                              <label>Theme</label>
+                              <input class="form-control" placeholder="Idea Theme">
                           </div>
                           <div class="form-group">
-                              <label>Idea Description</label>
-                              <textarea class="form-control" rows="4"></textarea>
+                              <label>Idea Date</label>
+                              <input class="form-control" placeholder="date" ></date>
+                          </div>
+                          <div class="form-group">
+                              <label>Idea Category</label>
+                              <input type="text" class="form-control" value="03-11-2014" id="idea-date"></date>
                           </div>
                         </div>
                         <!-- /.panel-body -->                            
@@ -187,6 +196,10 @@
 <!-- /.row -->
 
 
+<script>
+  $('#idea-date').datepicker()
+</script>
+
 <%= form_for(@idea) do |f| %>
   <% if @idea.errors.any? %>
     <div id="error_explanation">
@@ -212,6 +225,9 @@
   </div>
   <div class="form-group">
     <%= f.label :provider_partner_id %><br>
+    <select class="form-control">
+    <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
+  </select>
     <%= f.number_field :provider_partner_id %>
   </div>
   <div class="form-group">
@@ -235,5 +251,4 @@
   </div>
 <% end %>
 </form>
-
 
