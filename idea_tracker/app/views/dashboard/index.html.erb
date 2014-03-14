@@ -11,7 +11,7 @@
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.description %></td>
+      <td><%= idea.summary %></td>
       <td class="actions">
         <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
@@ -29,7 +29,7 @@
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.description %></td>
+      <td><%= idea.summary %></td>
       <td class="actions">
         <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
@@ -49,7 +49,7 @@
     </tr>
     <% @ideas.each do |idea| %>
     <tr>
-      <td><%= idea.description %></td>
+      <td><%= idea.summary %></td>
       <td class="actions">
         <p class="text-right">
         <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
