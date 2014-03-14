@@ -10,6 +10,14 @@ class IdeasController < ApplicationController
   # GET /ideas/1
   # GET /ideas/1.json
   def show
+    @status = Status.find(@idea.status)
+    @provider = Partner.find(@idea.provider_partner_id).partner_name
+    if @idea.receiver_partner_id != nil
+      @receiver = Partner.find(@idea.receiver_partner_id).partner_name
+    else 
+      @receiver = "None Assigned"
+    end
+
   end
 
   # GET /ideas/new
@@ -70,5 +78,6 @@ class IdeasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
       params.require(:idea).permit(:user_id, :description, :provider_id, :receiver_id, :submission_date, :last_modified, :status_date_change)
+      params.require(:status).permit(:id)
     end
 end

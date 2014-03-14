@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140305050930) do
+ActiveRecord::Schema.define(version: 20140314085443) do
 
   create_table "associations", id: false, force: true do |t|
     t.integer  "parent_idea_id"
@@ -54,6 +54,8 @@ ActiveRecord::Schema.define(version: 20140305050930) do
     t.date     "status_date_change"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "summary"
+    t.integer  "status",              default: 1, null: false
   end
 
   create_table "notifications", force: true do |t|
@@ -68,7 +70,7 @@ ActiveRecord::Schema.define(version: 20140305050930) do
     t.string   "partner_name"
     t.string   "contact_name"
     t.string   "email"
-    t.integer  "phone_num"
+    t.string   "phone_num"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
