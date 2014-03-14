@@ -14,26 +14,56 @@
                           Idea Originator
                         </div>
                         <div class="panel-body">
+<!--                           <div class="form-group btn-group" data-toggle="buttons">
+                            <label class="btn btn-primary">
+                              <input type="radio" name="options" id="option1"> Existing Partner
+                            </label>
+                            <label class="btn btn-primary">
+                              <input type="radio" name="options" id="option2"> New Partner
+                            </label>
+                          </div> -->
+
                           <div class="form-group">
-                            <select class="form-control">
-                              <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                              <label>Organization Name</label>
-                              <input class="form-control" placeholder="Enter Organization">
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Name</label>
-                              <input class="form-control" placeholder="Enter Name">
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Email</label>
-                              <input class="form-control" placeholder="E-mail"></input>
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Phone Number</label>
-                              <input class="form-control" placeholder="Phone Number"></input>
+                            Existing Partner?
+                            Yes <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="yesCheck">
+                            No <input type="radio" onclick="javascript:yesnoCheck();" name="yesno" id="noCheck"> 
+                            <br>
+                            <div id="ifYes" style="display:none">
+                              <div class="form-group">
+                                <select class="form-control">
+                                  <%= select_tag(:option, options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]], :selected => params[:option])) %>
+                                  <br>
+
+
+
+                                  <%= select_tag "", options_from_collection_for_select(Partner.all, :id, :partner_name), :onChange => "{alert('Minisection has been changed to x !')}" %>
+                                </select>
+                              </div>
+                              <div id="partnerInfo" style="display:none">
+                                <div class="form-group">
+                                    test
+                                </div>
+                              </div>
+                            </div>
+                            <div id="ifNo" style="display:none">
+
+                              <div class="form-group">
+                                  <label>Organization Name</label>
+                                  <input class="form-control" placeholder="Enter Organization">
+                              </div>
+                              <div class="form-group">
+                                  <label>Contact Name</label>
+                                  <input class="form-control" placeholder="Enter Name">
+                              </div>
+                              <div class="form-group">
+                                  <label>Contact Email</label>
+                                  <input class="form-control" placeholder="E-mail"></input>
+                              </div>
+                              <div class="form-group">
+                                  <label>Contact Phone Number</label>
+                                  <input class="form-control" placeholder="Phone Number"></input>
+                              </div>
+                            </div>
                           </div>
                         </div>
                         <!-- /.panel-body -->                            
@@ -199,6 +229,48 @@
 <script>
   $('#idea-date').datepicker()
 </script>
+
+<!-- Script for the selecting radio buttons (to choose a community partner, or new, etc) -->
+<script type="text/javascript">
+
+function yesnoCheck() {
+    if (document.getElementById('yesCheck').checked) {
+        document.getElementById('ifYes').style.display = 'block';
+        document.getElementById('ifNo').style.display = 'none';
+    }
+    else {
+        document.getElementById('ifNo').style.display = 'block';
+        document.getElementById('ifYes').style.display = 'none';
+        
+    }
+
+}
+
+</script>
+
+
+<!-- end script -->
+
+
+<!-- Script for showing partner info -->
+<script type="text/javascript">
+
+function showPartnerInfo() {
+var selected_index = oForm.elements["country"].selectedIndex;
+ 
+  if(selected_index > 0)
+  {
+     document.getElementById('ifYes').style.display = 'block';
+
+  }
+  else{
+
+  }
+}
+
+</script>
+
+<!-- end script -->
 
 <%= form_for(@idea) do |f| %>
   <% if @idea.errors.any? %>
