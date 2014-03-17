@@ -14,7 +14,15 @@
     <% @status.each do |status| %>
       <tr>
         <td><%= status.status %></td>
-		<td>1</td>
+		<td>
+		<% counter = 0 %>
+		<% @ideas.each do |idea| %>
+			<% if idea.status == status.id %>
+				<% counter = counter + 1 %>
+			<% end %>
+		<%end%>	
+		<%= counter %>
+		</td>
         
       </tr>
     <% end %>
