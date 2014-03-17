@@ -1,7 +1,26 @@
 <div id="page-wrapper">
 <h1>Status Reports</h1>
 
-The system will produce a copy of the ideas grouped by stage and sorted from the first stage to final stage. 
+<table class="table" summary="User list">
+  <thead>
+    <tr>
+      <th>Status</th>
+      <th>Number of Ideas</th>
+      <th></th>
+    </tr>
+  </thead>
+  
+  <tbody>
+    <% @status.each do |status| %>
+      <tr>
+        <td><%= status.status %></td>
+		<td>1</td>
+        
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
 
 <br>
 

@@ -1,7 +1,28 @@
 <div id="page-wrapper">
 <h1>Success Rate Reports</h1>
 
-System will calculate the success rates of each staff member calculated as the number of matched ideas the staff member had been assigned to divided by the total number of ideas the staff member had been assigned to.
+
+<h2>Users</h2>
+
+<table class="table" summary="User list">
+<tr class="header">
+  <th>Name</th>
+  <th>Email</th>
+  <th>Success Rate</th>
+</tr>
+<% if @users %>
+<% @users.each do |user| %>
+<tr>
+  <td><%= user.first_name + " " + user.last_name %></td>
+  <td><%= user.email %></td>
+  <td>
+	0% <!-- TODO -->
+  </td>
+</tr>
+<% end %>
+<% end %>
+</table>
+
 
 <br>
 
