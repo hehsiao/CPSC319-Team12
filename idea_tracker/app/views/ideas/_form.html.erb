@@ -37,7 +37,6 @@
                                   <br>
                                 </select> 
 -->
-
                                 <%= select_tag "", options_from_collection_for_select(Partner.all, :id, :partner_name), :onChange => "showPartnerInfo()" %>
 
                               </div>
@@ -48,7 +47,7 @@
                               </div>
                             </div>
                             <div id="ifNo" style="display:none">
-                              <%= render '/partners/form' %>
+
 
                              </div>
                           </div>
@@ -83,119 +82,58 @@
                       <!-- /.Idea Information Panel -->
                     </div>
                     <!-- Information col-lg-6 -->  
-                    <div class="col-lg-12">
-                      <!-- Information Panel -->
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Idea Details
+                    <%= form_for(@idea) do |f| %>
+                      <% if @idea.errors.any? %>
+                        <div id="error_explanation">
+                          <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+
+                          <ul>
+                          <% @idea.errors.full_messages.each do |msg| %>
+                            <li><%= msg %></li>
+                          <% end %>
+                          </ul>
                         </div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                              <label>Idea Title</label>
-                              <input class="form-control" placeholder="The One-Line summary">
-                          </div>
-                          <div class="form-group">
-                              <label>Idea Description</label>
-                              <textarea class="form-control" rows="4"></textarea>
-                          </div>
-                        </div>
-                        <!-- /.panel-body -->                            
+                      <% end %>
+
+                      <div class="form-group">
+                        <label>Idea Owner</label>
+                        <select class="form-control">
+                        <%= options_from_collection_for_select(User.all, :id, :first_name) %>
+                      </select>
                       </div>
-                      <!-- /.Idea Information Panel -->
-                    </div>
-                    <!-- Information col-lg-6 -->
-                            <div class="form-group">
-                                <label>File input</label>
-                                <input type="file">
-                            </div>
-                            <div class="form-group">
-                                <label>Text area</label>
-                                <textarea class="form-control" rows="3"></textarea>
-                            </div>
-                            <div class="form-group">
-                                <label>Checkboxes</label>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 1
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 2
-                                    </label>
-                                </div>
-                                <div class="checkbox">
-                                    <label>
-                                        <input type="checkbox" value="">Checkbox 3
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Inline Checkboxes</label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">1
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">2
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">3
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Radio Buttons</label>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Inline Radio Buttons</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <button type="submit" class="btn btn-default">Submit Button</button>
-                            <button type="reset" class="btn btn-default">Reset Button</button>
-                        </form>
-                    </div>
+                      <div class="form-group">
+                        <%= f.label :description %><br>
+                        <%= f.text_area :description %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :provider_partner_id %><br>
+                        <select class="form-control">
+                        <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
+                      </select>
+                        <%= f.number_field :provider_partner_id %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :receiver_partner_id %><br>
+                        <%= f.number_field :receiver_partner_id %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :submission_date %><br>
+                        <%= f.date_select :submission_date %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :last_modified %><br>
+                        <%= f.date_select :last_modified %>
+                      </div>
+                      <div class="form-group">
+                        <%= f.label :status_date_change %><br>
+                        <%= f.date_select :status_date_change %>
+                      </div>
+                      <div class="actions">
+                        <%= f.submit %>
+                      </div>
+                    <% end %>
+                    </form>
+
                     <!-- /.col-lg-6 (nested) -->
                     <div class="col-lg-6">
                       placeholder
@@ -263,55 +201,27 @@ $('select').change(showPartnerInfo);
 
 <!-- end script -->
 
-<%= form_for(@idea) do |f| %>
-  <% if @idea.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
 
-      <ul>
-      <% @idea.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <label>Idea Owner</label>
-    <select class="form-control">
-    <%= options_from_collection_for_select(User.all, :id, :first_name) %>
-  </select>
-  </div>
-  <div class="form-group">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-  <div class="form-group">
-    <%= f.label :provider_partner_id %><br>
-    <select class="form-control">
-    <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
-  </select>
-    <%= f.number_field :provider_partner_id %>
-  </div>
-  <div class="form-group">
-    <%= f.label :receiver_partner_id %><br>
-    <%= f.number_field :receiver_partner_id %>
-  </div>
-  <div class="form-group">
-    <%= f.label :submission_date %><br>
-    <%= f.date_select :submission_date %>
-  </div>
-  <div class="form-group">
-    <%= f.label :last_modified %><br>
-    <%= f.date_select :last_modified %>
-  </div>
-  <div class="form-group">
-    <%= f.label :status_date_change %><br>
-    <%= f.date_select :status_date_change %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-</form>
+<script>
+var nowTemp = new Date();
+var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
+  $(function() {
+    $( "#from" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#to" ).datepicker( "option", "minDate", selectedDate );
+      }
+    });
+    $( "#to" ).datepicker({
+      defaultDate: "+1w",
+      changeMonth: true,
+      numberOfMonths: 3,
+      onClose: function( selectedDate ) {
+        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
+      }
+    });
+  });
+</script>
 
