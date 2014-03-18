@@ -30,14 +30,16 @@
                             <br>
                             <div id="ifYes" style="display:none">
                               <div class="form-group">
+<!--                                 <br>
+                                <%= select_tag "", options_from_collection_for_select(Partner.all, :id, :partner_name), :onChange => "{alert('Minisection has been changed to x !')}" %>
                                 <select class="form-control">
                                   <%= select_tag(:option, options_for_select([['All', 1], ['Co', 2], ['Bought', 3], ['View', 4], ['Top API', 5]], :selected => params[:option])) %>
                                   <br>
+                                </select> 
+-->
 
+                                <%= select_tag "", options_from_collection_for_select(Partner.all, :id, :partner_name), :onChange => "showPartnerInfo()" %>
 
-
-                                  <%= select_tag "", options_from_collection_for_select(Partner.all, :id, :partner_name), :onChange => "{alert('Minisection has been changed to x !')}" %>
-                                </select>
                               </div>
                               <div id="partnerInfo" style="display:none">
                                 <div class="form-group">
@@ -255,17 +257,21 @@ function yesnoCheck() {
 <!-- Script for showing partner info -->
 <script type="text/javascript">
 
-function showPartnerInfo() {
-var selected_index = oForm.elements["country"].selectedIndex;
- 
-  if(selected_index > 0)
-  {
-     document.getElementById('ifYes').style.display = 'block';
 
-  }
-  else{
+//var selected_index = oForm.elements["country"].selectedIndex;
+$('select').change(showPartnerInfo);
 
+  function showPartnerInfo() {
+    alert("My First JavaScript");
   }
+  // if(selected_index > 0)
+  // {
+  //    document.getElementById('ifYes').style.display = 'block';
+
+  // }
+  // else{
+
+  // }
 }
 
 </script>
