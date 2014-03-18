@@ -7,18 +7,23 @@
 </p>
 
 <p>
+  <strong>Summary:</strong>
+  <%= @idea.summary %>
+</p>
+
+<p>
   <strong>Description:</strong>
   <%= @idea.description %>
 </p>
 
 <p>
   <strong>Provider:</strong>
-  <%= @idea.provider_partner_id %>
+  <%= @provider %>
 </p>
 
 <p>
   <strong>Receiver:</strong>
-  <%= @idea.receiver_partner_id %>
+  <%= @receiver %>
 </p>
 
 <p>
@@ -32,8 +37,8 @@
 </p>
 
 <p>
-  <strong>Status date change:</strong>
-  <%= @idea.status_date_change %>
+  <strong>Status:</strong>
+  <%= @status.status %>
 </p>
 
 <%= link_to 'Edit', edit_idea_path(@idea) %> |

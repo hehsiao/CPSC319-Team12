@@ -2,8 +2,8 @@
 <html>
 <head>
   <title>IdeaTracker</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>	
   <%= csrf_meta_tags %>
 </head>
 <body>
@@ -73,9 +73,24 @@
 	            <li>
 	                <a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
 	            </li>
-	            <li>
-	                <a href="#"><i class="fa fa-tasks fa-fw"></i> Reports</a>
-	            </li>	            
+				<li>
+	                <a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
+	                <ul class="nav nav-second-level">
+	                    <li>
+	                        <a href="/reports/status">Status Report</a>
+	                    </li>
+	                    <li>
+	                        <a href="/reports/success_rate">Success Rate Report</a>
+	                    </li>
+	                    <li>
+	                    	<a href="/reports/view_pending_ideas">Pending Ideas</a>
+	                    </li>
+						<li>
+	                    	<a href="/reports/popularity">Popularity Report</a>
+	                    </li>
+	                </ul>
+	                <!-- /.nav-second-level -->
+	            </li>            
 	            <li>
 	                <a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
 	            </li>
