@@ -45,5 +45,15 @@
     <% end %>
   </table>
 <br><br>
-  Notifications
+<h1>Activities Notification</h1>
+  <% @activities.each do |activity| %>
+   <% @sub_ideas.each do |sub_idea| %>
+   <div class="activity">
+       <% if activity.trackable.id == sub_idea.idea_id%>
+       <%= activity.owner.first_name if activity.owner%>
+       <%= render_activity activity%>
+    <% end %>
+   </div>
+   <% end %> 
+  <% end %>
 </div>
