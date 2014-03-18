@@ -5,6 +5,8 @@ class IdeasController < ApplicationController
   # GET /ideas.json
   def index
     @ideas = Idea.all
+    # @user = User.find(params[:user_id])
+    # @ideas = @user.ideas
   end
 
   # GET /ideas/1

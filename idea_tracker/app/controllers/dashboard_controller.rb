@@ -4,6 +4,7 @@ class DashboardController < ApplicationController
  
 	def index  
 		@ideas = Idea.all  
+		@recent_ideas = Idea.recent
 		#@notifications = Notification.all
 	end
 

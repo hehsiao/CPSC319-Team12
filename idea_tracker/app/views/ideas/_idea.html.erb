@@ -1,0 +1,25 @@
+
+  <thead>
+    <tr>
+      <th>Summary</th>
+      <th>Description</th>
+      <th>Submission date</th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @recent_ideas.each do |idea| %>
+      <tr>
+        <td><%= idea.summary %></td>
+        <td><%= truncate(idea.description, length:70) %></td>
+        <td><%= idea.submission_date %></td>
+        <td><%= link_to 'Show', idea %></td>
+        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
+        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+      </tr>
+    <% end %>
+  </tbody>
+

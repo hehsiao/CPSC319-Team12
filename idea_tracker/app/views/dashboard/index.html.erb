@@ -4,21 +4,7 @@
   <%= link_to("Submit a New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
 <br><br>
   <table class="table" summary="Recent Ideas">
-    <tr class="header">
-
-      <th>Recent Idea</th>
-      <th><p class="text-right">Actions</p></th>
-    </tr>
-    <% @ideas.each do |idea| %>
-    <tr>
-      <td><%= idea.summary %></td>
-      <td class="actions">
-        <p class="text-right">
-        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
-        </p>
-      </td>
-    </tr>
-    <% end %>
+    <%= render "ideas/idea" %>
   </table>
 <br><br>
   <table class="table" summary="My Idea">
