@@ -1,5 +1,6 @@
 <div id="page-wrapper">
-  <h2>Users</h2>
+  <div class="row">
+  <h1 class="page-header">Managing Users</h1>
 <!-- 
   <%= link_to("Add New User", {:action => 'new'}, :class => 'action new') %>
  -->
@@ -16,9 +17,13 @@
       <td><%= user.first_name + " " + user.last_name %></td>
       <td><%= user.email %></td>
       <td><% if user.admin? %>
-        <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Make sure you are not removing yourself?' } %>
+        <% if user == self.current_user %>
+          <i class="fa fa-check"></i>
         <% else %>
-        <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id} %>
+          <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to regular user?' } %>
+          <% end %>
+        <% else %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to admin?' } %>
         <% end %>
       </td>
       <td class="actions">
@@ -28,4 +33,5 @@
     <% end %>
     <% end %>
   </table>
+</div>
 </div>
