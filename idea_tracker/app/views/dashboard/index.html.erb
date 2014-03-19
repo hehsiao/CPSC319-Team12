@@ -45,15 +45,34 @@
     <% end %>
   </table>
 <br><br>
-<h1>Activities Notification</h1>
-  <% @activities.each do |activity| %>
-   <% @sub_ideas.each do |sub_idea| %>
-   <div class="activity">
-       <% if activity.trackable.id == sub_idea.idea_id%>
-       <%= activity.owner.first_name if activity.owner%>
-       <%= render_activity activity%>
-    <% end %>
-   </div>
-   <% end %> 
-  <% end %>
+<div class = "col-lg-4">
+  <div class = "panel panel-default">
+     <div class = "panel-heading">
+         <i class = "fa fa-bell fa-fw"></i>
+         "Notification"
+     </div>
+       <div class = "panel-body">
+         <div class = "list-group">
+
+           <% @activities.each do |activity| %>
+           <% @sub_ideas.each do |sub_idea| %>
+            <% if activity.trackable.id == sub_idea.idea_id%>
+             <a href = "http://localhost:3000/ideas/<%= activity.trackable.id%>" class = "list-group-item">
+             <!-- <div class="activity"> -->
+              <%= render_activity activity%>
+              <span class = "text-muted small">
+              <em> <%= activity.created_at%> </em>
+            </span>
+            <% end %>
+             </a>
+             <!-- </div> -->
+           <% end %> 
+           <% end %>
+
+      
+      
+         </div>
+      </div>
+  </div>
+</div> 
 </div>

@@ -1,7 +1,11 @@
+<i class = "fa fa-tasks fa-fw"> </i>
+<%= activity.owner.first_name if activity.owner%>
+<%= activity.owner.last_name if activity.owner%>
+
 create idea
 
 <% if activity.trackable%>
-   <%= link_to activity.trackable.id, activity.trackable%>
+   <%= activity.trackable.id%>
 <% else %>
    whick has been removed!!
 <% end %>
