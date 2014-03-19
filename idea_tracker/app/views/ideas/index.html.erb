@@ -1,20 +1,37 @@
 <div id="page-wrapper">
-<h1>Ideas</h1>
+  <div class="row">
+<h1 class="page-header">Ideas</h1>
 
 <%= link_to 'Submit a New Idea', new_idea_path %>
 
-<table class="table">
+<!-- pager -->
+<div id="pager" class="pager">
+  <form>
+    <i class="first fa fa-angle-double-left fa-2x"></i>
+    <i class="prev fa fa-angle-left fa-2x" ></i>
+    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+    <i class="next fa fa-angle-right fa-2x"></i>
+    <i class="last fa fa-angle-double-right fa-2x"></i>
+    <select class="pagesize">
+      <option selected="selected" value="10">10</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+    </select>
+  </form>
+</div>
+<table id="table" class="tablesorter">
   <thead>
     <tr>
-      <th>User</th>
+      <th>Owner</th>
       <th>Summary</th>
       <th>Description</th>
       <th>Submission date</th>
       <th>Last modified</th>
       <th>Keyword</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th class="no-sort-filter"></th>
+      <th class="no-sort-filter"></th>
+      <th class="no-sort-filter"></th>
     </tr>
   </thead>
 
@@ -27,14 +44,29 @@
         <td><%= idea.submission_date %></td>
         <td><%= idea.last_modified %></td>
         <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
-        <td><%= link_to 'Show', idea %></td>
-        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
+        <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
+<!--         <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, idea, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td> -->
       </tr>
     <% end %>
   </tbody>
 </table>
-
+<!-- pager -->
+<div id="pager" class="pager">
+  <form>
+    <i class="first fa fa-angle-double-left fa-2x"></i>
+    <i class="prev fa fa-angle-left fa-2x" ></i>
+    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
+    <i class="next fa fa-angle-right fa-2x"></i>
+    <i class="last fa fa-angle-double-right fa-2x"></i>
+    <select class="pagesize">
+      <option selected="selected" value="10">10</option>
+      <option value="20">20</option>
+      <option value="30">30</option>
+      <option value="40">40</option>
+    </select>
+  </form>
+</div>
 <br><br>
 
   <div id="tag_cloud">
@@ -44,4 +76,5 @@
     <% end %>
     <%= link_to 'clear filters', ideas_path %>
   </div>
+</div>
 </div>
