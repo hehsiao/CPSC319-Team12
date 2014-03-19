@@ -27,8 +27,8 @@
     <%= f.label :receiver_partner_id %><br>
     <%= f.number_field :receiver_partner_id %>
   </div>
-  
-  <div class="field">
+
+  <div class="input-row">
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
     <%= f.text_field :keyword_list %>
   </div>
@@ -48,3 +48,15 @@
     <%= f.submit %>
   </div>
 <% end %>
+
+
+<script>
+
+$(function() {
+  $('.input-row #idea_keyword_list').select2({
+    placeholder: "Add a keyword",
+    tags:[],
+    tokenSeparators: [",", " "]
+  })
+});
+</script>

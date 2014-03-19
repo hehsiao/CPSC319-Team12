@@ -13,6 +13,7 @@
 //= require jquery-1.10.2
 //= require jquery_ujs
 //= require bootstrap.min
+//= require select2
 //= require turbolinks
 //= require_tree .
 
@@ -21,3 +22,4 @@ $(function() {
     $('#side-menu').metisMenu();
 
 });
+

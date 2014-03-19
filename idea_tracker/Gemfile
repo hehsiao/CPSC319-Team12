@@ -36,6 +36,10 @@ gem 'jbuilder', '~> 1.2'
 # Taggable
 gem 'acts-as-taggable-on'
 
+# jQuery Select
+gem "select2-rails"
+
+
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
