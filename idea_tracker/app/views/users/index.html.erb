@@ -16,16 +16,14 @@
       <td><%= user.first_name + " " + user.last_name %></td>
       <td><%= user.email %></td>
       <td><% if user.admin? %>
-        <i class="fa fa-check"></i>
+        <i class=""></i>
+        <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id} %>
         <% else %>
-        <i class="fa fa-times"></i>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id} %>
         <% end %>
       </td>
       <td class="actions">
-      <!-- ## Implement edit if time permits
-        <%= link_to glyph(:pencil), {:action => 'edit', :id => user.id}, :class => "action delete" %> 
-      -->
-        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, {:action => 'delete', :id => user.id}, :class => "action delete" %>
+        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
       </td>
     </tr>
     <% end %>
