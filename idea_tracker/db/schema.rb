@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314085443) do
+ActiveRecord::Schema.define(version: 20140319065346) do
 
   create_table "associations", id: false, force: true do |t|
     t.integer  "parent_idea_id"
@@ -44,51 +44,6 @@ ActiveRecord::Schema.define(version: 20140314085443) do
     t.datetime "updated_at"
   end
 
-  create_table "commontator_comments", force: true do |t|
-    t.string   "creator_type"
-    t.integer  "creator_id"
-    t.string   "editor_type"
-    t.integer  "editor_id"
-    t.integer  "thread_id",                      null: false
-    t.text     "body",                           null: false
-    t.datetime "deleted_at"
-    t.integer  "cached_votes_total", default: 0
-    t.integer  "cached_votes_up",    default: 0
-    t.integer  "cached_votes_down",  default: 0
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "commontator_comments", ["cached_votes_down"], name: "index_commontator_comments_on_cached_votes_down", using: :btree
-  add_index "commontator_comments", ["cached_votes_total"], name: "index_commontator_comments_on_cached_votes_total", using: :btree
-  add_index "commontator_comments", ["cached_votes_up"], name: "index_commontator_comments_on_cached_votes_up", using: :btree
-  add_index "commontator_comments", ["creator_id", "creator_type", "thread_id"], name: "index_c_c_on_c_id_and_c_type_and_t_id", using: :btree
-  add_index "commontator_comments", ["thread_id"], name: "index_commontator_comments_on_thread_id", using: :btree
-
-  create_table "commontator_subscriptions", force: true do |t|
-    t.string   "subscriber_type",             null: false
-    t.integer  "subscriber_id",               null: false
-    t.integer  "thread_id",                   null: false
-    t.integer  "unread",          default: 0, null: false
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "commontator_subscriptions", ["subscriber_id", "subscriber_type", "thread_id"], name: "index_c_s_on_s_id_and_s_type_and_t_id", unique: true, using: :btree
-  add_index "commontator_subscriptions", ["thread_id"], name: "index_commontator_subscriptions_on_thread_id", using: :btree
-
-  create_table "commontator_threads", force: true do |t|
-    t.string   "commontable_type"
-    t.integer  "commontable_id"
-    t.datetime "closed_at"
-    t.string   "closer_type"
-    t.integer  "closer_id"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  add_index "commontator_threads", ["commontable_id", "commontable_type"], name: "index_c_t_on_c_id_and_c_type", unique: true, using: :btree
-
   create_table "ideas", force: true do |t|
     t.integer  "user_id"
     t.text     "description"
@@ -118,6 +73,9 @@ ActiveRecord::Schema.define(version: 20140314085443) do
     t.string   "phone_num"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "secondary_contact_name"
+    t.string   "secondary_email"
+    t.string   "secondary_phone_num"
   end
 
   create_table "statuses", force: true do |t|
@@ -134,13 +92,23 @@ ActiveRecord::Schema.define(version: 20140314085443) do
     t.datetime "updated_at"
   end
 
-  create_table "tags", id: false, force: true do |t|
-    t.integer  "category_id"
-    t.integer  "idea_id"
-    t.string   "additional_text"
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false
