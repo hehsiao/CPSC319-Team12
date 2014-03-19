@@ -39,6 +39,8 @@ gem 'acts-as-taggable-on'
 # jQuery Select
 gem "select2-rails"
 
+# datatables for pagination, sorting
+gem 'jquery-datatables-rails', git: 'git://github.com/rweng/jquery-datatables-rails.git'
 
 
 group :doc do

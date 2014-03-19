@@ -114,4 +114,13 @@
 
 </div>
 </body>
+<script>
+$('.datatable').dataTable({
+  "sPaginationType": "bootstrap",
+  "aoColumnDefs" : [ {
+    "bSortable" : false,
+    "aTargets" : [ "no-sort" ]
+} ]
+});
+</script>
 </html>
