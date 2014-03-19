@@ -12,8 +12,6 @@
 //
 //= require jquery-1.10.2
 //= require jquery_ujs
-//= require jquery-tablesorter
-//= require jquery-tablesorter/addons/pager/jquery.tablesorter.pager
 //= require bootstrap.min
 //= require select2
 //= require turbolinks
@@ -24,10 +22,4 @@ $(function() {
     $('#side-menu').metisMenu();
 
 });
-
-
-
-// $(function(){
-//   $("#table").tablesorter();
-// });
 

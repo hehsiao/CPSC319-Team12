@@ -4,32 +4,16 @@
 
 <h5><%= link_to 'Create a New Partner', new_partner_path %></h5>
 
-<!-- pager -->
-<div id="pager" class="pager">
-  <form>
-    <i class="first fa fa-angle-double-left fa-2x"></i>
-    <i class="prev fa fa-angle-left fa-2x" ></i>
-    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-    <i class="next fa fa-angle-right fa-2x"></i>
-    <i class="last fa fa-angle-double-right fa-2x"></i>
-    <select class="pagesize">
-      <option selected="selected" value="10">10</option>
-      <option value="20">20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-    </select>
-  </form>
-</div>
-<table id="table" class="tablesorter">
+<table class="table">
   <thead>
     <tr>
       <th>Partner name</th>
       <th>Contact name</th>
       <th>Email</th>
       <th>Phone num</th>
-      <th class="no-sort-filter"></th>
-      <th class="no-sort-filter"></th>
-      <th class="no-sort-filter"></th>
+      <th></th>
+      <th></th>
+      <th></th>
     </tr>
   </thead>
 
@@ -41,28 +25,12 @@
         <td><%= partner.email %></td>
         <td><%= partner.phone_num %></td>
         <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, partner, title: 'Show', ref: 'tooltip' %></td>
-		    <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_partner_path(partner), title: 'Edit', ref: 'tooltip' %></td>
-		    <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, partner, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+		<td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_partner_path(partner), title: 'Edit', ref: 'tooltip' %></td>
+		<td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, partner, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
       </tr>
     <% end %>
   </tbody>
 </table>
-<!-- pager -->
-<div id="pager" class="pager">
-  <form>
-    <i class="first fa fa-angle-double-left fa-2x"></i>
-    <i class="prev fa fa-angle-left fa-2x" ></i>
-    <span class="pagedisplay"></span> <!-- this can be any element, including an input -->
-    <i class="next fa fa-angle-right fa-2x"></i>
-    <i class="last fa fa-angle-double-right fa-2x"></i>
-    <select class="pagesize">
-      <option selected="selected" value="10">10</option>
-      <option value="20">20</option>
-      <option value="30">30</option>
-      <option value="40">40</option>
-    </select>
-  </form>
-</div>
 
 <br>
 

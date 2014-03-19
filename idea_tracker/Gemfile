@@ -39,8 +39,6 @@ gem 'acts-as-taggable-on'
 # jQuery Select
 gem "select2-rails"
 
-# jQuery Tablesorter
-gem 'jquery-tablesorter'
 
 
 group :doc do
