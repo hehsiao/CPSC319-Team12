@@ -1,5 +1,7 @@
 IdeaTracker::Application.routes.draw do
-  
+
+  match '/category/', :to => 'category#index', :as => :categories, :via => [:get]
+  resources :category  
   resources :partners
 
   resources :ideas
@@ -26,7 +28,9 @@ IdeaTracker::Application.routes.draw do
   get "clients/edit"
   get "clients/delete"
   resources :dashboard
+  get "admin/setting"
   resources :admin
+
 
   root to: "home#index"
   match ':controller(/:action(/:id))', :via => [:get, :post]

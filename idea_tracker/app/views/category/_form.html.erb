@@ -1,0 +1,35 @@
+<%= form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_name %><br>
+    <%= f.text_field :category_name  %>
+  </div>
+  <div class="field"> <!-- this is for description -->
+  </div>
+  <div class="field">
+    <%= f.label :type_id %><br>
+    <%= f.number_field :type_id %> <!-- TODO: change this to use dropdown select with actual type name -->
+    <p>
+      2 = dropdown single select <br />
+      3 = scroll multi select <br />
+      4 = checkbox multi select <br />
+    </p>
+  </div>
+
+  <!-- js to handle child items -->
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

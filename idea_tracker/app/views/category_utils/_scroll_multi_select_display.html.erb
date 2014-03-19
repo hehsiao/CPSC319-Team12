@@ -1,0 +1,10 @@
+<% special_tag = [] %>
+<select multiple size=5 id="<%= category_name %>" name="cat_tag[]"> <!-- TODO: change the size to be more flexible, perhaps min(tags.size, 6) ? -->
+	<% tags.each do |tag| %>
+		<option value="<%= tag.id %>"><%= tag.category_name %></option>
+		<% if [5,6,7].include?(tag.type_id) %>
+			<% special_tag << tag %>
+		<% end %>
+	<% end %>
+</select>
+<%= render :partial => "category_utils/special_tag_display", :locals => { :tags => special_tag, :category_name => category_name} %>

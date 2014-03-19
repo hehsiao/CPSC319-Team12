@@ -15,6 +15,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @idea = Idea.new
+    @categories = Category.where(parent_id: 0).to_a
   end
 
   # GET /ideas/1/edit

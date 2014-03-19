@@ -1,0 +1,29 @@
+<script>
+window.addEventListener('load', function (){
+	refresh<%=category_name%>Fields();
+    $('#<%=category_name%>').change(function(){
+		refresh<%=category_name%>Fields();
+	});
+});
+
+function refresh<%=category_name%>Fields()
+{
+	$("[id^=<%=category_name%>_]").hide();
+	$('#<%=category_name%> option:selected').each(function(){
+		if($('#<%=category_name%>_' + $(this).val()).length > 0)
+		{
+			$('#<%=category_name%>_' + $(this).val()).show();
+		}
+	});
+}
+
+</script>
+<% tags.each do |tag| %>
+	<% if tag.type_id == 5  #TODO: match against name instead of id %> 
+		<input id="<%=category_name%>_<%=tag.id%>" type="text" name="cat_tag_data[<%=tag.id%>]" /> <!-- TODO: figure out the proper naming for submission -->
+	<% elsif tag.type_id == 6 #TODO: match against name instead of id  %>
+		<input id="<%=category_name%>_<%=tag.id%>" type="month" name="cat_tag_data[<%=tag.id%>]" /> <!-- TODO: figure out the proper naming for submission -->
+	<% elsif tag.type_id == 7 #TODO: match against name instead of id  %>
+		<input id="<%=category_name%>_<%=tag.id%>" type="date" name="cat_tag_data[<%=tag.id%>]" /> <!-- TODO: figure out the proper naming for submission -->
+	<% end %>
+<% end %>

@@ -27,6 +27,10 @@
     <%= f.label :receiver_partner_id %><br>
     <%= f.number_field :receiver_partner_id %>
   </div>
+  <div>
+    <%= render :partial => "category_utils/category_form", :locals => { :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+
+  </div>
   <div class="field">
     <%= f.label :submission_date %><br>
     <%= f.date_select :submission_date %>

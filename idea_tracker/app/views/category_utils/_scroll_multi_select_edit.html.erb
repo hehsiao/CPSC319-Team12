@@ -1,0 +1,5 @@
+<select multiple size=5> <!-- TODO: change the size to be more flexible, perhaps min(tags.size, 6) ? -->
+	<% tags.each do |tag| %>
+		<option><%= tag.category_name %></option>
+	<% end %>
+</select>
