@@ -7,13 +7,13 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 
-Category_type.create(id: '1', type: 'NA')
-Category_type.create(id: '2', type: 'Dropdown Single Select')
-Category_type.create(id: '3', type: 'Scroll Multi Select')
-Category_type.create(id: '4', type: 'Checkbox Multi Select')
-Category_type.create(id: '5', type: 'TextField')
-Category_type.create(id: '6', type: 'DateMMYYYY')
-Category_type.create(id: '7', type: 'DateDDMMYYYY')
+CategoryType.create(id: '1', type: 'NA')
+CategoryType.create(id: '2', type: 'Dropdown Single Select')
+CategoryType.create(id: '3', type: 'Scroll Multi Select')
+CategoryType.create(id: '4', type: 'Checkbox Multi Select')
+CategoryType.create(id: '5', type: 'TextField')
+CategoryType.create(id: '6', type: 'DateMMYYYY')
+CategoryType.create(id: '7', type: 'DateDDMMYYYY')
 
 Category.create(category_name: 'Idea Type', type_id: '2', parent_id: '0', id: '1')
 Category.create(category_name: 'Possible Program Referral', type_id: '3', parent_id: '0', id: '2')
