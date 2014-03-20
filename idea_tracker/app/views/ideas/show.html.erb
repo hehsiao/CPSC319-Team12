@@ -49,10 +49,13 @@
 <p>
   <strong>Associations</strong><br />
   Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-  Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-  Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.parent_idea_id}.join ', ' %>
+  Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
+  Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
 </p>
 
+<p>
+  <strong>Participants</strong><br />
+  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
 </p>
 
 <div>

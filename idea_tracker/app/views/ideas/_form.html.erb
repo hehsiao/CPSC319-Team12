@@ -64,12 +64,25 @@
     <% s = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
     <%= f.label :association_peers %><br>
     <%= f.text_field :association_peers, :value => s %>
-  </div
+  </div>
 
   <div class="field">
     <%= f.label :status %><br>
     <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
   </div>
+
+  <div class="field">
+    <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+    <%= f.label :participants %><br>
+    <%= f.text_field :participants, :value => s %>
+  </div>
+
+  <p>
+    <strong>Participants</strong><br />
+    <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
+
+  </p>
+
 
   <div class="actions">
     <%= f.submit %>
@@ -78,7 +91,7 @@
 
 
 <script>
-$('#idea_keyword_list').selectize({
+$('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
@@ -89,7 +102,7 @@ $('#idea_keyword_list').selectize({
         }
     }
 });
-$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+$('#idea_participants').selectize({
     plugins: ['remove_button'],
     delimiter: ',',
     persist: false,
@@ -100,4 +113,5 @@ $('#idea_association_parents, #idea_association_childs, #idea_association_peers'
         }
     }
 });
+
 </script>

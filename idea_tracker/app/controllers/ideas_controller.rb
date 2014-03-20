@@ -84,6 +84,7 @@ class IdeasController < ApplicationController
         # Category Tags
         handle_category_tags
         handle_associations
+        handle_participations
         # Email Notification
         # if @last_update - 5.minute.ago < 0  
         #UserMailer.edit_notification_email(@idea, current_user).deliver
@@ -96,7 +97,6 @@ class IdeasController < ApplicationController
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
-    
   end
 
   # DELETE /ideas/1
@@ -111,6 +111,14 @@ class IdeasController < ApplicationController
   end
 
   private
+    def handle_participations
+      Subscription.where(:idea_id => params[:id]).destroy_all
+      participants = params[:idea][:participants].split ','
+      participants.each do |p|
+        Subscription.create(:idea_id => params[:id], :user_id => User.where(:email => p).first.id, :is_active => 1)
+      end
+    end
+
     def handle_associations
       Association.connection.execute("delete from associations where parent_idea_id=#{params[:id]} OR tagged_idea_id=#{params[:id]} ")
       peer_associations = params[:idea][:association_peers].split ','

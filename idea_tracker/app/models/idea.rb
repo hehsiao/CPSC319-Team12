@@ -7,6 +7,7 @@ class Idea < ActiveRecord::Base
 	has_many :comments
 	has_many :child_ideas, :class_name => 'Association', :foreign_key => 'parent_idea_id'
 	has_many :parent_ideas, :class_name => 'Association', :foreign_key => 'tagged_idea_id'
+	has_many :participants, :class_name => 'Subscription', :foreign_key => 'idea_id'
 
 	acts_as_taggable
 	acts_as_taggable_on :keyword 
