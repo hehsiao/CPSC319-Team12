@@ -39,9 +39,9 @@
   </div>
 
 
-  <div class="input-row">
+  <div class="field">
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-    <%= f.text_field :keyword_list %>
+     <%= f.text_field :keyword_list %>
 
   <div>
     <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
@@ -70,10 +70,8 @@
 <script>
 
 $(function() {
-  $('.input-row #idea_keyword_list').select2({
-    placeholder: "Add a keyword",
-    tags:[],
-    tokenSeparators: [",", " "]
+  $('.field #idea_keyword_list').select2({
+    tags
   })
 });
 </script>

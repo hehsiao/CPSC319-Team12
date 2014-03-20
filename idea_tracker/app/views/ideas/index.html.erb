@@ -1,40 +1,39 @@
 <div id="page-wrapper">
-<h1>Ideas</h1>
+<h1 class="page-header">Ideas</h1>
 
-<%= link_to 'Submit a New Idea', new_idea_path %>
 <div class="panel-body">
   <div class="table">
-<table class="table table-striped table-hover dataTable">
-  <thead>
-    <tr>
-      <th>User</th>
-      <th>Summary</th>
-      <th>Description</th>
-      <th>Submission date</th>
-      <th>Last modified</th>
-      <th>Keyword</th>
-      <th class="no-sort"></th>
-      <th class="no-sort"></th>
-    </tr>
-  </thead>
+    <table class="table table-striped table-hover dataTable">
+      <thead>
+        <tr>
+          <th>User</th>
+          <th>Summary</th>
+          <th>Description</th>
+          <th>Submission date</th>
+          <th>Last modified</th>
+          <th>Keyword</th>
+          <th class="no-sort"></th>
+          <th class="no-sort"></th>
+        </tr>
+      </thead>
 
-  <tbody>
-    <% @ideas.each do |idea| %>
-      <tr>
-        <td><%= idea.user_id %></td>
-        <td><%= idea.summary %></td>
-        <td><%= truncate(idea.description, length:70) %></td>
-        <td><%= idea.submission_date %></td>
-        <td><%= idea.last_modified %></td>
-        <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
-        <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
-        <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+      <tbody>
+        <% @ideas.each do |idea| %>
+          <tr>
+            <td><%= idea.user_id %></td>
+            <td><%= idea.summary %></td>
+            <td><%= truncate(idea.description, length:70) %></td>
+            <td><%= idea.submission_date %></td>
+            <td><%= idea.last_modified %></td>
+            <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
+            <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
+            <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
 
-<br><br>
 
   <div id="tag_cloud">
     <p>Filter by Keywords</p>
@@ -43,6 +42,5 @@
     <% end %>
     <%= link_to 'clear filters', ideas_path %>
   </div>
-</div>
 </div>
 </div>
