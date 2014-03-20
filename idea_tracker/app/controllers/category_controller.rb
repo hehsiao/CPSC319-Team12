@@ -85,7 +85,7 @@ class CategoryController < ApplicationController
             Category.update(tag[0], :category_name => tag[1]["0"], :type_id => (tag[1]["1"] ? 6 : 1))
           else
             Category.delete(tag[0])
-            Tag.where(:category_id => tag[0]).destroy_all
+            Tag.connection.execute("delete from tags where category_id = #{tag[0]}")
           end
         end  
       end
