@@ -61,7 +61,7 @@ class IdeasController < ApplicationController
   # DELETE /ideas/1
   # DELETE /ideas/1.json
   def destroy
-    Tag.connection.execute("delete from tags where idea_id = #{params[:id]}")
+    IdeaTag.connection.execute("delete from idea_tags where idea_id = #{params[:id]}")
     @idea.destroy
     respond_to do |format|
       format.html { redirect_to ideas_url }
@@ -72,15 +72,15 @@ class IdeasController < ApplicationController
   private
 
     def handle_category_tags
-      Tag.connection.execute("delete from tags where idea_id = #{params[:id]}")
+      IdeaTag.connection.execute("delete from idea_tags where idea_id = #{params[:id]}")
       cat_tags = params[:cat_tag]
       cat_tag_data = params[:cat_tag_data]
       if cat_tags 
         cat_tags.each do |tag|
           if cat_tag_data and cat_tag_data.has_key?(tag)
-            Tag.create(:idea_id => params[:id], :category_id => tag, :additional_text => cat_tag_data[tag])
+            IdeaTag.create(:idea_id => params[:id], :category_id => tag, :additional_text => cat_tag_data[tag])
           else
-            Tag.create(:idea_id => params[:id], :category_id => tag)
+            IdeaTag.create(:idea_id => params[:id], :category_id => tag)
           end
         end
       end

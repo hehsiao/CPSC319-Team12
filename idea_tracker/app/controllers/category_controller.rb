@@ -50,7 +50,7 @@ class CategoryController < ApplicationController
     @category = Category.find(params[:id])
     category_tags = Category.where(:parent_id => params[:id])
     category_tags.each do |tag|
-      Tag.connection.execute("delete from tags where category_id = #{tag.id}")
+      IdeaTag.connection.execute("delete from idea_tags where category_id = #{tag.id}")
     end
     category_tags.destroy_all
     @category.destroy
@@ -85,7 +85,7 @@ class CategoryController < ApplicationController
             Category.update(tag[0], :category_name => tag[1]["0"], :type_id => (tag[1]["1"] ? 6 : 1))
           else
             Category.delete(tag[0])
-            Tag.connection.execute("delete from tags where category_id = #{tag[0]}")
+            IdeaTag.connection.execute("delete from idea_tags where category_id = #{tag[0]}")
           end
         end  
       end
