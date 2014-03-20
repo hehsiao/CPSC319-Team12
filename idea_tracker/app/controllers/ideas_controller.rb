@@ -23,6 +23,7 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @idea = Idea.new
+    @partner = Partner.new
   end
 
   # GET /ideas/1/edit
@@ -79,5 +80,7 @@ class IdeasController < ApplicationController
     def idea_params
       params.require(:idea).permit(:user_id, :description, :provider_id, :receiver_id, :submission_date, :last_modified, :status_date_change)
       params.require(:status).permit(:id)
+      params.require(:partner).permit(:partner_id, :contact_name, :email, :phone_num)
     end
+
 end
