@@ -7,7 +7,7 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Setting.delete_all
-Setting.create{name: "Allow Sign Up", data: "Yes"}
+Setting.create(name: 'Allow Sign Up', data: 'Yes')
 
 User.delete_all
 User.create!([
