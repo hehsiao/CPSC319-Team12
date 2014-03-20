@@ -1,0 +1,14 @@
+<div id="page-wrapper">
+  <div class="row">
+<h1 class="page-header">
+  <%= @setting.name %></h1>
+
+<p>
+  <strong>Data:</strong>
+  <%= @setting.data %>
+</p>
+
+
+<%= link_to 'Edit', edit_setting_path(@setting) %> |
+<%= link_to 'Back', settings_path %>
+</div>
