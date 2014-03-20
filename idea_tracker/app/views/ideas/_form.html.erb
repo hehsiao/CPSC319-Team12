@@ -77,12 +77,6 @@
     <%= f.text_field :participants, :value => s %>
   </div>
 
-  <p>
-    <strong>Participants</strong><br />
-    <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
-
-  </p>
-
 
   <div class="actions">
     <%= f.submit %>
