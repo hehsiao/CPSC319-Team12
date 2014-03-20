@@ -8,9 +8,9 @@
 
 User.delete_all
 User.create!([
-	{id: 1, email: "admin", password: "12341234", first_name: "Admin", last_name: "Admin", admin: "1"},
-	{id: 2, email: "user", password: "12341234", first_name: "User", last_name: "User", admin: "0"},
-	{id: 3, email: "justin", password: "12341234", first_name: "Justin", last_name: "Ho", admin: "1"},
+	{id: 1, email: "admin@a.a", password: "12341234", first_name: "Admin", last_name: "Admin", admin: "1"},
+	{id: 2, email: "user@a.a", password: "12341234", first_name: "User", last_name: "User", admin: "0"},
+	{id: 3, email: "justin@a.a", password: "12341234", first_name: "Justin", last_name: "Ho", admin: "1"},
 ])
 
 Partner.delete_all
