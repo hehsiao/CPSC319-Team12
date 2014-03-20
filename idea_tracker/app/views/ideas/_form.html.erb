@@ -13,10 +13,22 @@
     </div>
   <% end %>
 
+    <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </div>
+
   <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+  </div>
+
+  <div class="field" >
     <%= f.label :user_id %><br>
     <%= f.number_field :user_id %>
   </div>
+
+
   <div class="field">
     <%= f.label :description %><br>
     <%= f.text_area :description %>
@@ -39,8 +51,12 @@
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
      <%= f.text_field :keyword_list %>
 
-  <div>
-    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+  </div>
+
+  <div class="field">
+    <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+    <%= f.label :participants %><br>
+    <%= f.text_field :participants, :value => s %>
   </div>
 
   <!-- Must seed db first -->
@@ -67,19 +83,12 @@
     <%= f.label :association_peers %><br>
     <%= f.text_field :association_peers, :value => peer_ideas %>
   </div>
-
-
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+    <br>
+  <div>
+    <p><strong>Categories </strong></p>
+    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
   </div>
-
-  <div class="field">
-    <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
-    <%= f.label :participants %><br>
-    <%= f.text_field :participants, :value => s %>
-  </div>
-
+<br>
 
   <div class="actions">
     <%= f.submit %>
