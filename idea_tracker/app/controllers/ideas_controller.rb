@@ -17,7 +17,8 @@ class IdeasController < ApplicationController
   # GET /ideas/1.json
   def show
     @status = Status.find(@idea.status)
-    @provider = Partner.find(@idea.provider_partner_id).partner_name
+    # @provider = Partner.find(@idea.provider_partner_id).partner_name
+    @provider = params[:provider_partner_id]
     if @idea.receiver_partner_id != nil
       @receiver = Partner.find(@idea.receiver_partner_id).partner_name
     else 
@@ -29,17 +30,20 @@ class IdeasController < ApplicationController
   # GET /ideas/new
   def new
     @idea = Idea.new
+    @partner = Partner.new
   end
 
   # GET /ideas/1/edit
   def edit
+    #ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
+    @partner = Partner.new
   end
 
   # POST /ideas
   # POST /ideas.json
   def create
     @idea = Idea.new(idea_params)
-
+#    @idea.provider_partner_id = params[:provider_partner_id]
     respond_to do |format|
       if @idea.save
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
@@ -84,6 +88,11 @@ class IdeasController < ApplicationController
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
       params.require(:idea).permit(:user_id, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change)
+
+    end
+
+    def partner_params  
+      params.require(:partner).permit(:provider_partner_id)
       # params.require(:status).permit(:id)
     end
 end

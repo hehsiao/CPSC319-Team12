@@ -1,3 +1,5 @@
+
+
 <%= form_for(@idea) do |f| %>
   <% if @idea.errors.any? %>
     <div id="error_explanation">
@@ -19,14 +21,24 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <div class="field">
-    <%= f.label :provider_partner_id %><br>
-    <%= f.number_field :provider_partner_id %>
+  <!-- <div class="field"> -->
+    <!-- <%= f.label :provider_partner_id %><br> -->
+    <!-- <%= f.number_field :provider_partner_id %> -->
+  <!-- </div> -->
+
+  <%= fields_for(@partner) do |p| %>
+  <div class="form-group">
+    <%= p.label :provider_partner_id %><br>
+    <%= select_tag 'provider_partner_id', options_from_collection_for_select(Partner.all, :id, :partner_name, 2) %>
   </div>
+  <% end %>
+
   <div class="field">
     <%= f.label :receiver_partner_id %><br>
     <%= f.number_field :receiver_partner_id %>
   </div>
+
+
 
   <div class="input-row">
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
@@ -44,6 +56,8 @@
     <%= f.label :status_date_change %><br>
     <%= f.date_select :status_date_change %>
   </div>
+
+
   <div class="actions">
     <%= f.submit %>
   </div>

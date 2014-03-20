@@ -9,4 +9,5 @@ class Idea < ActiveRecord::Base
 	scope :recent, order("created_at desc").limit(5)
 	scope :search, lambda {|query|
     	where(["name LIKE ?", "%#{query}%"]) }
+	accepts_nested_attributes_for :partner
 end
