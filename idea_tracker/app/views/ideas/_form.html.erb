@@ -39,27 +39,37 @@
   </div>
 
 
-  <div class="input-row">
+  <div class="field">
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-    <%= f.text_field :keyword_list %>
+     <%= f.text_field :keyword_list %>
 
   <div>
     <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
-
-  </div>
-  <div class="field">
-    <%= f.label :submission_date %><br>
-    <%= f.date_select :submission_date %>
-  </div>
-  <div class="field">
-    <%= f.label :last_modified %><br>
-    <%= f.date_select :last_modified %>
-  </div>
-  <div class="field">
-    <%= f.label :status_date_change %><br>
-    <%= f.date_select :status_date_change %>
   </div>
 
+  
+  <div class="field">
+    <% s = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+    <%= f.label :association_parents %><br>
+    <%= f.text_field :association_parents, :value => s %>
+  </div>
+
+  <div class="field">
+    <% s = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+    <%= f.label :association_childs %><br>
+    <%= f.text_field :association_childs, :value => s %>
+  </div>
+
+  <div class="field">
+    <% s = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+    <%= f.label :association_peers %><br>
+    <%= f.text_field :association_peers, :value => s %>
+  </div
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
@@ -68,12 +78,26 @@
 
 
 <script>
-
-$(function() {
-  $('.input-row #idea_keyword_list').select2({
-    placeholder: "Add a keyword",
-    tags:[],
-    tokenSeparators: [",", " "]
-  })
+$('#idea_keyword_list').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+});
+$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
 });
 </script>

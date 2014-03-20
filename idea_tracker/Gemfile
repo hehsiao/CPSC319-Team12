@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+#Commenting engine
+gem 'commontator', '~> 4.2.0'
+
 #User authentication
 gem 'devise'
 
@@ -41,7 +44,7 @@ gem 'public_activity', '~> 1.4.1'
 gem 'acts-as-taggable-on'
 
 # jQuery Select
-gem "select2-rails"
+gem "selectize-rails"
 
 # datatables for pagination, sorting
 gem 'jquery-datatables-rails'

@@ -1,4 +1,5 @@
 class CategoryController < ApplicationController
+  before_action :check_permission
 
   # GET /category
   def index
@@ -89,7 +90,13 @@ class CategoryController < ApplicationController
           end
         end  
       end
+    end
 
+    # Checks user is admin, otherwise redirect to dashboard
+    def check_permission
+      if !current_user.try(:admin?)
+        redirect_to new_user_session_path
+      end
     end
 
     # Never trust parameters from the scary internet, only allow the white list through.

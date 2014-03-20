@@ -15,13 +15,13 @@
 //= require bootstrap.min
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
-//= require select2
+//= require selectize
 //= require turbolinks
 //= require_tree .
 
 $(function() {
 
-    $('#side-menu').metisMenu();
+	 
 
 });
 

@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
     @categories = Category.where(parent_id: 0).to_a
     # @provider = Partner.find(@idea.provider_partner_id).partner_name
     @provider = params[:provider_partner_id]
+    commontator_thread_show(@idea) 
     if @idea.receiver_partner_id != nil
       @receiver = Partner.find(@idea.receiver_partner_id).partner_name
     else 
@@ -60,6 +61,7 @@ class IdeasController < ApplicationController
       if @idea.save
         params[:id] = @idea.id
         handle_category_tags
+        handle_associations
         format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
         format.json { render action: 'show', status: :created, location: @idea }
       else
@@ -73,16 +75,17 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1.json
   def update
     @last_update = @idea.updated_at
+
     respond_to do |format|
       if @idea.update(idea_params)
         params[:id] = @idea.id
         
         # Category Tags
         handle_category_tags
-
+        handle_associations
         # Email Notification
         # if @last_update - 5.minute.ago < 0  
-          UserMailer.edit_notification_email(@idea, current_user).deliver
+        #UserMailer.edit_notification_email(@idea, current_user).deliver
         # end
         
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}
@@ -93,6 +96,7 @@ class IdeasController < ApplicationController
         format.json { render json: @idea.errors, status: :unprocessable_entity }
       end
     end
+    
   end
 
   # DELETE /ideas/1
@@ -124,6 +128,23 @@ class IdeasController < ApplicationController
   end
 
   private
+    def handle_associations
+      Association.connection.execute("delete from associations where parent_idea_id=#{params[:id]} OR tagged_idea_id=#{params[:id]} ")
+      peer_associations = params[:idea][:association_peers].split ','
+      peer_associations.each do |p|
+        Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 0)
+        Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 0)
+      end
+      peer_associations = params[:idea][:association_parents].split ','
+      peer_associations.each do |p|
+        Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 1)
+      end
+      peer_associations = params[:idea][:association_childs].split ','
+      peer_associations.each do |p|
+        Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 1)
+      end
+    end
+
 
     def handle_category_tags
       IdeaTag.connection.execute("delete from idea_tags where idea_id = #{params[:id]}")
@@ -148,7 +169,7 @@ class IdeasController < ApplicationController
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:user_id, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change)
+      params.require(:idea).permit(:user_id, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status)
 
     end
 
