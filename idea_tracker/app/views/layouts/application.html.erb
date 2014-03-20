@@ -97,20 +97,22 @@
 	            <li>
 	                <a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
 	            </li>
-	            <li>
-	                <a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
-	                <ul class="nav nav-second-level">
-	                    <li>
-	                    	<a href="/category">Categories</a>
-	                    </li>
-	                    <li>
-	                        <a href="/status">Status</a>
-	                    </li>
-	                    <li>
-	                    	<a href="/users">Users</a>
-	                    </li>
-	                </ul>
-	            </li>
+	            <% if current_user.try(:admin?) %>
+		            <li>
+		                <a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
+		                <ul class="nav nav-second-level">
+		                    <li>
+		                    	<a href="/category">Categories</a>
+		                    </li>
+		                    <li>
+		                        <a href="/status">Status</a>
+		                    </li>
+		                    <li>
+		                    	<a href="/users">Users</a>
+		                    </li>
+		                </ul>
+		            </li>
+	            <% end %>
 	        </ul>
 	        <!-- /#side-menu -->
 	    </div>
