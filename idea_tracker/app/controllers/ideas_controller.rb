@@ -82,9 +82,9 @@ class IdeasController < ApplicationController
         handle_category_tags
 
         # Email Notification
-        if @last_update - 5.minute.ago < 0  
+        # if @last_update - 5.minute.ago < 0  
           UserMailer.edit_notification_email(@idea, current_user).deliver
-        end
+        # end
         
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}
         format.json { head :no_content }

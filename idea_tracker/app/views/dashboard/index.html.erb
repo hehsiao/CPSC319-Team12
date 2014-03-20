@@ -59,7 +59,7 @@
            <% @activities.each do |activity| %>
            <% @sub_ideas.each do |sub_idea| %>
             <% if activity.trackable.id == sub_idea.idea_id%>
-             <a href = "http://localhost:3000/ideas/<%= activity.trackable.id%>" class = "list-group-item">
+             <a href = "/ideas/<%= activity.trackable.id%>" class = "list-group-item">
              <!-- <div class="activity"> -->
               <%= render_activity activity%>
               <span class = "text-muted small">
