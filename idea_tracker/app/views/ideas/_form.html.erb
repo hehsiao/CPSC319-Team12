@@ -21,10 +21,6 @@
     <%= f.label :description %><br>
     <%= f.text_area :description %>
   </div>
-  <!-- <div class="field"> -->
-    <!-- <%= f.label :provider_partner_id %><br> -->
-    <!-- <%= f.number_field :provider_partner_id %> -->
-  <!-- </div> -->
 
   <%= fields_for(@partner) do |p| %>
   <div class="form-group">
@@ -47,7 +43,7 @@
     <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
   </div>
 
-  
+  <!-- Must seed db first -->
   <div class="field">
     <% s = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
     <%= f.label :association_parents %><br>

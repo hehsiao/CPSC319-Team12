@@ -5,48 +5,27 @@
 <div class="table">
   <h4>Recent Ideas (Latest 5 Ideas)</h4>
   <table class="table" summary="Recent Ideas">
-    <%= render "ideas/idea" %>
+    <%= render "ideas/recent_idea" %>
   </table>
 </div>
 <br><br>
-  <table class="table" summary="My Idea">
-    <tr class="header">
-
-      <th>My Idea</th>
-      <th><p class="text-right">Actions</p></th>
-    </tr>
-    <% @ideas.each do |idea| %>
-    <tr>
-      <td><%= idea.summary %></td>
-      <td class="actions">
-        <p class="text-right">
-        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
-        <%= link_to("Edit", {:action => 'edit', :id => idea.id}, :class => 'action edit') %>
-        <%= link_to("Delete", {:action => 'delete', :id => idea.id}, :class => 'action delete') %>
-        </p>
-      </td>
-    </tr>
-    <% end %>
+<div class="table">
+  <h4>My Ideas</h4>
+  <table class="table">
+    <%= render "ideas/my_idea" %>
   </table>
-<br><br>
-  <table class="table" summary="Subscription list">
-    <tr class="header">
+</div>
 
-      <th>My Subscriptions</th>
-      <th><p class="text-right">Actions</p></th>
-    </tr>
-    <% @ideas.each do |idea| %>
-    <tr>
-      <td><%= idea.summary %></td>
-      <td class="actions">
-        <p class="text-right">
-        <%= link_to("Show", {:action => 'show', :id => idea.id}, :class => 'action show') %>
-      </p>
-      </td>
-    </tr>
-    <% end %>
-  </table>
 <br><br>
+<div class="table">
+  <h4>My Subscriptions</h4>
+  <table class="table">
+    <%= render "ideas/subscribed_idea" %>
+  </table>
+</div>
+
+<br><br>
+  
 <div class = "col-lg-4">
   <div class = "chat-panel panel panel-default">
      <div class = "panel-heading">
