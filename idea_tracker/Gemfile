@@ -54,6 +54,12 @@ group :doc do
   gem 'sdoc', require: false
 end
 
+#testing gems
+group :test do
+  gem "capybara"
+  gem "launchy"
+end
+
 # Use ActiveModel has_secure_password
 # gem 'bcrypt-ruby', '~> 3.1.2'
 
