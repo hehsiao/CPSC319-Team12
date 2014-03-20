@@ -11,8 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-<<<<<<< HEAD
-ActiveRecord::Schema.define(version: 20140318164943) do
+ActiveRecord::Schema.define(version: 20140319065346) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -30,9 +29,6 @@ ActiveRecord::Schema.define(version: 20140318164943) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
-=======
-ActiveRecord::Schema.define(version: 20140319065346) do
->>>>>>> 6feae288fa2e0eea425bf5350c7f8d420ed011c2
 
   create_table "associations", id: false, force: true do |t|
     t.integer  "parent_idea_id"
@@ -63,6 +59,12 @@ ActiveRecord::Schema.define(version: 20140319065346) do
     t.date     "comment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
+  end
+
+  create_table "conversations", force: true do |t|
+    t.string   "subject",    default: ""
+    t.datetime "created_at",              null: false
+    t.datetime "updated_at",              null: false
   end
 
   create_table "ideas", force: true do |t|
@@ -97,7 +99,6 @@ ActiveRecord::Schema.define(version: 20140319065346) do
     t.string   "secondary_contact_name"
     t.string   "secondary_email"
     t.string   "secondary_phone_num"
-<<<<<<< HEAD
   end
 
   create_table "receipts", force: true do |t|
@@ -110,8 +111,6 @@ ActiveRecord::Schema.define(version: 20140319065346) do
     t.string   "mailbox_type",    limit: 25
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
-=======
->>>>>>> 6feae288fa2e0eea425bf5350c7f8d420ed011c2
   end
 
   create_table "statuses", force: true do |t|

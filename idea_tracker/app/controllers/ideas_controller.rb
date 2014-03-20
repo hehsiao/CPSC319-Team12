@@ -54,10 +54,17 @@ class IdeasController < ApplicationController
   # PATCH/PUT /ideas/1
   # PATCH/PUT /ideas/1.json
   def update
+    @last_update = @idea.updated_at
     respond_to do |format|
       if @idea.update(idea_params)
-        format.html { redirect_to @idea, notice: 'Idea was successfully updated.' }
+
+        if @last_update - 5.minute.ago < 0  
+        UserMailer.edit_notification_email(@idea, current_user).deliver
+        end
+        
+        format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}
         format.json { head :no_content }
+
       else
         format.html { render action: 'edit' }
         format.json { render json: @idea.errors, status: :unprocessable_entity }
