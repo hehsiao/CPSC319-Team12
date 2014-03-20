@@ -60,6 +60,10 @@
     <%= f.date_select :status_date_change %>
   </div>
 
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+  </div>
 
   <div class="actions">
     <%= f.submit %>
