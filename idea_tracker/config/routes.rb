@@ -8,7 +8,7 @@ IdeaTracker::Application.routes.draw do
   resources :ideas
 
   devise_for :users
-
+  mount Commontator::Engine => '/commontator'
   get "comments/index"
   get "comments/show"
   get "comments/new"

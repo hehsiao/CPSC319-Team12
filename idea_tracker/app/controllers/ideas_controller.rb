@@ -21,6 +21,7 @@ class IdeasController < ApplicationController
     @categories = Category.where(parent_id: 0).to_a
     # @provider = Partner.find(@idea.provider_partner_id).partner_name
     @provider = params[:provider_partner_id]
+    commontator_thread_show(@idea) 
     if @idea.receiver_partner_id != nil
       @receiver = Partner.find(@idea.receiver_partner_id).partner_name
     else 
