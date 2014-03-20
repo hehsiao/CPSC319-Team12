@@ -39,10 +39,13 @@
   </div>
 
 
-
   <div class="input-row">
     <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
     <%= f.text_field :keyword_list %>
+
+  <div>
+    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+
   </div>
   <div class="field">
     <%= f.label :submission_date %><br>

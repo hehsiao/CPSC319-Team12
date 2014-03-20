@@ -1,0 +1,10 @@
+<% defined?(idea_id) or idea_id = 0 %>
+
+<div id="<%= category_name %>">
+	<% category_tags.each do |cat_tag| %>
+		<% tag = cat_tag.tag.where(idea_id: idea_id) %>
+		<input type="checkbox" name="cat_tag[]" value="<%= cat_tag.id %>" <%= !tag.empty? ? "checked" : "" %> /><%= cat_tag.category_name %>
+		<%= render :partial => "category_utils/special_tag_display", :locals => {:idea_id => idea_id, :category_tags => [cat_tag], :category_name => category_name} %>
+		<br />
+	<% end %>
+</div>
