@@ -28,7 +28,7 @@
     <%= f.number_field :receiver_partner_id %>
   </div>
   <div>
-    <%= render :partial => "category_utils/category_form", :locals => { :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
 
   </div>
   <div class="field">

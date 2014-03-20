@@ -20,8 +20,6 @@ Category.create(category_name: 'Possible Program Referral', type_id: '3', parent
 Category.create(category_name: 'Organization\'s Mandate', type_id: '3', parent_id: '0', id: '3')
 Category.create(category_name: 'Possible Disciplines', type_id: '4', parent_id: '0', id: '4')
 Category.create(category_name: 'Timeframe', type_id: '2', parent_id: '0', id: '5')
-
-
 Category.create(category_name: 'One-Time Project', type_id: '1', parent_id: '1')
 Category.create(category_name: 'Recurring Project', type_id: '1', parent_id: '1')
 Category.create(category_name: 'Part of a Multi-Phase Project', type_id: '1', parent_id: '1')

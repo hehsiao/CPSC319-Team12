@@ -17,11 +17,11 @@
 			     	<td></td> <!-- add category.description -->
 			    	<td>
 			     		<% if category.type_id == 2 #TODO: change to compare with type (String) later %>
-				    		<%= render :partial => "category_utils/dropdown_single_display", :locals => { :tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+				    		<%= render :partial => "category_utils/dropdown_single_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
 			     		<% elsif category.type_id == 3 #TODO: same as above%>
-			     			<%= render :partial => "category_utils/scroll_multi_select_display", :locals => { :tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+			     			<%= render :partial => "category_utils/scroll_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
 			     		<% elsif category.type_id == 4 #TODO: same as above%>
-			     			<%= render :partial => "category_utils/check_box_multi_select_display", :locals => { :tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+			     			<%= render :partial => "category_utils/check_box_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
 			     		<% else %>
 				    		<% category.children.each do |tag| %>
 				    			<li><%= tag.category_name%></li>
@@ -30,7 +30,7 @@
 			  		</td>
 			  		<td>
 			  			<%= link_to 'Edit', edit_category_path(category) %>
-        				<%= link_to 'Destroy', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+        				<%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' } %>
 			  		</td>
 			    </tr>
 		    <% end %>
@@ -38,4 +38,5 @@
 	</table>
 </div>
 
+<%= link_to 'Add New Category', new_category_path %>
 </div>

@@ -21,6 +21,8 @@ class CategoryController < ApplicationController
     respond_to do |format|
       @category.parent_id = 0
       if @category.save
+        params[:id] = @category.id
+        handle_tags
         format.html { redirect_to action: "index", notice: 'Category was successfully created.' }
       else
         format.html { render action: 'new' }
@@ -33,6 +35,9 @@ class CategoryController < ApplicationController
   	@category = Category.find(params[:id])
     respond_to do |format|
       if @category.update(category_params)
+        # here we update the tags
+        handle_tags
+
         format.html { redirect_to action: "index", notice: 'Category was successfully updated.' }
       else
         format.html { render action: 'edit' }
@@ -42,17 +47,51 @@ class CategoryController < ApplicationController
 
   # DELETE /categories/1
   def destroy
+    @category = Category.find(params[:id])
+    category_tags = Category.where(:parent_id => params[:id])
+    category_tags.each do |tag|
+      Tag.connection.execute("delete from tags where category_id = #{tag.id}")
+    end
+    category_tags.destroy_all
     @category.destroy
     respond_to do |format|
-      
+      format.html { redirect_to categories_url }
     end
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_category
-      @category = Category.find(params[:id])
+    # handle tags in edit category
+    def handle_tags
+      new_tags = params[:new_tags]
+      old_tags = params[:old_tags]
+      require_other = params[:require_other]
+      if require_other
+        Category.find_or_create_by_parent_id_and_category_name_and_type_id(params[:id], "Other: Please Specify", 5)
+      else
+        Category.where("parent_id = ? AND type_id = 5",  params[:id]).destroy_all
+      end
+
+      if new_tags
+        new_tags.each do |tag|
+          if !tag[1]["2"]
+            Category.create(:parent_id => params[:id], :category_name => tag[1]["0"], :type_id => (tag[1]["1"] ? 6 : 1))
+          end
+        end
+      end
+
+      if old_tags
+        old_tags.each do |tag|
+          if !tag[1]["2"]
+            Category.update(tag[0], :category_name => tag[1]["0"], :type_id => (tag[1]["1"] ? 6 : 1))
+          else
+            Category.delete(tag[0])
+            Tag.where(:category_id => tag[0]).destroy_all
+          end
+        end  
+      end
+
     end
+
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(:category_name, :description, :type_id)
