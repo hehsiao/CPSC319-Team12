@@ -11,6 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
+<<<<<<< HEAD
 ActiveRecord::Schema.define(version: 20140318164943) do
 
   create_table "activities", force: true do |t|
@@ -29,6 +30,9 @@ ActiveRecord::Schema.define(version: 20140318164943) do
   add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
   add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
   add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
+=======
+ActiveRecord::Schema.define(version: 20140319065346) do
+>>>>>>> 6feae288fa2e0eea425bf5350c7f8d420ed011c2
 
   create_table "associations", id: false, force: true do |t|
     t.integer  "parent_idea_id"
@@ -59,12 +63,6 @@ ActiveRecord::Schema.define(version: 20140318164943) do
     t.date     "comment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
-  end
-
-  create_table "conversations", force: true do |t|
-    t.string   "subject",    default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
   end
 
   create_table "ideas", force: true do |t|
@@ -99,6 +97,7 @@ ActiveRecord::Schema.define(version: 20140318164943) do
     t.string   "secondary_contact_name"
     t.string   "secondary_email"
     t.string   "secondary_phone_num"
+<<<<<<< HEAD
   end
 
   create_table "receipts", force: true do |t|
@@ -111,6 +110,8 @@ ActiveRecord::Schema.define(version: 20140318164943) do
     t.string   "mailbox_type",    limit: 25
     t.datetime "created_at",                                 null: false
     t.datetime "updated_at",                                 null: false
+=======
+>>>>>>> 6feae288fa2e0eea425bf5350c7f8d420ed011c2
   end
 
   create_table "statuses", force: true do |t|
@@ -127,13 +128,23 @@ ActiveRecord::Schema.define(version: 20140318164943) do
     t.datetime "updated_at"
   end
 
-  create_table "tags", id: false, force: true do |t|
-    t.integer  "category_id"
-    t.integer  "idea_id"
-    t.string   "additional_text"
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

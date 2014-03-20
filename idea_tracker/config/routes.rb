@@ -1,5 +1,5 @@
 IdeaTracker::Application.routes.draw do
-  
+  get 'keywords/:keyword', to: 'ideas#index', as: :keyword
   resources :partners
 
   resources :ideas

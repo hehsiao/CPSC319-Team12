@@ -3,7 +3,7 @@
 
 <%= link_to 'Submit a New Idea', new_idea_path %>
 
-<table class="table">
+<table class="datatable">
   <thead>
     <tr>
       <th>User</th>
@@ -11,9 +11,10 @@
       <th>Description</th>
       <th>Submission date</th>
       <th>Last modified</th>
-      <th></th>
-      <th></th>
-      <th></th>
+      <th>Keyword</th>
+      <th class="no-sort"></th>
+      <th class="no-sort"></th>
+      <th class="no-sort"></th>
     </tr>
   </thead>
 
@@ -25,6 +26,7 @@
         <td><%= truncate(idea.description, length:70) %></td>
         <td><%= idea.submission_date %></td>
         <td><%= idea.last_modified %></td>
+        <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
         <td><%= link_to 'Show', idea %></td>
         <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
         <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
@@ -33,4 +35,13 @@
   </tbody>
 </table>
 
+<br><br>
+
+  <div id="tag_cloud">
+    <p>Filter by Keywords</p>
+    <% tag_cloud Idea.keyword_counts, %w[s m l] do |keyword, css_class| %>
+      <%= link_to keyword.name, keyword_path(keyword.name), class: css_class %>
+    <% end %>
+    <%= link_to 'clear filters', ideas_path %>
+  </div>
 </div>

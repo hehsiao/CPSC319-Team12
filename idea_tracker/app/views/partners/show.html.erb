@@ -1,13 +1,11 @@
 <div id="page-wrapper">
-<p id="notice"><%= notice %></p>
+  <div class="row">
+<h1 class="page-header">
+  <%= @partner.partner_name %></h1>
 
+<h3>Primary Contact</h3>
 <p>
-  <strong>Partner name:</strong>
-  <%= @partner.partner_name %>
-</p>
-
-<p>
-  <strong>Contact name:</strong>
+  <strong>Name:</strong>
   <%= @partner.contact_name %>
 </p>
 
@@ -15,10 +13,25 @@
   <strong>Email:</strong>
   <%= @partner.email %>
 </p>
+<p>
+  <strong>Phone:</strong>
+  <%= @partner.phone_num %>
+</p>
+
+<h3>Secondary Contact</h3>
+<p>
+  <strong>Name:</strong>
+  <%= @partner.secondary_contact_name %>
+</p>
 
 <p>
-  <strong>Phone num:</strong>
-  <%= @partner.phone_num %>
+  <strong>Email:</strong>
+  <%= @partner.secondary_email %>
+</p>
+
+<p>
+  <strong>Phone:</strong>
+  <%= @partner.secondary_phone_num %>
 </p>
 
 <%= link_to 'Edit', edit_partner_path(@partner) %> |
