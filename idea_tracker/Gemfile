@@ -44,7 +44,7 @@ gem 'public_activity', '~> 1.4.1'
 gem 'acts-as-taggable-on'
 
 # jQuery Select
-gem "select2-rails"
+gem "selectize-rails"
 
 # datatables for pagination, sorting
 gem 'jquery-datatables-rails'

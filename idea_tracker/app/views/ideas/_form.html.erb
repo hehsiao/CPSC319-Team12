@@ -68,10 +68,14 @@
 
 
 <script>
-
-$(function() {
-  $('.field #idea_keyword_list').select2({
-    tags
-  })
+$('#idea_keyword_list').selectize({
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
 });
 </script>
