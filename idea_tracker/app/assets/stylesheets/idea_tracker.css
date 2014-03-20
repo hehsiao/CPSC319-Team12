@@ -20,12 +20,12 @@
     background-color: #fff;
 }
 
-@media(min-width:768px) {
+@media(min-width:1300px) {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
         padding: 0 30px;
-        min-height: 1300px;
+        min-height: 768px;
         border-left: 1px solid #e7e7e7;
     }
 }
