@@ -6,6 +6,9 @@
 #   cities = City.create([{ name: 'Chicago' }, { name: 'Copenhagen' }])
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
+Setting.delete_all
+Setting.create{name: "Allow Sign Up", data: "Yes"}
+
 User.delete_all
 User.create!([
 	{id: 1, email: "admin@a.a", password: "12341234", first_name: "Admin", last_name: "Admin", admin: "1"},
@@ -53,14 +56,14 @@ Idea.create!([
 
 Status.delete_all
 Status.create!([
-	{id: 1, status:	"New Submission" },
-	{id: 2, status:	"New Ideas" },
-	{id: 3, status: "Removed"}, 	
-	{id: 4, status: "Verified"},
-	{id: 5, status: "Active Development"}, 
-	{id: 6, status: "Referral Pending"},  
-	{id: 7, status: "Confirmed"},
-	{id: 8, status: "Archived"}
+	{id: 1, position: 1, status: "New Submission" },
+	{id: 2, position: 2, status: "New Ideas" },
+	{id: 3, position: 3, status: "Removed"}, 	
+	{id: 4, position: 4, status: "Verified"},
+	{id: 5, position: 5, status: "Active Development"}, 
+	{id: 6, position: 6, status: "Referral Pending"},  
+	{id: 7, position: 7, status: "Confirmed"},
+	{id: 8, position: 8, status: "Archived"}
 ])
 
 CategoryType.delete_all

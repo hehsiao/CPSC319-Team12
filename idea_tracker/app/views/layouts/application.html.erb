@@ -101,11 +101,14 @@
 		            <li>
 		                <a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
 		                <ul class="nav nav-second-level">
+		                	<li>
+		                    	<a href="/settings">Settings</a>
+		                    </li>
 		                    <li>
 		                    	<a href="/category">Categories</a>
 		                    </li>
 		                    <li>
-		                        <a href="/status">Status</a>
+		                        <a href="/statuses">Status</a>
 		                    </li>
 		                    <li>
 		                    	<a href="/users">Users</a>
@@ -129,6 +132,10 @@
 
 <%= yield %>
 
+
+
+</div>
+</body>
 <script>
 	$(document).ready(function(){
 		$('#side-menu > li > ul').hide();
@@ -147,18 +154,13 @@
 				subnav.show();
 			}
 		});
+		$('.dataTable').dataTable({
+		  "aoColumnDefs" : [ {
+		    "bSortable" : false,
+		    "aTargets" : [ "no-sort" ]
+		} ]
+		});
 	});
 
-</script>
-
-</div>
-</body>
-<script>
-$('.dataTable').dataTable({
-  "aoColumnDefs" : [ {
-    "bSortable" : false,
-    "aTargets" : [ "no-sort" ]
-} ]
-});
 </script>
 </html>

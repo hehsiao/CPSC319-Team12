@@ -1,0 +1,14 @@
+<div id="page-wrapper">
+  <div class="row">
+<h1 class="page-header">
+  <%= @status.status %></h1>
+
+<p>
+  <strong>Position:</strong>
+  <%= @status.position %>
+</p>
+
+
+<%= link_to 'Edit', edit_status_path(@status) %> |
+<%= link_to 'Back', statuses_path %>
+</div>
