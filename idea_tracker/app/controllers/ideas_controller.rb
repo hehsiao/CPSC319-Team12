@@ -34,6 +34,7 @@ class IdeasController < ApplicationController
     @idea = Idea.new
 
     @partner = Partner.new
+    
     @categories = Category.where(parent_id: 0).to_a
 
   end
@@ -43,6 +44,7 @@ class IdeasController < ApplicationController
 
     #ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
     @partner = Partner.new
+
     @categories = Category.where(parent_id: 0).to_a
 
   end
