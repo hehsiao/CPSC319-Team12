@@ -5,8 +5,6 @@
 	<%= csrf_meta_tag %>
   <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
   <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-
-
 </head>
 <body>
 <div id="wrapper">
@@ -55,6 +53,9 @@
 	                </div>
 	            </li> -->
 	            <li>
+	                <a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
+	            </li>
+	            <li>
 	                <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
 	            </li>
 	            <li>
@@ -95,6 +96,9 @@
 	            </li>            
 	            <li>
 	                <a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
+	            </li>
+	            <li>
+	                <a href="/category"><i class="fa fa-flag fa-fw"></i> Categories</a>
 	            </li>
 	        </ul>
 	        <!-- /#side-menu -->
