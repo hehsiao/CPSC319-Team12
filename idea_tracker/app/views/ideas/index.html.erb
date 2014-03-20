@@ -2,8 +2,9 @@
 <h1>Ideas</h1>
 
 <%= link_to 'Submit a New Idea', new_idea_path %>
-
-<table class="datatable">
+<div class="panel-body">
+  <div class="table">
+<table class="table table-striped table-hover dataTable">
   <thead>
     <tr>
       <th>User</th>
@@ -12,7 +13,6 @@
       <th>Submission date</th>
       <th>Last modified</th>
       <th>Keyword</th>
-      <th class="no-sort"></th>
       <th class="no-sort"></th>
       <th class="no-sort"></th>
     </tr>
@@ -27,9 +27,8 @@
         <td><%= idea.submission_date %></td>
         <td><%= idea.last_modified %></td>
         <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
-        <td><%= link_to 'Show', idea %></td>
-        <td><%= link_to 'Edit', edit_idea_path(idea) %></td>
-        <td><%= link_to 'Destroy', idea, method: :delete, data: { confirm: 'Are you sure?' } %></td>
+        <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
+        <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
       </tr>
     <% end %>
   </tbody>
@@ -44,4 +43,6 @@
     <% end %>
     <%= link_to 'clear filters', ideas_path %>
   </div>
+</div>
+</div>
 </div>

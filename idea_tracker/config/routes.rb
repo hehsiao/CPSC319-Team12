@@ -1,5 +1,8 @@
 IdeaTracker::Application.routes.draw do
   get 'keywords/:keyword', to: 'ideas#index', as: :keyword
+
+  match '/category/', :to => 'category#index', :as => :categories, :via => [:get]
+  resources :category  
   resources :partners
 
   resources :ideas
@@ -26,6 +29,7 @@ IdeaTracker::Application.routes.draw do
   get "clients/edit"
   get "clients/delete"
   resources :dashboard
+  get "admin/setting"
   resources :admin
 
   resources :users do

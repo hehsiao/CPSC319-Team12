@@ -2,9 +2,12 @@
   <h2>Dashboard</h2>
   <%= link_to("Submit a New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
 <br><br>
+<div class="table">
+  <h4>Recent Ideas (Latest 5 Ideas)</h4>
   <table class="table" summary="Recent Ideas">
     <%= render "ideas/idea" %>
   </table>
+</div>
 <br><br>
   <table class="table" summary="My Idea">
     <tr class="header">
@@ -56,7 +59,11 @@
            <% @activities.each do |activity| %>
            <% @sub_ideas.each do |sub_idea| %>
             <% if activity.trackable.id == sub_idea.idea_id%>
+<<<<<<< HEAD
              <a href = "http://localhost:3000/ideas/<%= activity.trackable.id%>" class = "list-group-item">
+=======
+             <a href = "/ideas/<%= activity.trackable.id%>" class = "list-group-item">
+>>>>>>> 5ced37aab105f2a896513074056437e3eff1e094
              <!-- <div class="activity"> -->
               <%= render_activity activity%>
               <span class = "text-muted small">

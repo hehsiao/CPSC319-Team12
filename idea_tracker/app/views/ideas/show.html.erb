@@ -46,6 +46,11 @@
   <%= @status.status %>
 </p>
 
+<div>
+  <table>
+    <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
+  </table>
+</div>
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
 </div>
