@@ -6,7 +6,7 @@ class Idea < ActiveRecord::Base
 	acts_as_taggable
 	acts_as_taggable_on :keyword 
 
-	scope :recent, order("created_at desc").limit(5)
+	scope :recent, order("submission_date desc").limit(5)
 	scope :search, lambda {|query|
     	where(["name LIKE ?", "%#{query}%"]) }
 	accepts_nested_attributes_for :partner

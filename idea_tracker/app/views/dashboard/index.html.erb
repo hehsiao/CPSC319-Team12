@@ -3,9 +3,12 @@
 
   <%= link_to("Submit a New Idea", {:controller => 'ideas', :action => 'new'}, :class => 'action new') %>
 <br><br>
+<div class="table">
+  <h4>Recent Ideas (Latest 5 Ideas)</h4>
   <table class="table" summary="Recent Ideas">
     <%= render "ideas/idea" %>
   </table>
+</div>
 <br><br>
   <table class="table" summary="My Idea">
     <tr class="header">
