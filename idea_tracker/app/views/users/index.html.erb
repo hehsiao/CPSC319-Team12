@@ -1,42 +1,37 @@
 <div id="page-wrapper">
-<<<<<<< HEAD
-  <h2>Users</h2>
-<!-- \\
-=======
   <div class="row">
-  <h1 class="page-header">Managing Users</h1>
-<!-- 
->>>>>>> 6feae288fa2e0eea425bf5350c7f8d420ed011c2
-  <%= link_to("Add New User", {:action => 'new'}, :class => 'action new') %>
- -->
-  <table class="table" summary="User list">
-    <tr class="header">
-      <th>Name</th>
-      <th>Email</th>
-      <th>Admin</th>
-      <th>Remove</th>
-    </tr>
-    <% if @users %>
-    <% @users.each do |user| %>
-    <tr>
-      <td><%= user.first_name + " " + user.last_name %></td>
-      <td><%= user.email %></td>
-      <td><% if user.admin? %>
-        <% if user == self.current_user %>
-          <i class="fa fa-check"></i>
-        <% else %>
-          <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to regular user?' } %>
+    <h1 class="page-header">Managing Users</h1>
+
+    <%= link_to("Add New User", {:action => 'new'}, :class => 'action new') %>
+   
+    <table class="table" summary="User list">
+      <tr class="header">
+        <th>Name</th>
+        <th>Email</th>
+        <th>Admin</th>
+        <th>Remove</th>
+      </tr>
+      <% if @users %>
+      <% @users.each do |user| %>
+      <tr>
+        <td><%= user.first_name + " " + user.last_name %></td>
+        <td><%= user.email %></td>
+        <td><% if user.admin? %>
+          <% if user == self.current_user %>
+            <i class="fa fa-check"></i>
+          <% else %>
+            <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to regular user?' } %>
+            <% end %>
+          <% else %>
+          <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to admin?' } %>
           <% end %>
-        <% else %>
-        <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id}, data: {confirm: 'Change staff to admin?' } %>
-        <% end %>
-      </td>
-      <td class="actions">
-        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
-      </td>
-    </tr>
-    <% end %>
-    <% end %>
-  </table>
-</div>
+        </td>
+        <td class="actions">
+          <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
+        </td>
+      </tr>
+      <% end %>
+      <% end %>
+    </table>
+  </div>
 </div>

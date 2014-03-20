@@ -21,7 +21,7 @@
 
 $(function() {
 
-    $('#side-menu').metisMenu();
+	 
 
 });
 

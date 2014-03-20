@@ -98,7 +98,18 @@
 	                <a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
 	            </li>
 	            <li>
-	                <a href="/category"><i class="fa fa-flag fa-fw"></i> Categories</a>
+	                <a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
+	                <ul class="nav nav-second-level">
+	                    <li>
+	                    	<a href="/category">Categories</a>
+	                    </li>
+	                    <li>
+	                        <a href="/status">Status</a>
+	                    </li>
+	                    <li>
+	                    	<a href="/users">Users</a>
+	                    </li>
+	                </ul>
 	            </li>
 	        </ul>
 	        <!-- /#side-menu -->
@@ -115,6 +126,28 @@
   <% end %>
 
 <%= yield %>
+
+<script>
+	$(document).ready(function(){
+		$('#side-menu > li > ul').hide();
+		$('#side-menu > li > ul').siblings('a').click(function(e){e.preventDefault();});
+		$('#side-menu > li > ul').closest('li').click(function(e){
+			var subnav = $(this).children('ul');
+			if(subnav.is(":visible"))
+			{
+				$(this).toggleClass("active", false);
+				subnav.hide();
+			}
+			else
+			{
+				$(this).toggleClass("active", true);
+				$(this).siblings().find('ul').hide();
+				subnav.show();
+			}
+		});
+	});
+
+</script>
 
 </div>
 </body>
