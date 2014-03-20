@@ -33,18 +33,13 @@
 </p>
 
 <p>
-  <strong>Submission date:</strong>
-  <%= @idea.submission_date %>
-</p>
-
-<p>
-  <strong>Last modified:</strong>
-  <%= @idea.last_modified %>
-</p>
-
-<p>
   <strong>Status:</strong>
   <%= @idea.status %>
+</p>
+
+<p>
+  <strong>Participants</strong><br />
+  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
 </p>
 
 <p>
@@ -54,17 +49,20 @@
   Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
 </p>
 
-<p>
-  <strong>Participants</strong><br />
-  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
-</p>
-
 <div>
   <table>
     <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
   </table>
 </div>
+<br><br>
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
+
+<br><br>
 <%= commontator_thread(@idea) %>
+<br><br>
+<p> Submission date:  <%= @idea.submission_date %> | Last modified: <%= @idea.last_modified %> </p>
+
+
 </div>
+
