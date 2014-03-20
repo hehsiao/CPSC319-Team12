@@ -19,7 +19,7 @@
 
       <tbody>
         <% @ideas.each do |idea| %>
-          <tr>
+          <tr onclick="document.location = '/ideas/<%=idea.id%>';">
             <td><%= idea.user_id %></td>
             <td><%= idea.summary %></td>
             <td><%= truncate(idea.description, length:70) %></td>
