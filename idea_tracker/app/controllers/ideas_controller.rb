@@ -106,6 +106,23 @@ class IdeasController < ApplicationController
     end
   end
 
+
+  def sendemail
+
+      @user = current_user
+      @idea = Idea.find(params[:id])
+     
+      puts "to this email" + " " + params[:send_mail].inspect
+
+      UserMailer.idea_email(@idea, params[:send_mail]).deliver
+
+      
+      respond_to do |format|
+        format.html { redirect_to @idea, notice: 'Idea was successfully send.' }
+        format.json { render action: 'show', status: :created, location: @idea }
+      end
+  end
+
   private
 
     def handle_category_tags
@@ -122,6 +139,7 @@ class IdeasController < ApplicationController
         end
       end
     end
+
 
     # Use callbacks to share common setup or constraints between actions.
     def set_idea

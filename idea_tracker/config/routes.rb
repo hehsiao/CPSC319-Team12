@@ -34,6 +34,7 @@ IdeaTracker::Application.routes.draw do
 
   resources :users do
     resources :ideas
+       get 'sendemail', :on => :collection
   end
 
   root to: "home#index"
