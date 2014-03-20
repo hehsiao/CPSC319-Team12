@@ -1,4 +1,7 @@
 class Idea < ActiveRecord::Base
+	include PublicActivity::Model
+	tracked owner: ->(controller, model) {controller && controller.current_user}
+	
 	belongs_to :partner
 	belongs_to :user
 	has_many :comments

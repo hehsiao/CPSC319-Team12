@@ -6,4 +6,9 @@ class User < ActiveRecord::Base
 
   has_many :ideas
   has_many :comments
+
+  after_create :register_mail
+  def register_mail
+  	UserMailer.welcome_email(self).deliver
+  end
 end
