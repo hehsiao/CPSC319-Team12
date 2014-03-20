@@ -44,23 +44,30 @@
   </div>
 
   <!-- Must seed db first -->
+  <% if !@idea.id.nil? %>
+    <% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+    <% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+    <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+  <% end %>
+
   <div class="field">
-    <% s = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+    
     <%= f.label :association_parents %><br>
-    <%= f.text_field :association_parents, :value => s %>
+    <%= f.text_field :association_parents, :value => parent_ideas %>
   </div>
 
   <div class="field">
-    <% s = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+    
     <%= f.label :association_childs %><br>
-    <%= f.text_field :association_childs, :value => s %>
+    <%= f.text_field :association_childs, :value => child_ideas %>
   </div>
 
   <div class="field">
-    <% s = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+    
     <%= f.label :association_peers %><br>
-    <%= f.text_field :association_peers, :value => s %>
+    <%= f.text_field :association_peers, :value => peer_ideas %>
   </div>
+
 
   <div class="field">
     <%= f.label :status %><br>
