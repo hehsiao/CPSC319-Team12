@@ -1,4 +1,3 @@
-
 <% category_tags.each do |cat_tag| %>
 	<% tag = cat_tag.tag.where(idea_id: idea_id).first %>
 	<% if cat_tag.type_id == 5  #TODO: match against name instead of id %> 

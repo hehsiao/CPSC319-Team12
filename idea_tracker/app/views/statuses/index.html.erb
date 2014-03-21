@@ -1,34 +1,31 @@
-<div id="page-wrapper">
-  <div class="row">
-<h1 class="page-header">Listing Status</h1>
 
-<h5><%= link_to 'Create a New Status', new_status_path %></h5>
-<div class="panel-body">
-  <div class="table">
-<table class="table table-striped table-hover dataTable">
-  <thead>
-    <tr>
-      <th>Position</th>
-      <th>Status</th>
-      <th class="no-sort"></th>
-      <th class="no-sort"></th>
-    </tr>
-  </thead>
+    <h1 class="page-header">Listing Status</h1>
 
-  <tbody>
-    <% @statuses.each do |s| %>
-      <tr>
-        <td><%= s.position %></td>
-        <td><%= s.status %></td>
-    <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_status_path(s), title: 'Edit', ref: 'tooltip' %></td>
-    <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, s, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div></div>
+    <h5><%= link_to 'Create a New Status', new_status_path %></h5>
+    <div class="panel-body">
+      <div class="table">
+        <table class="table table-striped table-hover dataTable">
+          <thead>
+            <tr>
+              <th>Position</th>
+              <th>Status</th>
+              <th class="no-sort"></th>
+              <th class="no-sort"></th>
+            </tr>
+          </thead>
 
-<br>
+          <tbody>
+            <% @statuses.each do |s| %>
+            <tr>
+              <td><%= s.position %></td>
+              <td><%= s.status %></td>
+              <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_status_path(s), title: 'Edit', ref: 'tooltip' %></td>
+              <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, s, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
 
-</div>
-</div>
+    <br>

@@ -19,7 +19,7 @@ class ApplicationController < ActionController::Base
 
   # Determine layout for Sign In Front, or Application view
   private
-    def determine_layout
-      signed_in? ? "application" : "sign_in"
-    end
+  def determine_layout
+    signed_in? ? "application" : "sign_in"
+  end
 end

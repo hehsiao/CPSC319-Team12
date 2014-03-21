@@ -9,12 +9,12 @@
 
   <tbody>
     <% @subscribed_ideas.each do |idea| %>
-      <tr onclick="document.location = '/ideas/<%=idea.id%>';">
-        <td><%= idea.summary %></td>
-        <td><%= truncate(idea.description, length:70) %></td>
-        <td><%= idea.submission_date %></td>
-        <td><%= link_to 'Show', idea %></td>
-      </tr>
+    <tr onclick="document.location = '/ideas/<%=idea.id%>';">
+      <td><%= idea.summary %></td>
+      <td><%= truncate(idea.description, length:70) %></td>
+      <td><%= idea.submission_date %></td>
+      <td><%= link_to 'Show', idea %></td>
+    </tr>
     <% end %>
   </tbody>
 

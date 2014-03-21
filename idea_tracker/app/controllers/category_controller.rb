@@ -103,4 +103,4 @@ class CategoryController < ApplicationController
     def category_params
       params.require(:category).permit(:category_name, :description, :type_id)
     end
-end
+  end

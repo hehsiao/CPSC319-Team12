@@ -1,14 +1,62 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeaTracker</title>
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
-  <%= csrf_meta_tags %>
+	<title>IdeaTracker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	<%= csrf_meta_tags %>
+	<style>
+	html{
+		height:100%;
+	}
+	body{
+		height: 100%;
+		background: url('/bg.jpg') no-repeat center center fixed;
+		-webkit-background-size: cover;
+		-moz-background-size: cover;
+		-o-background-size: cover;
+		background-size: cover;
+	}
+	.landing-box{
+		background-color: rgba(221, 244, 255, 0.5);
+		position: relative;
+		top: 100px;
+	}
+	a:hover, a:focus {
+		color: #1F4A6F;
+		text-decoration: underline;
+	}
+	a {
+		color: #2a6496;
+	}
+
+
+	</style>
 </head>
 <body>
+	<div id="wrap">
+		<div class="container">
+			<div class="row landing-box">
+				<div class="col-md-12">
+					<div class="col-md-8">
+						<div>
+							<h1>Welcome to CBEL Idea Tracker!</h1>
+							<h3>
+								UBC’s <em>internal</em> tracking system for curricular community-based experiential learning (CBEL) opportunities.
+							</h3>
+							<p>
+								This portal is designed for internal use in order to keep track of all the great ideas.<br>
+								If you stumbled around this by accident, <br> you can get more information about what we do at <a href="http://students.ubc.ca/about/centre-community-engaged-learning">The Centre</a>. 
+							</p>
+						</div>
+					</div>
 
-	<%= yield %>
-	
+					<%= yield %>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
 </body>
 </html>
