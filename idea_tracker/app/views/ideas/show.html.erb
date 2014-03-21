@@ -1,68 +1,68 @@
 <div id="page-wrapper">
 
-<h1 class="page-header">
-  Summary:
-  <%= @idea.id %> - <%= @idea.summary %>
-</h1>
+  <h1 class="page-header">
+    Summary:
+    <%= @idea.id %> - <%= @idea.summary %>
+  </h1>
 
-<p>
-  <strong>Status:</strong>
-  <%= @idea.status %>
-</p>
+  <p>
+    <strong>Status:</strong>
+    <%= @idea.status %>
+  </p>
 
-<p>
-  <strong>User:</strong>
-  <% user = User.find(@idea.user_id) %>
-  <%= user.first_name+" "+user.last_name %>
-</p>
+  <p>
+    <strong>User:</strong>
+    <% user = User.find(@idea.user_id) %>
+    <%= user.first_name+" "+user.last_name %>
+  </p>
 
-<p>
-  <strong>Description:</strong>
-  <%= @idea.description %>
-</p>
+  <p>
+    <strong>Description:</strong>
+    <%= @idea.description %>
+  </p>
 
-<p>
-  <strong>Provider:</strong>
-  <%= Partner.find(@idea.provider_partner_id).partner_name %>
-</p>
+  <p>
+    <strong>Provider:</strong>
+    <%= Partner.find(@idea.provider_partner_id).partner_name %>
+  </p>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= @receiver %>
-</p>
+  <p>
+    <strong>Receiver:</strong>
+    <%= @receiver %>
+  </p>
 
-<p>
-  <strong>Keywords:</strong>
-  <%= @idea.keyword_list %>
-</p>
+  <p>
+    <strong>Keywords:</strong>
+    <%= @idea.keyword_list %>
+  </p>
 
-<p>
-  <strong>Participants:</strong><br />
-  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
-</p>
+  <p>
+    <strong>Participants:</strong><br />
+    <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
+  </p>
 
-<p>
-  <strong>Associations:</strong><br />
-  Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-  Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
-  Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
-</p>
+  <p>
+    <strong>Associations:</strong><br />
+    Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
+    Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
+    Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
+  </p>
 
 
-<div>
-  <p><strong>Categories: </strong></p>
-  <table>
-    <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
-  </table>
-</div>
-<br><br>
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>
+  <div>
+    <p><strong>Categories: </strong></p>
+    <table>
+      <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
+    </table>
+  </div>
+  <br><br>
+  <%= link_to 'Edit', edit_idea_path(@idea) %> |
+  <%= link_to 'Back', ideas_path %>
 
-<br><br>
-<%= commontator_thread(@idea) %>
-<br><br>
-<p> Submission date:  <%= @idea.submission_date %> | Last modified: <%= @idea.last_modified %> </p>
+  <br><br>
+  <%= commontator_thread(@idea) %>
+  <br><br>
+  <p> Submission date:  <%= @idea.submission_date %> | Last modified: <%= @idea.last_modified %> </p>
 
 
 </div>

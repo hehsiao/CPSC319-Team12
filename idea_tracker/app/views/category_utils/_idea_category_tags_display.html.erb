@@ -1,14 +1,13 @@
 <% categories.each do |category| %>
-	<tr>
-		<td><%= category.category_name %></td>
-		<td>
-			<% category.children.each do |category_tag| %>
-				<% tag = category_tag.tag.where(idea_id: idea_id).first %>
-				<% if tag %>
-					| <%= category_tag.category_name %> <%= tag[:additional_text] %>
-				<% end %>
+<tr>
+	<td><%= category.category_name %></td>
+	<td>
+		<% category.children.each do |category_tag| %>
+			<% tag = category_tag.tag.where(idea_id: idea_id).first %>
+			<% if tag %>
+				| <%= category_tag.category_name %> <%= tag[:additional_text] %>
 			<% end %>
-
-		</td>
-	</tr>
+		<% end %>
+	</td>
+</tr>
 <% end %>

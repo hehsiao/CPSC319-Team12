@@ -1,122 +1,122 @@
 
 <%= form_for(@idea) do |f| %>
-  <% if @idea.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+<% if @idea.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
 
-      <ul>
-      <% @idea.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
+  <ul>
+    <% @idea.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-    <div class="field">
-    <%= f.label :summary %><br>
-    <%= f.text_area :summary %>
-  </div>
+<div class="field">
+  <%= f.label :summary %><br>
+  <%= f.text_area :summary %>
+</div>
 
-  <div class="field">
-    <%= f.label :status %><br>
-    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
-  </div>
+<div class="field">
+  <%= f.label :status %><br>
+  <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+</div>
 
-  <div class="field" >
-    <%= f.label :user_id %><br>
-    <%= f.number_field :user_id %>
-  </div>
-
-
-  <div class="field">
-    <%= f.label :description %><br>
-    <%= f.text_area :description %>
-  </div>
-
-  <%= fields_for(@partner) do |p| %>
-  <div class="form-group">
-    <%= p.label :provider_partner_id %><br>
-    <%= select_tag 'provider_partner_id', options_from_collection_for_select(Partner.all, :id, :partner_name, 2) %>
-  </div>
-  <% end %>
-
-  <div class="field">
-    <%= f.label :receiver_partner_id %><br>
-    <%= f.number_field :receiver_partner_id %>
-  </div>
+<div class="field" >
+  <%= f.label :user_id %><br>
+  <%= f.number_field :user_id %>
+</div>
 
 
-  <div class="field">
-    <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-     <%= f.text_field :keyword_list %>
+<div class="field">
+  <%= f.label :description %><br>
+  <%= f.text_area :description %>
+</div>
 
-  </div>
+<%= fields_for(@partner) do |p| %>
+<div class="form-group">
+  <%= p.label :provider_partner_id %><br>
+  <%= select_tag 'provider_partner_id', options_from_collection_for_select(Partner.all, :id, :partner_name, 2) %>
+</div>
+<% end %>
 
-  <div class="field">
-    <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
-    <%= f.label :participants %><br>
-    <%= f.text_field :participants, :value => s %>
-  </div>
+<div class="field">
+  <%= f.label :receiver_partner_id %><br>
+  <%= f.number_field :receiver_partner_id %>
+</div>
 
-  <!-- Must seed db first -->
-  <% if !@idea.id.nil? %>
-    <% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
-    <% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
-    <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
-  <% end %>
 
-  <div class="field">
-    
-    <%= f.label :association_parents %><br>
-    <%= f.text_field :association_parents, :value => parent_ideas %>
-  </div>
+<div class="field">
+  <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
+  <%= f.text_field :keyword_list %>
 
-  <div class="field">
-    
-    <%= f.label :association_childs %><br>
-    <%= f.text_field :association_childs, :value => child_ideas %>
-  </div>
+</div>
 
-  <div class="field">
-    
-    <%= f.label :association_peers %><br>
-    <%= f.text_field :association_peers, :value => peer_ideas %>
-  </div>
-    <br>
-  <div>
-    <p><strong>Categories </strong></p>
-    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
-  </div>
+<div class="field">
+  <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+  <%= f.label :participants %><br>
+  <%= f.text_field :participants, :value => s %>
+</div>
+
+<!-- Must seed db first -->
+<% if !@idea.id.nil? %>
+<% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+<% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+<% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+<% end %>
+
+<div class="field">
+  
+  <%= f.label :association_parents %><br>
+  <%= f.text_field :association_parents, :value => parent_ideas %>
+</div>
+
+<div class="field">
+  
+  <%= f.label :association_childs %><br>
+  <%= f.text_field :association_childs, :value => child_ideas %>
+</div>
+
+<div class="field">
+  
+  <%= f.label :association_peers %><br>
+  <%= f.text_field :association_peers, :value => peer_ideas %>
+</div>
+<br>
+<div>
+  <p><strong>Categories </strong></p>
+  <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+</div>
 <br>
 
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
 
 
 <script>
 $('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-        return {
-            value: input,
-            text: input
-        }
+  plugins: ['remove_button'],
+  delimiter: ',',
+  persist: false,
+  create: function(input) {
+    return {
+      value: input,
+      text: input
     }
+  }
 });
 $('#idea_participants').selectize({
-    plugins: ['remove_button'],
-    delimiter: ',',
-    persist: false,
-    create: function(input) {
-        return {
-            value: input,
-            text: input
-        }
+  plugins: ['remove_button'],
+  delimiter: ',',
+  persist: false,
+  create: function(input) {
+    return {
+      value: input,
+      text: input
     }
+  }
 });
 
 </script>

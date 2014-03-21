@@ -1,24 +1,24 @@
 <div id="page-wrapper">
-<h1 class="page-header">Ideas</h1>
+  <h1 class="page-header">Ideas</h1>
 
-<div class="panel-body">
-  <div class="table">
-    <table class="table table-striped table-hover dataTable">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Summary</th>
-          <th>Description</th>
-          <th>Submission date</th>
-          <th>Last modified</th>
-          <th>Keyword</th>
-          <th class="no-sort"></th>
-          <th class="no-sort"></th>
-        </tr>
-      </thead>
+  <div class="panel-body">
+    <div class="table">
+      <table class="table table-striped table-hover dataTable">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Summary</th>
+            <th>Description</th>
+            <th>Submission date</th>
+            <th>Last modified</th>
+            <th>Keyword</th>
+            <th class="no-sort"></th>
+            <th class="no-sort"></th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <% @ideas.each do |idea| %>
+        <tbody>
+          <% @ideas.each do |idea| %>
           <tr onclick="document.location = '/ideas/<%=idea.id%>';">
             <td><%= idea.user_id %></td>
             <td><%= idea.summary %></td>
@@ -29,18 +29,18 @@
             <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
             <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
 
 
-  <div id="tag_cloud">
-    <p>Filter by Keywords</p>
-    <% tag_cloud Idea.keyword_counts, %w[s m l] do |keyword, css_class| %>
+    <div id="tag_cloud">
+      <p>Filter by Keywords</p>
+      <% tag_cloud Idea.keyword_counts, %w[s m l] do |keyword, css_class| %>
       <%= link_to keyword.name, keyword_path(keyword.name), class: css_class %>
-    <% end %>
-    <%= link_to 'clear filters', ideas_path %>
+      <% end %>
+      <%= link_to 'clear filters', ideas_path %>
+    </div>
   </div>
-</div>
 </div>

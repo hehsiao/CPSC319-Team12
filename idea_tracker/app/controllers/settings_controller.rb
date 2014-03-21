@@ -81,4 +81,4 @@ class SettingsController < ApplicationController
       params.require(:setting).permit(:name, :data)
 
     end
-end
+  end
