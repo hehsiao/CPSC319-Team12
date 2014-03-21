@@ -52,11 +52,11 @@ class UsersController < ApplicationController
     if current_user.try(:admin?)
       user = User.find(params[:id])
       if user.admin 
-        if user.update_attribute(:admin, '0')
+        if user.update_attributes(:admin => '0')
           flash[:notice] = "User '#{user.email}' status changed to users successfully."
         end
       else
-        if user.update_attribute(:admin, '1')
+        if user.update_attributes(:admin => '1')
           flash[:notice] = "User '#{user.email}' status changed to admin successfully."
         end
       end
