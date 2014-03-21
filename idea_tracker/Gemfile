@@ -3,6 +3,9 @@ source 'https://rubygems.org'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.0.2'
 
+#Commenting engine
+gem 'commontator', '~> 4.2.0'
+
 #User authentication
 gem 'devise'
 
@@ -32,6 +35,19 @@ gem 'turbolinks'
 
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 1.2'
+
+
+#public activity use for notification 
+gem 'public_activity', '~> 1.4.1'
+
+# Taggable
+gem 'acts-as-taggable-on'
+
+# jQuery Select
+gem "selectize-rails"
+
+# datatables for pagination, sorting
+gem 'jquery-datatables-rails'
 
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.

@@ -1,0 +1,84 @@
+<% hasOtherField = false %>
+<%= form_for(@category) do |f| %>
+  <% if @category.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
+
+      <ul>
+      <% @category.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :category_name %><br>
+    <%= f.text_field :category_name  %>
+  </div>
+  <div class="field"> <!-- this is for description -->
+  </div>
+  <div class="field">
+    <%= f.label :type_id %><br>
+    <%= f.number_field :type_id %> <!-- TODO: change this to use dropdown select with actual type name -->
+    <p>
+      2 = dropdown single select <br />
+      3 = scroll multi select <br />
+      4 = checkbox multi select <br />
+    </p>
+  </div>
+  <div class="field">
+    <table id="tag_table">
+      <thead>
+        <tr>
+          <th>Tag Name</th>
+          <th>isDate</th>
+          <th>Remove</th>
+        </tr>
+      </thead>
+      <% @category.children.each do |tag| %>
+        <% if tag.type_id == 5 %>
+          <% hasOtherField = true %>
+        <% else %>
+          <tr>
+            <td>
+              <input type="text" name= "old_tags[<%= tag.id %>][0]" value="<%= tag.category_name %>" />
+            </td>
+            <td>
+              <input type="checkbox" name="old_tags[<%= tag.id %>][1]" value="1" <%= (tag.type_id == 6 ? "checked" : "") %> />
+            </td>
+            <td>
+              <input type="checkbox" name="old_tags[<%= tag.id %>][2]" value="1" />
+            </td>
+          </tr>
+        <% end %>
+      <% end %>
+    </table>
+    <input type="checkbox" name="require_other" value="1" <%= hasOtherField ? "checked" : "" %> /> Require Other Field <br />
+
+    <button id="addTag">Add New</button>
+  </div>
+
+  <!-- js to handle child items -->
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+<script>
+var newTagCount = 0;
+window.onload=function()
+{
+  $('#addTag').click(function(e){
+    e.preventDefault();
+    var tt =  $('#tag_table');
+    var row = $(
+      '<tr><td><input type="text" name= "new_tags['+newTagCount+'][0]"/></td>' +
+        '<td><input type="checkbox" name="new_tags['+newTagCount+'][1]" value="1"/></td>' +
+        '<td><input type="checkbox" name="new_tags['+newTagCount+'][2]" value="1"/></td>' +
+      '</tr>');
+    newTagCount++;
+    $(tt).append(row);
+  });
+}
+</script>

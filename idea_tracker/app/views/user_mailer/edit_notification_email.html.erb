@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> idea <%= @idea.id %> has been edited on IdeaTracker</h1>
+    <p>
+      
+      <%= @user.first_name + " " + @user.last_name %> edit the idea <%= @idea.id %> 
+
+    </p>
+    <p>
+      To login to the site, just follow this link: "http://localhost:3000/ideas/<%= @idea.id%>".
+    </p>
+    <p>Thanks for using Idea Tracker and have a great day!</p>
+  </body>
+</html>

@@ -1,235 +1,122 @@
-<div class="row">
-    <div class="col-lg-12">
-<!--         <div class="panel panel-default">
-            <div class="panel-heading">
-                Basic Form Elements
-            </div>
-            <div class="panel-body"> -->
-              <form role="form">
-                <div class="row">
-                    <!-- Originator Block -->
-                    <div class="col-lg-6" id="Originator">
-                      <!-- Originator Panel -->
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Idea Originator
-                        </div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                            <select class="form-control">
-                              <%= options_from_collection_for_select(Partner.all, :id, :partner_name) %>
-                            </select>
-                          </div>
-                          <div class="form-group">
-                              <label>Organization Name</label>
-                              <input class="form-control" placeholder="Enter Organization">
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Name</label>
-                              <input class="form-control" placeholder="Enter Name">
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Email</label>
-                              <input class="form-control" placeholder="E-mail"></input>
-                          </div>
-                          <div class="form-group">
-                              <label>Contact Phone Number</label>
-                              <input class="form-control" placeholder="Phone Number"></input>
-                          </div>
-                        </div>
-                        <!-- /.panel-body -->                            
-                      </div>
-                      <!-- /.Originator Panel -->
-                    </div>
-                    <!-- /.Originator Block -->
-                    <!-- Category Block -->
-                    <div class="col-lg-6" id="Category">
-                      <!-- Category Panel -->
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Idea Category
-                        </div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                              <label>Project Type</label>
-                              <input class="form-control" placeholder="Project Type">
-                          </div>
-                          <div class="form-group">
-                              <label>Theme</label>
-                              <input class="form-control" placeholder="Idea Theme">
-                          </div>
-                          <div class="form-group">
-                              <label>Idea Start Date</label>
-                              <input type="text" class="form-control" placeholder="<%= Date.today %>" name="from" id="from"></date>
-                          </div>
-                          <div class="form-group">
-                              <label>Idea End Date</label>
-                              <input type="text" class="form-control" placeholder="Optional" name="to" id="to"></date>
-                          </div>
-                          <div class="form-group">
-                              <label>Occurance</label>
-                              <input class="form-control" placeholder="Idea Theme">
-                          </div>                          
-                        </div>
-                        <!-- /.panel-body -->                            
-                      </div>
-                      <!-- /.Category Panel -->
-                    </div>
-                    <!-- /.Category Block -->  
-                    <!-- Detail Block -->
-                    <div class="col-lg-12" id="Idea Details">
-                      <!-- Details Panel -->
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Idea Details
-                        </div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                              <label>Idea Title</label>
-                              <input class="form-control" placeholder="The One-Line summary">
-                          </div>
-                          <div class="form-group">
-                              <label>Idea Description</label>
-                              <textarea class="form-control" rows="4"></textarea>
-                          </div>
-                        </div>
-                        <!-- /.panel-body -->                            
-                      </div>
-                      <!-- /.Idea Detail Panel -->
-                    </div>
-                    <!-- /.Detail Block -->
-                    <!-- Other Block -->
-                    <div class="col-lg-12" id="Other">
-                      <!-- Panel -->
-                      <div class="panel panel-default">
-                        <div class="panel-heading">
-                          Idea Other Type of things
-                        </div>
-                        <div class="panel-body">
-                          <div class="form-group">
-                              <label>Checkboxes</label>
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" value="">Checkbox 1
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" value="">Checkbox 2
-                                  </label>
-                              </div>
-                              <div class="checkbox">
-                                  <label>
-                                      <input type="checkbox" value="">Checkbox 3
-                                  </label>
-                              </div>
-                              <div class="form-group">
-                                <label>Inline Checkboxes</label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">1
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">2
-                                </label>
-                                <label class="checkbox-inline">
-                                    <input type="checkbox">3
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Radio Buttons</label>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios1" value="option1" checked>Radio 1
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios2" value="option2">Radio 2
-                                    </label>
-                                </div>
-                                <div class="radio">
-                                    <label>
-                                        <input type="radio" name="optionsRadios" id="optionsRadios3" value="option3">Radio 3
-                                    </label>
-                                </div>
-                            </div>
-                            <div class="form-group">
-                                <label>Inline Radio Buttons</label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline1" value="option1" checked>1
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline2" value="option2">2
-                                </label>
-                                <label class="radio-inline">
-                                    <input type="radio" name="optionsRadiosInline" id="optionsRadiosInline3" value="option3">3
-                                </label>
-                            </div>
-                            <div class="form-group">
-                                <label>Selects</label>
-                                <select class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>
-                            <div class="form-group">
-                                <label>Multiple Selects</label>
-                                <select multiple class="form-control">
-                                    <option>1</option>
-                                    <option>2</option>
-                                    <option>3</option>
-                                    <option>4</option>
-                                    <option>5</option>
-                                </select>
-                            </div>                              
-                          </div>
-                        </div>
-                        <!-- /.panel-body -->                            
-                      </div>
-                      <!-- /.Panel -->
-                    </div>
-                    <!-- /.Other Block -->
-                    <div class="col-lg-12" id="Submit">
-                      <button type="submit" class="btn btn-default">Submit Button</button>
-                      <button type="reset" class="btn btn-default">Reset Button</button>
-                    </div>    
-                            
-                  
-              </form>
-</div>
-</div>
 
-                <!-- /.row (nested) -->
-            <!-- </div> -->
-            <!-- /.panel-body -->
-        <!-- </div> -->
-        <!-- /.panel -->
-    <!-- </div> -->
-    <!-- /.col-lg-12 -->
-<!-- </div> -->
-<!-- /.row -->
+<%= form_for(@idea) do |f| %>
+  <% if @idea.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+
+      <ul>
+      <% @idea.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+    <div class="field">
+    <%= f.label :summary %><br>
+    <%= f.text_area :summary %>
+  </div>
+
+  <div class="field">
+    <%= f.label :status %><br>
+    <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+  </div>
+
+  <div class="field" >
+    <%= f.label :user_id %><br>
+    <%= f.number_field :user_id %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :description %><br>
+    <%= f.text_area :description %>
+  </div>
+
+  <%= fields_for(@partner) do |p| %>
+  <div class="form-group">
+    <%= p.label :provider_partner_id %><br>
+    <%= select_tag 'provider_partner_id', options_from_collection_for_select(Partner.all, :id, :partner_name, 2) %>
+  </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :receiver_partner_id %><br>
+    <%= f.number_field :receiver_partner_id %>
+  </div>
+
+
+  <div class="field">
+    <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
+     <%= f.text_field :keyword_list %>
+
+  </div>
+
+  <div class="field">
+    <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+    <%= f.label :participants %><br>
+    <%= f.text_field :participants, :value => s %>
+  </div>
+
+  <!-- Must seed db first -->
+  <% if !@idea.id.nil? %>
+    <% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+    <% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+    <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+  <% end %>
+
+  <div class="field">
+    
+    <%= f.label :association_parents %><br>
+    <%= f.text_field :association_parents, :value => parent_ideas %>
+  </div>
+
+  <div class="field">
+    
+    <%= f.label :association_childs %><br>
+    <%= f.text_field :association_childs, :value => child_ideas %>
+  </div>
+
+  <div class="field">
+    
+    <%= f.label :association_peers %><br>
+    <%= f.text_field :association_peers, :value => peer_ideas %>
+  </div>
+    <br>
+  <div>
+    <p><strong>Categories </strong></p>
+    <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+  </div>
+<br>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>
+
+
 <script>
-var nowTemp = new Date();
-var now = new Date(nowTemp.getFullYear(), nowTemp.getMonth(), nowTemp.getDate(), 0, 0, 0, 0);
-  $(function() {
-    $( "#from" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#to" ).datepicker( "option", "minDate", selectedDate );
-      }
-    });
-    $( "#to" ).datepicker({
-      defaultDate: "+1w",
-      changeMonth: true,
-      numberOfMonths: 3,
-      onClose: function( selectedDate ) {
-        $( "#from" ).datepicker( "option", "maxDate", selectedDate );
-      }
-    });
-  });
+$('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+});
+$('#idea_participants').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+        return {
+            value: input,
+            text: input
+        }
+    }
+});
+
 </script>

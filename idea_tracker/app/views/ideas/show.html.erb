@@ -1,14 +1,19 @@
 <div id="page-wrapper">
-<p id="notice"><%= notice %></p>
+
+<h1 class="page-header">
+  Summary:
+  <%= @idea.id %> - <%= @idea.summary %>
+</h1>
 
 <p>
-  <strong>User:</strong>
-  <%= @idea.user_id %>
+  <strong>Status:</strong>
+  <%= @idea.status %>
 </p>
 
 <p>
-  <strong>Summary:</strong>
-  <%= @idea.summary %>
+  <strong>User:</strong>
+  <% user = User.find(@idea.user_id) %>
+  <%= user.first_name+" "+user.last_name %>
 </p>
 
 <p>
@@ -18,7 +23,7 @@
 
 <p>
   <strong>Provider:</strong>
-  <%= @provider %>
+  <%= Partner.find(@idea.provider_partner_id).partner_name %>
 </p>
 
 <p>
@@ -27,20 +32,38 @@
 </p>
 
 <p>
-  <strong>Submission date:</strong>
-  <%= @idea.submission_date %>
+  <strong>Keywords:</strong>
+  <%= @idea.keyword_list %>
 </p>
 
 <p>
-  <strong>Last modified:</strong>
-  <%= @idea.last_modified %>
+  <strong>Participants:</strong><br />
+  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
 </p>
 
 <p>
-  <strong>Status:</strong>
-  <%= @status.status %>
+  <strong>Associations:</strong><br />
+  Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
+  Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
+  Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
 </p>
 
+
+<div>
+  <p><strong>Categories: </strong></p>
+  <table>
+    <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
+  </table>
+</div>
+<br><br>
 <%= link_to 'Edit', edit_idea_path(@idea) %> |
 <%= link_to 'Back', ideas_path %>
+
+<br><br>
+<%= commontator_thread(@idea) %>
+<br><br>
+<p> Submission date:  <%= @idea.submission_date %> | Last modified: <%= @idea.last_modified %> </p>
+
+
 </div>
+

@@ -11,7 +11,24 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140314085443) do
+ActiveRecord::Schema.define(version: 20140320124802) do
+
+  create_table "activities", force: true do |t|
+    t.integer  "trackable_id"
+    t.string   "trackable_type"
+    t.integer  "owner_id"
+    t.string   "owner_type"
+    t.string   "key"
+    t.text     "parameters"
+    t.integer  "recipient_id"
+    t.string   "recipient_type"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
+  add_index "activities", ["owner_id", "owner_type"], name: "index_activities_on_owner_id_and_owner_type", using: :btree
+  add_index "activities", ["recipient_id", "recipient_type"], name: "index_activities_on_recipient_id_and_recipient_type", using: :btree
+  add_index "activities", ["trackable_id", "trackable_type"], name: "index_activities_on_trackable_id_and_trackable_type", using: :btree
 
   create_table "associations", id: false, force: true do |t|
     t.integer  "parent_idea_id"
@@ -89,6 +106,14 @@ ActiveRecord::Schema.define(version: 20140314085443) do
 
   add_index "commontator_threads", ["commontable_id", "commontable_type"], name: "index_c_t_on_c_id_and_c_type", unique: true, using: :btree
 
+  create_table "idea_tags", id: false, force: true do |t|
+    t.integer  "category_id"
+    t.integer  "idea_id"
+    t.string   "additional_text"
+    t.datetime "created_at"
+    t.datetime "updated_at"
+  end
+
   create_table "ideas", force: true do |t|
     t.integer  "user_id"
     t.text     "description"
@@ -118,12 +143,23 @@ ActiveRecord::Schema.define(version: 20140314085443) do
     t.string   "phone_num"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.string   "secondary_contact_name"
+    t.string   "secondary_email"
+    t.string   "secondary_phone_num"
+  end
+
+  create_table "settings", force: true do |t|
+    t.string   "name"
+    t.string   "data"
+    t.datetime "created_at"
+    t.datetime "updated_at"
   end
 
   create_table "statuses", force: true do |t|
     t.string   "status"
     t.datetime "created_at"
     t.datetime "updated_at"
+    t.integer  "position"
   end
 
   create_table "subscriptions", force: true do |t|
@@ -134,13 +170,23 @@ ActiveRecord::Schema.define(version: 20140314085443) do
     t.datetime "updated_at"
   end
 
-  create_table "tags", id: false, force: true do |t|
-    t.integer  "category_id"
-    t.integer  "idea_id"
-    t.string   "additional_text"
+  create_table "taggings", force: true do |t|
+    t.integer  "tag_id"
+    t.integer  "taggable_id"
+    t.string   "taggable_type"
+    t.integer  "tagger_id"
+    t.string   "tagger_type"
+    t.string   "context",       limit: 128
     t.datetime "created_at"
-    t.datetime "updated_at"
   end
+
+  add_index "taggings", ["tag_id", "taggable_id", "taggable_type", "context", "tagger_id", "tagger_type"], name: "taggings_idx", unique: true, using: :btree
+
+  create_table "tags", force: true do |t|
+    t.string "name"
+  end
+
+  add_index "tags", ["name"], name: "index_tags_on_name", unique: true, using: :btree
 
   create_table "users", force: true do |t|
     t.string   "email",                  default: "",    null: false

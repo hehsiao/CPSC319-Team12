@@ -1,0 +1,11 @@
+<i class = "fa fa-edit fa-fw"> </i>
+<%= activity.owner.first_name if activity.owner%>
+<%= activity.owner.last_name if activity.owner%>
+
+edit idea
+
+<% if activity.trackable%>
+   <%= activity.trackable.id%>
+<% else %>
+   whick has been removed!!
+<% end %>

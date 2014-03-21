@@ -1,0 +1,22 @@
+<script>
+$(document).ready(function(){
+	refresh<%=category_name%>Fields();
+    $('#<%=category_name%>').change(function(){
+		refresh<%=category_name%>Fields();
+	});
+});
+
+function refresh<%=category_name%>Fields()
+{
+	$("[id^=<%=category_name%>_]").hide();
+	$('#<%=category_name%> option:selected').each(function(){
+		if($('#<%=category_name%>_' + $(this).val()).length > 0)
+		{
+			$('#<%=category_name%>_' + $(this).val()).show();
+		}
+	});
+}
+
+</script>
+
+<%= render :partial => "category_utils/special_tag_display", :locals => {:idea_id => idea_id, :category_tags => category_tags, :category_name => category_name} %>

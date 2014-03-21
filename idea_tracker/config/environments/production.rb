@@ -77,4 +77,15 @@ IdeaTracker::Application.configure do
 
   # Use default logging formatter so that PID and timestamp are not suppressed.
   config.log_formatter = ::Logger::Formatter.new
+
+  #setup email 
+  config.action_mailer.smtp_settings = {
+  :address              => 'smtp.gmail.com',
+  :port                 => 25,
+  :domain               => 'gmail.com',
+  :user_name            => 'cpsc3192014',
+  :password             => 'Gem3192014',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true}
+end
 end
