@@ -1,38 +1,10 @@
 <h1>Status Reports</h1>
 <h2><%= @status.status %> </h2>
-<div class="table">
-  <table class="table table-striped table-hover dataTable">
-	<thead>
-	  <tr>
-		<th>User</th>
-		<th>Summary</th>
-		<th>Description</th>
-		<th>Submission date</th>
-		<th>Last modified</th>
-		<th>Keyword</th>
-		<th class="no-sort"></th>
-	  </tr>
-	</thead>
 
-	<tbody>
-	  <% @ideas.each do |idea| %>
-	  <tr onclick="document.location = '/ideas/<%=idea.id%>';">
-		<td><%= idea.user_id %></td>
-		<td><%= idea.summary %></td>
-		<td><%= truncate(idea.description, length:70) %></td>
-		<td><%= idea.submission_date %></td>
-		<td><%= idea.last_modified %></td>
-		<td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
-		<td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
-	  </tr>
-	  <% end %>
-	</tbody>
-  </table>
-</div>
-
+<%= render 'idea_table' %>
 
 
 <div>
 <%= link_to("Back",{:action => 'status'}, :class => 'action status') %>
-</dive>
+</div>
 
