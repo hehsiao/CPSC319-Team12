@@ -49,6 +49,9 @@ gem "selectize-rails"
 # datatables for pagination, sorting
 gem 'jquery-datatables-rails'
 
+# jQuery Validation
+gem 'jquery-validation-rails'
+
 group :doc do
   # bundle exec rake doc:rails generates the API under doc/api.
   gem 'sdoc', require: false

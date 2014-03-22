@@ -2,22 +2,73 @@
 
 /* ------------------------------- */
 
- body {
-    background-color: #f8f8f8;
+body {
+    background-image: url('./background.jpg');
+    color: #f8f8f8;
+    font-family: "Open Sans", sans-serif;
 }
 
+a {
+    color: #9bd0f6;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #54aff0;
+    text-decoration: underline;
+}
+
+h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
+    font-weight: normal;
+    line-height: 1;
+    color: rgb(192, 192, 192);
+}
+
+.page-header {
+    margin: 20px 0 0px !important;
+    border-bottom: transparent !important;
+}
+
+.error-block {
+    color: rgb(169, 68, 66);
+}
+
+/* Breadcrumb */
+
+.widget>.breadcrumb {
+    margin: -10px -12px;
+}
+
+.breadcrumb {
+    padding: 8px 15px;
+    margin-bottom: 20px;
+    list-style: none;
+    background-color: rgba(0, 0, 0, 0);
+    border-radius: 1px;
+}
+
+input {
+    padding-left: 5px;
+    line-height: normal;
+    color: black !important;
+}
+
+div.dataTables_filter input {
+    padding-left: 5px;
+    background-color: rgb(255, 255, 255);
+    color:black;
+}
 /* Wrappers */
 
 /* ------------------------------- */
 
- #wrapper {
+#wrapper {
     width: 100%;
 }
 
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-    background-color: #fff;
 }
 
 @media(min-width:1300px) {
@@ -26,25 +77,58 @@
         margin: 0 0 0 250px;
         padding: 0 30px;
         min-height: 768px;
-        border-left: 1px solid #e7e7e7;
     }
 }
 
-.navbar-static-side ul li {
-    border-bottom: 1px solid #e7e7e7;
+.alert {
+  padding: 15px;
+  margin-bottom: 20px;
+  border: 1px solid transparent;
+  border-radius: 4px;
+  text-align: right;
+}
+
+.widget {
+    -webkit-border-radius: 1px;
+    -moz-border-radius: 1px;
+    -ms-border-radius: 1px;
+    -o-border-radius: 1px;
+    border-radius: 1px;
+    -webkit-box-sizing: content-box;
+    -moz-box-sizing: content-box;
+    box-sizing: content-box;
+    padding: 10px 12px;
+    color: #f8f8f8;
+    background: rgba(51,51,51,0.4);
+    margin-bottom: 30px;
+    position: relative;
 }
 
 /* Navigation */
 
 /* ------------------------------- */
 
+.navbar {
+    border-bottom: 0px !important;
+}
+
+.navbar-static-side ul li {
+    border-bottom: 0px solid #e7e7e7;
+}
+
+.navbar-brand,
+.navbar-default {
+    background: rgba(51,51,51,0.0) !important; 
+    color: white !important;
+}
+
 /* Top Right Navigation Dropdown Styles */
- .navbar-username {
+.navbar-username {
     padding: 15px;
     min-height: 50px;
 }
 
- .navbar-top-links li {
+.navbar-top-links li {
     display: inline-block;
 }
 
@@ -100,7 +184,7 @@
 
 /* Sidebar Menu Styles */
 
- .sidebar-search {
+.sidebar-search {
     padding: 15px;
 }
 
@@ -133,7 +217,9 @@
     .navbar-static-side {
         z-index: 1;
         position: absolute;
-        width: 250px;
+        width: 200px;
+        margin: 25px 0 0 25px !important;
+        background: rgba(51, 51, 51, 0.4) !important;
     }
 
     .navbar-top-links .dropdown-messages,
@@ -147,7 +233,7 @@
 
 /* ------------------------------- */
 
- .btn-outline {
+.btn-outline {
     color: inherit;
     background-color: transparent;
     transition: all .5s;
@@ -187,7 +273,7 @@
 
 /* Dashboard Chat */
 
- .chat {
+.chat {
     margin: 0;
     padding: 0;
     list-style: none;
@@ -224,13 +310,13 @@
 
 /* Login Page */
 
- .login-panel {
+.login-panel {
     margin-top: 25%;
 }
 
 /* Flot Chart Containers */
 
- .flot-chart {
+.flot-chart {
     display: block;
     height: 400px;
 }
@@ -241,6 +327,18 @@
 }
 
 /* DataTables Overrides */
+table {
+    background: transparent !important;
+}
+
+.table-hover > tbody > tr:hover > td, .table-hover > tbody > tr:hover > th {
+    background-color: rgba(245, 245, 245, .4) !important;
+    border-top: 0px solid rgb(221, 221, 221) !important;
+}
+
+.table > tbody > tr > td, .table > tbody > tr > th {
+    border-top: 0px solid rgb(221, 221, 221) !important;
+}
 
 table.dataTable thead .sorting,
 table.dataTable thead .sorting_asc:after,
@@ -271,7 +369,7 @@ table.dataTable thead .sorting:after {
 
 /* Circle Buttons */
 
- .btn-circle {
+.btn-circle {
     width: 30px;
     height: 30px;
     padding: 6px 0;

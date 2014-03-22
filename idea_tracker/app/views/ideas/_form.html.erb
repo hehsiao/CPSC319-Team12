@@ -1,4 +1,3 @@
-
 <%= form_for(@idea) do |f| %>
 <% if @idea.errors.any? %>
 <div id="error_explanation">
@@ -12,25 +11,25 @@
 </div>
 <% end %>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :summary %><br>
-  <%= f.text_area :summary %>
+  <%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
 </div>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :status %><br>
   <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
 </div>
 
-<div class="field" >
+<div class="form-group" >
   <%= f.label :user_id %><br>
-  <%= f.number_field :user_id %>
+  <%= f.number_field :user_id, class: 'form-control' %>
 </div>
 
 
-<div class="field">
+<div class="form-group">
   <%= f.label :description %><br>
-  <%= f.text_area :description %>
+  <%= f.text_area :description, class: 'form-control', :rows => 5 %>
 </div>
 
 <%= fields_for(@partner) do |p| %>
@@ -40,19 +39,19 @@
 </div>
 <% end %>
 
-<div class="field">
+<div class="form-group">
   <%= f.label :receiver_partner_id %><br>
   <%= f.number_field :receiver_partner_id %>
 </div>
 
 
-<div class="field">
+<div class="form-group">
   <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
   <%= f.text_field :keyword_list %>
 
 </div>
 
-<div class="field">
+<div class="form-group">
   <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
   <%= f.label :participants %><br>
   <%= f.text_field :participants, :value => s %>
@@ -65,19 +64,19 @@
 <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
 <% end %>
 
-<div class="field">
+<div class="form-group">
   
   <%= f.label :association_parents %><br>
   <%= f.text_field :association_parents, :value => parent_ideas %>
 </div>
 
-<div class="field">
+<div class="form-group">
   
   <%= f.label :association_childs %><br>
   <%= f.text_field :association_childs, :value => child_ideas %>
 </div>
 
-<div class="field">
+<div class="form-group">
   
   <%= f.label :association_peers %><br>
   <%= f.text_field :association_peers, :value => peer_ideas %>
@@ -93,7 +92,6 @@
   <%= f.submit %>
 </div>
 <% end %>
-
 
 <script>
 $('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({

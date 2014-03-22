@@ -1,10 +1,12 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>IdeaTracker</title>
+	<title>Idea Tracker</title>
 	<%= csrf_meta_tag %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>
+
 </head>
 <body>
 	<div id="wrapper">
@@ -16,7 +18,7 @@
 					<span class="icon-bar"></span>
 					<span class="icon-bar"></span>
 				</button>
-				<a class="navbar-brand" href="/">Idea Tracker</a>
+				<a class="navbar-brand" href="/">CBEL Online Idea Tracker</a>
 			</div>
 			<div class="nav navbar-username navbar-right">
 				<% if user_signed_in? %>
@@ -42,102 +44,92 @@
 		<nav class="navbar-default navbar-static-side" role="navigation">
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
-<!-- 	            <li class="sidebar-search">
-	                <div class="input-group custom-search-form">
-	                    <input type="text" class="form-control" placeholder="Search...">
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="button">
-	                            <i class="fa fa-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-	            </li> -->
-	            <li>
-	            	<a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
-	            </li>
-	            <li>
-	            	<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-	            </li>
-	            <li>
-	            	<a href="#"><i class="fa fa-lightbulb-o fa-fw"></i> Ideas <span class="fa arrow"></span></a>
-	            	<ul class="nav nav-second-level">
-	            		<li>
-	            			<a href="/ideas"><i class=" fa fa-list fa-fw"></i> Recent Ideas</a>
-	            		</li>
-	            		<li>
-	            			<a href="/ideas">Assigned Ideas</a>
-	            		</li>
-	            		<li>
-	            			<a href="/ideas"><i class="fa fa-check fa-fw"></i> Subscribed Ideas</a>
-	            		</li>
-	            	</ul>
-	            	<!-- /.nav-second-level -->
-	            </li>
-	            <li>
-	            	<a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
-	            </li>
-	            <li>
-	            	<a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
-	            	<ul class="nav nav-second-level">
-	            		<li>
-	            			<a href="/reports/status">Status Report</a>
-	            		</li>
-	            		<li>
-	            			<a href="/reports/success_rate">Success Rate Report</a>
-	            		</li>
-	            		<li>
-	            			<a href="/reports/view_pending_ideas">Pending Ideas</a>
-	            		</li>
-	            		<li>
-	            			<a href="/reports/popularity">Popularity Report</a>
-	            		</li>
-	            	</ul>
-	            	<!-- /.nav-second-level -->
-	            </li>            
-	            <li>
-	            	<a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
-	            </li>
-	            <% if current_user.try(:admin?) %>
-	            <li>
-	            	<a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
-	            	<ul class="nav nav-second-level">
-	            		<li>
-	            			<a href="/settings">Settings</a>
-	            		</li>
-	            		<li>
-	            			<a href="/category">Categories</a>
-	            		</li>
-	            		<li>
-	            			<a href="/statuses">Status</a>
-	            		</li>
-	            		<li>
-	            			<a href="/users">Users</a>
-	            		</li>
-	            	</ul>
-	            </li>
-	            <% end %>
-	        </ul>
-	        <!-- /#side-menu -->
-	    </div>
-	    <!-- /.sidebar-collapse -->
-	</nav>
-	<!-- /.navbar-static-side -->
+					<li>
+						<a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
+					</li>
+					<li>
+						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-lightbulb-o fa-fw"></i> Ideas <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="/ideas"><i class=" fa fa-list fa-fw"></i> Recent Ideas</a>
+							</li>
+							<li>
+								<a href="/ideas">Assigned Ideas</a>
+							</li>
+							<li>
+								<a href="/ideas"><i class="fa fa-check fa-fw"></i> Subscribed Ideas</a>
+							</li>
+						</ul>
+						<!-- /.nav-second-level -->
+					</li>
+					<li>
+						<a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="/reports/status">Status Report</a>
+							</li>
+							<li>
+								<a href="/reports/success_rate">Success Rate Report</a>
+							</li>
+							<li>
+								<a href="/reports/view_pending_ideas">Pending Ideas</a>
+							</li>
+							<li>
+								<a href="/reports/popularity">Popularity Report</a>
+							</li>
+						</ul>
+						<!-- /.nav-second-level -->
+					</li>            
+					<li>
+						<a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
+					</li>
+					<% if current_user.try(:admin?) %>
+					<li>
+						<a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="/settings">Settings</a>
+							</li>
+							<li>
+								<a href="/category">Categories</a>
+							</li>
+							<li>
+								<a href="/statuses">Status</a>
+							</li>
+							<li>
+								<a href="/users">Users</a>
+							</li>
+						</ul>
+					</li>
+					<% end %>
+				</ul>
+				<!-- /#side-menu -->
+			</div>
+			<!-- /.sidebar-collapse -->
+		</nav>
+		<!-- /.navbar-static-side -->
 
-<div id="page-wrapper">
-  <div class="row">
-	<% flash.each do |key, value| %>
-	<div class="<%= flash_class(key) %> alert-dismissable">
-		<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
-		<%= value %>
+		<div id="page-wrapper">
+			<div class="row">
+				<% flash.each do |key, value| %>
+				<div class="<%= flash_class(key) %> alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<%= value %>
+				</div>
+				<% end %>
+
+				<%= yield %>
+
+			</div>
+		</div>
+
 	</div>
-	<% end %>
-
-	<%= yield %>
-
-</div>
-</div>
-
-</div>
 </body>
 <script>
 $(document).ready(function(){

@@ -4,6 +4,7 @@
 	<title>IdeaTracker</title>
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%= stylesheet_link_tag "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= csrf_meta_tags %>
 	<style>
 	html{
@@ -18,17 +19,21 @@
 		background-size: cover;
 	}
 	.landing-box{
-		background-color: rgba(221, 244, 255, 0.5);
+		background-color: rgba(51, 51, 51, 0.5);
 		position: relative;
 		top: 100px;
 	}
-	a:hover, a:focus {
-		color: #1F4A6F;
-		text-decoration: underline;
-	}
-	a {
-		color: #2a6496;
-	}
+
+a {
+    color: #9bd0f6;
+    text-decoration: none;
+}
+
+a:hover, a:focus {
+    color: #54aff0;
+    text-decoration: underline;
+}
+
 
 
 	</style>

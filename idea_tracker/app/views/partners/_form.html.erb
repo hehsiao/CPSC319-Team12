@@ -1,44 +1,52 @@
 <%= form_for(@partner) do |f| %>
-  <% if @partner.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
-      <ul>
-        <% @partner.errors.full_messages.each do |msg| %>
-          <li><%= msg %></li>
-        <% end %>
-      </ul>
-    </div>
-  <% end %>
+<% if @partner.errors.any? %>
+<div id="error_explanation">
+  <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
+  <ul>
+    <% @partner.errors.full_messages.each do |msg| %>
+    <li><%= msg %></li>
+    <% end %>
+  </ul>
+</div>
+<% end %>
 
-  <div class="field">
-    <%= f.label :partner_name %><br>
-    <%= f.text_field :partner_name %>
+<div class="form-group">
+  <%= f.label :partner_name %><br>
+  <%= f.text_field :partner_name %>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <h4>Primary Contact</h4>
+    <div class="form-group">
+      <%= f.label :contact_name %><br>
+      <%= f.text_field :contact_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :email %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone_num %><br>
+      <%= f.text_field :phone_num %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :contact_name %><br>
-    <%= f.text_field :contact_name %>
+  <div class="col-md-6">
+    <h4>Secondary Contact</h4>
+    <div class="form-group">
+      <%= f.label :contact_name %><br>
+      <%= f.text_field :secondary_contact_name %>
+    </div>
+    <div class="form-group">
+      <%= f.label :email %><br>
+      <%= f.text_field :secondary_email %>
+    </div>
+    <div class="form-group">
+      <%= f.label :phone_num %><br>
+      <%= f.text_field :secondary_phone_num %>
+    </div>
   </div>
-  <div class="field">
-    <%= f.label :email %><br>
-    <%= f.text_field :email %>
-  </div>
-  <div class="field">
-    <%= f.label :phone_num %><br>
-    <%= f.text_field :phone_num %>
-  </div>
-  <div class="field">
-    <%= f.label :secondary_contact_name %><br>
-    <%= f.text_field :secondary_contact_name %>
-  </div>
-  <div class="field">
-    <%= f.label :secondary_email %><br>
-    <%= f.text_field :secondary_email %>
-  </div>
-  <div class="field">
-    <%= f.label :secondary_phone_num %><br>
-    <%= f.text_field :secondary_phone_num %>
-  </div>
-  <div class="actions">
-    <%= f.submit %>
-  </div>
+</div>
+<div class="actions">
+  <%= f.submit %>
+</div>
 <% end %>
