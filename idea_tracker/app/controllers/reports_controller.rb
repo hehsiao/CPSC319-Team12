@@ -6,7 +6,7 @@ class ReportsController < ApplicationController
    @users = User.all
    @ideas = Idea.all
    @status_size = Status.all.size
- end
+  end
  
  def status
    @status = Status.all
@@ -14,7 +14,21 @@ class ReportsController < ApplicationController
  end
  
  def view_pending_ideas
-   @days
+
+	   ideas = Idea.all
+	   final_status = Status.all.size
+	   now = Time.now.to_date
+	   filtered_ideas = Array.new
+	   ideas.each do |idea|
+		if idea.status < final_status
+			diff = now - idea.submission_date
+			#if diff > :idea_days_limit
+			#	filtered_ideas << idea
+			#end
+		end
+	   end
+	   @ideas = filtered_ideas
+
  end
  
  def status_show
@@ -33,4 +47,14 @@ class ReportsController < ApplicationController
 	@user = User.find(params[:id])
 	@all_status = Status.all
  end
-end
+ 
+ def popularity
+	@categories = Category.where(parent_id: 0)
+ end
+ 
+ def popularity_show
+	@category = Category.find(params[:id])
+	@categories = Category.where(parent_id: params[:id])
+ end
+end 
+

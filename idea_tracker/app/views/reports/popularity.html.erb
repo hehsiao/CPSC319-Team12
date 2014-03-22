@@ -1,17 +1,22 @@
 
-<h1>Popularity Reports</h1>
+<h1>Popularity Report</h1>
 
-The ideas will be grouped by the category of interest and the groups will be sorted by size in descending order.
-
-<div class="form-group">
-	<label>Select a Category</label>
-	<select class="form-control">
-		<option>Category1</option>
-		<option>Category2</option>
-		<option>Category3</option>
-		<option>Category4</option>
-		<option>Category5</option>
-	</select>
+<div>
+	<table class="table table-hover dataTable" summary="Category List">
+	  <thead>
+		<tr>
+		  <th>Pick a Category</th>
+		</tr>
+	  </thead>
+	  
+	  <tbody>
+		<% @categories.each do |category| %>
+		  <tr onclick="document.location = '/reports/popularity_show/<%= category.id %>';">
+			<td><%= category.category_name %></td>
+		  </tr>
+		<% end %>
+	  </tbody>
+	</table>
 </div>
 
 <br>
