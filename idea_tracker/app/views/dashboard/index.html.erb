@@ -20,21 +20,32 @@
    </div>
    <div class = "panel-body">
      <div class = "list-group">
-
            <% @activities.each do |activity| %>
-           <% @sub_ideas.each do |sub_idea| %>
+             <% if activity.trackable_type == "Idea"%> 
+               <% @sub_ideas.each do |sub_idea| %>
+                 <% if activity.trackable_id == sub_idea.idea_id%>
+                   <a href = "/ideas/<%= activity.trackable.id%>" class = "list-group-item">
+                    <%= render_activity activity%>
+                    <span class = "text-muted small">
+                      <em> <%= activity.created_at%> </em>
+                    </span>
+                 <% end %>
+                   </a>
+               <% end %>
+             <% end %>
 
-            <% if activity.trackable_id == sub_idea.idea_id%>
-             <a href = "/ideas/<%= activity.trackable.id%>" class = "list-group-item">
-             <!-- <div class="activity"> -->
-              <%= render_activity activity%>
-              <span class = "text-muted small">
-              <em> <%= activity.created_at%> </em>
-            </span>
-            <% end %>
-             </a>
-             <!-- </div> -->
-           <% end %> 
+             <% if activity.trackable_type == "Commontator::Comment"%> 
+                <% @comment_ids.each do |comment_id| %>
+                 <% if activity.trackable_id == comment_id.id%>
+                     <a href = "/ideas/<%= Commontator::Thread.find_by_id(comment_id.thread_id).commontable_id%>" class = "list-group-item">
+                     <%= render_activity activity%>
+                     <span class = "text-muted small">
+                        <em> <%= activity.created_at%> </em>
+                     </span>
+                 <% end %>
+                          </a>
+                <% end %> 
+             <% end %> 
            <% end %>      
     </div>
   </div>

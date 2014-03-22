@@ -35,8 +35,10 @@ class UserMailer < ActionMailer::Base
     @all_email << User.find_by_id(related_user.user_id).email  
     end 
     end
-    
+
+    if (@all_email.any?)
     mail(to: @all_email, subject: 'someone edit idea on Ideal Tracker')
+    end
     #flash[:notice] = "sended successfully"
   end
 
@@ -46,7 +48,7 @@ class UserMailer < ActionMailer::Base
     @related_users = Subscription.where(idea_id: idea.id)
     @related_users.each do |related_user| 
     end
-    mail(to: 'tanat.ratana@gmail.com', subject: 'Idea for YOU!!!')
+    mail(to: @email, subject: 'Idea for YOU!!!')
     #flash[:notice] = "sended successfully"
   end
 

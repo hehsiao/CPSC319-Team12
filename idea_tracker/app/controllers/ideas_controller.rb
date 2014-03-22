@@ -21,7 +21,7 @@ class IdeasController < ApplicationController
     @categories = Category.where(parent_id: 0).to_a
     # @provider = Partner.find(@idea.provider_partner_id).partner_name
     @provider = params[:provider_partner_id]
-    commontator_thread_show(@idea) 
+    commontator_thread_show(@idea)
     if @idea.receiver_partner_id != nil
       @receiver = Partner.find(@idea.receiver_partner_id).partner_name
     else 
@@ -86,7 +86,7 @@ end
         handle_participations
         # Email Notification
         # if @last_update - 5.minute.ago < 0  
-        #UserMailer.edit_notification_email(@idea, current_user).deliver
+        UserMailer.edit_notification_email(@idea, current_user).deliver
         # end
         
         format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}

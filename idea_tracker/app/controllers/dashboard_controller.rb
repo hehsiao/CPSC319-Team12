@@ -10,11 +10,33 @@ class DashboardController < ApplicationController
 		# Need to fix to make sure ideas gets updated from cache
 
 		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
-		@sub_ideas = Subscription.where(user_id: current_user.id)   
+		@sub_ideas = Subscription.where(user_id: current_user.id)  
+
+		@comments = Commontator::Comment.all 
+		@threads = Commontator::Thread.all
+		@thread_ids = []
+		@comment_ids =[]
+       
+		@sub_ideas.each do |sub_idea|
+			@threads.each do |thread|
+				if  sub_idea.idea_id == thread.commontable_id
+				    @thread_ids << thread
+                end 
+            end	
+		end	
+        
+        @comments.each do |comment|
+        	@thread_ids.each do |thread_id|
+        		if comment.thread_id == thread_id.id
+        		    @comment_ids << comment  
+        		end    
+            end
+        end	 
 
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
 		@recent_ideas = Idea.recent
+
 	end
 
 end
