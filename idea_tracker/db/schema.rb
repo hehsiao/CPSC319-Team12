@@ -61,12 +61,6 @@ ActiveRecord::Schema.define(version: 20140320085826) do
     t.datetime "updated_at"
   end
 
-  create_table "conversations", force: true do |t|
-    t.string   "subject",    default: ""
-    t.datetime "created_at",              null: false
-    t.datetime "updated_at",              null: false
-  end
-
   create_table "commontator_comments", force: true do |t|
     t.string   "creator_type"
     t.integer  "creator_id"
@@ -152,18 +146,6 @@ ActiveRecord::Schema.define(version: 20140320085826) do
     t.string   "secondary_contact_name"
     t.string   "secondary_email"
     t.string   "secondary_phone_num"
-  end
-
-  create_table "receipts", force: true do |t|
-    t.integer  "receiver_id"
-    t.string   "receiver_type"
-    t.integer  "notification_id",                            null: false
-    t.boolean  "read",                       default: false
-    t.boolean  "trashed",                    default: false
-    t.boolean  "deleted",                    default: false
-    t.string   "mailbox_type",    limit: 25
-    t.datetime "created_at",                                 null: false
-    t.datetime "updated_at",                                 null: false
   end
 
   create_table "statuses", force: true do |t|
