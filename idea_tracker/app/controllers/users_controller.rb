@@ -11,7 +11,7 @@ class UsersController < ApplicationController
   end
 
   def show
-   # @user = User.find(param[:id])
+    @user = User.find(param[:id])
   end
 
   def new
@@ -49,13 +49,22 @@ class UsersController < ApplicationController
   end
 
   def update_admin
-    user = User.find(params[:id])
-    if user.admin 
-      user.update_attribute(:admin, '0')
+    if current_user.try(:admin?)
+      user = User.find(params[:id])
+      if user.admin 
+        if user.update_attributes(:admin => '0')
+          flash[:notice] = "User '#{user.email}' status changed to users successfully."
+        end
+      else
+        if user.update_attributes(:admin => '1')
+          flash[:notice] = "User '#{user.email}' status changed to admin successfully."
+        end
+      end
+      redirect_to(:action => 'index') 
     else
-      user.update_attribute(:admin, '1')
+      flash[:notice] = "Error Loading Page."
+      redirect_to(:action => 'index')
     end
-    redirect_to(:action => 'index')
   end
 
   def destroy
@@ -66,9 +75,9 @@ class UsersController < ApplicationController
 
   private
 
-    def user_params
-      params.require(:user).permit(:email, :first_name, :last_name)
-    end
+  def user_params
+    params.require(:user).permit(:email, :first_name, :last_name)
+  end
 
   
 end

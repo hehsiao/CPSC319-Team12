@@ -1,0 +1,28 @@
+
+  <h1 class="page-header">Settings</h1>
+
+<!-- <h5><%= link_to 'Create a New Settings', new_setting_path %></h5>
+ --><div class="panel-body">
+  <div class="table">
+<table class="table table-striped table-hover ">
+  <thead>
+    <tr>
+      <th>Setting</th>
+      <th>Value</th>
+      <th class="no-sort"></th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @settings.each do |c| %>
+      <tr>
+        <td><%= c.name %></td>
+        <td><%= c.data %></td>
+    <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_setting_path(c), title: 'Edit', ref: 'tooltip' %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+</div></div>
+
+<br>

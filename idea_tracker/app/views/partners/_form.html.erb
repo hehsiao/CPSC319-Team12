@@ -2,11 +2,10 @@
   <% if @partner.errors.any? %>
     <div id="error_explanation">
       <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
-
       <ul>
-      <% @partner.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
+        <% @partner.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
       </ul>
     </div>
   <% end %>
@@ -25,7 +24,7 @@
   </div>
   <div class="field">
     <%= f.label :phone_num %><br>
-    <%= f.number_field :phone_num %>
+    <%= f.text_field :phone_num %>
   </div>
   <div class="field">
     <%= f.label :secondary_contact_name %><br>
@@ -37,7 +36,7 @@
   </div>
   <div class="field">
     <%= f.label :secondary_phone_num %><br>
-    <%= f.number_field :secondary_phone_num %>
+    <%= f.text_field :secondary_phone_num %>
   </div>
   <div class="actions">
     <%= f.submit %>

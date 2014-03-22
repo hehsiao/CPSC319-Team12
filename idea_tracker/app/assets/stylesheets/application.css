@@ -14,3 +14,8 @@
  *= require selectize.bootstrap3
  *= require_tree .
  */
+
+tr[onclick]
+{
+	cursor: pointer;
+}

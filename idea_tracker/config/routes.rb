@@ -1,4 +1,7 @@
 IdeaTracker::Application.routes.draw do
+  resources :statuses
+  resources :settings
+
   get 'keywords/:keyword', to: 'ideas#index', as: :keyword
 
   match '/category/', :to => 'category#index', :as => :categories, :via => [:get]
@@ -8,6 +11,7 @@ IdeaTracker::Application.routes.draw do
   resources :ideas
 
   devise_for :users
+
   mount Commontator::Engine => '/commontator'
   get "comments/index"
   get "comments/show"
@@ -15,9 +19,6 @@ IdeaTracker::Application.routes.draw do
   get "comments/edit"
   get "comments/delete"
   get "users/index"
-  get "users/show"
-  get "users/new"
-  get "users/delete"
   get "ideas/index"
   get "ideas/show"
   get "ideas/new"

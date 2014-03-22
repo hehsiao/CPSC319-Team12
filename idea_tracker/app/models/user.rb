@@ -6,6 +6,7 @@ class User < ActiveRecord::Base
 
   has_many :ideas
   has_many :comments
+  has_many :subscriptions
 
   # allows users to post comments
   acts_as_commontator
