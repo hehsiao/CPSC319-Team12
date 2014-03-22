@@ -17,14 +17,28 @@
 		<% counter = 0 %>
 		<% @ideas.each do |idea| %>
 			<% if idea.status == status.id %>
-				<% counter = counter + 1 %>
+				<% counter += 1 %>
 			<% end %>
 		<%end%>	
 		<%= counter %>
+		</td>
+		<td><%= link_to("Show",{:action => 'status_show', :id => status.id}, :class => 'action status_show') %>
 		</td>
         
       </tr>
     <% end %>
   </tbody>
 </table>
+
+<div>
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript" src="status_pie">
+
+    </script>
+</div>
+
+<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+
+
 
