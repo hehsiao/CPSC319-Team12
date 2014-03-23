@@ -8,6 +8,7 @@
 
 Setting.delete_all
 Setting.create(name: 'Allow Sign Up', data: 'Yes')
+Setting.create(name: 'Default Owner', data: '3')
 
 User.delete_all
 User.create!([

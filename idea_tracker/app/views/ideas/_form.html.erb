@@ -74,8 +74,12 @@
       <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
       <div class="panel-body">
         <div class="form-group" >
+          <% if @idea.owner_id %>
           <label for="idea_user_id">Idea Owner</label>
-          <input class="form-control" type="text" placeholder="<%= current_user.first_name %>" disabled="">
+            <input class="form-control" type="text" placeholder="<%= current_user.first_name %>" disabled="">
+          <% else %>
+            <input class="form-control" type="hidden" value="1">
+          <% end %>
           <input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
         </div>
 

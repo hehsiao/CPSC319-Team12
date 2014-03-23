@@ -85,7 +85,7 @@ div.dataTables_filter input {
     min-height: 568px;
 }
 
-@media(min-width:1300px) {
+@media(min-width:768px) {
     #page-wrapper {
         position: inherit;
         margin: 0 0 0 250px;
@@ -93,6 +93,17 @@ div.dataTables_filter input {
         min-height: 768px;
     }
 }
+
+@media(min-width:1200px) {
+    #page-wrapper {
+        position: inherit;
+        margin: 0 0 0 250px;
+        padding: 0 30px;
+        min-height: 768px;
+    }
+}
+
+
 
 .alert {
   padding: 15px;
