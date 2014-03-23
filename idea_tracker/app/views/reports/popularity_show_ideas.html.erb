@@ -1,0 +1,8 @@
+<h1>Popularity Reports</h1>
+<h2><%= @category_child.category_name %> </h2>
+
+<%= render 'idea_table' %>
+
+<div>
+<%= link_to("Back",{:action => 'popularity_show',:id => @category_child.parent_id}, :class => 'action popularity_show') %>
+</div>

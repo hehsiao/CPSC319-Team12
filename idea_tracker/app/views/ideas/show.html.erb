@@ -21,7 +21,7 @@
 
 <p>
   <strong>Provider:</strong>
-  <%= Partner.find(@idea.provider_partner_id).partner_name %>
+  <%= @provider %>
 </p>
 
 <p>
@@ -63,7 +63,7 @@
 <br><br>
 <%= commontator_thread(@idea) %>
 <br><br>
-<p> Submission date:  <%= @idea.submission_date %> | Last modified: <%= @idea.last_modified %> </p>
+<p> Submission date:  <%= @idea.created_at %> | Last modified: <%= @idea.updated_at %> </p>
 
 
 

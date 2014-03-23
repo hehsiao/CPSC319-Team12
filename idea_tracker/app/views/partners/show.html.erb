@@ -1,39 +1,41 @@
-<div id="page-wrapper">
-  <div class="row">
-<h1 class="page-header">
-  <%= @partner.partner_name %></h1>
+<h1 class="page-header">Partners</h1>
+<section class="widget">
+  <div class="panel-body">
+    <div class="row">
+      <h4><%= @partner.partner_name %></h4>
+      <h5>Primary Contact</h5>
+      <p>
+        <strong>Name:</strong>
+        <%= @partner.contact_name %>
+      </p>
 
-<h3>Primary Contact</h3>
-<p>
-  <strong>Name:</strong>
-  <%= @partner.contact_name %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= @partner.email %>
+      </p>
+      <p>
+        <strong>Phone:</strong>
+        <%= @partner.phone_num %>
+      </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @partner.email %>
-</p>
-<p>
-  <strong>Phone:</strong>
-  <%= @partner.phone_num %>
-</p>
+      <h5>Secondary Contact</h5>
+      <p>
+        <strong>Name:</strong>
+        <%= @partner.secondary_contact_name %>
+      </p>
 
-<h3>Secondary Contact</h3>
-<p>
-  <strong>Name:</strong>
-  <%= @partner.secondary_contact_name %>
-</p>
+      <p>
+        <strong>Email:</strong>
+        <%= @partner.secondary_email %>
+      </p>
 
-<p>
-  <strong>Email:</strong>
-  <%= @partner.secondary_email %>
-</p>
-
-<p>
-  <strong>Phone:</strong>
-  <%= @partner.secondary_phone_num %>
-</p>
+      <p>
+        <strong>Phone:</strong>
+        <%= @partner.secondary_phone_num %>
+      </p>
+    </div>
+  </div>
+</section>
 
 <%= link_to 'Edit', edit_partner_path(@partner) %> |
 <%= link_to 'Back', partners_path %>
-</div>

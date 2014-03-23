@@ -1,34 +1,37 @@
-<h1 class="page-header">Listing partners</h1>
+<h1 class="page-header">Partners</h1>
 
-<h5><%= link_to 'Create a New Partner', new_partner_path %></h5>
-<div class="panel-body">
-  <div class="table">
-<table class="table table-striped table-hover dataTable">
-  <thead>
-    <tr>
-      <th>Partner name</th>
-      <th>Contact name</th>
-      <th>Email</th>
-      <th>Phone num</th>
-      <th class="no-sort"></th>
-      <th class="no-sort"></th>
-      <th class="no-sort"></th>
-    </tr>
-  </thead>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bars"></i> List of Partners</div>
+    
+  <div class="panel-body">
+    <h5><%= link_to 'Create a New Partner', new_partner_path %></h5>
 
-  <tbody>
-    <% @partners.each do |partner| %>
-      <tr>
-        <td><%= partner.partner_name %></td>
-        <td><%= partner.contact_name %></td>
-        <td><%= partner.email %></td>
-        <td><%= partner.phone_num %></td>
-        <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, partner, title: 'Show', ref: 'tooltip' %></td>
-		<td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_partner_path(partner), title: 'Edit', ref: 'tooltip' %></td>
-		<td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, partner, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-      </tr>
-    <% end %>
-  </tbody>
-</table>
-</div>
-</div>
+    <div class="table">
+      <table class="table table-hover dataTable">
+        <thead>
+          <tr>
+            <th>Partner name</th>
+            <th>Contact name</th>
+            <th>Email</th>
+            <th>Phone num</th>
+            <th class="no-sort"></th>
+          </tr>
+        </thead>
+
+        <tbody>
+          <% @partners.each do |partner| %>
+          <tr>
+            <td><%= partner.partner_name %></td>
+            <td><%= partner.contact_name %></td>
+            <td><%= partner.email %></td>
+            <td><%= partner.phone_num %></td>
+            <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, partner, title: 'Show', ref: 'tooltip' %> | 
+              <%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_partner_path(partner), title: 'Edit', ref: 'tooltip' %> | 
+              <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, partner, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+            </tr>
+            <% end %>
+          </tbody>
+        </table>
+      </div>
+    </div>
+  </section>

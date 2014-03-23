@@ -1,31 +1,32 @@
+<h1 class="page-header">Statuses <small>stage of an idea</small></h1>
 
-    <h1 class="page-header">Listing Status</h1>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bars"></i> List of Statuses</div>
 
+  <div class="panel-body">
     <h5><%= link_to 'Create a New Status', new_status_path %></h5>
-    <div class="panel-body">
-      <div class="table">
-        <table class="table table-striped table-hover dataTable">
-          <thead>
-            <tr>
-              <th>Position</th>
-              <th>Status</th>
-              <th class="no-sort"></th>
-              <th class="no-sort"></th>
-            </tr>
-          </thead>
+    <div class="table">
+      <table class="table table-hover dataTable">
+        <thead>
+          <tr>
+            <th>Position</th>
+            <th>Status</th>
+            <th class="no-sort"></th>
+            <th class="no-sort"></th>
+          </tr>
+        </thead>
 
-          <tbody>
-            <% @statuses.each do |s| %>
-            <tr>
-              <td><%= s.position %></td>
-              <td><%= s.status %></td>
-              <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_status_path(s), title: 'Edit', ref: 'tooltip' %></td>
-              <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, s, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
-            </tr>
-            <% end %>
-          </tbody>
-        </table>
-      </div>
+        <tbody>
+          <% @statuses.each do |s| %>
+          <tr>
+            <td><%= s.position %></td>
+            <td><%= s.status %></td>
+            <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_status_path(s), title: 'Edit', ref: 'tooltip' %></td>
+            <td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, s, title: 'Delete', ref: 'tooltip', method: :delete, data: { confirm: 'Are you sure?' } %></td>
+          </tr>
+          <% end %>
+        </tbody>
+      </table>
     </div>
-
-    <br>
+  </div>
+</section>  

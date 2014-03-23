@@ -3,23 +3,47 @@
 
 <h2>Users</h2>
 
-<table class="table" summary="User list">
-<tr class="header">
-  <th>Name</th>
-  <th>Email</th>
-  <th>Success Rate</th>
-</tr>
-<% if @users %>
-<% @users.each do |user| %>
-<tr>
-  <td><%= user.first_name + " " + user.last_name %></td>
-  <td><%= user.email %></td>
-  <td>
-	0% <!-- TODO -->
-  </td>
-</tr>
-<% end %>
-<% end %>
+<table class="table table-hover dataTable" summary="User list">
+	<thead>
+		<tr class="header">
+		  <th>Name</th>
+		  <th>Email</th>
+		  <th>Success Rate</th>
+		</tr>
+	</thead>
+	
+	<tbody>
+		<% if @users %>
+		<% @users.each do |user| %>
+		<tr onclick="document.location = '/reports/success_rate_show/<%=user.id%>';">
+		  <td><%= user.first_name + " " + user.last_name %></td>
+		  <td><%= user.email %></td>
+		  <td>
+			<% verified = 0 %>
+			<% owner_of = 0 %>
+			<% @ideas.each do |idea| %>
+				<% if idea.user_id == user.id %>
+				<% owner_of += 1 %>
+					<% if idea.status == @status_size %>
+					<% verified += 1 %>
+					<% end %>
+				<% end %>
+			<% end %>
+			<% if verified == 0 %>
+				0%
+			<% else %>
+				<%= verified*100/owner_of %>%
+			<% end %>
+		  </td>
+		</tr>
+		<% end %>
+		<% end %>
+	</tbody>
 </table>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="success_rate_column_chart"></script>
+
+<div id="chart_div" style="width: 700px; height: 500px;"></div>
 
 

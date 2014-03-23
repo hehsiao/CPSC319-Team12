@@ -1,0 +1,35 @@
+<div class="table">
+  <table class="table table-hover dataTable">
+	<thead>
+	  <tr>
+		<th>User</th>
+		<th>Summary</th>
+		<th>Description</th>
+		<th>Submission date</th>
+		<th>Last modified</th>
+		<th>Status</th>
+		<th class="no-sort"></th>
+	  </tr>
+	</thead>
+
+	<tbody>
+	  <% @ideas.each do |idea| %>
+	  <tr onclick="document.location = '/ideas/<%=idea.id%>';">
+		<td><%= idea.user_id %></td>
+		<td><%= idea.summary %></td>
+		<td><%= truncate(idea.description, length:70) %></td>
+		<td><%= idea.submission_date %></td>
+		<td><%= idea.last_modified %></td>
+		<td>
+		<% @all_status.each do |status| %>
+			<% if idea.status == status.id %>
+			<%= status.status %>
+			<% end %>
+		<% end %>
+		</td>
+		<td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
+	  </tr>
+	  <% end %>
+	</tbody>
+  </table>
+</div>

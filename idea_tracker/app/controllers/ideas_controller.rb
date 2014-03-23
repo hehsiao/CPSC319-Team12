@@ -19,9 +19,14 @@ class IdeasController < ApplicationController
 
     @status = Status.find(@idea.status)
     @categories = Category.where(parent_id: 0).to_a
-    # @provider = Partner.find(@idea.provider_partner_id).partner_name
-    @provider = params[:provider_partner_id]
-    commontator_thread_show(@idea)
+
+    commontator_thread_show(@idea) 
+    if @idea.provider_partner_id != nil
+      @provider = Partner.find(@idea.provider_partner_id).partner_name
+    else 
+      @provider = "None Assigned"
+    end
+    
     if @idea.receiver_partner_id != nil
       @receiver = Partner.find(@idea.receiver_partner_id).partner_name
     else 
@@ -177,7 +182,7 @@ end
 
     # Never trust parameters from the scary internet, only allow the white list through.
     def idea_params
-      params.require(:idea).permit(:user_id, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status)
+      params.require(:idea).permit(:user_id, :summary, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status)
 
     end
 

@@ -1,37 +1,42 @@
-<h1 class="page-header">Managing Users</h1>
+<h1 class="page-header">Users <small>fellow coworkers</small></h1>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bars"></i> List of Users</div>
 
- <div class="table">
-<table class="table table-striped table-hover dataTable" summary="User list">
-  <thead>
-  <tr>
-    <th>Name</th>
-    <th>Email</th>
-    <th class="no-sort">Admin</th>
-    <th class="no-sort">Remove</th>
-  </tr>
-</thead>
-</tbody>
-  <% if @users %>
-  <% @users.each do |user| %>
-  <tr>
-    <td><%= user.first_name + " " + user.last_name %></td>
-    <td><%= user.email %></td>
-    <td><% if user.admin? %>
-      <% if user == self.current_user %>
+  <div class="panel-body">
+    <h5><%= link_to 'Enable Sign Up', '/settings/'.html_safe %></h5>
+   <div class="table">
+    <table class="table table-hover dataTable">
+      <thead>
+        <tr>
+          <th>Name</th>
+          <th>Email</th>
+          <th class="no-sort">Admin</th>
+          <th class="no-sort">Remove</th>
+        </tr>
+      </thead>
+    </tbody>
+    <% if @users %>
+    <% @users.each do |user| %>
+    <tr>
+      <td><%= user.first_name + " " + user.last_name %></td>
+      <td><%= user.email %></td>
+      <td><% if user.admin? %>
+        <% if user == self.current_user %>
         <i class="fa fa-check"></i>
-      <% else %>
+        <% else %>
         <%= link_to '<i class="fa fa-check"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id, :t => Time.now.to_i}, data: {confirm: 'Change staff to regular user?' } %>
         <% end %>
-      <% else %>
-      <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id, :t => Time.now.to_i}, data: {confirm: 'Change staff to admin?' } %>
-      <% end %>
-    </td>
-    <td class="actions">
-      <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
-    </td>
-  </tr>
-  <% end %>
-  <% end %>
-</tbody>
+        <% else %>
+        <%= link_to '<i class="fa fa-times"></i>'.html_safe, {:controller => "users", :action => "update_admin", :id => user.id, :t => Time.now.to_i}, data: {confirm: 'Change staff to admin?' } %>
+        <% end %>
+      </td>
+      <td class="actions">
+        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
+      </td>
+    </tr>
+    <% end %>
+    <% end %>
+  </tbody>
 </table>
 </div>
+</section>
