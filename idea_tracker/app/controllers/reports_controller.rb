@@ -15,19 +15,22 @@ class ReportsController < ApplicationController
  
  def view_pending_ideas
 
-	   ideas = Idea.all
-	   final_status = Status.all.size
-	   now = Time.now.to_date
-	   filtered_ideas = Array.new
-	   ideas.each do |idea|
-		if idea.status < final_status
-			diff = now - idea.submission_date
-			#if diff > :idea_days_limit
-			#	filtered_ideas << idea
-			#end
-		end
-	   end
-	   @ideas = filtered_ideas
+ 		@days = params[:idea_days_limit]
+
+ 		@ideas = Idea.where(:created_at => Time.now - (60*60*24*@days))
+		# ideas = Idea.all
+		# final_status = Status.all.size
+		# now = Time.now.to_date
+		# filtered_ideas = Array.new
+		# ideas.each do |idea|
+		# if idea.status < final_status
+		# diff = now - idea.submission_date
+		# #if diff > :idea_days_limit
+		# #	filtered_ideas << idea
+		# #end
+		# end
+		# end
+		# @ideas = filtered_ideas
 
  end
  
