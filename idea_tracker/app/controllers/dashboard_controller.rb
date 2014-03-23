@@ -16,14 +16,24 @@ class DashboardController < ApplicationController
 		@threads = Commontator::Thread.all
 		@thread_ids = []
 		@comment_ids =[]
-       
-		@sub_ideas.each do |sub_idea|
-			@threads.each do |thread|
-				if  sub_idea.idea_id == thread.commontable_id
+
+
+        @my_ideas.each do |my_idea|
+        	@threads.each do |thread|
+				if  my_idea.id == thread.commontable_id
 				    @thread_ids << thread
                 end 
             end	
-		end	
+	    end	
+      
+		@sub_ideas.each do |sub_idea|
+			@threads.each do |thread|
+				if  sub_idea.idea_id == thread.commontable_id 
+				    @thread_ids << thread
+                end 
+            end	
+		end
+
         
         @comments.each do |comment|
         	@thread_ids.each do |thread_id|
@@ -35,8 +45,6 @@ class DashboardController < ApplicationController
 
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
-		@recent_ideas = Idea.recent
-
 	end
 
 end

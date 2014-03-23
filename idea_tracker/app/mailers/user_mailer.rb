@@ -20,7 +20,7 @@ class UserMailer < ActionMailer::Base
     end 
     end
 
-    if (@all_email)
+    if @all_email.present?
     mail(to: @all_email, subject: 'someone edit idea on Ideal Tracker')
     end
     #flash[:notice] = "sended successfully"
@@ -33,7 +33,7 @@ class UserMailer < ActionMailer::Base
     @related_users.each do |related_user| 
     end
 
-    if (@all_email)
+    if @email.present?
     mail(to: @email, subject: 'Idea for YOU!!!')
     end
     #flash[:notice] = "sended successfully"
