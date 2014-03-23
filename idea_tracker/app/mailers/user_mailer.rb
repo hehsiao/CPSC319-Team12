@@ -9,22 +9,6 @@ class UserMailer < ActionMailer::Base
   end
 
   def edit_notification_email(idea, user)
-  	@user = user
-  	@idea = idea
-  	@related_users = Subscription.where(idea_id: idea.id)
-  	@all_email = []
-
-  	@related_users.each do |related_user|
-      if User.find_by_id(related_user.user_id)    	
-       @all_email << User.find_by_id(related_user.user_id).email  
-     end 
-   end
-   
-   mail(to: @all_email, subject: 'someone edit idea on Ideal Tracker')
-    #flash[:notice] = "sended successfully"
-  end
-
-  def edit_notification_email(idea, user)
     @user = user
     @idea = idea
     @related_users = Subscription.where(idea_id: idea.id)
@@ -36,7 +20,7 @@ class UserMailer < ActionMailer::Base
     end 
     end
 
-    if (@all_email.any?)
+    if (@all_email)
     mail(to: @all_email, subject: 'someone edit idea on Ideal Tracker')
     end
     #flash[:notice] = "sended successfully"
@@ -48,7 +32,10 @@ class UserMailer < ActionMailer::Base
     @related_users = Subscription.where(idea_id: idea.id)
     @related_users.each do |related_user| 
     end
+
+    if (@all_email)
     mail(to: @email, subject: 'Idea for YOU!!!')
+    end
     #flash[:notice] = "sended successfully"
   end
 
