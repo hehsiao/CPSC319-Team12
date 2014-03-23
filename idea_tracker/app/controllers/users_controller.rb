@@ -53,16 +53,16 @@ class UsersController < ApplicationController
       user = User.find(params[:id])
       if user.admin 
         if user.update_attributes(:admin => '0')
-          flash[:notice] = "User '#{user.email}' status changed to users successfully."
+          flash[:success] = "User '#{user.email}' status changed to users successfully."
         end
       else
         if user.update_attributes(:admin => '1')
-          flash[:notice] = "User '#{user.email}' status changed to admin successfully."
+          flash[:success] = "User '#{user.email}' status changed to admin successfully."
         end
       end
       redirect_to(:action => 'index') 
     else
-      flash[:notice] = "Error Loading Page."
+      flash[:error] = "Error Loading Page."
       redirect_to(:action => 'index')
     end
   end

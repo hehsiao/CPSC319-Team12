@@ -4,7 +4,7 @@ class DashboardController < ApplicationController
 	
 	def index  
 		@ideas = Idea.all  
-		@recent_ideas = Idea.order("submission_date desc").limit(5)
+		@recent_ideas = Idea.order("created_at desc").limit(5)
 		@my_ideas = Idea.where(user_id: current_user.id)
 		# Need to fix to make sure ideas gets updated from cache
 
