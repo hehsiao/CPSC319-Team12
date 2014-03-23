@@ -1,34 +1,53 @@
-<h2>Edit <%= resource_name.to_s.humanize %></h2>
+<h1 class="page-header">Update Your Profile</h1>
 
-<%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
-  <%= devise_error_messages! %>
+<section class="widget">
+    <div class="page-body">
+      <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
+      <%= devise_error_messages! %>
+        <fieldset>
+          <p>To update your profile, please enter your current password.</p>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <%= f.password_field :current_password, :placeholder => "Current Password", :class => "form-control" %>
+          </div>
 
-  <div><%= f.label :email %><br />
-  <%= f.email_field :email, :autofocus => true, placeholder:"Email" %></div>
+          <p>Update your Email</p>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
+            <%= f.email_field :email, :autofocus => true, :placeholder => "E-mail", :class => "form-control" %>
+          </div>
+          <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
+          <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
+          <% end %>
+          <p>Name</p>
+          <div class="form-group">
+            <%= f.text_field :first_name, :autofocus => true, :placeholder => "First Name", :class => "form-control" %>
+          </div>
+          <div class="form-group">
+            <%= f.text_field :last_name, :autofocus => true, :placeholder => "Last Name", :class => "form-control" %>
+          </div>                
 
-  <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
-    <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
-  <% end %>
+          <p>New Password</p>                                      
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <%= f.password_field :password, :placeholder => "Password", :class => "form-control" %>
+          </div>
+          <div class="form-group input-group">
+            <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
+            <%= f.password_field :password_confirmation, :placeholder => "Password", :class => "form-control" %>
+          </div>
 
-  <div><%= f.text_field :first_name, :autofocus => true, placeholder:"First Name"  %></div>
 
-  <div><%= f.text_field :last_name, :autofocus => true, placeholder:"Last Name"  %></div>
+          <div class="form-group">
+            <%= f.submit "Update" , class:"btn btn-primary" %> 
+            <%= link_to "Back", :back, class:"btn btn btn-default" %>
+          </div>
 
-  <div><%= f.label :password %> <i>(leave blank if you don't want to change it)</i><br />
-  <%= f.password_field :password, :autocomplete => "off", placeholder:"Password"  %></div>
+        </fieldset>
+        <% end %>
+      </form>
+  </div>
 
-  <div><%= f.label :password_confirmation %><br />
-  <%= f.password_field :password_confirmation, placeholder:"Password Confirmation"  %></div>
+</section>
 
-  <div><%= f.label :current_password %> <i>(we need your current password to confirm your changes)</i><br />
-  <%= f.password_field :current_password, placeholder:"Current Password"  %></div>
-
-  <div><%= f.submit "Update" %></div>
-<% end %>
-
-<!-- <h3>Cancel my account</h3>
-
-<p>Unhappy? <%= button_to "Cancel my account", registration_path(resource_name), :data => { :confirm => "Are you sure?" }, :method => :delete %></p>
- -->
-<%= link_to "Back", :back %>
 

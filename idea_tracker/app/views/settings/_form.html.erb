@@ -13,10 +13,10 @@
 
   <div class="form-group">
     <%= f.label :data %>: <br> 
-    <%= f.text_field :data %>
+    <%= f.text_field :data, :class => "form-control" %>
   </div>
   <br>
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", :class => "btn btn-primary" %>
   </div>
 <% end %>

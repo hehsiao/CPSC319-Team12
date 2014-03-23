@@ -9,7 +9,7 @@
   					<%= form_for(resource, :as => resource_name, :url => password_path(resource_name), :html => {class:"form-signin"}) do |f| %>
   					<%= devise_error_messages! %>
   					<fieldset>
-              <div class="form-group" input-group">
+              <div class="form-group input-group">
                 <span class="input-group-addon"><i class="fa fa-envelope-o fa-fw"></i></span>
   							<%= f.email_field :email, :autofocus => true, :placeholder => "E-mail Address", :class => "form-control" %>
   						</div>

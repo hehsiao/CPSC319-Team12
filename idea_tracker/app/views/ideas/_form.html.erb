@@ -1,4 +1,4 @@
-<%= form_for(@idea) do |f| %>
+<%= form_for(@idea, :html => {:class => "horizontal-form"}) do |f| %>
 <% if @idea.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
@@ -11,110 +11,164 @@
 </div>
 <% end %>
 
-<div class="form-group">
-  <%= f.label :summary %><br>
-  <%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-info"></i> Idea Information</div>
+      <div class="panel-body">
+         <div class="form-group">
+          <label for="idea_status">Stage of Idea</label>
+          <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status), {}, { :class => 'form-control' }) %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :summary %>
+          <%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :description %>
+          <%= f.text_area :description, class: 'form-control', :rows => 5 %>
+        </div>
+
+        <div class="form-group">
+          <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
+          <%= f.text_field :keyword_list %>
+
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div> 
+
+
+
+<div class="row">
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading">
+        <i class="fa fa-users"></i> Partner Information 
+        <%= link_to '<small><i class="fa fa-plus"></i> Add New Partners</small>'.html_safe, new_partner_path, :target => '_new' %>
+      </div>
+      <div class="panel-body">
+        <%= fields_for(@partner) do |p| %>
+        <div class="form-group">
+          <%= p.label :provider_partner_id %><br>
+          <%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, 1), {}, { :class => 'form-control'}) %>
+        </div>
+        <% end %>
+        
+        <%= fields_for(@partner) do |p| %>
+        <div class="form-group">
+          <%= p.label :receiver_partner_id %><br>
+          <%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, 1), {}, { :class => 'form-control'}) %>
+          <% end %>
+
+        </div>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
+      <div class="panel-body">
+        <div class="form-group" >
+          <label for="idea_user_id">Idea Owner</label>
+          <input class="form-control" type="text" placeholder="<%= current_user.first_name %>" disabled="">
+          <input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
+        </div>
+
+        <div class="form-group">
+          <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+          <%= f.label :participants %><br>
+          <%= f.text_field :participants, :value => s %>
+        </div>
+
+      </div>
+    </section>
+  </div> 
 </div>
 
-<div class="form-group">
-  <%= f.label :status %><br>
-  <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status)) %>
+<div class="row">
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-cog"></i> Options</div>
+
+      <div class="panel-body">
+         <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+
+      </div>
+    </section>
+  </div>
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading">
+        <i class="fa fa-link"></i> Idea Associations
+      </div>
+      <div class="panel-body">
+        <% if !@idea.id.nil? %>
+        <% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
+        <% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
+        <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+        <% end %>
+
+        <div class="form-group">
+
+          <%= f.label :association_parents %><br>
+          <%= f.text_field :association_parents, :value => parent_ideas %>
+        </div>
+
+        <div class="form-group">
+
+          <%= f.label :association_peers %><br>
+          <%= f.text_field :association_peers, :value => peer_ideas %>
+        </div>
+
+        <div class="form-group">
+
+          <%= f.label :association_childs %><br>
+          <%= f.text_field :association_childs, :value => child_ideas %>
+        </div>
+
+      </div>
+    </section>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="actions">
+        <%= f.submit "Submit", :class => 'btn btn-primary' %>
+      </div>
+    </section>
+  </div>
 </div>
 
-<div class="form-group" >
-  <%= f.label :user_id %><br>
-  <%= f.number_field :user_id, class: 'form-control' %>
-</div>
+  <% end %>
 
-
-<div class="form-group">
-  <%= f.label :description %><br>
-  <%= f.text_area :description, class: 'form-control', :rows => 5 %>
-</div>
-
-<%= fields_for(@partner) do |p| %>
-<div class="form-group">
-  <%= p.label :provider_partner_id %><br>
-  <%= select_tag 'provider_partner_id', options_from_collection_for_select(Partner.all, :id, :partner_name, 2) %>
-</div>
-<% end %>
-
-<div class="form-group">
-  <%= f.label :receiver_partner_id %><br>
-  <%= f.number_field :receiver_partner_id %>
-</div>
-
-
-<div class="form-group">
-  <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-  <%= f.text_field :keyword_list %>
-
-</div>
-
-<div class="form-group">
-  <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
-  <%= f.label :participants %><br>
-  <%= f.text_field :participants, :value => s %>
-</div>
-
-<!-- Must seed db first -->
-<% if !@idea.id.nil? %>
-<% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
-<% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
-<% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
-<% end %>
-
-<div class="form-group">
-  
-  <%= f.label :association_parents %><br>
-  <%= f.text_field :association_parents, :value => parent_ideas %>
-</div>
-
-<div class="form-group">
-  
-  <%= f.label :association_childs %><br>
-  <%= f.text_field :association_childs, :value => child_ideas %>
-</div>
-
-<div class="form-group">
-  
-  <%= f.label :association_peers %><br>
-  <%= f.text_field :association_peers, :value => peer_ideas %>
-</div>
-<br>
-<div>
-  <p><strong>Categories </strong></p>
-  <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
-</div>
-<br>
-
-<div class="actions">
-  <%= f.submit %>
-</div>
-<% end %>
-
-<script>
-$('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
-  plugins: ['remove_button'],
-  delimiter: ',',
-  persist: false,
-  create: function(input) {
-    return {
-      value: input,
-      text: input
+  <script>
+  $('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+      return {
+        value: input,
+        text: input
+      }
     }
-  }
-});
-$('#idea_participants').selectize({
-  plugins: ['remove_button'],
-  delimiter: ',',
-  persist: false,
-  create: function(input) {
-    return {
-      value: input,
-      text: input
+  });
+  $('#idea_participants').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    create: function(input) {
+      return {
+        value: input,
+        text: input
+      }
     }
-  }
-});
+  });
 
-</script>
+  </script>

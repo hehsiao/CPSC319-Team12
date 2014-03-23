@@ -33,6 +33,10 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     color: rgb(169, 68, 66);
 }
 
+.filter {
+    padding: 0px 0px 0px 15px;
+}
+
 /* Breadcrumb */
 
 .widget>.breadcrumb {
@@ -58,6 +62,16 @@ div.dataTables_filter input {
     background-color: rgb(255, 255, 255);
     color:black;
 }
+
+/* Panels */
+
+.panel-heading {
+    padding-bottom: 2px;
+    border-bottom: 0px solid rgba(0, 0, 0, 0);
+    border-top-left-radius: 3px;
+    border-top-right-radius: 3px;
+}
+
 /* Wrappers */
 
 /* ------------------------------- */
@@ -406,4 +420,67 @@ table.dataTable thead .sorting:after {
 
 .show-grid {
     margin: 15px 0;
+}
+
+/* Alert Styles */
+
+.alert {
+    text-shadow: none;
+    border: none;
+    margin: 20px;
+    text-align: left;
+}
+
+.alert-info {
+    background-color: rgb(97, 143, 176);
+    border-color: rgb(79, 138, 158);
+    color: rgb(248, 248, 248);
+}
+
+.alert-dismissable .close {
+    top: 0px;
+    right: 0px;
+    padding-left: 10px;
+}
+.alert-warning {
+    background-color: rgb(234, 200, 94);
+    border-color: rgb(231, 166, 71);
+    color: rgb(248, 248, 248);
+}
+
+.alert-error,
+.alert-danger {
+    background-color: rgb(229, 96, 59);
+    border-color: rgb(226, 46, 36);
+    color: rgb(248, 248, 248);
+}
+
+
+.alert-success {
+    background-color: rgb(86, 188, 118);
+    border-color: rgb(71, 178, 86);
+    color: rgb(248, 248, 248);
+}
+
+button.close {
+    padding: 10;
+    cursor: pointer;
+    background: rgba(0, 0, 0, 0);
+    border: 0;
+    -webkit-appearance: none;
+}
+.close {
+    -webkit-transition: opacity 0.2s ease-out;
+    transition: opacity 0.2s ease-out;
+    text-shadow: none;
+}
+.close {
+    float: right;
+    font-size: 19.5px;
+    font-weight: bold;
+    line-height: 1;
+    color: rgb(0, 0, 0);
+    text-shadow: 0 1px 0 rgb(255, 255, 255);
+    opacity: 0.2;
+    filter: alpha(opacity=20);
 }
