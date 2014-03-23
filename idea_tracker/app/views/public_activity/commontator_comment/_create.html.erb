@@ -1,0 +1,11 @@
+<i class = "fa fa-comment fa-fw"> </i>
+<%= activity.owner.first_name if activity.owner%>
+<%= activity.owner.last_name if activity.owner%>
+
+post comment:  
+
+<% if activity.trackable%>
+   <%= activity.trackable.body%>
+<% else %>
+   whick has been removed!!
+<% end %>

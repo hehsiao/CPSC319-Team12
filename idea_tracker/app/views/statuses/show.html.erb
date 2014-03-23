@@ -1,14 +1,13 @@
-<div id="page-wrapper">
-  <div class="row">
-<h1 class="page-header">
-  <%= @status.status %></h1>
+<h1 class="page-header">Statuses <small>stage of an idea</small></h1>
 
-<p>
-  <strong>Position:</strong>
-  <%= @status.position %>
-</p>
+<section class="widget">
+    <div class="panel-body">
+        <h4><%= @status.status %></h4>
+        			<p>
+				<!-- <strong>Position:</strong> -->
+				<%= @status.position %>
+			</p>
 
-
-<%= link_to 'Edit', edit_status_path(@status) %> |
-<%= link_to 'Back', statuses_path %>
-</div>
+    </div>
+</section>		
+<%= link_to 'Edit', edit_status_path(@status) %> | <%= link_to 'Back', statuses_path %>

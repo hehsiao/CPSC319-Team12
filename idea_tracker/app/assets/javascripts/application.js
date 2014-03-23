@@ -12,6 +12,7 @@
 //
 //= require jquery-1.10.2
 //= require jquery_ujs
+//= require jquery.validate.min
 //= require bootstrap.min
 //= require dataTables/jquery.dataTables
 //= require dataTables/jquery.dataTables.bootstrap3
@@ -19,9 +20,21 @@
 //= require turbolinks
 //= require_tree .
 
-$(function() {
-
-	 
-
+$.validator.setDefaults({
+    highlight: function(element) {
+        $(element).closest('.form-group').addClass('has-error');
+    },
+    unhighlight: function(element) {
+        $(element).closest('.form-group').removeClass('has-error');
+    },
+    errorElement: 'span',
+    errorClass: 'help-block error-block',
+    errorPlacement: function(error, element) {
+        if(element.parent('.input-group').length) {
+            error.insertAfter(element.parent());
+        } else {
+            error.insertAfter(element);
+        }
+    }
 });
 

@@ -1,7 +1,6 @@
-<div id="page-wrapper">
 <h1>Status Reports</h1>
 
-<table class="table" summary="User list">
+<table class="table table-hover dataTable" summary="User list">
   <thead>
     <tr>
       <th>Status</th>
@@ -12,13 +11,13 @@
   
   <tbody>
     <% @status.each do |status| %>
-      <tr>
+      <tr onclick="document.location = '/reports/status_show/<%=status.id%>';">
         <td><%= status.status %></td>
 		<td>
 		<% counter = 0 %>
 		<% @ideas.each do |idea| %>
 			<% if idea.status == status.id %>
-				<% counter = counter + 1 %>
+				<% counter += 1 %>
 			<% end %>
 		<%end%>	
 		<%= counter %>
@@ -29,7 +28,11 @@
   </tbody>
 </table>
 
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="status_pie"></script>
 
-<br>
+<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
 
-</div>
+
+
+

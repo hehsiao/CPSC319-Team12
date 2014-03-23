@@ -71,4 +71,4 @@ class PartnersController < ApplicationController
     def partner_params
       params.require(:partner).permit(:partner_name, :contact_name, :email, :phone_num, :secondary_contact_name, :secondary_email, :secondary_phone_num)
     end
-end
+  end

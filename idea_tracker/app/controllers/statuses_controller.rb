@@ -72,4 +72,4 @@ class StatusesController < ApplicationController
       params.require(:status).permit(:status, :position)
 
     end
-end
+  end

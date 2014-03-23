@@ -1,0 +1,25 @@
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+  ['Status', 'Number of Ideas'],
+    <% @status.each do |status| %>
+
+		<% counter = 0 %>
+		<% @ideas.each do |idea| %>
+			<% if idea.status == status.id %>
+				<% counter += 1 %>
+			<% end %>
+		<%end%>	
+		["<%= status.status %>",<%= counter %>],
+    <% end %>
+]);
+
+var options = {
+  title: 'Status',
+  is3D: true,
+};
+
+var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+chart.draw(data, options);
+}

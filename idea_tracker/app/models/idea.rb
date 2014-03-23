@@ -15,8 +15,8 @@ class Idea < ActiveRecord::Base
 	# lets to comment on ideas
 	acts_as_commontable
 
-	scope :recent, order("submission_date desc").limit(5)
-	scope :search, lambda {|query|
-    	where(["name LIKE ?", "%#{query}%"]) }
+	# scope :recent, order("created_at desc").limit(5)
+	scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }
+	
 	accepts_nested_attributes_for :partner
 end
