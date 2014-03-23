@@ -53,9 +53,13 @@ class ReportsController < ApplicationController
 
  # TODO : Sort by idea_counter_array
  def popularity_show
+	idea_counter = idea_counter_array
+	category_children = Category.where(parent_id: params[:id])
+	quicksort idea_counter, 0, nil, category_children
+	
 	@category = Category.find(params[:id])
-	@idea_counter_array = idea_counter_array
-	@category_children = Category.where(parent_id: params[:id])
+	@idea_counter_array = idea_counter.reverse
+	@category_children = category_children.reverse
  end
  
  def popularity_show_ideas
@@ -73,6 +77,7 @@ class ReportsController < ApplicationController
 			filtered_ideas << idea
 		end
 	end	
+	
 	@ideas = filtered_ideas
 	@category_child = category_child
 	@all_status = Status.all
@@ -84,6 +89,59 @@ class ReportsController < ApplicationController
  end
  
  private 
+ 
+def quicksort(array,from=0, to=nil, accompany_array)
+    if to == nil
+        # Sort the whole array, by default
+        to = array.count - 1
+    end
+ 
+    if from >= to
+        # Done sorting
+        return
+    end
+ 
+    # Take a pivot value, at the far left
+    pivot = array[from]
+	accompany_pivot = accompany_array[from]
+ 
+    # Min and Max pointers
+    min = from
+    max = to
+ 
+    # Current free slot
+    free = min
+ 
+    while min < max
+        if free == min # Evaluate array[max]
+            if array[max] <= pivot # Smaller than pivot, must move
+                array[free] = array[max]
+				accompany_array[free] = accompany_array[max]
+                min += 1
+                free = max
+            else
+                max -= 1
+            end
+        elsif free == max # Evaluate array[min]
+            if array[min] >= pivot # Bigger than pivot, must move
+                array[free] = array[min]
+				accompany_array[free] = accompany_array[min]
+                max -= 1
+                free = min
+            else
+                min += 1
+            end
+        else
+            raise "Inconsistent state"
+        end
+    end
+    array[free] = pivot
+	accompany_array[free] = accompany_pivot
+ 
+    quicksort array, from, free - 1,accompany_array
+    quicksort array, free + 1, to,accompany_array
+end	
+ 
  # TODO : There must be a simpler way 
  def idea_counter_array
 	category_children = Category.where(parent_id: params[:id])
