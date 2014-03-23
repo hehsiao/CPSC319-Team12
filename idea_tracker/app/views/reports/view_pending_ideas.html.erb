@@ -1,8 +1,0 @@
-
-<h1>Pending Ideas</h1>
-
-<label>Number of Days</label>
-<%= form_tag({:action=>"view_pending_ideas"}, method: :get) do %>
-  <%= number_field_tag :idea_days_limit %>
-  <%= submit_tag 'Submit', name: nil %>
-<% end %>
