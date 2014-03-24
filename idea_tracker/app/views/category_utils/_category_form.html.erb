@@ -3,6 +3,7 @@
 <% if categories %>
 	<% categories.each do |category| %>
 		<div class="form-group">
+			<div class="col-md-6">
 				<label><%= category.category_name %></label>
 
 					<% if category.type_id == 2 #TODO: change to compare with type (String) later %>
@@ -16,6 +17,7 @@
 							<li><%= tag.category_name%></li>
 						<% end %>
 					<% end %>
+				</div>
 		</div>
 	<% end %>
 <% end %>

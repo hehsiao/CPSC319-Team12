@@ -42,5 +42,7 @@ class DashboardController < ApplicationController
         end	 
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
+
 	end
+ 
 end

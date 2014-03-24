@@ -110,11 +110,6 @@ div.dataTables_filter input {
 
 
 .widget {
-    -webkit-border-radius: 1px;
-    -moz-border-radius: 1px;
-    -ms-border-radius: 1px;
-    -o-border-radius: 1px;
-    border-radius: 1px;
     -webkit-box-sizing: content-box;
     -moz-box-sizing: content-box;
     box-sizing: content-box;
@@ -123,9 +118,33 @@ div.dataTables_filter input {
     background: rgba(51,51,51,0.4);
     margin-bottom: 30px;
     position: relative;
+    -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+}
 }
 
-/* Navigation */
+
+/* Idea Creation */
+
+.selectize {
+    display: inline;
+    padding: .2em .6em .3em;
+    font-size: 75%;
+    font-weight: bold;
+    line-height: 1;
+    color: #777; 
+    text-align: center;
+    white-space: nowrap;
+    vertical-align: baseline;
+    border-radius: .25em;
+}
+.label.selectize{
+    color: #000;
+}
+.caption.selectize {
+    color: #777; 
+}
+/* navigation */
 
 /* ------------------------------- */
 .nav > li > a:hover, .nav > li > a:focus {
@@ -246,6 +265,8 @@ div.dataTables_filter input {
         width: 200px;
         margin: 25px 0 0 25px !important;
         background: rgba(51, 51, 51, 0.4) !important;
+        -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
+        box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     }
 
     .navbar-top-links .dropdown-messages,
@@ -467,7 +488,8 @@ table.dataTable thead .sorting:after {
 .alert {
     text-shadow: none;
     border: none;
-    margin: 20px;
+    margin: 0 0 20px 0;
+    border-radius: 0px; 
     text-align: left;
 }
 

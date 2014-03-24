@@ -1,7 +1,7 @@
 <h1 class="page-header">Chart</h1>
 
 <section class="widget">
-  <div class="panel-heading"><i class="fa fa-bars"></i> List of Statuses</div>
+  <div class="panel-heading"><i class="fa fa-signal"></i> <%= params[:aggregate1] + " vs " + params[:aggregate2] %><!-- TODO: CHANGE TO NAME OF CHART --></div>
   <div class="panel-body">
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
   </div>
@@ -34,7 +34,10 @@
         ],
         xkey: 'x',
         ykeys: [<%=ykeys.join ","%>],
-        labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>]
+        labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>],
+        gridTextColor: '#F8F8F8',
+        gridTextFamily: 'Open Sans, sans-serif',
+        stacked: true
       });
       
     <% elsif @chart_type.casecmp("line") == 0 %>
