@@ -18,6 +18,7 @@
 //= require dataTables/jquery.dataTables.bootstrap3
 //= require selectize
 //= require turbolinks
+//= require jquery.slimscroll.min
 //= require_tree .
 
 $.validator.setDefaults({
@@ -37,4 +38,5 @@ $.validator.setDefaults({
         }
     }
 });
+
 
