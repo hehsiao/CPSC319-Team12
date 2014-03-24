@@ -1,69 +1,124 @@
-<h1 class="page-header">
-  Summary:
-  <%= @idea.id %> - <%= @idea.summary %>
-</h1>
+<h1 class="page-header">Ideas <small>- <%= @idea.summary %></small></h1>
 
-<p>
-  <strong>Status:</strong>
-  <%= @idea.status %>
-</p>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-info"></i> Idea Information</div>
+      <div class="panel-body">
+        <p>
+          <strong>Status:</strong>
+          <%= Status.find(@idea.status).status %>
+        </p>
+        <p>
+          <strong>Summary:</strong>
+          <%= @idea.summary %>
+        </p>
+        <p>
+          <strong>Description:</strong>
+          <%= @idea.description %>
+        </p>
+        <p>
+          <strong>Keywords:</strong>
+          <%= @idea.keyword_list %>
+        </p>
 
-<p>
-  <strong>User:</strong>
-  <% user = User.find(@idea.user_id) %>
-  <%= user.first_name+" "+user.last_name %>
-</p>
+        <p> Submission date:  <%= @idea.created_at %> | Last modified: <%= @idea.updated_at %> </p>
+      </div>
+    </section>
+  </div>
+</div>
 
-<p>
-  <strong>Description:</strong>
-  <%= @idea.description %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-users"></i> Partner Information</div>
+      <div class="panel-body">
+        <p>
+          <strong>Provider:</strong>
+          <%= @provider %>
+        </p>
 
-<p>
-  <strong>Provider:</strong>
-  <%= @provider %>
-</p>
+        <p>
+          <strong>Receiver:</strong>
+          <%= @receiver %>
+        </p>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
+      <div class="panel-body">
+        <p>
+          <strong>User:</strong>
+          <% user = User.find(@idea.user_id) %>
+          <%= user.first_name+" "+user.last_name %>
+        </p>
+        <p>
+          <strong>Participants:</strong><br />
+          <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
+        </p>
+      </div>
+    </section>
+  </div>
+</div>
 
-<p>
-  <strong>Receiver:</strong>
-  <%= @receiver %>
-</p>
+<div class="row">
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-cog"></i> Options</div>
 
-<p>
-  <strong>Keywords:</strong>
-  <%= @idea.keyword_list %>
-</p>
+      <div class="panel-body">
+        <table>
+          <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
+        </table>
+      </div>
+    </section>
+  </div>
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading">
+        <i class="fa fa-link"></i> Idea Associations
+      </div>
+      <div class="panel-body">
+        <p>
+          Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
+          Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
+          Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
+        </p>
 
-<p>
-  <strong>Participants:</strong><br />
-  <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
-</p>
+      </div>
+    </section>
+  </div>
+</div>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"></div>
+      <div class="panel-body">
+        <%= link_to 'Edit', edit_idea_path(@idea) %> |
+        <%= link_to 'Back', ideas_path %>
+        <br>
+      </div>
+    </section>
+  </div>
+</div>
 
-<p>
-  <strong>Associations:</strong><br />
-  Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-  Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
-  Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
-</p>
+<%= render 'email' %>
 
-
-<div>
-  <p><strong>Categories: </strong></p>
-  <table>
-    <%= render :partial => "category_utils/idea_category_tags_display", :locals => { :categories => @categories, :idea_id => @idea.id } %>
-  </table>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-users"></i> Staff Discussion</div>
+      <div class="panel-body">
+        <%= commontator_thread(@idea) %>
+      </div>
+    </section>
+  </div>
 </div>
 <br><br>
-<%= link_to 'Edit', edit_idea_path(@idea) %> |
-<%= link_to 'Back', ideas_path %>
 
-</br>
-</br>
-<%= render 'email' %>
-<br><br>
-<%= commontator_thread(@idea) %>
-<br><br>
-<p> Submission date:  <%= @idea.created_at %> | Last modified: <%= @idea.updated_at %> </p>
+
 
 
 

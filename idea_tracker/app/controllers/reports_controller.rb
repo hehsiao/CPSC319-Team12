@@ -13,6 +13,7 @@ class ReportsController < ApplicationController
    @ideas = Idea.all
  end
  
+
  def pending_ideas
 	
  end

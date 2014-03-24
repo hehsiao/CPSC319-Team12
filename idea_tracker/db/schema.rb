@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140320124802) do
+ActiveRecord::Schema.define(version: 20140323214336) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -126,6 +126,7 @@ ActiveRecord::Schema.define(version: 20140320124802) do
     t.datetime "updated_at"
     t.string   "summary"
     t.integer  "status",              default: 1, null: false
+    t.integer  "owner_id"
   end
 
   create_table "notifications", force: true do |t|
