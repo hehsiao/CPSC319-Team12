@@ -5,48 +5,104 @@
   <%= label_tag(:aggregate1, "Aggregate By") %>
   <%= select_tag(:aggregate1, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "provider_partner_id"]])) %>
 
+  
 
 
   <%= label_tag(:show_options1, "Show Only") %>
-  <div id="stages">
+  <div class="options1" id="user1">
   	<% User.all.each do |u| %>
   		<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
   	<% end %>
   </div>
-  <div id="stages">
+  <div class="options1" id="stage1">
   	<% Status.all.each do |s| %>
   		<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %>
   	<% end %>
   </div>
-  <div id="stages">
+  <div class="options1" id="partner1">
   	<% Partner.all.each do |p| %>
   		<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %>
   	<% end %>
   </div>
 
-  <%= label_tag(:aggregate2, "Aggregate By") %>
-  <%= select_tag(:aggregate2, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
-
-  <%= label_tag(:show_options2, "Show Only") %>
-  <div id="stages">
-  	<% User.all.each do |u| %>
-  		<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
-  	<% end %>
+  <div id="aggregate2_select">
+	  <%= label_tag(:aggregate2, "Aggregate By") %>
+	  <%= select_tag(:aggregate2, options_for_select([["",""],["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
+	  <%= label_tag(:show_options2, "Show Only") %>
+	  <div class="options2" id="user2">
+	  	<% User.all.each do |u| %>
+	  		<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+	  	<% end %>
+	  </div>
+	  <div class="options2" id="stage2">
+	  	<% Status.all.each do |s| %>
+	  		<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
+	  	<% end %>
+	  </div>
+	  <div class="options2" id="partner2">
+	  	<% Partner.all.each do |p| %>
+	  		<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
+	  	<% end %>
+	  </div>
   </div>
-  <div id="stages">
-  	<% Status.all.each do |s| %>
-  		<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
-  	<% end %>
-  </div>
-  <div id="stages">
-  	<% Partner.all.each do |p| %>
-  		<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
-  	<% end %>
-  </div>
+
+  <script>
+  	function update_display()
+  	{
+  		$('.options2').hide();
+  		if($('#chart_type option:selected').val() == "Bar")
+  		{
+  			$('#aggregate2_select').show();
+	  		switch($('#aggregate2 option:selected').val())
+	  		{
+	  			case "status":
+	  				$('#stage2').show();
+	  				break;
+	  			case "owner_id":
+	  			case "user_id":
+	  				$('#user2').show();
+	  				break;
+	  			case "provider_partner_id":
+	  			case "provider_partner_id":
+	  				$('#partner2').show();
+	  				break;
+	  			default:
+	  				break;
+	  		}
+  		}
+  		else
+  		{
+  			$('#aggregate2_select').hide();
+  		}
+
+  		$('.options1').hide();
+  		switch($('#aggregate1 option:selected').val())
+  		{
+  			case "status":
+  				$('#stage1').show();
+  				break;
+  			case "owner_id":
+  			case "user_id":
+  				$('#user1').show();
+  				break;
+  			case "provider_partner_id":
+  			case "provider_partner_id":
+  				$('#partner1').show();
+  				break;
+  			default:
+  				break;
+  		}
+  		
+  	}
+  	$('#aggregate1, #aggregate2, #chart_type').change(function(){
+  		update_display();
+  	});
+
+  	update_display();
+  </script>
 
 
-
-  <%= label_tag(:date_tag, "Chart Type") %>
+  <%= label_tag(:date_tag, "Filter By") %>
   <%= select_tag(:date_tag, options_for_select([["Created After", "created_at"], ["Updated After", "updated_at"], ["Status Changed After", "status_date_change"]])) %>
   <input type="date" name="date_value" required />
   

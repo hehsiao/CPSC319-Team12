@@ -19,7 +19,7 @@ class ReportsController < ApplicationController
  	
  	sql = 
  		"SELECT COUNT(*) as count, #{params[:aggregate1]} " + 
- 		(params[:aggregate2].nil? ? "" : ", #{params[:aggregate2]} ") +
+ 		(params[:chart_type] != "Bar" ? "" : ", #{params[:aggregate2]} ") +
  		"FROM ideas " +
  		"WHERE #{params[:date_tag]} > #{params[:date_value]}   " +
  		((params[:show_options1].nil? and params[:show_options2].nil?) ? "" : "AND ( ")
@@ -38,7 +38,7 @@ class ReportsController < ApplicationController
  	end
  	sql << 
  		"GROUP BY #{params[:aggregate1]} " +
-		(params[:aggregate2].nil? ? "" : ", #{params[:aggregate2]} ") +
+		(params[:chart_type] != "Bar" ? "" : ", #{params[:aggregate2]} ") +
 		"ORDER BY #{params[:aggregate1]} DESC"
 	@result = ActiveRecord::Base.connection.execute(sql).to_a
 	@chart_type = params[:chart_type]
@@ -59,6 +59,8 @@ class ReportsController < ApplicationController
 	elsif params[:aggregate2] == 'provider_partner_id' or params[:aggregate2] == 'provider_partner_id'
 		@label2 = Partner.all
 	end
+	@aggregate1 = params[:aggregate1]
+	@aggregate2 = params[:aggregate2]
 
  end
 

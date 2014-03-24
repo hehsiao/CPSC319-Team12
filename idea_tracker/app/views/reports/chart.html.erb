@@ -17,6 +17,7 @@
 <script>
   $(function () {
     <% if @chart_type.casecmp("bar") == 0 %>
+
       Morris.Bar({
         element: 'container',
         data: [
@@ -25,7 +26,7 @@
             "{x:'#{(@label1.find(u).to_s)}'," + 
             (ykeys.collect{
               |v|
-              "#{v}: #{@result.detect{|r| r[1]==u and r[2]==v}.nil? ? 1 : @result.detect{|r| r[1]==u and r[2]==v}[0]},"
+              "#{v}: #{@result.detect{|r| r[1]==u and r[2]==v}.nil? ? 0 : @result.detect{|r| r[1]==u and r[2]==v}[0]},"
             }.join) + 
             "},"
           }.join %> 
@@ -42,6 +43,21 @@
         data:[<%= raw @result.collect{|row| "{label: '#{@label1.find(row[1]).to_s }', value: '#{row[0]}'},"}.join %>]
       });
     <% elsif @chart_type.casecmp("table") == 0 %>
+      $('#container').html(
+          "<table class='table table-hover dataTable'>" + 
+            "<thead>" +
+              "<tr>" +
+                "<th><%= @aggregate1 %></th>" +
+                "<th>Count</th>" + 
+              "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+              <% @result.each do |row| %>
+                "<tr><td><%=@label1.find(row[1]).to_s%></td><td><%=row[0]%></td></tr>" +
+              <% end %>
+            "</tbody>" +
+          "</table>"
+        );
     <% end %>
 
 
