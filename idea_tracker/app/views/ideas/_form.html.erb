@@ -1,3 +1,4 @@
+
 <%= form_for(@idea, :html => {:class => "horizontal-form"}) do |f| %>
 <% if @idea.errors.any? %>
 <div id="error_explanation">
@@ -165,6 +166,9 @@ $('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
   sortField: 'text',
 });
 
+
+var participants_options = <%= raw @participants %>;
+
 var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
                   '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
@@ -174,15 +178,11 @@ $('#idea_participants').selectize({
     valueField: 'email',
     labelField: 'name',
     searchField: ['name', 'email'],
-    options: [
-        {email: 'brian@thirdroute.com', name: 'Brian Reavis'},
-        {email: 'nikola@tesla.com', name: 'Nikola Tesla'},
-        {email: 'someone@gmail.com'}
-    ],
+    options:  participants_options,
     render: {
         item: function(item, escape) {
             return '<div>' +
-                (item.name ? '<span class="name">' + escape(item.name) + '</span>' : '') +
+                (item.name ? '<span class="name">' + escape(item.name) + ' </span>' : '') +
                 (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
             '</div>';
         },
@@ -190,7 +190,7 @@ $('#idea_participants').selectize({
             var label = item.name || item.email;
             var caption = item.name ? item.email : null;
             return '<div>' +
-                '<span class="label">' + escape(label) + '</span>' +
+                '<span class="label">' + escape(label) + ' </span>' +
                 (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
             '</div>';
         }
