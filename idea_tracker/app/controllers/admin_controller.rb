@@ -1,9 +1,8 @@
 class AdminController < ApplicationController
 
-	before_filter :authenticate_user!
+	before_filter :check_admin_permission
 	
 	def index    
-		@b=1
 	end
 
 	# GET /admin/edit
@@ -13,12 +12,11 @@ class AdminController < ApplicationController
 
 	# GET /admin/show
 	def show
-		@b=1
 	end
 
 	# GET /admin/show_setting
 	def setting
-		@categories = Category.where(parent_id: 0).to_a
+		@categories = Category.top_categories
 	end
 
 

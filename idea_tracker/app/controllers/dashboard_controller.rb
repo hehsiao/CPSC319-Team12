@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
-
-	before_filter :authenticate_user!
+	before_action :check_user_permission
 	
 	def index  
 
@@ -33,7 +32,6 @@ class DashboardController < ApplicationController
                 end 
             end	
 		end
-
         
         @comments.each do |comment|
         	@thread_ids.each do |thread_id|
@@ -42,9 +40,7 @@ class DashboardController < ApplicationController
         		end    
             end
         end	 
-
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
 	end
-
 end

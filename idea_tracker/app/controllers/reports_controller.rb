@@ -1,4 +1,6 @@
 class ReportsController < ApplicationController
+  before_action :check_user_permission
+
   def index
   end
   
@@ -48,7 +50,7 @@ class ReportsController < ApplicationController
  end
  
  def popularity
-	@categories = Category.where(parent_id: 0)
+	@categories = Category.top_categories
  end
  
 
