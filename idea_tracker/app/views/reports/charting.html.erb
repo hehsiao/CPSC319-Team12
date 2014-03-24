@@ -1,0 +1,56 @@
+<%= form_tag("chart", method: "get") do %>
+  <%= label_tag(:chart_type, "Chart Type") %>
+  <%= select_tag(:chart_type, options_for_select(["Bar", "Line", "Pie", "Table"])) %>
+
+  <%= label_tag(:aggregate1, "Aggregate By") %>
+  <%= select_tag(:aggregate1, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
+
+
+
+  <%= label_tag(:show_options1, "Show Only") %>
+  <div id="stages">
+  	<% User.all.each do |u| %>
+  		<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+  	<% end %>
+  </div>
+  <div id="stages">
+  	<% Status.all.each do |s| %>
+  		<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %>
+  	<% end %>
+  </div>
+  <div id="stages">
+  	<% Partner.all.each do |p| %>
+  		<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %>
+  	<% end %>
+  </div>
+
+  <%= label_tag(:aggregate2, "Aggregate By") %>
+  <%= select_tag(:aggregate2, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
+
+  <%= label_tag(:show_options2, "Show Only") %>
+  <div id="stages">
+  	<% User.all.each do |u| %>
+  		<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+  	<% end %>
+  </div>
+  <div id="stages">
+  	<% Status.all.each do |s| %>
+  		<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
+  	<% end %>
+  </div>
+  <div id="stages">
+  	<% Partner.all.each do |p| %>
+  		<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
+  	<% end %>
+  </div>
+
+
+
+  <%= label_tag(:date_tag, "Chart Type") %>
+  <%= select_tag(:date_tag, options_for_select([["Created After", "created_at"], ["Updated After", "updated_at"], ["Status Changed After", "status_date_change"]])) %>
+  <input type="date" name="date_value" required />
+  
+
+
+  <%= submit_tag("Generate Chart") %>
+<% end %>
