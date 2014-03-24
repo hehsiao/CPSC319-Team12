@@ -105,13 +105,6 @@ div.dataTables_filter input {
 
 
 
-.alert {
-  padding: 15px;
-  margin-bottom: 20px;
-  border: 1px solid transparent;
-  border-radius: 4px;
-  text-align: right;
-}
 
 .widget {
     -webkit-border-radius: 1px;
@@ -291,6 +284,30 @@ div.dataTables_filter input {
 .btn-danger.btn-outline:hover {
     color: #fff;
 }
+
+/* Notification */
+
+a > span > em {
+    color: #BDBDBD;
+}
+a.list-group-item {
+   color: inherit; 
+}
+
+.list-group-item {
+    position: relative;
+    display: block;
+    padding: 10px 15px;
+    margin-bottom: -1px;
+    background-color: transparent; 
+    border: 0px solid #DDD; 
+}
+
+a.list-group-item:hover, a.list-group-item:focus {
+    text-decoration: underline;
+    background-color: transparent; 
+}
+
 
 /* Pages */
 
