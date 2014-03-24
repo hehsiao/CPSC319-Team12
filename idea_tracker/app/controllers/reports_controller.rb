@@ -43,7 +43,23 @@ class ReportsController < ApplicationController
 	@result = ActiveRecord::Base.connection.execute(sql).to_a
 	@chart_type = params[:chart_type]
 	@sql2 = sql
-		
+
+	if params[:aggregate1] == 'status'
+		@label1 = Status.all
+	elsif params[:aggregate1] == 'owner_id' or params[:aggregate1] == 'user_id'
+		@label1 = User.all
+	elsif params[:aggregate1] == 'provider_partner_id' or params[:aggregate1] == 'provider_partner_id'
+		@label1 = Partner.all
+	end
+
+	if params[:aggregate2] == 'status'
+		@label2 = Status.all
+	elsif params[:aggregate2] == 'owner_id' or params[:aggregate2] == 'user_id'
+		@label2 = User.all
+	elsif params[:aggregate2] == 'provider_partner_id' or params[:aggregate2] == 'provider_partner_id'
+		@label2 = Partner.all
+	end
+
  end
 
 

@@ -3,7 +3,7 @@
   <%= select_tag(:chart_type, options_for_select(["Bar", "Line", "Pie", "Table"])) %>
 
   <%= label_tag(:aggregate1, "Aggregate By") %>
-  <%= select_tag(:aggregate1, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
+  <%= select_tag(:aggregate1, options_for_select([["Stage", "status"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "provider_partner_id"]])) %>
 
 
 

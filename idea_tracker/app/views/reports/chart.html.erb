@@ -1,25 +1,28 @@
+<h1 class="page-header">Chart</h1>
 
-<h1 class="page-header"> Chart </h1>
-
-<div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bars"></i> List of Statuses</div>
+  <div class="panel-body">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</section>
 <br><br>
 <%= debug(@sql2) %>
 <% xkey = @result.collect{|u| u[1]}.uniq %>
 <% ykeys = @result.collect{|u| u[2]}.uniq %>
 <%= debug(xkey) %> <br />
 <%= debug(ykeys) %> <br />
+<%= debug(@label1.find(1)) %>
 
 <script>
   $(function () {
-    
-
     <% if @chart_type.casecmp("bar") == 0 %>
       Morris.Bar({
         element: 'container',
         data: [
           <%= raw xkey.collect{
             |u| 
-            "{x:'#{u}'," + 
+            "{x:'#{(@label1.find(u).to_s)}'," + 
             (ykeys.collect{
               |v|
               "#{v}: #{@result.detect{|r| r[1]==u and r[2]==v}.nil? ? 1 : @result.detect{|r| r[1]==u and r[2]==v}[0]},"
@@ -29,17 +32,14 @@
         ],
         xkey: 'x',
         ykeys: [<%=ykeys.join ","%>],
-        labels: ['Series A', 'Series B']
+        labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>]
       });
       
     <% elsif @chart_type.casecmp("line") == 0 %>
     <% elsif @chart_type.casecmp("pie") == 0 %>
       new Morris.Donut({
         element: 'container',
-        data:
-        [
-          <%= raw @result.collect{|row| "{label: '#{row[1]}', value: '#{row[0]}'},"}.join %>
-        ]
+        data:[<%= raw @result.collect{|row| "{label: '#{@label1.find(row[1]).to_s }', value: '#{row[0]}'},"}.join %>]
       });
     <% elsif @chart_type.casecmp("table") == 0 %>
     <% end %>
