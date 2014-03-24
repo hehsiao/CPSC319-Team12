@@ -1,18 +1,21 @@
-<div class="admin index">
-	<h1>Manage Categories</h1>
+<h1 class="page-heading">Categories</h1>
+<section class="widget">
+<div class="panel-heading"><i class="fa fa-tags"> Manage Categories</i></div>
+	<div class="panel-body">
 
-	<table>
+	<%= link_to 'Add New Category', new_category_path %>
+	<table class="table">
 		<thead>
 			<th>Name</th>
 			<th>Description</th>
 			<th>Display</th>
-			<th>Action</th>
+			<th></th>
 		</thead>
 		<% if @categories %>
 		<% @categories.each do |category| %>
 		<tr>
 			<td><%= category.category_name %></td>
-			<td></td> <!-- add category.description -->
+			<td><%= category.description %></td>
 			<td>
 				<% if category.type_id == 2 #TODO: change to compare with type (String) later %>
 				<%= render :partial => "category_utils/dropdown_single_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
@@ -27,13 +30,14 @@
 				<% end %>
 			</td>
 			<td>
-				<%= link_to 'Edit', edit_category_path(category) %>
-				<%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' } %>
+      	<%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_category_path(category), title: 'Edit', ref: 'tooltip' %> | 
+        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, category, method: :delete, data: {confirm: 'Are you sure?' } %>
 			</td>
 		</tr>
 		<% end %>
 		<% end %>
 	</table>
-</div>
 
-<%= link_to 'Add New Category', new_category_path %>
+</div>
+</section>
+
