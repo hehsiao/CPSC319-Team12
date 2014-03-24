@@ -8,6 +8,7 @@
 </section>
 <br><br>
 <%= debug(@sql2) %>
+<%= debug(@result) %>
 <% xkey = @result.collect{|u| u[1]}.uniq %>
 <% ykeys = @result.collect{|u| u[2]}.uniq %>
 <%= debug(xkey) %> <br />
@@ -37,6 +38,16 @@
       });
       
     <% elsif @chart_type.casecmp("line") == 0 %>
+      Morris.Line({
+        element: 'container',
+        data: [
+          <%= raw @result.collect{|row| "{y: '#{row[1]}', a:#{row[0]}},"}.join %>
+        ],
+        xkey: 'y',
+        ykeys: ['a'],
+        labels: ['Total'],
+        xlabels: ['<%= @date_type %>']
+      });
     <% elsif @chart_type.casecmp("pie") == 0 %>
       new Morris.Donut({
         element: 'container',
