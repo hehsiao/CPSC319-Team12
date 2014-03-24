@@ -31,7 +31,11 @@
         <% end %>
       </td>
       <td class="actions">
-        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :delete, data: {confirm: 'Are you sure?' } %>
+        <% if user == self.current_user %>
+          <i class="fa fa-trash-o"></i>
+        <% else %>
+          <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, user, method: :destroy, data: {confirm: 'Are you sure?' } %>
+        <% end %>
       </td>
     </tr>
     <% end %>

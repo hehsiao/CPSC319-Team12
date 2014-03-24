@@ -4,11 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1> idea <%= @idea.summary %> has been edited on IdeaTracker</h1>
+    <h1>Idea for YOU!!!</h1>
     <p>
       
-      <%= @user.first_name + " " + @user.last_name %> edit the idea <%= @idea.id %> 
-
+      idea <%= @idea.summary %> 
+      </br>
+      <%= @idea.description%> 
+    
     </p>
     <p>
       To login to the site, just follow this link: "http://localhost:3000/ideas/<%= @idea.id%>".

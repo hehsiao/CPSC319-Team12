@@ -1,0 +1,11 @@
+module Commontator
+  module ThreadsHelper
+    def commontable_name(thread)
+      thread.config.commontable_name_proc.call(thread.commontable)
+    end
+    
+    def commontable_id(thread)
+      thread.commontable.send(thread.config.commontable_id_method)
+    end
+  end
+end
