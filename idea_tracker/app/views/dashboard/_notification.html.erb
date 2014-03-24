@@ -7,7 +7,9 @@
                 <% if activity.trackable_id == my_idea.id && activity.owner_id == my_idea.user_id%>
                     <div class = "list-group-item">
                         <%= render_activity activity%>
-                        <span class = "text-muted small"> <em> <%= activity.created_at%> </em></span>
+                        <span class = "text-muted small"> 
+                            <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                        </span>
                     </div>
                 <% end %>
             <% end %>
@@ -17,7 +19,9 @@
                     <% if activity.trackable_id == sub_idea.idea_id%>
                         <div class = "list-group-item">
                             <%= render_activity activity%>
-                            <span class = "text-muted small"> <em> <%= activity.created_at%> </em></span>
+                            <span class = "text-muted small"> 
+                                <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                            </span>
                         </div>
                     <% end %>
                 <% end %>   
@@ -38,7 +42,9 @@
                             <% else %>
                                which has been removed!!
                             <% end %>
-                            <span class = "text-muted small"> <em> <%= activity.created_at%> </em></span>
+                            <span class = "text-muted small"> 
+                                <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                            </span>
                         </div>
                     <% end %>
                 <% end %> 

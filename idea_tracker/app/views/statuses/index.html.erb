@@ -1,8 +1,10 @@
-<h1 class="page-header">Statuses <small>stage of an idea</small></h1>
+<h1 class="page-header">Statuses <small>stages of an idea</small></h1>
+<h5 class="widget">
+  <%= link_to '<i class="fa fa-plus"></i> Add a New Status'.html_safe, new_status_path %>
+</h5>
 <section class="widget">
   <div class="panel-heading"><i class="fa fa-bars"></i> List of Statuses</div>
   <div class="panel-body">
-    <h5><%= link_to 'Create a New Status', new_status_path %></h5>
     <div class="table">
       <table class="table table-hover dataTable">
         <thead>

@@ -1,4 +1,3 @@
-<%= form_for(@partner) do |f| %>
 <% if @partner.errors.any? %>
 <div id="error_explanation">
   <h2><%= pluralize(@partner.errors.count, "error") %> prohibited this partner from being saved:</h2>
@@ -10,39 +9,40 @@
 </div>
 <% end %>
 
+<%= form_for(@partner) do |f| %>
 <div class="form-group">
   <%= f.label :partner_name %><br>
-  <%= f.text_field :partner_name %>
+  <%= f.text_field :partner_name, :class => 'form-control' %>
 </div>
 <div class="row">
   <div class="col-md-6">
     <h4>Primary Contact</h4>
     <div class="form-group">
       <%= f.label :contact_name %><br>
-      <%= f.text_field :contact_name %>
+      <%= f.text_field :contact_name, :class => 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %><br>
-      <%= f.text_field :email %>
+      <%= f.email_field :email, :class => 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :phone_num %><br>
-      <%= f.text_field :phone_num %>
+      <%= f.phone_field :phone_num, :class => 'form-control' %>
     </div>
   </div>
   <div class="col-md-6">
     <h4>Secondary Contact</h4>
     <div class="form-group">
       <%= f.label :contact_name %><br>
-      <%= f.text_field :secondary_contact_name %>
+      <%= f.text_field :secondary_contact_name, :class => 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :email %><br>
-      <%= f.text_field :secondary_email %>
+      <%= f.text_field :secondary_email, :class => 'form-control' %>
     </div>
     <div class="form-group">
       <%= f.label :phone_num %><br>
-      <%= f.text_field :secondary_phone_num %>
+      <%= f.text_field :secondary_phone_num, :class => 'form-control' %>
     </div>
   </div>
 </div>

@@ -19,6 +19,7 @@
 //= require selectize
 //= require turbolinks
 //= require jquery.slimscroll.min
+//= require jquery.mask.min.js
 //= require_tree .
 
 $.validator.setDefaults({

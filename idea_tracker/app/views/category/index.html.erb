@@ -1,16 +1,18 @@
-<h1 class="page-heading">Categories</h1>
+<h1 class="page-heading">Categories </h1>
+<h5 class="widget">
+	<%= link_to '<i class="fa fa-plus"></i> Add New Category'.html_safe, new_category_path %>
+</h5>
 <section class="widget">
 <div class="panel-heading"><i class="fa fa-tags"> Manage Categories</i></div>
 	<div class="panel-body">
 
-	<%= link_to 'Add New Category', new_category_path %>
 	<table class="table">
 		<thead>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Display</th>
-			<th class="no-sort"></th>			
-			<th class="no-sort"></th>
+			<th span="1" style="width: 10%;">Name</th>
+			<th span="1" style="width: 35%;">Description</th>
+			<th span="1" style="width: 50%;">Display</th>
+			<th class="no-sort" span="1" style="width: 2.5%;"></th>			
+			<th class="no-sort" span="1" style="width: 2.5%;"></th>
 		</thead>
 		<% if @categories %>
 		<% @categories.each do |category| %>

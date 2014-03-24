@@ -1,9 +1,11 @@
 <h1 class="page-header">Partners</h1>
+<h5 class="widget">
+    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, partners_path %>
+</h5>
 <section class="widget">
     <div class="panel-body">
-        <h4>Create a New Partner</h4>
+        <h4>Add a New Partner</h4>
            <%= render 'form' %>
 
    </div>
 </section>
-<%= link_to 'Back', partners_path %>
