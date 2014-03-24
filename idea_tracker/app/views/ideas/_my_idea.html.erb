@@ -12,7 +12,7 @@
     <tr onclick="document.location = '/ideas/<%=idea.id%>';">
       <td><%= idea.summary %></td>
       <td><%= truncate(idea.description, length:70) %></td>
-      <td><%= idea.created_at.to_formatted_s(:db) %></td>
+      <td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></td>
       <td><%= link_to 'Show', idea %></td>
     </tr>
     <% end %>

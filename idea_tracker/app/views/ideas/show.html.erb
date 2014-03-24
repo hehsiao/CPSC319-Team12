@@ -22,7 +22,7 @@
           <%= @idea.keyword_list %>
         </p>
 
-        <p> Submission date:  <%= @idea.created_at %> | Last modified: <%= @idea.updated_at %> </p>
+        <p> Submission date:  <%= @idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %> | Last modified: <%= @idea.updated_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %> </p>
       </div>
     </section>
   </div>

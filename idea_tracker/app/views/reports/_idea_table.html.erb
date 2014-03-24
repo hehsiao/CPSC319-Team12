@@ -18,7 +18,7 @@
 		<td><%= idea.user_id %></td>
 		<td><%= idea.summary %></td>
 		<td><%= truncate(idea.description, length:70) %></td>
-		<td><%= idea.created_at.to_formatted_s(:db) %></td>
+		<td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></td>
 		<td><%= idea.last_modified %></td>
 		<td>
 		<% @all_status.each do |status| %>

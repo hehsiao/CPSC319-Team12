@@ -1,219 +1,210 @@
 
 <%= form_for(@idea, :html => {:class => "horizontal-form"}) do |f| %>
-<% if @idea.errors.any? %>
-<div id="error_explanation">
-  <h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+	<% if @idea.errors.any? %>
+		<div id="error_explanation">
+			<h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
+			<ul>
+				<% @idea.errors.full_messages.each do |msg| %>
+					<li><%= msg %></li>
+				<% end %>
+			</ul>
+		</div>
+	<% end %>
 
-  <ul>
-    <% @idea.errors.full_messages.each do |msg| %>
-    <li><%= msg %></li>
-    <% end %>
-</ul>
-</div>
-<% end %>
+	<div class="row">
+		<div class="col-md-12">
+			<section class="widget">
+				<div class="panel-heading"><i class="fa fa-info"></i> Idea Information</div>
+					<div class="panel-body">
+					 <div class="form-group">
+							<label for="idea_status">Stage of Idea</label>
+							<%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status, @idea.status), {}, { :class => 'form-control' }) %>
+					</div>
 
-<div class="row">
-  <div class="col-md-12">
-    <section class="widget">
-      <div class="panel-heading"><i class="fa fa-info"></i> Idea Information</div>
-      <div class="panel-body">
-       <div class="form-group">
-          <label for="idea_status">Stage of Idea</label>
-          <%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status), {}, { :class => 'form-control' }) %>
-      </div>
+					<div class="form-group">
+							<label for="idea_summary">Idea Name</label>
+							<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
+					</div>
 
-      <div class="form-group">
-          <label for="idea_summary">Idea Name</label>
-          <%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
-      </div>
+					<div class="form-group">
+							<%= f.label :description %>
+							<%= f.text_area :description, class: 'form-control', :rows => 5 %>
+					</div>
 
-      <div class="form-group">
-          <%= f.label :description %>
-          <%= f.text_area :description, class: 'form-control', :rows => 5 %>
-      </div>
-
-      <div class="form-group">
-          <%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-          <%= f.text_field :keyword_list %>
-
-      </div>
-
-  </div>
-</section>
-</div>
-</div> 
+					<div class="form-group">
+							<%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
+							<%= f.text_field :keyword_list %>
+					</div>
+				</div>
+			</section>
+		</div>
+	</div> 
 
 
 
-<div class="row">
-    <div class="col-md-6">
-        <section class="widget">
-            <div class="panel-heading">
-                <i class="fa fa-users"></i> Partner Information 
-                <%= link_to '<small><i class="fa fa-plus"></i> Add New Partners</small>'.html_safe, new_partner_path, :target => '_new' %>
-            </div>
-            <div class="panel-body">
-                <%= fields_for(@partner) do |p| %>
-                <div class="form-group">
-                  <%= p.label :provider_partner_id %><br>
-                  <%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-                </div>
-                <% end %>
+	<div class="row">
+		<div class="col-md-6">
+			<section class="widget">
+				<div class="panel-heading">
+					<i class="fa fa-users"></i> Partner Information 
+					<%= link_to '<small><i class="fa fa-plus"></i> Add New Partners</small>'.html_safe, new_partner_path, :target => '_new' %>
+				</div>
+				<div class="panel-body">
+					<%= fields_for(@partner) do |p| %>
+						<div class="form-group">
+							<%= p.label :provider_partner_id %><br>
+							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+						</div>
+					<% end %>
 
-                <%= fields_for(@partner) do |p| %>
-                <div class="form-group">
-                  <%= p.label :receiver_partner_id %><br>
-                  <%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-                </div>
-                <% end %>
-            </div>
-        </section>
-    </div>
-<div class="col-md-6">
-    <section class="widget">
-      <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
-      <div class="panel-body">
-        <div class="form-group" >
-          <% if @idea.owner_id %>
-            <label for="idea_user_id">Idea Owner</label>            
-            <input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id) ? "" : "disabled" %> />
-          <% end %>
-          <input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
-        </div>
+					<%= fields_for(@partner) do |p| %>
+						<div class="form-group">
+							<%= p.label :receiver_partner_id %><br>
+							<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+						</div>
+					<% end %>
+				</div>
+			</section>
+		</div>
+		<div class="col-md-6">
+			<section class="widget">
+				<div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
+				<div class="panel-body">
+					<div class="form-group" >
+						<% if @idea.owner_id %>
+							<label for="idea_user_id">Idea Owner</label>            
+							<input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id) ? "" : "disabled" %> />
+						<% end %>
+						<input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
+					</div>
 
-        <div class="form-group">
-            <% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
-            <%= f.label :participants %><br>
-            <%= f.text_field :participants, :value => s %>
-        </div>
-      </div>
-    </section>
-</div> 
-</div>
+					<div class="form-group">
+							<% s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
+							<%= f.label :participants %><br>
+							<%= f.text_field :participants, :value => s %>
+					</div>
+				</div>
+			</section>
+		</div> 
+	</div>
 
-<div class="row">
-  <div class="col-md-6">
-    <section class="widget">
-      <div class="panel-heading"><i class="fa fa-cog"></i> Options</div>
+	<div class="row">
+		<div class="col-md-6">
+			<section class="widget">
+				<div class="panel-heading"><i class="fa fa-cog"></i> Options</div>
 
-      <div class="panel-body">
-       <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
+				<div class="panel-body">
+				 <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
 
-   </div>
-</section>
-</div>
-<div class="col-md-6">
-    <section class="widget">
-      <div class="panel-heading">
-        <i class="fa fa-link"></i> Idea Associations
-    </div>
-    <div class="panel-body">
+				</div>
+			</section>
+		</div>
+		<div class="col-md-6">
+			<section class="widget">
+				<div class="panel-heading">
+					<i class="fa fa-link"></i> Idea Associations
+				</div>
+				<div class="panel-body">
+					<% if @idea.id.nil? #new idea, may have peer/parent id%>
+						<% if @parent_idea_id %>
+							<% parent_ideas = @parent_idea_id %>
+						<% end %>
+						<% if @peer_idea_ids %>
+							<% peer_ideas = @peer_idea_ids %>
+						<% end %>
+					<% else %>
+						<% parent_ideas = @idea.parent_ideas_ids.join ", " %>
+						<% child_ideas = @idea.child_ideas_ids.join ", " %>
+						<% peer_ideas = @idea.peer_ideas_ids.join ", " %>
+					<% end %>
 
-        <% if @idea.id.nil? #new idea, may have peer/parent id%>
-          <% if @parent_idea_id %>
-            <% parent_ideas = @parent_idea_id %>
-          <% end %>
-          <% if @peer_idea_ids %>
-            <% peer_ideas = @peer_idea_ids %>
-          <% end %>
-        <% else %>
-          <% parent_ideas = @idea.parent_ideas_ids.join ", " %>
-          <% child_ideas = @idea.child_ideas_ids.join ", " %>
-          <% peer_ideas = @idea.peer_ideas_ids.join ", " %>
-        <% end %>
+					<div class="form-group">
+						<%= f.label :association_parents %><br>
+						<%= f.text_field :association_parents, :value => parent_ideas %>
+					</div>
 
-        <div class="form-group">
-          <%= f.label :association_parents %><br>
-          <%= f.text_field :association_parents, :value => parent_ideas %>
-      </div>
+					<div class="form-group">
+						<%= f.label :association_peers %><br>
+						<%= f.text_field :association_peers, :value => peer_ideas %>
+					</div>
 
-      <div class="form-group">
-          <%= f.label :association_peers %><br>
-          <%= f.text_field :association_peers, :value => peer_ideas %>
-      </div>
+					<div class="form-group">
+						<%= f.label :association_childs %><br>
+						<%= f.text_field :association_childs, :value => child_ideas %>
+					</div>
 
-      <div class="form-group">
-          <%= f.label :association_childs %><br>
-          <%= f.text_field :association_childs, :value => child_ideas %>
-      </div>
-
-  </div>
-</section>
-</div>
-</div>
-<div class="row">
-    <div class="col-md-12">
-        <section class="widget">
-            <div class="actions">
-                <%= f.submit "Submit", :class => 'btn btn-primary' %>
-                <%= link_to "Back", @idea, :class => 'btn btn-default' %>
-            </div>
-        </section>
-    </div>
-</div>
+				</div>
+			</section>
+		</div>
+	</div>
+	<div class="row">
+		<div class="col-md-12">
+			<section class="widget">
+				<div class="actions">
+					<%= f.submit "Submit", :class => 'btn btn-primary' %>
+					<%= link_to "Back", @idea, :class => 'btn btn-default' %>
+				</div>
+			</section>
+		</div>
+	</div>
 
 <% end %>
 
 <script>
-$('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
-  plugins: ['remove_button'],
-  delimiter: ',',
-  persist: false,
-  create: function(input) {
-    return {
-      value: input,
-      text: input
-  }
-}
-});
+	$('#idea_keyword_list, #idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+		plugins: ['remove_button'],
+		delimiter: ',',
+		persist: false,
+		create: function(input) {return {value: input, text: input};}
+	});
 
-$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
-  sortField: 'text',
-});
+	$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
+		sortField: 'text',
+	});
 
 
-var participants_options = <%= raw @participants %>;
+	var participants_options = <%= raw @participants %>;
 
-var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-                  '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+	var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+										'(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
 
-$('#idea_participants').selectize({
-    persist: false,
-    maxItems: null,
-    valueField: 'email',
-    labelField: 'name',
-    searchField: ['name', 'email'],
-    options:  participants_options,
-    render: {
-        item: function(item, escape) {
-            return '<div>' +
-                (item.name ? '<span class="name">' + escape(item.name) + ' </span>' : '') +
-                (item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
-            '</div>';
-        },
-        option: function(item, escape) {
-            var label = item.name || item.email;
-            var caption = item.name ? item.email : null;
-            return '<div>' +
-                '<span class="label">' + escape(label) + ' </span>' +
-                (caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
-            '</div>';
-        }
-    },
-    create: function(input) {
-        if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-            return {email: input};
-        }
-        var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-        if (match) {
-            return {
-                email : match[2],
-                name  : $.trim(match[1])
-            };
-        }
-        alert('Invalid email address.');
-        return false;
-    }
-});
+	$('#idea_participants').selectize({
+		persist: false,
+		maxItems: null,
+		valueField: 'email',
+		labelField: 'name',
+		searchField: ['name', 'email'],
+		options:  participants_options,
+		render: {
+			item: function(item, escape) {
+				return '<div>' +
+						(item.name ? '<span class="name">' + escape(item.name) + ' </span>' : '') +
+						(item.email ? '<span class="email">' + escape(item.email) + '</span>' : '') +
+				'</div>';
+			},
+			option: function(item, escape) {
+				var label = item.name || item.email;
+				var caption = item.name ? item.email : null;
+				return '<div>' +
+						'<span class="label">' + escape(label) + ' </span>' +
+						(caption ? '<span class="caption">' + escape(caption) + '</span>' : '') +
+				'</div>';
+			}
+		},
+		create: function(input) {
+			if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
+				return {email: input};
+			}
+			var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
+			if (match) {
+				return {
+					email : match[2],
+					name  : $.trim(match[1])
+				};
+			}
+			alert('Invalid email address.');
+			return false;
+		}
+	});
 
 </script>
