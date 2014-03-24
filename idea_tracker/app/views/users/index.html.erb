@@ -1,9 +1,12 @@
 <h1 class="page-header">Users <small>fellow coworkers</small></h1>
+<h5 class="widget">
+  <%= link_to '<i class="fa fa-cog"></i> Change Sign Up Settings'.html_safe, '/settings/1/edit'.html_safe %>
+</h5>
+
 <section class="widget">
   <div class="panel-heading"><i class="fa fa-bars"></i> List of Users</div>
 
   <div class="panel-body">
-    <h5><%= link_to 'Enable Sign Up', '/settings/'.html_safe %></h5>
    <div class="table">
     <table class="table table-hover dataTable">
       <thead>

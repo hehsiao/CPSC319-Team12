@@ -41,6 +41,7 @@ class IdeasController < ApplicationController
 		@partner = Partner.new
 		@categories = Category.top_categories
 		user_list
+		keyword_list
 
 		if(params[:parent_idea_id])
 			@parent_idea_id = params[:parent_idea_id]
@@ -56,6 +57,7 @@ class IdeasController < ApplicationController
 		@partner = Partner.new
 		@categories = Category.top_categories
     	user_list
+    	keyword_list
 	end
 
 	# POST /ideas
@@ -72,7 +74,8 @@ class IdeasController < ApplicationController
 				params[:id] = @idea.id
 				handle_category_tags
 				handle_associations
-        handle_participations     
+        handle_participations 
+        keyword_list    
 				format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
 				format.json { render action: 'show', status: :created, location: @idea }
 			else
@@ -96,6 +99,7 @@ class IdeasController < ApplicationController
 				handle_category_tags
 				handle_associations
 				handle_participations
+				keyword_list
 				# Email Notification
 				# if @last_update - 5.minute.ago < 0  
 				#UserMailer.edit_notification_email(@idea, current_user).deliver
@@ -150,6 +154,15 @@ class IdeasController < ApplicationController
 	      end
 	      @participants = @participants[0...-2]
 	      @participants += "]"
+	    end
+
+	    def keyword_list
+	      @keywords = "["
+	      Tag.all.each do |t|
+	        @keywords += "{id: '" + t.id.to_s + "', name: '" + t.name + "'}, "
+	      end
+	      @keywords = @keywords[0...-2]
+	      @keywords += "]"
 	    end
 	    
 		def handle_participations
