@@ -96,15 +96,14 @@
     <section class="widget">
       <div class="panel-heading"></div>
       <div class="panel-body">
+        <i class="fa fa-envelope"></i> Send idea <%= render 'email' %>
+      </br>
         <%= link_to 'Edit', edit_idea_path(@idea) %> |
         <%= link_to 'Back', ideas_path %>
-        <br>
       </div>
     </section>
   </div>
 </div>
-
-<%= render 'email' %>
 
 <div class="row">
   <div class="col-md-12">

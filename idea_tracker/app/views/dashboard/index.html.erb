@@ -25,7 +25,7 @@
 
            <% @activities.each do |activity| %>
                <% @my_ideas.each do |my_idea| %>
-                 <% if activity.trackable_id == my_idea.id &&activity.owner_id == my_idea.user_id%>
+                 <% if activity.trackable_id == my_idea.id && activity.owner_id == my_idea.user_id%>
                    <a href = "/ideas/<%= activity.trackable.id%>" class = "list-group-item">
                     <%= render_activity activity%>
                     <span class = "text-muted small">
