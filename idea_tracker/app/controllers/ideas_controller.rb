@@ -188,4 +188,3 @@ class IdeasController < ApplicationController
 			# params.require(:status).permit(:id)
 		end
 	end
->>>>>>> e172127f7144aaf505230a7e813e3133bc0b0ab3
