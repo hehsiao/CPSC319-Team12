@@ -19,4 +19,14 @@ class Idea < ActiveRecord::Base
 	scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }
 	
 	accepts_nested_attributes_for :partner
+
+	def self.to_csv(options = {})
+		CSV.generate(options) do |csv|
+			csv << column_names
+			all.each do |idea|
+				csv << idea.attributes.values_at(*column_names)
+			end
+		end
+		
+	end
 end

@@ -12,6 +12,12 @@ class IdeasController < ApplicationController
 		end
 		# @user = User.find(params[:user_id])
 		# @ideas = @user.ideas
+
+	  respond_to do |format|
+		format.html
+		format.csv{ send_data @ideas.to_csv.encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''})}
+	  end
+
 	end
 
 	# GET /ideas/1
@@ -32,7 +38,7 @@ class IdeasController < ApplicationController
 		else 
 			@receiver = "None Assigned"
 		end
-
+ 
 	end
 
 	# GET /ideas/new
