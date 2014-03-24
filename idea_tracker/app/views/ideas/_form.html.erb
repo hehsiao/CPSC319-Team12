@@ -108,10 +108,17 @@
     </div>
     <div class="panel-body">
 
-        <% if !@idea.id.nil? %>
-        <% parent_ideas = @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| u.parent_idea_id}.join ', ' %>
-        <% child_ideas = @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| u.tagged_idea_id}.join ', ' %>
-        <% peer_ideas = @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}.join ', ' %>
+        <% if @idea.id.nil? #new idea, may have peer/parent id%>
+          <% if @parent_idea_id %>
+            <% parent_ideas = @parent_idea_id %>
+          <% end %>
+          <% if @peer_idea_ids %>
+            <% peer_ideas = @peer_idea_ids %>
+          <% end %>
+        <% else %>
+          <% parent_ideas = @idea.parent_ideas_ids.join ", " %>
+          <% child_ideas = @idea.child_ideas_ids.join ", " %>
+          <% peer_ideas = @idea.peer_ideas_ids.join ", " %>
         <% end %>
 
         <div class="form-group">

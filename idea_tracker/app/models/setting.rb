@@ -1,6 +1,10 @@
 class Setting < ActiveRecord::Base
 
+	def self.allow_sign_up
+		self.find_by_name("Allow Sign Up").data.casecmp "yes"
+	end
+
 	def self.default_owner
-		self.where(:name => 'Default Owner').first.data.to_i
+		self.find_by_name("Default Owner").data.to_i
 	end
 end

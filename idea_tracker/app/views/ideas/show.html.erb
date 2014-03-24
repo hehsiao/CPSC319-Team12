@@ -50,9 +50,12 @@
       <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
       <div class="panel-body">
         <p>
-          <strong>User:</strong>
-          <% user = User.find(@idea.user_id) %>
-          <%= user.first_name+" "+user.last_name %>
+          <strong>Creator:</strong>
+          <%= @idea.user.first_name+" "+@idea.user.last_name %>
+        </p>
+        <p>
+          <strong>Owner:</strong>
+          <%= @idea.owner.first_name+" "+@idea.owner.last_name %>
         </p>
         <p>
           <strong>Participants:</strong><br />
@@ -82,9 +85,9 @@
       </div>
       <div class="panel-body">
         <p>
-          Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-          Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
-          Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
+          Parents: <%= raw @idea.parent_ideas_ids.collect{|u| link_to u, id: u}.join ", "  %><br />
+          Childs: <%= raw @idea.child_ideas_ids.collect{|u| link_to u, id: u}.join ", " %><br />
+          Peers: <%= raw @idea.peer_ideas_ids.collect{|u| link_to u, id: u}.join ", " %>
         </p>
 
       </div>
@@ -98,6 +101,7 @@
       <div class="panel-body">
         <i class="fa fa-envelope"></i> Send idea <%= render 'email' %>
       </br>
+        <%= link_to 'Create Sub Idea', new_idea_path(:parent_idea_id => @idea.id, :peer_idea_ids => (@idea.child_ideas_ids.join ", ") ) %> |
         <%= link_to 'Edit', edit_idea_path(@idea) %> |
         <%= link_to 'Back', ideas_path %>
       </div>

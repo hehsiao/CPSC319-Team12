@@ -40,6 +40,12 @@ class IdeasController < ApplicationController
 		@idea = Idea.new
 		@partner = Partner.new
 		@categories = Category.top_categories
+		if(params[:parent_idea_id])
+			@parent_idea_id = params[:parent_idea_id]
+		end
+		if(params[:peer_idea_ids])
+			@peer_idea_ids = params[:peer_idea_ids]
+		end
 	end
 
 	# GET /ideas/1/edit
@@ -47,7 +53,6 @@ class IdeasController < ApplicationController
 		#ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
 		@partner = Partner.new
 		@categories = Category.top_categories
-
 	end
 
 	# POST /ideas
