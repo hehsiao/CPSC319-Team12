@@ -108,7 +108,13 @@
 			}		
 			
 		}
-		$('#aggregate1, #aggregate2, #chart_type').change(function(){
+		$('#chart_type').change(function(){
+			update_display();
+		});
+		$('#aggregate1, #aggregate2').change(function(){
+			var b = $(this).siblings();
+			var c = b.find('input:checkbox');
+			c.prop('checked', false);
 			update_display();
 		});
 

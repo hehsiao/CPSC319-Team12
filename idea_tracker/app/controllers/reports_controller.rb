@@ -37,7 +37,7 @@ class ReportsController < ApplicationController
 	 		(params[:chart_type] != "bar" ? "" : ", #{params[:aggregate2]} ") +
 	 		"FROM ideas " +
 	 		"WHERE #{params[:date_tag]} > #{params[:date_value]}   " +
-	 		((params[:show_options1].nil? and params[:show_options2].nil?) ? "" : "AND ( ")
+	 		((params[:show_options1].nil? and (params[:chart_type] != "bar" or params[:show_options2].nil?)) ? "" : "AND ( ")
 	 	if(params[:show_options1])
 		 	params[:show_options1].each do |option|
 		 		sql << " #{params[:aggregate1]} = #{option} OR"

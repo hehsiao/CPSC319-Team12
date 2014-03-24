@@ -78,9 +78,8 @@
 					</div>
 
 					<div class="form-group">
-							<%= s = @idea.participants.where(:is_active => 1).collect {|u| "#{u.user.email}"}.join ', ' %>
-							<%= f.label :participants %><br>
-							<%= f.text_field :participants, :value => s %>
+						<%= f.label :participants %><br>
+						<%= f.text_field :participants, :value => "" %>
 					</div>
 				</div>
 			</section>
@@ -178,7 +177,7 @@
 
 	var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
 										'(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-
+	
 	$('#idea_participants').selectize({
 		plugins: ['remove_button'],
 		delimiter: ',',
@@ -188,6 +187,7 @@
 		labelField: 'name',
 		searchField: ['name', 'email'],
 		options:  participants_options,
+		preload: true,
 		render: {
 			item: function(item, escape) {
 				return '<div>' +
@@ -205,19 +205,14 @@
 			}
 		},
 		create: function(input) {
-			if ((new RegExp('^' + REGEX_EMAIL + '$', 'i')).test(input)) {
-				return {email: input};
-			}
-			var match = input.match(new RegExp('^([^<]*)\<' + REGEX_EMAIL + '\>$', 'i'));
-			if (match) {
-				return {
-					email : match[2],
-					name  : $.trim(match[1])
-				};
-			}
-			alert('Invalid email address.');
 			return false;
 		}
+	});
+
+	var participants_list = [<%= raw @idea.participants.where(:is_active => 1).collect {|u| "'#{u.user.email}'"}.join "," %>]
+	var selectize_particpants = $('#idea_participants')[0].selectize;
+	$(participants_list).each(function(idx, data){
+		selectize_particpants.addItem(data);
 	});
 
 </script>
