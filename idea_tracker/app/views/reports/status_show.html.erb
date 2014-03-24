@@ -1,8 +1,14 @@
-<h1>Status Reports</h1>
-<h2><%= @status.status %> </h2>
+<h1 class="page-header">Reports <small>Stages</small></h1>
+
+<section class="widget">
+	<div class="panel-heading"><i class="fa fa-bars"></i> <%= @status.status %></div>
+	  
+	<div class="panel-body">
+
 
 <%= render 'idea_table' %>
-
+</div>
+</section>
 <div>
 <%= link_to("Back",{:action => 'status'}, :class => 'action status') %>
 </div>

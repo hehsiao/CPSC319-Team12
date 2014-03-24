@@ -9,7 +9,8 @@
 			<th>Name</th>
 			<th>Description</th>
 			<th>Display</th>
-			<th></th>
+			<th class="no-sort"></th>			
+			<th class="no-sort"></th>
 		</thead>
 		<% if @categories %>
 		<% @categories.each do |category| %>
@@ -29,10 +30,8 @@
 				<% end %>
 				<% end %>
 			</td>
-			<td>
-      	<%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_category_path(category), title: 'Edit', ref: 'tooltip' %> | 
-        <%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, category, method: :delete, data: {confirm: 'Are you sure?' } %>
-			</td>
+			<td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_category_path(category), title: 'Edit', ref: 'tooltip' %></td>
+  		<td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, category, method: :delete, data: {confirm: 'Are you sure?' } %></td>
 		</tr>
 		<% end %>
 		<% end %>

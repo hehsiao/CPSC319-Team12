@@ -316,6 +316,10 @@ a.list-group-item:hover, a.list-group-item:focus {
     background-color: transparent; 
 }
 
+#notifications {
+    max-height: 300px;
+    overflow-y: scroll;
+}
 
 /* Pages */
 
