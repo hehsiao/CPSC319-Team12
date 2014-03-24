@@ -6,9 +6,20 @@ class ApplicationController < ActionController::Base
 
   # Check if user is logged in, determine the layouts, and redirect to login page
   layout :determine_layout
-  before_filter :authenticate_user! 
+  
+  before_action check_user_permission 
+  before_action :configure_permitted_parameters, if: :devise_controller?
 
-  before_filter :configure_permitted_parameters, if: :devise_controller?
+  def check_admin_permission
+    if !current_user.try(:admin?)
+      flash[:error] = "Unauthorized!"
+      redirect_to '/dashboard'
+    end
+  end
+
+  def check_user_permission
+    authenticate_user!
+  end
 
   protected
 

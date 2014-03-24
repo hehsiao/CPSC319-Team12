@@ -1,6 +1,5 @@
 class DashboardController < ApplicationController
-
-	before_filter :authenticate_user!
+	before_action :check_user_permission
 	
 	def index  
 		@ideas = Idea.all  
@@ -11,9 +10,7 @@ class DashboardController < ApplicationController
 		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
 		@sub_ideas = Subscription.where(user_id: current_user.id)   
 
-
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
 	end
-
 end
