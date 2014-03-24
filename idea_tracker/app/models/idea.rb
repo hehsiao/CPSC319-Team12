@@ -3,7 +3,8 @@ class Idea < ActiveRecord::Base
 	tracked owner: ->(controller, model) {controller && controller.current_user}
 	
 	belongs_to :partner
-	belongs_to :user
+	belongs_to :owner, :class_name => 'User'
+	belongs_to :user, :class_name => 'User'
 	has_many :comments
 	has_many :child_ideas, :class_name => 'Association', :foreign_key => 'parent_idea_id'
 	has_many :parent_ideas, :class_name => 'Association', :foreign_key => 'tagged_idea_id'

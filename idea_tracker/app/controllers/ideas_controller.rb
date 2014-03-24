@@ -54,7 +54,8 @@ class IdeasController < ApplicationController
 	# POST /ideas.json
 	def create
 		@idea = Idea.new(idea_params)
-
+		@idea.owner_id = Setting.default_owner
+		@idea.user_id = current_user.id
 #    @idea.provider_partner_id = params[:provider_partner_id]
 		respond_to do |format|
 			if @idea.save
