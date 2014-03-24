@@ -40,6 +40,8 @@ class IdeasController < ApplicationController
 		@idea = Idea.new
 		@partner = Partner.new
 		@categories = Category.top_categories
+		user_list
+
 		if(params[:parent_idea_id])
 			@parent_idea_id = params[:parent_idea_id]
 		end
@@ -53,12 +55,15 @@ class IdeasController < ApplicationController
 		#ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
 		@partner = Partner.new
 		@categories = Category.top_categories
+    	user_list
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
 		@idea = Idea.new(idea_params)
+    	user_list
+
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
 #    @idea.provider_partner_id = params[:provider_partner_id]
@@ -67,6 +72,7 @@ class IdeasController < ApplicationController
 				params[:id] = @idea.id
 				handle_category_tags
 				handle_associations
+        handle_participations     
 				format.html { redirect_to @idea, notice: 'Idea was successfully created.' }
 				format.json { render action: 'show', status: :created, location: @idea }
 			else
@@ -137,6 +143,15 @@ class IdeasController < ApplicationController
   end
 
 	private
+	    def user_list
+	      @participants = "["
+	      User.all.each do |u|
+	        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+	      end
+	      @participants = @participants[0...-2]
+	      @participants += "]"
+	    end
+	    
 		def handle_participations
 			Subscription.where(:idea_id => params[:id]).destroy_all
 			participants = params[:idea][:participants].split ','
@@ -177,6 +192,7 @@ class IdeasController < ApplicationController
 				end
 			end
 		end
+
 
 		# Use callbacks to share common setup or constraints between actions.
 		def set_idea

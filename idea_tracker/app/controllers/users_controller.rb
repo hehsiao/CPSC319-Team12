@@ -54,8 +54,17 @@ class UsersController < ApplicationController
     end
   end
 
-
   private
+
+    def participant_list
+      @plist = "["
+      User.all.each do |u|
+        @plist += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+      end
+      @plist = @b[0...-2]
+      @plist += "]"
+    end
+
     def user_params
       params.require(:user).permit(:email, :first_name, :last_name)
     end
