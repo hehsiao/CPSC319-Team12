@@ -14,21 +14,20 @@
 
   <div class="form-group">
     <%= f.label :category_name %><br>
-    <%= f.text_field :category_name  %>
+    <%= f.text_field :category_name, class: 'form-control', placeholder: 'Enter Category Name'  %>
   </div>
-  <div class="form-group"> <!-- this is for description -->
+  <div class="form-group"> 
+    <%= f.label :description %><br>
+    <%= f.text_area :description, class: 'form-control', placeholder: 'Enter a Short Description'  %>
+  </div>
+  <div class="control-group">
+    <label for="category_type_id">Type</label>   
+    <select id="category_type_id" class="form-control" name="category[type_id]" placeholder="Select a type...">
+      <%= options_for_select([['Select a type...', ], ['Drop Down Single Select', 2], ['Scroll Multi-Select', 3],['CheckBox Multi-Select', 4]], @category.type_id) %>
+    </select>
   </div>
   <div class="form-group">
-    <%= f.label :type_id %><br>
-    <%= f.number_field :type_id %> <!-- TODO: change this to use dropdown select with actual type name -->
-    <p>
-      2 = dropdown single select <br />
-      3 = scroll multi select <br />
-      4 = checkbox multi select <br />
-    </p>
-  </div>
-  <div class="form-group">
-    <table id="tag_table">
+    <table class="table" id="tag_table">
       <thead>
         <tr>
           <th>Tag Name</th>
@@ -56,15 +55,16 @@
     </table>
     <input type="checkbox" name="require_other" value="1" <%= hasOtherField ? "checked" : "" %> /> Require Other Field <br />
 
-    <button id="addTag">Add New</button>
+    <button id="addTag" class="btn btn-default">Add New</button>
   </div>
 
   <!-- js to handle child items -->
 
   <div class="actions">
-    <%= f.submit %>
+    <%= f.submit "Submit", :class => "btn btn-primary" %>
   </div>
 <% end %>
+
 <script>
 var newTagCount = 0;
 window.onload=function()
@@ -80,89 +80,11 @@ window.onload=function()
     newTagCount++;
     $(tt).append(row);
   });
-}
-</script>
-<% hasOtherField = false %>
-<%= form_for(@category) do |f| %>
-  <% if @category.errors.any? %>
-    <div id="error_explanation">
-      <h2><%= pluralize(@category.errors.count, "error") %> prohibited this category from being saved:</h2>
 
-      <ul>
-      <% @category.errors.full_messages.each do |msg| %>
-        <li><%= msg %></li>
-      <% end %>
-      </ul>
-    </div>
-  <% end %>
-
-  <div class="form-group">
-    <%= f.label :category_name %><br>
-    <%= f.text_field :category_name  %>
-  </div>
-  <div class="form-group"> <!-- this is for description -->
-  </div>
-  <div class="form-group">
-    <%= f.label :type_id %><br>
-    <%= f.number_field :type_id %> <!-- TODO: change this to use dropdown select with actual type name -->
-    <p>
-      2 = dropdown single select <br />
-      3 = scroll multi select <br />
-      4 = checkbox multi select <br />
-    </p>
-  </div>
-  <div class="form-group">
-    <table id="tag_table">
-      <thead>
-        <tr>
-          <th>Tag Name</th>
-          <th>isDate</th>
-          <th>Remove</th>
-        </tr>
-      </thead>
-      <% @category.children.each do |tag| %>
-        <% if tag.type_id == 5 %>
-          <% hasOtherField = true %>
-        <% else %>
-          <tr>
-            <td>
-              <input type="text" name= "old_tags[<%= tag.id %>][0]" value="<%= tag.category_name %>" />
-            </td>
-            <td>
-              <input type="checkbox" name="old_tags[<%= tag.id %>][1]" value="1" <%= (tag.type_id == 6 ? "checked" : "") %> />
-            </td>
-            <td>
-              <input type="checkbox" name="old_tags[<%= tag.id %>][2]" value="1" />
-            </td>
-          </tr>
-        <% end %>
-      <% end %>
-    </table>
-    <input type="checkbox" name="require_other" value="1" <%= hasOtherField ? "checked" : "" %> /> Require Other Field <br />
-
-    <button id="addTag">Add New</button>
-  </div>
-
-  <!-- js to handle child items -->
-
-  <div class="actions">
-    <%= f.submit %>
-  </div>
-<% end %>
-<script>
-var newTagCount = 0;
-window.onload=function()
-{
-  $('#addTag').click(function(e){
-    e.preventDefault();
-    var tt =  $('#tag_table');
-    var row = $(
-      '<tr><td><input type="text" name= "new_tags['+newTagCount+'][0]"/></td>' +
-        '<td><input type="checkbox" name="new_tags['+newTagCount+'][1]" value="1"/></td>' +
-        '<td><input type="checkbox" name="new_tags['+newTagCount+'][2]" value="1"/></td>' +
-      '</tr>');
-    newTagCount++;
-    $(tt).append(row);
+  $('#category_type_id').selectize({
+    create: false,
+    dropdownParent: 'body'
   });
+
 }
 </script>

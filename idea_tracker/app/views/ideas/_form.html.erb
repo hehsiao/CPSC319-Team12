@@ -1,5 +1,4 @@
-
-<%= form_for(@idea, :html => {:class => "horizontal-form"}) do |f| %>
+<%= form_for(@idea) do |f| %>
 	<% if @idea.errors.any? %>
 		<div id="error_explanation">
 			<h2><%= pluralize(@idea.errors.count, "error") %> prohibited this idea from being saved:</h2>
@@ -91,7 +90,7 @@
 	<div class="row">
 		<div class="col-md-6">
 			<section class="widget">
-				<div class="panel-heading"><i class="fa fa-cog"></i> Options</div>
+				<div class="panel-heading"><i class="fa fa-tags"></i> Categories</div>
 
 				<div class="panel-body">
 				 <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
