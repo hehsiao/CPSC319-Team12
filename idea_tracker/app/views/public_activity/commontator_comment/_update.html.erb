@@ -1,11 +1,11 @@
-<i class = "fa fa-edit fa-fw"> </i>
+<i class = "fa fa-comment fa-fw"> </i>
 <%= activity.owner.first_name if activity.owner%>
 <%= activity.owner.last_name if activity.owner%>
 
-edit idea
+edit comment on 
 
 <% if activity.trackable%>
-   <%= activity.trackable.summary%>
+   <%= activity.trackable.body%>
 <% else %>
    whick has been removed!!
 <% end %>
