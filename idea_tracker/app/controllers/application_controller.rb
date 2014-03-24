@@ -6,8 +6,8 @@ class ApplicationController < ActionController::Base
 
   # Check if user is logged in, determine the layouts, and redirect to login page
   layout :determine_layout
-  
-  before_action check_user_permission 
+
+  before_action :check_user_permission 
   before_action :configure_permitted_parameters, if: :devise_controller?
 
   def check_admin_permission
