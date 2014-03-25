@@ -1,0 +1,55 @@
+<div class = "panel-heading"><i class = "fa fa-bell fa-fw"></i> "Notification"</div>
+<div class = "panel-body">
+    <div id="notifications" class = "list-group">
+
+        <% @activities.each do |activity| %>
+            <% @my_ideas.each do |my_idea| %>
+                <% if activity.trackable_id == my_idea.id && activity.owner_id == my_idea.user_id%>
+                    <div class = "list-group-item">
+                        <%= render_activity activity%>
+                        <span class = "text-muted small"> 
+                            <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                        </span>
+                    </div>
+                <% end %>
+            <% end %>
+
+            <% if activity.trackable_type == "Idea"%> 
+                <% @sub_ideas.each do |sub_idea| %>
+                    <% if activity.trackable_id == sub_idea.idea_id%>
+                        <div class = "list-group-item">
+                            <%= render_activity activity%>
+                            <span class = "text-muted small"> 
+                                <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                            </span>
+                        </div>
+                    <% end %>
+                <% end %>   
+            <% end %>
+
+            <% if activity.trackable_type == "Commontator::Comment"%> 
+                <% @comment_ids.each do |comment_id| %>
+                    <% if activity.trackable_id == comment_id.id%>
+                        <div class = "list-group-item">
+                            <i class = "fa fa-comment fa-fw"> </i>
+                            <%= activity.owner.first_name if activity.owner%>
+                            <%= activity.owner.last_name if activity.owner%>
+
+                            commented   
+
+                            <% if activity.trackable%>
+                               <a href = "/ideas/<%= Commontator::Thread.find_by_id(comment_id.thread_id).commontable_id%>"><%= activity.trackable.body%></a>
+                            <% else %>
+                               which has been removed!!
+                            <% end %>
+                            <span class = "text-muted small"> 
+                                <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
+                            </span>
+                        </div>
+                    <% end %>
+                <% end %> 
+            <% end %> 
+        <% end %>      
+
+    </div>
+</div>

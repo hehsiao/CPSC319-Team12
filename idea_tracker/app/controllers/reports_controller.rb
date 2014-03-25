@@ -15,6 +15,86 @@ class ReportsController < ApplicationController
    @ideas = Idea.all
  end
  
+ def chart
+ 	if params[:chart_type] == "line"
+ 		if params[:date_type] == "day"
+ 			theDate = "DATE(created_at)"
+ 		elsif params[:date_type] == "month"
+ 			theDate = "CONCAT_WS('-',YEAR(created_at),MONTH(created_at))"
+ 		else
+ 			theDate = "YEAR(created_at)"
+ 		end
+ 		sql = 
+ 			"SELECT IFNULL(ac.count, 0), ad.d " + 
+ 			"FROM ( " +
+	 			"SELECT DISTINCT(#{theDate}) as d " +
+	 			"FROM ( " +
+				    "SELECT curdate() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as created_at " + 
+				    "FROM (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a " +
+				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b " +
+				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c " +
+				") a " + 
+				"WHERE a.created_at > '#{params[:date_value]}' " + 
+			") ad " +
+			"LEFT JOIN (" +
+	 			"SELECT COUNT(*) as count, #{theDate} as theDate " +
+	 			"FROM #{params[:aggregate3]} " + 
+	 			"WHERE #{params[:date_tag]} > #{params[:date_value]} " +
+	 			"GROUP BY theDate " + 
+	 			"ORDER BY theDate DESC " +
+	 		") ac ON ad.d = ac.theDate " +
+			"ORDER BY ad.d DESC"
+ 		@date_type=params[:date_type]
+ 	else
+	 	sql = 
+	 		"SELECT COUNT(*) as count, #{params[:aggregate1]} " + 
+	 		(params[:chart_type] != "bar" ? "" : ", #{params[:aggregate2]} ") +
+	 		"FROM ideas " +
+	 		"WHERE #{params[:date_tag]} > #{params[:date_value]}   " +
+	 		((params[:show_options1].nil? and (params[:chart_type] != "bar" or params[:show_options2].nil?)) ? "" : "AND ( ")
+	 	if(params[:show_options1])
+		 	params[:show_options1].each do |option|
+		 		sql << " #{params[:aggregate1]} = #{option} OR"
+		 	end
+	 	end
+	 	if(params[:show_options2])
+		 	params[:show_options2].each do |option|
+		 		sql << " #{params[:aggregate2]} = #{option} OR"
+		 	end
+		end
+	 	if !(params[:show_options1].nil? and params[:show_options2].nil?)
+	 		sql = sql[0..-3] + " ) "
+	 	end
+	 	sql << 
+	 		"GROUP BY #{params[:aggregate1]} " +
+			(params[:chart_type] != "bar" ? "" : ", #{params[:aggregate2]} ") +
+			"ORDER BY #{params[:aggregate1]} DESC"
+	end
+
+	@result = ActiveRecord::Base.connection.execute(sql).to_a
+	@chart_type = params[:chart_type]
+	@sql2 = sql
+
+	if params[:aggregate1] == 'status'
+		@label1 = Status.all
+	elsif params[:aggregate1] == 'owner_id' or params[:aggregate1] == 'user_id'
+		@label1 = User.all
+	elsif params[:aggregate1] == 'provider_partner_id' or params[:aggregate1] == 'provider_partner_id'
+		@label1 = Partner.all
+	end
+
+	if params[:aggregate2] == 'status'
+		@label2 = Status.all
+	elsif params[:aggregate2] == 'owner_id' or params[:aggregate2] == 'user_id'
+		@label2 = User.all
+	elsif params[:aggregate2] == 'provider_partner_id' or params[:aggregate2] == 'provider_partner_id'
+		@label2 = Partner.all
+	end
+	@aggregate1 = params[:aggregate1]
+	@aggregate2 = params[:aggregate2]
+
+ end
+
 
  def pending_ideas
 	

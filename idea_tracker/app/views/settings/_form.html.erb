@@ -13,7 +13,12 @@
 
   <div class="form-group">
     <%= f.label :data %>: <br> 
-    <%= f.text_field :data, :class => "form-control" %>
+    <% if @setting.name == "Allow Sign Up" %>
+      <%= f.select(:data, options_for_select([['Yes', 'Yes'], ['No', 'No']], @setting.data), {}, {:class=>'form-control'})  %>
+      <%= %>
+    <% elsif @setting.name == "Default Owner" %>
+      <%= f.select(:data, options_from_collection_for_select(User.all, :id, :first_name, @setting.data), {}, { :class => 'form-control' }) %>
+    <% end %>
   </div>
   <br>
   <div class="actions">

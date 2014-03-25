@@ -1,28 +1,55 @@
-<h1 class="page-header">Ideas <small>- <%= @idea.summary %></small></h1>
+<h1 class="page-header">Ideas <small>- <%= @idea.summary %></small></h1> 
+<h5 class="widget">
+    <%= link_to '<i class="fa fa-plus"> </i> Create a Sub Idea'.html_safe , new_idea_path(:parent_idea_id => @idea.id, :peer_idea_ids => (@idea.child_ideas_ids.join ", "))  %> | 
+    <%= link_to '<i class="fa fa-pencil"></i> Edit Idea'.html_safe, edit_idea_path(@idea) %> |
+    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, ideas_path %> | 
+    <a href="#"><i class="fa fa-share-square-o"></i> Share</a>
+</h5>
+
 
 <div class="row">
   <div class="col-md-12">
     <section class="widget">
-      <div class="panel-heading"><i class="fa fa-info"></i> Idea Information</div>
+      <div class="panel-heading"></div>
       <div class="panel-body">
-        <p>
-          <strong>Status:</strong>
-          <%= Status.find(@idea.status).status %>
-        </p>
-        <p>
-          <strong>Summary:</strong>
-          <%= @idea.summary %>
-        </p>
-        <p>
-          <strong>Description:</strong>
-          <%= @idea.description %>
-        </p>
-        <p>
-          <strong>Keywords:</strong>
-          <%= @idea.keyword_list %>
-        </p>
+        <dl class="dl-horizontal">
+          <!-- TODO: SHARE IDEA BUTTON TO export as CSV and or Send Email -->
+          <h1> maybe bump the send idea in a modal and access via a share button?</h1>
+          <dt><i class="fa fa-envelope"></i> Send Idea</dt> <dd><%= render 'email' %><dd>
+        </dl>
+      </div>
+    </section>
+  </div>
+</div>
 
-        <p> Submission date:  <%= @idea.created_at %> | Last modified: <%= @idea.updated_at %> </p>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-info"></i> Idea Information
+        </div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+        
+          <dt>Status:</dt>
+          <dd><%= Status.find(@idea.status).status %></dd>
+        
+          <dt>Summary:</dt>
+          <dd><%= @idea.summary %></dd>
+        
+          <dt>Description:</dt>
+          <dd><%= @idea.description %></dd>
+        
+          <dt>Keywords:</dt>
+          <dd><%= @idea.keyword_list %></dd>
+        </br>
+          <small>
+          <dt>Submission date:</dt>
+          <dd><%= @idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></dd> 
+
+          <dt>Last modified:</dt> 
+          <dd><%= @idea.updated_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></dd>
+        </small>
+      </dl>
       </div>
     </section>
   </div>
@@ -33,15 +60,13 @@
     <section class="widget">
       <div class="panel-heading"><i class="fa fa-users"></i> Partner Information</div>
       <div class="panel-body">
-        <p>
-          <strong>Provider:</strong>
-          <%= @provider %>
-        </p>
+        <dl class="dl-horizontal">
+          <dt>Provider:</dt>
+          <dd><%= @provider %></dd>
 
-        <p>
-          <strong>Receiver:</strong>
-          <%= @receiver %>
-        </p>
+          <dt>Receiver:</dt>
+          <dd><%= @receiver %></dd>
+        </dl>
       </div>
     </section>
   </div>
@@ -49,15 +74,20 @@
     <section class="widget">
       <div class="panel-heading"><i class="fa fa-user"></i> Staff Information</div>
       <div class="panel-body">
-        <p>
-          <strong>User:</strong>
-          <% user = User.find(@idea.user_id) %>
-          <%= user.first_name+" "+user.last_name %>
-        </p>
-        <p>
-          <strong>Participants:</strong><br />
-          <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
-        </p>
+        <dl class="dl-horizontal">
+          <dt>Creator:</dt>
+          <dd>
+            <%= @idea.user.first_name+" "+@idea.user.last_name %>
+          </dd>
+          <dt>Owner:</dt>
+          <dd> 
+            <%= @idea.owner.first_name+" "+@idea.owner.last_name %>
+          </dd>
+          <dt>Participants:</dt>
+          <dd>
+            <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
+          </dd>
+        </dl>
       </div>
     </section>
   </div>
@@ -81,29 +111,18 @@
         <i class="fa fa-link"></i> Idea Associations
       </div>
       <div class="panel-body">
-        <p>
-          Parents: <%= raw @idea.parent_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.parent_idea_id, id: u.parent_idea_id}.join ', ' %><br />
-          Childs: <%= raw @idea.child_ideas.where(:is_hierarchy => 1).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %><br />
-          Peers: <%= raw @idea.child_ideas.where(:is_hierarchy => 0).collect {|u| link_to u.tagged_idea_id, id: u.tagged_idea_id}.join ', ' %>
-        </p>
+        <dl class="dl-horizontal">
+          <dt>Parents:</dt><dd><%= raw @idea.parent_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br> "  %></dd>
+          <dt>Childs:</dt><dd><%= raw @idea.child_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
+          <dt>Peers:</dt><dd><%= raw @idea.peer_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
+        
+        </dl>
 
       </div>
     </section>
   </div>
 </div>
-<div class="row">
-  <div class="col-md-12">
-    <section class="widget">
-      <div class="panel-heading"></div>
-      <div class="panel-body">
-        <i class="fa fa-envelope"></i> Send idea <%= render 'email' %>
-      </br>
-        <%= link_to 'Edit', edit_idea_path(@idea) %> |
-        <%= link_to 'Back', ideas_path %>
-      </div>
-    </section>
-  </div>
-</div>
+
 
 <div class="row">
   <div class="col-md-12">

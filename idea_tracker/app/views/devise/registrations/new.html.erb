@@ -1,6 +1,6 @@
 
 <div class="col-md-4">
-    <% if (Setting.find_by_name("Allow Sign Up").data.casecmp "no") == 0 %>
+    <% if Setting.find_by_name("Allow Sign Up").data == "No" %>
       <div class="panel-body">
         <h4>Registrations is currently Closed!</h4>
         <p>Please contact your Administrator to gain access.</p>

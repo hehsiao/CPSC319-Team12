@@ -1,0 +1,84 @@
+<h1 class="page-header">Chart</h1>
+
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-signal"></i> <%= params[:aggregate1] + " vs " + params[:aggregate2] %><!-- TODO: CHANGE TO NAME OF CHART --></div>
+  <div class="panel-body">
+    <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
+  </div>
+</section>
+<br><br>
+<%= debug(@sql2) %>
+<%= debug(@result) %>
+<% xkey = @result.collect{|u| u[1]}.uniq %>
+<% ykeys = @result.collect{|u| u[2]}.uniq %>
+<%= debug(xkey) %> <br />
+<%= debug(ykeys) %> <br />
+<%= debug(@label1.find(1)) %>
+
+<script>
+  $(function () {
+    <% if @chart_type.casecmp("bar") == 0 %>
+
+      Morris.Bar({
+        element: 'container',
+        data: [
+          <%= raw xkey.collect{
+            |u| 
+            "{x:'#{(@label1.find(u).to_s)}'," + 
+            (ykeys.collect{
+              |v|
+              "#{v}: #{@result.detect{|r| r[1]==u and r[2]==v}.nil? ? 0 : @result.detect{|r| r[1]==u and r[2]==v}[0]},"
+            }.join) + 
+            "},"
+          }.join %> 
+        ],
+        xkey: 'x',
+        ykeys: [<%=ykeys.join ","%>],
+        labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>],
+        gridTextColor: '#F8F8F8',
+        gridTextFamily: 'Open Sans, sans-serif',
+        stacked: true
+      });
+      
+    <% elsif @chart_type.casecmp("line") == 0 %>
+      Morris.Line({
+        element: 'container',
+        data: [
+          <%= raw @result.collect{|row| "{y: '#{row[1]}', a:#{row[0]}},"}.join %>
+        ],
+        xkey: 'y',
+        ykeys: ['a'],
+        labels: ['Total'],
+        xlabels: ['<%= @date_type %>']
+      });
+    <% elsif @chart_type.casecmp("pie") == 0 %>
+      new Morris.Donut({
+        element: 'container',
+        data:[<%= raw @result.collect{|row| "{label: '#{@label1.find(row[1]).to_s }', value: '#{row[0]}'},"}.join %>]
+      });
+    <% elsif @chart_type.casecmp("table") == 0 %>
+      $('#container').html(
+          "<table class='table table-hover dataTable'>" + 
+            "<thead>" +
+              "<tr>" +
+                "<th><%= @aggregate1 %></th>" +
+                "<th>Count</th>" + 
+              "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+              <% @result.each do |row| %>
+                "<tr><td><%=@label1.find(row[1]).to_s%></td><td><%=row[0]%></td></tr>" +
+              <% end %>
+            "</tbody>" +
+          "</table>"
+        );
+    <% end %>
+
+
+  });
+    
+
+  
+
+</script>
+

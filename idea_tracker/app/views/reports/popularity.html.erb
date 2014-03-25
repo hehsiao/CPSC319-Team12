@@ -1,22 +1,24 @@
+<h1 class="page-header">Reports</h1>
 
-<h1>Popularity Report</h1>
-
-<div style="width: 300px;">
-	<table class="table table-hover dataTable" summary="Category List">
-	  <thead>
-		<tr>
-		  <th>Pick a Category</th>
-		</tr>
-	  </thead>
+<section class="widget">
+	<div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Popularity Report</div>
 	  
-	  <tbody>
-		<% @categories.each do |category| %>
-		  <tr onclick="document.location = '/reports/popularity_show/<%= category.id %>';">
-			<td><%= category.category_name %></td>
-		  </tr>
-		<% end %>
-	  </tbody>
-	</table>
-</div>
+	<div class="panel-body">
 
-<br>
+		<table class="table table-hover" summary="Category List">
+		  <thead>
+			<tr>
+			  <th>Pick a Category</th>
+			</tr>
+		  </thead>
+		  
+		  <tbody>
+			<% @categories.each do |category| %>
+			  <tr onclick="document.location = '/reports/popularity_show/<%= category.id %>';">
+				<td><%= category.category_name %></td>
+			  </tr>
+			<% end %>
+		  </tbody>
+		</table>
+	</div>
+</section>	
