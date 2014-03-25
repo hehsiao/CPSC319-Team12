@@ -81,6 +81,9 @@
 							<li>
 								<a href="/reports/popularity">Popularity Report</a>
 							</li>
+							<li>
+								<a href="/reports/charting">Custom Report</a>
+							</li>
 						</ul>
 						<!-- /.nav-second-level -->
 					</li>            
@@ -145,13 +148,16 @@ $(document).ready(function(){
 		}
 	});
 
-	$('.dataTable').dataTable({
-		"aoColumnDefs" : [ {
-			"bSortable" : false,
-			"aTargets" : [ "no-sort" ]
+	if($('.dataTable').length > 0)
+	{
+		$('.dataTable').dataTable({
+			"aoColumnDefs" : [ {
+				"bSortable" : false,
+				"aTargets" : [ "no-sort" ]
 
-		} ]
-	});
+			} ]
+		});
+	}
 
 });
 

@@ -25,11 +25,25 @@ class ReportsController < ApplicationController
  			theDate = "YEAR(created_at)"
  		end
  		sql = 
- 			"SELECT COUNT(*) as count, #{theDate} as theDate " +
- 			"FROM #{params[:aggregate3]} " + 
- 			"WHERE #{params[:date_tag]} > #{params[:date_value]} " +
- 			"GROUP BY theDate " + 
- 			"ORDER BY theDate DESC"
+ 			"SELECT IFNULL(ac.count, 0), ad.d " + 
+ 			"FROM ( " +
+	 			"SELECT DISTINCT(#{theDate}) as d " +
+	 			"FROM ( " +
+				    "SELECT curdate() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as created_at " + 
+				    "FROM (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a " +
+				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b " +
+				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c " +
+				") a " + 
+				"WHERE a.created_at > '#{params[:date_value]}' " + 
+			") ad " +
+			"LEFT JOIN (" +
+	 			"SELECT COUNT(*) as count, #{theDate} as theDate " +
+	 			"FROM #{params[:aggregate3]} " + 
+	 			"WHERE #{params[:date_tag]} > #{params[:date_value]} " +
+	 			"GROUP BY theDate " + 
+	 			"ORDER BY theDate DESC " +
+	 		") ac ON ad.d = ac.theDate " +
+			"ORDER BY ad.d DESC"
  		@date_type=params[:date_type]
  	else
 	 	sql = 
