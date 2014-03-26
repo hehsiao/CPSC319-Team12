@@ -16,14 +16,13 @@ class DashboardController < ApplicationController
 		@thread_ids = []
 		@comment_ids =[]
 
-
-        @my_ideas.each do |my_idea|
-        	@threads.each do |thread|
+		@my_ideas.each do |my_idea|
+			@threads.each do |thread|
 				if  my_idea.id == thread.commontable_id
-				    @thread_ids << thread
-                end 
-            end	
-	    end	
+					@thread_ids << thread
+				end 
+			end	
+		end	
       
 		@sub_ideas.each do |sub_idea|
 			@threads.each do |thread|

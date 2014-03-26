@@ -27,17 +27,17 @@
 
 						<div class="form-group">
 								<label for="idea_summary">Idea Name</label>
-								<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary'%>
+								<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary (Max 40 Characters', maxlength: '40' %>
 						</div>
 
 						<div class="form-group">
 								<%= f.label :description %>
-								<%= f.text_area :description, class: 'form-control', :rows => 5 %>
+								<%= f.text_area :description, class: 'form-control', :rows => 5, placeholder: 'Long Descriptions' %>
 						</div>
 
 						<div class="form-group">
 								<%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-								<%= f.text_field :keyword_list %>
+								<%= f.text_field :keyword_list, placeholder: 'Add keywords...' %>
 						</div>
 
 						<div class="form-group">
@@ -54,41 +54,115 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-users"></i> Partner Information 
-
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
-						<%= f.label :provider_partner_id %>
-	                    <div class="radio">
-	                        <label>
-	                            <input type="radio" name="provider_use" id="optionsRadios1" value="option1" checked="">
-	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "0"} %>
+						<div class="control-group">
+							<%= f.label :provider_partner_id %>
+	                        <label class="radio-inline">
+	                            <input type="radio" name="provider_use" id="optionsRadiosInline1" value="provider_partner_form">New
+	                        </label>
+	                        <label class="radio-inline">
+	                            <input type="radio" name="provider_use" id="optionsRadiosInline2" value="provider_partner_pulldown" checked>Existing
 	                        </label>
 	                    </div>
-	                    <div class="radio">
-	                        <label>
-	                            <input type="radio" name="provider_use" id="optionsRadios2" value="option2">
-								<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                
+		                <div id="provider_partner_form" class="form-group" style="display: none; width: 681px; top: 34px; left: 0px; visibility: visible;">
+		                    <div class="form-group">
+							  <%= label_tag :partner_name, "Partner Name" %><br>
+							  <%= text_field :"provider_partner", :partner_name, :class => 'form-control' %>
+							</div>
+							<div class="row">
+							  <div class="col-md-6">
+							    <h4>Primary Contact</h4>
+							    <div class="form-group">
+							      <%= label :contact_name, "Contact Name" %><br>
+							      <%= text_field :"provider_partner", :contact_name, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :email, "Email" %><br>
+							      <%= email_field :"provider_partner", :email, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :phone_num, "Phone" %><br>
+							      <%= phone_field :"provider_partner", :phone_num, :class => 'form-control' %>
+							    </div>
+							  </div>
+							  <div class="col-md-6">
+							    <h4>Secondary Contact</h4>
+							    <div class="form-group">
+							      <%= label :contact_name, "Contact Name" %><br>
+							      <%= text_field :"provider_partner", :secondary_contact_name, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :email, "Email" %><br>
+							      <%= text_field :"provider_partner", :secondary_email, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :phone_num, "Phone" %><br>
+							      <%= text_field :"provider_partner", :secondary_phone_num, :class => 'form-control' %>
+							    </div>
+							  </div>
+							</div>
+		                </div>
+		                <div id="provider_partner_pulldown" class="form-group">
+							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                    </div> 
+                    </div>
+                    <div class="form-group">
+						<div class="control-group">
+							<%= f.label :receiver_partner_id %>
+	                        <label class="radio-inline">
+	                            <input type="radio" name="receiver_use" id="optionsRadiosInline1" value="receiver_partner_form">New
+	                        </label>
+	                        <label class="radio-inline">
+	                            <input type="radio" name="receiver_use" id="optionsRadiosInline2" value="receiver_partner_pulldown" checked>Existing
 	                        </label>
 	                    </div>
-	                </div>
-	                <div class="form-group">
-						<%= f.label :receiver_partner_id %>
-	                    <div class="radio">
-	                        <label>
-	                            <input type="radio" name="receiver_use" id="optionsRadios1" value="option1" checked="">
-	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "1"} %>
-	                        </label>
-	                    </div>
-	                    <div class="radio">
-	                        <label>
-	                            <input type="radio" name="receiver_use" id="optionsRadios2" value="option2">
-								<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-	                        </label>
-	                    </div>
-	                </div>
-
-				</div>
+	                
+		                <div id="receiver_partner_form" class="form-group" style="display: none; width: 681px; top: 34px; left: 0px; visibility: visible;">
+		                    <div class="form-group">
+							  <%= label_tag :partner_name, "Partner Name" %><br>
+							  <%= text_field :"receiver_partner", :partner_name, :class => 'form-control' %>
+							</div>
+							<div class="row">
+							  <div class="col-md-6">
+							    <h4>Primary Contact</h4>
+							    <div class="form-group">
+							      <%= label :contact_name, "Contact Name" %><br>
+							      <%= text_field :"receiver_partner", :contact_name, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :email, "Email" %><br>
+							      <%= email_field :"receiver_partner", :email, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :phone_num, "Phone" %><br>
+							      <%= phone_field :"receiver_partner", :phone_num, :class => 'form-control' %>
+							    </div>
+							  </div>
+							  <div class="col-md-6">
+							    <h4>Secondary Contact</h4>
+							    <div class="form-group">
+							      <%= label :contact_name, "Contact Name" %><br>
+							      <%= text_field :"receiver_partner", :secondary_contact_name, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :email, "Email" %><br>
+							      <%= text_field :"receiver_partner", :secondary_email, :class => 'form-control' %>
+							    </div>
+							    <div class="form-group">
+							      <%= label :phone_num, "Phone" %><br>
+							      <%= text_field :"receiver_partner", :secondary_phone_num, :class => 'form-control' %>
+							    </div>
+							  </div>
+							</div>
+		                </div>
+		                <div id="receiver_partner_pulldown" class="form-group">
+							<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                    </div> 
+                    </div>
+	            </div>
 			</section>
 		</div>
 		<div class="col-md-6">
@@ -127,9 +201,9 @@
 							<% peer_ideas = @peer_idea_ids %>
 						<% end %>
 					<% else %>
-						<% parent_ideas = @idea.parent_ideas_ids.join ", " %>
-						<% child_ideas = @idea.child_ideas_ids.join ", " %>
-						<% peer_ideas = @idea.peer_ideas_ids.join ", " %>
+						<% parent_ideas = @idea.parent_ideas_ids.join "," %>
+						<% child_ideas = @idea.child_ideas_ids.join "," %>
+						<% peer_ideas = @idea.peer_ideas_ids.join "," %>
 					<% end %>
 
 					<div class="form-group">
@@ -179,13 +253,53 @@
 <% end %>
 
 <script>
+    $('#provider_partner_form', '#receiver_partner_form').hide();
+
+    $("[name=provider_use]").each(function(i) {
+        $(this).change(function(){
+            $('#provider_partner_form, #provider_partner_pulldown').hide();
+            divId = $(this).val();
+            $("#"+divId).show('fast');
+        });
+    });
+
+    $("[name=receiver_use]").each(function(i) {
+        $(this).change(function(){
+            $('#receiver_partner_form, #receiver_partner_pulldown').hide();
+            divId = $(this).val();
+            $("#"+divId).show('fast');
+        });
+    });
+	// Idea Associations
+	var ideas_options = <%= raw @idea_selections %>;
 	$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
 		plugins: ['remove_button'],
 		delimiter: ',',
 		persist: false,
-		create: function(input) {return {value: input, text: input};}
+		maxItems: null,
+		valueField: 'id',
+		labelField: 'summary',
+		searchField: ['summary', 'id'],
+		options:  ideas_options,
+		preload: true,
+		render: {
+			item: function(item, escape) {
+				return '<div>' +
+						(item.summary ? '<span class="name selectize">' + escape(item.summary) + ' </span>' : '') +
+				'</div>';
+			},
+			option: function(item, escape) {
+				var label = item.summary || item.id;
+				var caption = item.summary ? item.id : null;
+				return '<div>' +
+						'<span class="name selectize">' + escape(label) + ' </span>' +
+				'</div>';
+			}
+		},
+		create: false
 	});
 
+	//  Keyword Tag Text Box
 	var keywords_options = <%= raw @keywords %>;
 	$('#idea_keyword_list').selectize({
 		plugins: ['remove_button'],
@@ -193,6 +307,7 @@
 		valueField: 'name',
 		searchField: ['name'],
 		options: keywords_options,
+		preload: true,
 		render: {
 			item: function(item, escape) {
 				return '<div>' +
@@ -200,7 +315,7 @@
 				'</div>';
 			},
 			option: function(item, escape) {
-				var label = item.name || item.id;
+				var label = item.name;
 				return '<div>' +
 						'<span class="name selectize">' + escape(label) + ' </span>' +
 				'</div>';
@@ -209,22 +324,15 @@
 		create: function(input) {
 			return {name: input};
 		}
-
 	});
 
-	<%= @idea.keyword_list.split(',') %>
-
-
+	// Idea Partner Pull Down
 	$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
 		sortField: 'text',
 	});
 
-
+	// Participant text box Javascript
 	var participants_options = <%= raw @participants %>;
-
-	var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
-										'(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
-	
 	$('#idea_participants').selectize({
 		plugins: ['remove_button'],
 		delimiter: ',',
@@ -251,15 +359,13 @@
 				'</div>';
 			}
 		},
-		create: function(input) {
-			return false;
-		}
+		create: false
 	});
 
 	var participants_list = [<%= raw @idea.participants.where(:is_active => 1).collect {|u| "'#{u.user.email}'"}.join "," %>]
-	var selectize_particpants = $('#idea_participants')[0].selectize;
+	var selectize_participants = $('#idea_participants')[0].selectize;
 	$(participants_list).each(function(idx, data){
-		selectize_particpants.addItem(data);
+		selectize_participants.addItem(data);
 	});
 
 
