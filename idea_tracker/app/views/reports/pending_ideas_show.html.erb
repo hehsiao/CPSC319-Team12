@@ -1,0 +1,10 @@
+
+<h1>Pending Ideas</h1>
+
+<label>Number of Days</label>
+<%= form_tag({:action=>"pending_ideas_show"}, method: :get) do %>
+  <%= number_field_tag :submit, params[:submit]%>
+  <%= submit_tag :submit%>
+<% end %>
+<h2>Ideas pending for more than <%=@days%> days</h2>
+<%= render 'idea_table' %>

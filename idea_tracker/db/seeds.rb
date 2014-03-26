@@ -7,7 +7,8 @@
 #   Mayor.create(name: 'Emanuel', city: cities.first)
 
 Setting.delete_all
-Setting.create(name: 'Allow Sign Up', data: 'Yes')
+Setting.create(id: 1, name: 'Allow Sign Up', data: 'Yes')
+Setting.create(id: 2, name: 'Default Owner', data: '3')
 
 User.delete_all
 User.create!([
@@ -41,18 +42,17 @@ Partner.create!([
 
 Idea.delete_all
 Idea.create!([
-	{id: 1, user_id: 3, provider_partner_id: 1, submission_date: "2014-03-1", summary: "1Youth in Transition in Psychology", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status: 1 },
-	{id: 2, user_id: 2, provider_partner_id: 2, submission_date: "2014-03-3", summary: "2Fitness Program", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
-	{id: 3, user_id: 1, provider_partner_id: 1, submission_date: "2014-03-3", summary: "3Social Media", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
-	{id: 4, user_id: 3, provider_partner_id: 1, submission_date: "2014-03-4", summary: "4Youth in Transition in Psychology", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status: 1 },
-	{id: 5, user_id: 2, provider_partner_id: 2, submission_date: "2014-03-8", summary: "5Fitness Program", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
-	{id: 6, user_id: 1, provider_partner_id: 1, submission_date: "2014-03-10", summary: "6Social Media", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
-	{id: 7, user_id: 3, provider_partner_id: 12, receiver_partner_id: 10,  submission_date: "2014-03-12", summary: "CBEL", description: "Idea tracker project for CBEL", status: 1 },
-	{id: 8, user_id: 2, provider_partner_id: 1, submission_date: "2014-03-16", summary: "7Fitness Program", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
-	{id: 9, user_id: 1, provider_partner_id: 1, submission_date: "2014-03-19", summary: "8Social Media", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
+	{id: 1, owner_id: 3, user_id: 3, provider_partner_id: 1, created_at: "2014-03-1", summary: "Youth in Transition in Psychology 1", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status: 1 },
+	{id: 2, owner_id: 3, user_id: 2, provider_partner_id: 2, created_at: "2014-03-3", summary: "Fitness Program 1", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
+	{id: 3, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-3", summary: "Social Media 1", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
+	{id: 4, owner_id: 3, user_id: 3, provider_partner_id: 1, created_at: "2014-03-4", summary: "Youth in Transition in Psychology 2", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status: 1 },
+	{id: 5, owner_id: 3, user_id: 2, provider_partner_id: 2, created_at: "2014-03-8", summary: "Fitness Program 2" , description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
+	{id: 6, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-10", summary: "Social Media 2 ", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
+	{id: 7, owner_id: 3, user_id: 3, provider_partner_id: 12, receiver_partner_id: 10,  created_at: "2014-03-12", summary: "CBEL", description: "Idea tracker project for CBEL", status: 1 },
+	{id: 8, owner_id: 3, user_id: 2, provider_partner_id: 1, created_at: "2014-03-16", summary: "Fitness Program 3", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status: 2},
+	{id: 9, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-19", summary: "Social Media 3", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status: 4},
 
 ])
-
 
 Status.delete_all
 Status.create!([
@@ -76,21 +76,27 @@ CategoryType.create(id: '6', type: 'DateMMYYYY')
 CategoryType.create(id: '7', type: 'DateDDMMYYYY')
 
 Category.delete_all
-Category.create(category_name: 'Idea Type', type_id: '2', parent_id: '0', id: '1')
-Category.create(category_name: 'Possible Program Referral', type_id: '3', parent_id: '0', id: '2')
-Category.create(category_name: 'Organization\'s Mandate', type_id: '3', parent_id: '0', id: '3')
-Category.create(category_name: 'Possible Disciplines', type_id: '4', parent_id: '0', id: '4')
-Category.create(category_name: 'Timeframe', type_id: '2', parent_id: '0', id: '5')
+Category.create(category_name: 'Idea Type', type_id: '2', parent_id: '0', id: '1', description: 'Give a general sense of the kind of idea this might be - from a one-time project to an on-going activity.')
+Category.create(category_name: 'Possible Program Referral', type_id: '3', parent_id: '0', id: '2', description: 'Even at an early stage in an idea\'s developmet, there may be a clear connection to a Centre program or CBEL opportunity that we know of.  If so, please indicate.')
+Category.create(category_name: 'Organization\'s Mandate', type_id: '3', parent_id: '0', id: '3', description: 'Select all the categories that describe the mandate of the organization that has proposed this idea.')
+Category.create(category_name: 'Idea Focus Areas', type_id: '3', parent_id: '0', id: '4', description: 'Select all the categories that describe the community priority area that the project/placement hopes to address.  This might be the same or different from the organization\'s mandate.')
+Category.create(category_name: 'Main Activities', type_id: '3', parent_id: '0', id: '5', description: 'Select the categories that best describe the main activities that would be done in this placement/project.')
+Category.create(category_name: 'Delivery Location', type_id: '3', parent_id: '0', id: '6', description: 'Please select the location(s) where the project/placement would take place.')
+Category.create(category_name: 'Possible Disciplines', type_id: '4', parent_id: '0', id: '7', description: 'Please select any faculties/departments/disciplines that this idea is best suited for.')
+Category.create(category_name: 'Timeframe', type_id: '2', parent_id: '0', id: '8', description: 'Please identify if there are any timeframe parameters with this idea or whether there is flexibility on when it can be implemented.')
+
 Category.create(category_name: 'One-Time Project', type_id: '1', parent_id: '1')
 Category.create(category_name: 'Recurring Project', type_id: '1', parent_id: '1')
 Category.create(category_name: 'Part of a Multi-Phase Project', type_id: '1', parent_id: '1')
 Category.create(category_name: 'On-Going Activity', type_id: '1', parent_id: '1')
+
 Category.create(category_name: 'Course-Based Opportunity ', type_id: '1', parent_id: '2')
 Category.create(category_name: 'Trek Program ', type_id: '1', parent_id: '2')
 Category.create(category_name: 'Reading Week Project ', type_id: '1', parent_id: '2')
 Category.create(category_name: 'Community Projects ', type_id: '1', parent_id: '2')
 Category.create(category_name: 'Hackthon ', type_id: '1', parent_id: '2')
 Category.create(category_name: 'Other: Please Specify', type_id: '5', parent_id: '2')
+
 Category.create(category_name: 'Aboriginal Engagement ', type_id: '1', parent_id: '3')
 Category.create(category_name: 'Arts - Culture - Heritage ', type_id: '1', parent_id: '3')
 Category.create(category_name: 'Civic Participation - Politics - Democracy ', type_id: '1', parent_id: '3')
@@ -102,10 +108,40 @@ Category.create(category_name: 'International ', type_id: '1', parent_id: '3')
 Category.create(category_name: 'Social Services ', type_id: '1', parent_id: '3')
 Category.create(category_name: 'Recreation - Sport ', type_id: '1', parent_id: '3')
 Category.create(category_name: 'Other: Please Specify', type_id: '5', parent_id: '3')
+
+Category.create(category_name: 'Aboriginal Engagement ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Arts - Culture - Heritage ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Civic Participation - Politics - Democracy ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Community and Economic Development ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Education - Research ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Health - Human Services ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Inclusion - Diversity ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'International ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Social Services ', type_id: '1', parent_id: '4')
+Category.create(category_name: 'Recreation - Sport ', type_id: '1', parent_id: '4')
 Category.create(category_name: 'Other: Please Specify', type_id: '5', parent_id: '4')
-Category.create(category_name: 'See Comment ', type_id: '1', parent_id: '4')
-Category.create(category_name: 'General ', type_id: '1', parent_id: '4')
-Category.create(category_name: 'Flexible ', type_id: '1', parent_id: '5')
-Category.create(category_name: 'Needs to Start By', type_id: '6', parent_id: '5')
-Category.create(category_name: 'Needs to End By', type_id: '6', parent_id: '5')
+
+
+Category.create(category_name: 'Consultation ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Curriculum Development ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Data Gathering and Mapping ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Direct service delivery ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Event ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Fund Development ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'IT ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Marketing and Communications ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Program Development ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Research - Evaluation and Assessment ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Research - Literature Review ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Research - More formalized data collection ', type_id: '1', parent_id: '5')
+Category.create(category_name: 'Other: Please specify ', type_id: '5', parent_id: '5')
+
+Category.create(category_name: 'Other: Please Specify', type_id: '5', parent_id: '6')
+
+Category.create(category_name: 'Other: Please Specify', type_id: '5', parent_id: '7')
+Category.create(category_name: 'See Comment ', type_id: '1', parent_id: '7')
+Category.create(category_name: 'General ', type_id: '1', parent_id: '7')
+Category.create(category_name: 'Flexible ', type_id: '1', parent_id: '8') 
+Category.create(category_name: 'Needs to Start By', type_id: '6', parent_id: '8')
+Category.create(category_name: 'Needs to End By', type_id: '6', parent_id: '8')
 

@@ -1,42 +1,44 @@
-<div id="page-wrapper">
+<h1 class="page-heading">Categories </h1>
+<h5 class="widget">
+	<%= link_to '<i class="fa fa-plus"></i> Add New Category'.html_safe, new_category_path %>
+</h5>
+<section class="widget">
+<div class="panel-heading"><i class="fa fa-tags"> Manage Categories</i></div>
+	<div class="panel-body">
 
-<div class="admin index">
-	<h1>Manage Categories</h1>
-
-	<table>
+	<table class="table">
 		<thead>
-			<th>Name</th>
-			<th>Description</th>
-			<th>Display</th>
-			<th>Action</th>
+			<th span="1" style="width: 10%;">Name</th>
+			<th span="1" style="width: 35%;">Description</th>
+			<th span="1" style="width: 50%;">Display</th>
+			<th class="no-sort" span="1" style="width: 2.5%;"></th>			
+			<th class="no-sort" span="1" style="width: 2.5%;"></th>
 		</thead>
 		<% if @categories %>
-		    <% @categories.each do |category| %>
-			    <tr>
-			     	<td><%= category.category_name %></td>
-			     	<td></td> <!-- add category.description -->
-			    	<td>
-			     		<% if category.type_id == 2 #TODO: change to compare with type (String) later %>
-				    		<%= render :partial => "category_utils/dropdown_single_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
-			     		<% elsif category.type_id == 3 #TODO: same as above%>
-			     			<%= render :partial => "category_utils/scroll_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
-			     		<% elsif category.type_id == 4 #TODO: same as above%>
-			     			<%= render :partial => "category_utils/check_box_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
-			     		<% else %>
-				    		<% category.children.each do |tag| %>
-				    			<li><%= tag.category_name%></li>
-				     		<% end %>
-			     		<% end %>
-			  		</td>
-			  		<td>
-			  			<%= link_to 'Edit', edit_category_path(category) %>
-        				<%= link_to 'Remove', category, method: :delete, data: { confirm: 'Are you sure?' } %>
-			  		</td>
-			    </tr>
-		    <% end %>
+		<% @categories.each do |category| %>
+		<tr>
+			<td><%= category.category_name %></td>
+			<td><%= category.description %></td>
+			<td>
+				<% if category.type_id == 2 #TODO: change to compare with type (String) later %>
+				<%= render :partial => "category_utils/dropdown_single_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+				<% elsif category.type_id == 3 #TODO: same as above%>
+				<%= render :partial => "category_utils/scroll_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+				<% elsif category.type_id == 4 #TODO: same as above%>
+				<%= render :partial => "category_utils/check_box_multi_select_display", :locals => { :category_tags => category.children, :category_name => category.category_name.gsub(/[^0-9a-z]/i, '') } %>
+				<% else %>
+				<% category.children.each do |tag| %>
+				<li><%= tag.category_name%></li>
+				<% end %>
+				<% end %>
+			</td>
+			<td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_category_path(category), title: 'Edit', ref: 'tooltip' %></td>
+  		<td><%= link_to '<i class="fa fa-trash-o"></i>'.html_safe, category, method: :delete, data: {confirm: 'Are you sure?' } %></td>
+		</tr>
+		<% end %>
 		<% end %>
 	</table>
-</div>
 
-<%= link_to 'Add New Category', new_category_path %>
 </div>
+</section>
+

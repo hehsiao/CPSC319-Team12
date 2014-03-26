@@ -1,6 +1,6 @@
 <% defined?(idea_id) or idea_id = 0 %>
 <% special_tag = [] %>
-<select multiple size=5 id="<%= category_name %>" name="cat_tag[]"> <!-- TODO: change the size to be more flexible, perhaps min(tags.size, 6) ? -->
+<select multiple size=5 class="form-control" id="<%= category_name %>" name="cat_tag[]"> <!-- TODO: change the size to be more flexible, perhaps min(tags.size, 6) ? -->
 	<% category_tags.each do |cat_tag| %>
 		<% tag = cat_tag.tag.where(idea_id: idea_id) %>
 		<option value="<%= cat_tag.id %>" <%= !tag.empty? ? "selected" : "" %>> <%= cat_tag.category_name %></option>

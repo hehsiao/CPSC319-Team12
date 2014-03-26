@@ -1,46 +1,50 @@
-<div id="page-wrapper">
-<h1 class="page-header">Ideas</h1>
+<h1 class="page-header">Ideas <small>“Ideas come from everything” <small><small>― Alfred Hitchcock</small></small></small></h1>
+<h5 class="widget">
+  <%= link_to '<i class="fa fa-plus"> </i> Create a New Idea'.html_safe , new_idea_path  %> 
+</h5>
 
-<div class="panel-body">
-  <div class="table">
-    <table class="table table-striped table-hover dataTable">
-      <thead>
-        <tr>
-          <th>User</th>
-          <th>Summary</th>
-          <th>Description</th>
-          <th>Submission date</th>
-          <th>Last modified</th>
-          <th>Keyword</th>
-          <th class="no-sort"></th>
-          <th class="no-sort"></th>
-        </tr>
-      </thead>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bars"></i> List of Ideas</div>
+  <div class="panel-body">
+    <div class="table">
+      <table class="table table-hover dataTable">
+        <thead>
+          <tr>
+            <th>User</th>
+            <th>Summary</th>
+            <th>Description</th>
+            <th>Submission date</th>
+            <th>Keyword</th>
+            <th class="no-sort"></th>
+            <th class="no-sort"></th>
+          </tr>
+        </thead>
 
-      <tbody>
-        <% @ideas.each do |idea| %>
+        <tbody>
+          <% @ideas.each do |idea| %>
           <tr onclick="document.location = '/ideas/<%=idea.id%>';">
             <td><%= idea.user_id %></td>
             <td><%= idea.summary %></td>
             <td><%= truncate(idea.description, length:70) %></td>
-            <td><%= idea.submission_date %></td>
-            <td><%= idea.last_modified %></td>
+            <td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long)  %></td>
             <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
             <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
             <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>
           </tr>
-        <% end %>
-      </tbody>
-    </table>
-  </div>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </section>
 
-
-  <div id="tag_cloud">
-    <p>Filter by Keywords</p>
-    <% tag_cloud Idea.keyword_counts, %w[s m l] do |keyword, css_class| %>
-      <%= link_to keyword.name, keyword_path(keyword.name), class: css_class %>
-    <% end %>
-    <%= link_to 'clear filters', ideas_path %>
-  </div>
-</div>
-</div>
+  <section class="widget">
+    <div class="panel-heading"><i class="fa fa-filter"></i> Filter by Keywords <i class="fa fa-chevron-down"></i> <small><%= link_to 'clear filters', ideas_path %></small>
+      <div class="panel-body" id="tag_cloud_body">
+        <div id="tag_cloud">
+          <% tag_cloud Idea.keyword_counts, %w[s m l] do |keyword, css_class| %>
+          <%= link_to keyword.name, keyword_path(keyword.name), class: css_class %>
+          <% end %>
+        </div>
+      </div>
+    </div>
+  </section>

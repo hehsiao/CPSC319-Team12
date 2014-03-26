@@ -18,7 +18,7 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "should create idea" do
     assert_difference('Idea.count') do
-      post :create, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.submission_date, user_id: @idea.user_id }
+      post :create, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
     end
 
     assert_redirected_to idea_path(assigns(:idea))
@@ -35,7 +35,7 @@ class IdeasControllerTest < ActionController::TestCase
   end
 
   test "should update idea" do
-    patch :update, id: @idea, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.submission_date, user_id: @idea.user_id }
+    patch :update, id: @idea, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
     assert_redirected_to idea_path(assigns(:idea))
   end
 

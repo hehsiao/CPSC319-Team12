@@ -1,9 +1,9 @@
 class CategoryController < ApplicationController
-  before_action :check_permission
+  before_action :check_admin_permission
 
   # GET /category
   def index
-  	@categories = Category.where(parent_id: 0).to_a
+  	@categories = Category.top_categories
   end
 
   # GET /category/new
@@ -49,7 +49,7 @@ class CategoryController < ApplicationController
   # DELETE /categories/1
   def destroy
     @category = Category.find(params[:id])
-    category_tags = Category.where(:parent_id => params[:id])
+    category_tags = @category.children
     category_tags.each do |tag|
       IdeaTag.connection.execute("delete from idea_tags where category_id = #{tag.id}")
     end
@@ -92,15 +92,8 @@ class CategoryController < ApplicationController
       end
     end
 
-    # Checks user is admin, otherwise redirect to dashboard
-    def check_permission
-      if !current_user.try(:admin?)
-        redirect_to new_user_session_path
-      end
-    end
-
     # Never trust parameters from the scary internet, only allow the white list through.
     def category_params
       params.require(:category).permit(:category_name, :description, :type_id)
     end
-end
+  end

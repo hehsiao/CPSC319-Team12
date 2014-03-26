@@ -1,35 +1,45 @@
-<div id="page-wrapper">
-<h1>Status Reports</h1>
+<h1 class="page-header">Reports</h1>
 
-<table class="table" summary="User list">
-  <thead>
-    <tr>
-      <th>Status</th>
-      <th>Number of Ideas</th>
-      <th></th>
-    </tr>
-  </thead>
-  
-  <tbody>
-    <% @status.each do |status| %>
-      <tr>
-        <td><%= status.status %></td>
-		<td>
-		<% counter = 0 %>
-		<% @ideas.each do |idea| %>
-			<% if idea.status == status.id %>
-				<% counter = counter + 1 %>
-			<% end %>
-		<%end%>	
-		<%= counter %>
-		</td>
-        
-      </tr>
-    <% end %>
-  </tbody>
-</table>
+<section class="widget">
+  <div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Stage Report</div>
+    
+  <div class="panel-body">
+
+    <table class="table table-hover dataTable" summary="User list">
+      <thead>
+        <tr>
+          <th>Status</th>
+          <th>Number of Ideas</th>
+          <th></th>
+        </tr>
+      </thead>
+      
+      <tbody>
+        <% @status.each do |status| %>
+          <tr onclick="document.location = '/reports/status_show/<%=status.id%>';">
+            <td><%= status.status %></td>
+    		<td>
+    		<% counter = 0 %>
+    		<% @ideas.each do |idea| %>
+    			<% if idea.status == status.id %>
+    				<% counter += 1 %>
+    			<% end %>
+    		<%end%>	
+    		<%= counter %>
+    		</td>
+            
+          </tr>
+        <% end %>
+      </tbody>
+    </table>
+  </div>
+</section>
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript" src="status_pie"></script>
+
+<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
 
 
-<br>
 
-</div>
+

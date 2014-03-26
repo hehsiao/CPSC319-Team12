@@ -1,0 +1,9 @@
+<h1>Success Rate Report</h1>
+<h2><%= @user.first_name + " " + @user.last_name %></h2>
+
+<%= render 'idea_table' %>
+
+<div>
+<%= link_to("Back",{:action => 'success_rate'}, :class => 'action success_rate') %>
+</div>
+

@@ -1,12 +1,14 @@
-
 <% category_tags.each do |cat_tag| %>
 	<% tag = cat_tag.tag.where(idea_id: idea_id).first %>
 	<% if cat_tag.type_id == 5  #TODO: match against name instead of id %> 
-		<input id="<%=category_name%>_<%=cat_tag.id%>" type="text" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
+		<br>
+		<input id="<%=category_name%>_<%=cat_tag.id%>" class="form-control" type="text" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
 	<% elsif cat_tag.type_id == 6 #TODO: match against name instead of id  %>
-		<input id="<%=category_name%>_<%=cat_tag.id%>" type="month" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
+		<br>
+		<input id="<%=category_name%>_<%=cat_tag.id%>"  class="form-control" type="month" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
 	<% elsif cat_tag.type_id == 7 #TODO: match against name instead of id  %>
-		<input id="<%=category_name%>_<%=cat_tag.id%>" type="date" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
+		<br>
+		<input id="<%=category_name%>_<%=cat_tag.id%>" class="form-control" type="date" name="cat_tag_data[<%=cat_tag.id%>]" value="<%= tag ? tag[:additional_text] : "" %>" /> <!-- TODO: figure out the proper naming for submission -->
 	<% end %>
 <% end %>
 

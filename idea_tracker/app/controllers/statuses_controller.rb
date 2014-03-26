@@ -1,4 +1,6 @@
 class StatusesController < ApplicationController
+  
+  before_action :check_user_permission
   before_action :set_status, only: [:show, :edit, :update, :destroy]
 
   # GET /statuses
@@ -72,4 +74,4 @@ class StatusesController < ApplicationController
       params.require(:status).permit(:status, :position)
 
     end
-end
+  end

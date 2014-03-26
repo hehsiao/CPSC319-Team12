@@ -1,13 +1,8 @@
-<div id="page-wrapper">
-    <div class="row">
-        <div class="col-lg-12">
-            <h1 class="page-header">Idea Editing</h1>
-        </div>
-        <!-- /.col-lg-12 -->
-    </div>
-    
-<%= render 'form' %>
+<h1 class="page-header">Ideas <small>Editing an Idea</small></h1>
+<h5 class="widget">
+  <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe , ideas_path  %> 
+</h5>
 
-<%= link_to 'Show', @idea %> |
-<%= link_to 'Back', ideas_path %>
-</div>
+		<%= render 'form' %>
+
+</section>

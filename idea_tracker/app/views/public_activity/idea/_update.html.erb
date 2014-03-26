@@ -2,10 +2,10 @@
 <%= activity.owner.first_name if activity.owner%>
 <%= activity.owner.last_name if activity.owner%>
 
-edit idea
+updated 
 
 <% if activity.trackable%>
-   <%= activity.trackable.id%>
+   <a href = "/ideas/<%= activity.trackable.id%>" ><%= activity.trackable.summary%></a>
 <% else %>
-   whick has been removed!!
+   which has been removed!!
 <% end %>

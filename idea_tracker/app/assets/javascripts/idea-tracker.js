@@ -15,4 +15,8 @@ $(function() {
             $('div.sidebar-collapse').removeClass('collapse')
         }
     })
+
+    $('#notifications').slimScroll({
+        height: '300px'
+    });
 })

@@ -1,166 +1,167 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>IdeaTracker</title>
+	<title>Idea Tracker</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<%= csrf_meta_tag %>
-  <%= javascript_include_tag "application", "data-turbolinks-track" => true %>
-  <%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
+	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
+	<link href='http://fonts.googleapis.com/css?family=Abel|Open+Sans:400,600' rel='stylesheet'>
+
 </head>
 <body>
-<div id="wrapper">
-	<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
-	    <div class="navbar-header">
-	    	<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-	    	<a class="navbar-brand" href="/">Idea Tracker</a>
-	    </div>
-	    <div class="nav navbar-username navbar-right">
-	    	<% if user_signed_in? %>
-		Signed in as 
-			<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
-			<%=current_user.first_name + " " + current_user.last_name %>
-			<% end %>
-			<%= " (Administrator) " if current_user.try(:admin?) %>. Not you?
-			<%= link_to "Sign out", destroy_user_session_path, :method => :delete %>
-		<% else %>
-			<%= link_to "Sign up", new_user_registration_path %> or <%=link_to "Sign in", new_user_session_path %>
-		<% end %>
+	<div id="wrapper">
+		<nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+			<div class="navbar-header">
+				<button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+					<span class="sr-only">Toggle navigation</span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+					<span class="icon-bar"></span>
+				</button>
+				<a class="navbar-brand" href="/">CBEL Online Idea Tracker</a>
+			</div>
+			<div class="nav navbar-username navbar-right">
+				<% if user_signed_in? %>
+					<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
+					<%=current_user.first_name + " " + current_user.last_name %>
+					<% end %>
+
+					<%= "(Admin) " if current_user.try(:admin?) %>
+					<a href="/users/edit"><i class="fa fa-user fa-fw"></i></a> | 
+					<%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, destroy_user_session_path, :method => :delete %>
+
+				<% else %>
+					<%= link_to "Sign up", new_user_registration_path %> or <%=link_to "Sign in", new_user_session_path %>
+				<% end %>
+			</div>
+
+		</nav>
+		
+		<!-- /.navbar-static-top -->
+		<nav class="navbar-default navbar-static-side" role="navigation">
+			<div class="sidebar-collapse">
+				<ul class="nav" id="side-menu">
+					<li>
+						<a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
+					</li>
+					<li>
+						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+					</li>
+					<li>
+						<a href="/ideas"><i class="fa fa-lightbulb-o fa-fw"></i> Ideas</a>
+<!-- 						<ul class="nav nav-second-level">
+							<li>
+								<a href="/ideas"><i class=" fa fa-list fa-fw"></i> Recent Ideas</a>
+							</li>
+							<li>
+								<a href="/ideas">Assigned Ideas</a>
+							</li>
+							<li>
+								<a href="/ideas"><i class="fa fa-check fa-fw"></i> Subscribed Ideas</a>
+							</li>
+						</ul> -->
+						<!-- /.nav-second-level -->
+					</li>
+					<li>
+						<a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
+					</li>
+					<li>
+						<a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="/reports/status">Status Report</a>
+							</li>
+							<li>
+								<a href="/reports/success_rate">Success Rate Report</a>
+							</li>
+							<li>
+								<a href="/reports/pending_ideas">Pending Ideas</a>
+							</li>
+							<li>
+								<a href="/reports/popularity">Popularity Report</a>
+							</li>
+							<li>
+								<a href="/reports/charting">Custom Report</a>
+							</li>
+						</ul>
+						<!-- /.nav-second-level -->
+					</li>            
+					<% if current_user.try(:admin?) %>
+					<li>
+						<a href="#"><i class="fa fa-cog fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
+						<ul class="nav nav-second-level">
+							<li>
+								<a href="/settings">Site Settings</a>
+							</li>
+							<li>
+								<a href="/category">Categories</a>
+							</li>
+							<li>
+								<a href="/statuses">Status</a>
+							</li>
+							<li>
+								<a href="/users">Users</a>
+							</li>
+						</ul>
+					</li>
+					<% end %>
+				</ul>
+				<!-- /#side-menu -->
+			</div>
+			<!-- /.sidebar-collapse -->
+		</nav>
+		<!-- /.navbar-static-side -->
+
+		<div id="page-wrapper">
+			<div class="row">
+				<% flash.each do |key, value| %>
+				<div class="<%= flash_class(key) %> alert-dismissable">
+					<button type="button" class="close" data-dismiss="alert" aria-hidden="true">×</button>
+					<%= value %>
+				</div>
+				<% end %>
+
+				<%= yield %>
+
+			</div>
 		</div>
-		<!-- 	<ul class="nav navbar-top-links navbar-right">
-				<li class="dropdown">
 
-
-				</li>
-			</ul> -->
-	</nav>
-    
-    <!-- /.navbar-static-top -->
-	<nav class="navbar-default navbar-static-side" role="navigation">
-	    <div class="sidebar-collapse">
-	        <ul class="nav" id="side-menu">
-<!-- 	            <li class="sidebar-search">
-	                <div class="input-group custom-search-form">
-	                    <input type="text" class="form-control" placeholder="Search...">
-	                    <span class="input-group-btn">
-	                        <button class="btn btn-default" type="button">
-	                            <i class="fa fa-search"></i>
-	                        </button>
-	                    </span>
-	                </div>
-	            </li> -->
-	            <li>
-	                <a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
-	            </li>
-	            <li>
-	                <a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
-	            </li>
-	            <li>
-	                <a href="#"><i class="fa fa-lightbulb-o fa-fw"></i> Ideas <span class="fa arrow"></span></a>
-	                <ul class="nav nav-second-level">
-	                    <li>
-	                        <a href="/ideas"><i class=" fa fa-list fa-fw"></i> Recent Ideas</a>
-	                    </li>
-	                    <li>
-	                        <a href="/ideas">Assigned Ideas</a>
-	                    </li>
-	                    <li>
-	                    	<a href="/ideas"><i class="fa fa-check fa-fw"></i> Subscribed Ideas</a>
-	                    </li>
-	                </ul>
-	                <!-- /.nav-second-level -->
-	            </li>
-	            <li>
-	                <a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
-	            </li>
-				<li>
-	                <a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
-	                <ul class="nav nav-second-level">
-	                    <li>
-	                        <a href="/reports/status">Status Report</a>
-	                    </li>
-	                    <li>
-	                        <a href="/reports/success_rate">Success Rate Report</a>
-	                    </li>
-	                    <li>
-	                    	<a href="/reports/view_pending_ideas">Pending Ideas</a>
-	                    </li>
-						<li>
-	                    	<a href="/reports/popularity">Popularity Report</a>
-	                    </li>
-	                </ul>
-	                <!-- /.nav-second-level -->
-	            </li>            
-	            <li>
-	                <a href="/users/edit"><i class="fa fa-cog fa-fw"></i> User Settings</a>
-	            </li>
-	            <% if current_user.try(:admin?) %>
-		            <li>
-		                <a href="#"><i class="fa fa-flag fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
-		                <ul class="nav nav-second-level">
-		                	<li>
-		                    	<a href="/settings">Settings</a>
-		                    </li>
-		                    <li>
-		                    	<a href="/category">Categories</a>
-		                    </li>
-		                    <li>
-		                        <a href="/statuses">Status</a>
-		                    </li>
-		                    <li>
-		                    	<a href="/users">Users</a>
-		                    </li>
-		                </ul>
-		            </li>
-	            <% end %>
-	        </ul>
-	        <!-- /#side-menu -->
-	    </div>
-	    <!-- /.sidebar-collapse -->
-	</nav>
-	<!-- /.navbar-static-side -->
-
-
-  <% flash.each do |key, value| %>
-        <div class="<%= flash_class(key) %>">
-              <%= value %>
-        </div>
-  <% end %>
-
-<%= yield %>
-
-
-
-</div>
+	</div>
 </body>
 <script>
-	$(document).ready(function(){
-		$('#side-menu > li > ul').hide();
-		$('#side-menu > li > ul').siblings('a').click(function(e){e.preventDefault();});
-		$('#side-menu > li > ul').closest('li').click(function(e){
-			var subnav = $(this).children('ul');
-			if(subnav.is(":visible"))
-			{
-				$(this).toggleClass("active", false);
-				subnav.hide();
-			}
-			else
-			{
-				$(this).toggleClass("active", true);
-				$(this).siblings().find('ul').hide();
-				subnav.show();
-			}
-		});
-		$('.dataTable').dataTable({
-		  "aoColumnDefs" : [ {
-		    "bSortable" : false,
-		    "aTargets" : [ "no-sort" ]
-		} ]
-		});
+$(document).ready(function(){
+	$('#side-menu > li > ul').hide();
+	$('#side-menu > li > ul').siblings('a').click(function(e){e.preventDefault();});
+	$('#side-menu > li > ul').closest('li').click(function(e){
+		var subnav = $(this).children('ul');
+		if(subnav.is(":visible"))
+		{
+			$(this).toggleClass("active", false);
+			subnav.hide();
+		}
+		else
+		{
+			$(this).toggleClass("active", true);
+			$(this).siblings().find('ul').hide();
+			subnav.show();
+		}
 	});
+
+	if($('.dataTable').length > 0)
+	{
+		$('.dataTable').dataTable({
+			"aoColumnDefs" : [ {
+				"bSortable" : false,
+				"aTargets" : [ "no-sort" ]
+
+			} ]
+		});
+	}
+
+});
+
+
 
 </script>
 </html>

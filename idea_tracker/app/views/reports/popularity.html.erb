@@ -1,19 +1,24 @@
-<div id="page-wrapper">
-<h1>Popularity Reports</h1>
+<h1 class="page-header">Reports</h1>
 
-The ideas will be grouped by the category of interest and the groups will be sorted by size in descending order.
+<section class="widget">
+	<div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Popularity Report</div>
+	  
+	<div class="panel-body">
 
-<div class="form-group">
-	<label>Select a Category</label>
-	<select class="form-control">
-		<option>Category1</option>
-		<option>Category2</option>
-		<option>Category3</option>
-		<option>Category4</option>
-		<option>Category5</option>
-	</select>
-</div>
-
-<br>
-
-</div>
+		<table class="table table-hover" summary="Category List">
+		  <thead>
+			<tr>
+			  <th>Pick a Category</th>
+			</tr>
+		  </thead>
+		  
+		  <tbody>
+			<% @categories.each do |category| %>
+			  <tr onclick="document.location = '/reports/popularity_show/<%= category.id %>';">
+				<td><%= category.category_name %></td>
+			  </tr>
+			<% end %>
+		  </tbody>
+		</table>
+	</div>
+</section>	
