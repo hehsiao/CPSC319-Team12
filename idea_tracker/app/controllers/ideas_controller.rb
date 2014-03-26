@@ -99,31 +99,22 @@ class IdeasController < ApplicationController
 		#ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
 		@partner = Partner.new
 		@categories = Category.top_categories
-<<<<<<< HEAD
-    	user_list
-    	keyword_list
-=======
+
   	user_list
   	keyword_list
->>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
+
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
 		@idea = Idea.new(idea_params)
-<<<<<<< HEAD
-    	user_list
-
-		@idea.owner_id = Setting.default_owner
-		@idea.user_id = current_user.id
-=======
   	user_list	
 
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
 		@idea.status_date_change = Time.now
->>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
+
 #    @idea.provider_partner_id = params[:provider_partner_id]
 		respond_to do |format|
 			if @idea.save
