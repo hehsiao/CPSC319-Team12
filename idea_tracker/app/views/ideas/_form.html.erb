@@ -53,18 +53,38 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-users"></i> Partner Information 
-					<%= link_to '<small><i class="fa fa-plus"></i> Add New Partners</small>'.html_safe, new_partner_path, :target => '_new' %>
 				</div>
 				<div class="panel-body">
-						<div class="form-group">
-							<%= f.label :provider_partner_id %><br>
-							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-						</div>
-
-						<div class="form-group">
-							<%= f.label :receiver_partner_id %><br>
-							<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-						</div>
+					<div class="form-group">
+						<%= f.label :provider_partner_id %>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="provider_use" id="optionsRadios1" value="option1" checked="">
+	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "0"} %>
+	                        </label>
+	                    </div>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="provider_use" id="optionsRadios2" value="option2">
+								<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                        </label>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+						<%= f.label :receiver_partner_id %>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="receiver_use" id="optionsRadios1" value="option1" checked="">
+	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "1"} %>
+	                        </label>
+	                    </div>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="receiver_use" id="optionsRadios2" value="option2">
+								<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                        </label>
+	                    </div>
+	                </div>
 				</div>
 			</section>
 		</div>
