@@ -5,6 +5,7 @@ class Idea < ActiveRecord::Base
 	belongs_to :partner
 	belongs_to :owner, :class_name => 'User' # this is the current owner of the idea
 	belongs_to :user, :class_name => 'User' # this is the creator of the idea
+	belongs_to :status
 	has_many :comments
 	has_many :child_ideas, :class_name => 'Association', :foreign_key => 'parent_idea_id'
 	has_many :parent_ideas, :class_name => 'Association', :foreign_key => 'tagged_idea_id'

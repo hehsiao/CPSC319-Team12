@@ -30,8 +30,8 @@
       <div class="panel-body">
         <dl class="dl-horizontal">
         
-          <dt>Status:</dt>
-          <dd><%= Status.find(@idea.status).status %></dd>
+          <dt>Stage:</dt>
+          <dd><%= @idea.status %></dd>
         
           <dt>Summary:</dt>
           <dd><%= @idea.summary %></dd>
@@ -48,6 +48,9 @@
 
           <dt>Last modified:</dt> 
           <dd><%= @idea.updated_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></dd>
+
+          <dt>Status updated at:</dt> 
+          <dd><%= @idea.status_date_change.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></dd>
         </small>
       </dl>
       </div>

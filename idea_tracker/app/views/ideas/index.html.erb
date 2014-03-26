@@ -13,6 +13,7 @@
             <th>User</th>
             <th>Summary</th>
             <th>Description</th>
+            <th>Stage</th>
             <th>Submission date</th>
             <th>Keyword</th>
             <th class="no-sort"></th>
@@ -23,10 +24,11 @@
         <tbody>
           <% @ideas.each do |idea| %>
           <tr onclick="document.location = '/ideas/<%=idea.id%>';">
-            <td><%= idea.user_id %></td>
+            <td><%= idea.owner %></td>
             <td><%= idea.summary %></td>
             <td><%= truncate(idea.description, length:70) %></td>
-            <td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long)  %></td>
+            <td><%= idea.status %></td>
+            <td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:short)  %></td>
             <td><%= raw idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></td>
             <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
             <td><%= link_to '<i class="fa fa-pencil"></i>'.html_safe, edit_idea_path(idea), title: 'Edit', ref: 'tooltip' %></td>

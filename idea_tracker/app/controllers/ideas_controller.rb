@@ -18,7 +18,7 @@ class IdeasController < ApplicationController
 	# GET /ideas/1.json
 	def show
 
-		@status = Status.find(@idea.status)
+		@status = @idea.status
 		@categories = Category.top_categories
 
 		commontator_thread_show(@idea) 
@@ -68,6 +68,7 @@ class IdeasController < ApplicationController
 
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
+		@idea.status_date_change = Time.now
 #    @idea.provider_partner_id = params[:provider_partner_id]
 		respond_to do |format|
 			if @idea.save
@@ -89,6 +90,11 @@ class IdeasController < ApplicationController
 	# PATCH/PUT /ideas/1.json
 	def update
 		@last_update = @idea.updated_at
+		@poop1 = @idea.status_id
+		@poop2 = idea_params[:status_id]
+		if !(@idea.status_id.to_s == idea_params[:status_id])
+			@idea.status_date_change = Time.now
+		end
 
 		respond_to do |format|
 			if @idea.update(idea_params)
@@ -105,7 +111,7 @@ class IdeasController < ApplicationController
 				#UserMailer.edit_notification_email(@idea, current_user).deliver
 				# end
 				
-				format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}
+				format.html { redirect_to @idea, notice: "Idea was successfully updated.#{@poop1}..#{@poop2}"}
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -214,7 +220,7 @@ class IdeasController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def idea_params
-			params.require(:idea).permit(:user_id, :summary, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status)
+			params.require(:idea).permit(:user_id, :summary, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status_id)
 
 		end
 

@@ -21,7 +21,7 @@
 					<div class="panel-body">
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
-							<%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status, @idea.status), {}, { :class => 'form-control' }) %>
+							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
 						</div>
 
 						<div class="form-group">
