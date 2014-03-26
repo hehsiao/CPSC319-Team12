@@ -67,7 +67,7 @@ class IdeasController < ApplicationController
 
 		@status = @idea.status
 		@categories = Category.top_categories
-
+		user_list
 		commontator_thread_show(@idea) 
 		if @idea.provider_partner_id != nil
 			@provider = Partner.find(@idea.provider_partner_id).partner_name
@@ -276,41 +276,51 @@ class IdeasController < ApplicationController
 	  end
 
 		def handle_participations
-			Subscription.where(:idea_id => params[:id]).destroy_all
-			participants = params[:idea][:participants].split ','
-			participants.each do |p|
-				Subscription.create(:idea_id => params[:id], :user_id => User.where(:email => p).first.id, :is_active => 1)
+			if !params[:idea][:participants].nil?
+				Subscription.where(:idea_id => params[:id]).destroy_all
+				participants = params[:idea][:participants].split ','
+				participants.each do |p|
+					Subscription.create(:idea_id => params[:id], :user_id => User.where(:email => p).first.id, :is_active => 1)
+				end
 			end
 		end
 
 		def handle_associations
-			Association.connection.execute("delete from associations where parent_idea_id=#{params[:id]} OR tagged_idea_id=#{params[:id]} ")
-			peer_associations = params[:idea][:association_peers].split ','
-			peer_associations.each do |p|
-				Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 0)
-				Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 0)
+			if !params[:idea][:association_peers].nil?
+				Association.connection.execute("delete from associations where parent_idea_id=#{params[:id]} OR tagged_idea_id=#{params[:id]} ")
+				peer_associations = params[:idea][:association_peers].split ','
+				peer_associations.each do |p|
+					Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 0)
+					Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 0)
+				end
 			end
-			peer_associations = params[:idea][:association_parents].split ','
-			peer_associations.each do |p|
-				Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 1)
+			if !params[:idea][:association_parents].nil?
+				peer_associations = params[:idea][:association_parents].split ','
+				peer_associations.each do |p|
+					Association.create(:parent_idea_id => p, :tagged_idea_id => params[:id], :is_hierarchy => 1)
+				end
 			end
-			peer_associations = params[:idea][:association_childs].split ','
-			peer_associations.each do |p|
-				Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 1)
+			if !params[:idea][:association_childs].nil?
+				peer_associations = params[:idea][:association_childs].split ','
+				peer_associations.each do |p|
+					Association.create(:parent_idea_id => params[:id], :tagged_idea_id => p, :is_hierarchy => 1)
+				end
 			end
 		end
 
 
 		def handle_category_tags
-			IdeaTag.connection.execute("delete from idea_tags where idea_id = #{params[:id]}")
-			cat_tags = params[:cat_tag]
-			cat_tag_data = params[:cat_tag_data]
-			if cat_tags 
-				cat_tags.each do |tag|
-					if cat_tag_data and cat_tag_data.has_key?(tag)
-						IdeaTag.create(:idea_id => params[:id], :category_id => tag, :additional_text => cat_tag_data[tag])
-					else
-						IdeaTag.create(:idea_id => params[:id], :category_id => tag)
+			if !params[:cat_tag].nil?
+				IdeaTag.connection.execute("delete from idea_tags where idea_id = #{params[:id]}")
+				cat_tags = params[:cat_tag]
+				cat_tag_data = params[:cat_tag_data]
+				if cat_tags 
+					cat_tags.each do |tag|
+						if cat_tag_data and cat_tag_data.has_key?(tag)
+							IdeaTag.create(:idea_id => params[:id], :category_id => tag, :additional_text => cat_tag_data[tag])
+						else
+							IdeaTag.create(:idea_id => params[:id], :category_id => tag)
+						end
 					end
 				end
 			end
