@@ -150,6 +150,7 @@ Category.create(category_name: 'Flexible ', type_id: '1', parent_id: '8')
 Category.create(category_name: 'Needs to Start By', type_id: '6', parent_id: '8')
 Category.create(category_name: 'Needs to End By', type_id: '6', parent_id: '8')
 
+
 Commontator::Comment.delete_all
 Commontator::Comment.create(id:1, creator_type: "User", creator_id: "1", thread_id: "1", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:40:37", updated_at: "2014-03-25 23:40:37")
 Commontator::Comment.create(id:2, creator_type: "User", creator_id: "2", thread_id: "1", body: "Etiam nec augue vel magna interdum varius. Nunc elementum, erat non facilisis tempor, nisi massa gravida velit, in mollis orci tortor sit amet nisl. Nulla vel orci mi.", created_at: "2014-03-25 23:41:37", updated_at: "2014-03-25 23:41:37")

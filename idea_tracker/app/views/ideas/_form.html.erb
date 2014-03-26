@@ -22,6 +22,7 @@
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
 							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
+
 						</div>
 
 						<div class="form-group">
@@ -53,6 +54,7 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-users"></i> Partner Information 
+
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
@@ -85,6 +87,7 @@
 	                        </label>
 	                    </div>
 	                </div>
+
 				</div>
 			</section>
 		</div>
@@ -188,8 +191,7 @@
 		plugins: ['remove_button'],
 		delimiter: ',',
 		valueField: 'name',
-		labelField: 'id',
-		searchField: ['id','name'],
+		searchField: ['name'],
 		options: keywords_options,
 		render: {
 			item: function(item, escape) {
@@ -199,16 +201,19 @@
 			},
 			option: function(item, escape) {
 				var label = item.name || item.id;
-				var caption = item.name ? item.id : null;
 				return '<div>' +
 						'<span class="name selectize">' + escape(label) + ' </span>' +
-						(caption ? '<span class="caption selectize">' + escape(caption) + '</span>' : '') +
 				'</div>';
 			}
 		},
-		create: function(input) {return {value: input, text: input};}
+		create: function(input) {
+			return {name: input};
+		}
 
 	});
+
+	<%= @idea.keyword_list.split(',') %>
+
 
 	$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
 		sortField: 'text',

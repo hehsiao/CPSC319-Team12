@@ -20,22 +20,6 @@
 
 </h5>
 
-
-<div class="row">
-  <div class="col-md-12">
-    <section class="widget">
-      <div class="panel-heading"></div>
-      <div class="panel-body">
-        <dl class="dl-horizontal">
-          <!-- TODO: SHARE IDEA BUTTON TO export as CSV and or Send Email -->
-          <h1> maybe bump the send idea in a modal and access via a share button?</h1>
-          <dt><i class="fa fa-envelope"></i> Send Idea</dt> <dd><%= render 'email' %><dd>
-        </dl>
-      </div>
-    </section>
-  </div>
-</div>
-
 <div class="row">
   <div class="col-md-12">
     <section class="widget">
@@ -54,7 +38,7 @@
           <dd><%= @idea.description %></dd>
         
           <dt>Keywords:</dt>
-          <dd><%= @idea.keyword_list %></dd>
+          <dd><%= raw @idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></dd>
         </br>
           <small>
           <dt>Submission date:</dt>
@@ -65,6 +49,7 @@
 
           <dt>Status updated at:</dt> 
           <dd><%= @idea.status_date_change.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></dd>
+
         </small>
       </dl>
       </div>
@@ -136,9 +121,21 @@
           <dt>Parents:</dt><dd><%= raw @idea.parent_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br> "  %></dd>
           <dt>Childs:</dt><dd><%= raw @idea.child_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
           <dt>Peers:</dt><dd><%= raw @idea.peer_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
-        
-        </dl>
 
+        </dl>
+      </div>
+    </section>
+  </div>
+
+  <div class="col-md-6">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-share-square-o"></i> Share</div>
+      <div class="panel-body">
+        <dl class="dl-horizontal">
+          <dt><i class="fa fa-envelope"></i> Send Idea</dt> <dd><%= render 'email' %><dd>
+        </br>
+          <dd><%= render 'export' %><dd>
+        </dl>
       </div>
     </section>
   </div>

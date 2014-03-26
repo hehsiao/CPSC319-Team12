@@ -89,7 +89,6 @@ div.dataTables_filter input {
     min-height: 568px;
 }
 
-
 @media(min-width:1200px) {
     #page-wrapper {
         position: inherit;
