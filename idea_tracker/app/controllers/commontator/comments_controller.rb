@@ -30,6 +30,7 @@ module Commontator
       
       respond_to do |format|
         if @comment.save
+          EuserMailer.comment_email(@thread, @user, @comment.body).deliver \
           @thread.subscribe(@user) if @thread.config.auto_subscribe_on_comment
           @thread.add_unread_except_for(@user)
           recipients = @thread.active_subscribers.reject{|s| s == @user}
