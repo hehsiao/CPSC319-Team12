@@ -15,6 +15,12 @@ User.create!([
 	{id: 1, email: "admin@a.a", password: "12341234", first_name: "Admin", last_name: "Admin", admin: "1"},
 	{id: 2, email: "user@a.a", password: "12341234", first_name: "User", last_name: "User", admin: "0"},
 	{id: 3, email: "justin@a.a", password: "12341234", first_name: "Justin", last_name: "Ho", admin: "1"},
+	{id: 4, email: "bryliov@gmail.com", password: "12341234", first_name: "Ilya", last_name: "Bryliov", admin: "0"},
+	{id: 5, email: "me@henrychsiao.com", password: "12341234", first_name: "Henry", last_name: "Hsiao", admin: "0"},
+	{id: 6, email: "jimmy.gnahz@gmail.com", password: "12341234", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
+	{id: 7, email: "jtsengyc@gmail.com", password: "12341234", first_name: "Jason", last_name: "Tseng", admin: "0"},
+	{id: 8, email: "ronaldho@alumni.ubc.ca", password: "12341234", first_name: "Ronald", last_name: "Ho", admin: "0"},
+	{id: 9, email: "tanat.ratana@gmail.com", password: "12341234", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
 ])
 
 Partner.delete_all
@@ -144,4 +150,19 @@ Category.create(category_name: 'General ', type_id: '1', parent_id: '7')
 Category.create(category_name: 'Flexible ', type_id: '1', parent_id: '8') 
 Category.create(category_name: 'Needs to Start By', type_id: '6', parent_id: '8')
 Category.create(category_name: 'Needs to End By', type_id: '6', parent_id: '8')
+
+Commontator::Comment.delete_all
+Commontator::Comment.create(id:1, creator_type: "User", creator_id: "1", thread_id: "1", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:40:37", updated_at: "2014-03-25 23:40:37")
+Commontator::Comment.create(id:2, creator_type: "User", creator_id: "2", thread_id: "1", body: "Etiam nec augue vel magna interdum varius. Nunc elementum, erat non facilisis tempor, nisi massa gravida velit, in mollis orci tortor sit amet nisl. Nulla vel orci mi.", created_at: "2014-03-25 23:41:37", updated_at: "2014-03-25 23:41:37")
+Commontator::Comment.create(id:3, creator_type: "User", creator_id: "3", thread_id: "1", body: "Vestibulum scelerisque velit a malesuada vehicula. Morbi adipiscing iaculis neque, non cursus odio accumsan at. Integer suscipit tristique semper. Maecenas sed massa at magna elementum molestie.", created_at: "2014-03-25 23:42:37", updated_at: "2014-03-25 23:42:37")
+Commontator::Comment.create(id:4, creator_type: "User", creator_id: "4", thread_id: "2", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:43:37", updated_at: "2014-03-25 23:43:37")
+Commontator::Comment.create(id:5, creator_type: "User", creator_id: "5", thread_id: "3", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:44:37", updated_at: "2014-03-25 23:44:37")
+Commontator::Comment.create(id:6, creator_type: "User", creator_id: "6", thread_id: "4", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:45:37", updated_at: "2014-03-25 23:45:37")
+Commontator::Comment.create(id:7, creator_type: "User", creator_id: "7", thread_id: "5", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:46:37", updated_at: "2014-03-25 23:46:37")
+Commontator::Comment.create(id:8, creator_type: "User", creator_id: "8", thread_id: "6", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:47:37", updated_at: "2014-03-25 23:47:45")
+Commontator::Comment.create(id:9, creator_type: "User", creator_id: "9", thread_id: "7", body: "Lorem ipsum dolor sit amet, consectetur adipiscing elit. In et risus id metus tempor sodales eget et nulla. Mauris sollicitudin odio felis, id pretium odio molestie sit amet. In vitae lectus eget quam vehicula tristique nec vel ipsum.", created_at: "2014-03-25 23:48:37", updated_at: "2014-03-25 23:48:37")
+Commontator::Comment.create(id:10, creator_type: "User", creator_id: "7", thread_id: "3", body: "Etiam nec augue vel magna interdum varius. Nunc elementum, erat non facilisis tempor, nisi massa gravida velit, in mollis orci tortor sit amet nisl. Nulla vel orci mi.", created_at: "2014-03-25 23:46:37", updated_at: "2014-03-25 23:46:37")
+Commontator::Comment.create(id:11, creator_type: "User", creator_id: "8", thread_id: "3", body: "Pellentesque eget vehicula ligula. Aenean nec venenatis erat. Praesent consequat, lacus sit amet fringilla bibendum, justo neque sagittis elit, fermentum tristique justo magna non ante. Duis eget urna neque. Interdum et malesuada fames ac ante ipsum primis in faucibus.", created_at: "2014-03-25 23:47:37", updated_at: "2014-03-25 23:47:45")
+Commontator::Comment.create(id:12, creator_type: "User", creator_id: "9", thread_id: "3", body: "Suspendisse eget enim vel orci faucibus semper. Ut tempus justo dolor, et volutpat magna scelerisque porttitor.", created_at: "2014-03-25 23:48:37", updated_at: "2014-03-25 23:48:37")
+
 
