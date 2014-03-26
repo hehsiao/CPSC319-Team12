@@ -7,7 +7,9 @@ function drawChart() {
 
 			<% counter = 0 %>
 			<% @ideas.each do |idea| %>
-				<% if idea.status == status.id %>
+
+				<% if idea.status.id == status.id %>
+
 					<% counter += 1 %>
 				<% end %>
 			<%end%>	

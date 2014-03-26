@@ -61,7 +61,7 @@ class IdeasController < ApplicationController
 	# GET /ideas/1.json
 	def show
 
-		@status = Status.find(@idea.status)
+		@status = @idea.status
 		@categories = Category.top_categories
 
 		commontator_thread_show(@idea) 
@@ -99,18 +99,31 @@ class IdeasController < ApplicationController
 		#ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
 		@partner = Partner.new
 		@categories = Category.top_categories
+<<<<<<< HEAD
     	user_list
     	keyword_list
+=======
+  	user_list
+  	keyword_list
+>>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
 		@idea = Idea.new(idea_params)
+<<<<<<< HEAD
     	user_list
 
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
+=======
+  	user_list	
+
+		@idea.owner_id = Setting.default_owner
+		@idea.user_id = current_user.id
+		@idea.status_date_change = Time.now
+>>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
 #    @idea.provider_partner_id = params[:provider_partner_id]
 		respond_to do |format|
 			if @idea.save
@@ -132,6 +145,11 @@ class IdeasController < ApplicationController
 	# PATCH/PUT /ideas/1.json
 	def update
 		@last_update = @idea.updated_at
+		@poop1 = @idea.status_id
+		@poop2 = idea_params[:status_id]
+		if !(@idea.status_id.to_s == idea_params[:status_id])
+			@idea.status_date_change = Time.now
+		end
 
 		respond_to do |format|
 			if @idea.update(idea_params)
@@ -148,7 +166,7 @@ class IdeasController < ApplicationController
 				#UserMailer.edit_notification_email(@idea, current_user).deliver
 				# end
 				
-				format.html { redirect_to @idea, notice: 'Idea was successfully updated.'}
+				format.html { redirect_to @idea, notice: "Idea was successfully updated.#{@poop1}..#{@poop2}"}
 				format.json { head :no_content }
 			else
 				format.html { render action: 'edit' }
@@ -190,23 +208,24 @@ class IdeasController < ApplicationController
   end
 
 	private
-	    def user_list
-	      @participants = "["
-	      User.all.each do |u|
-	        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
-	      end
-	      @participants = @participants[0...-2]
-	      @participants += "]"
-	    end
 
-	    def keyword_list
-	      @keywords = "["
-	      Tag.all.each do |t|
-	        @keywords += "{id: '" + t.id.to_s + "', name: '" + t.name + "'}, "
-	      end
-	      @keywords = @keywords[0...-2]
-	      @keywords += "]"
-	    end
+    def user_list
+      @participants = "["
+      User.all.each do |u|
+        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+      end
+      @participants = @participants[0...-2]
+      @participants += "]"
+    end
+
+    def keyword_list
+      @keywords = "["
+      Tag.all.each do |t|
+        @keywords += "{name: '" + t.name + "'}, "
+      end
+      @keywords = @keywords[0...-2]
+      @keywords += "]"
+    end
 	    
 		def handle_participations
 			Subscription.where(:idea_id => params[:id]).destroy_all
@@ -257,7 +276,7 @@ class IdeasController < ApplicationController
 
 		# Never trust parameters from the scary internet, only allow the white list through.
 		def idea_params
-			params.require(:idea).permit(:user_id, :summary, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status)
+			params.require(:idea).permit(:user_id, :summary, :description, :provider_partner_id, :receiver_partner_id, :keyword_list, :submission_date, :last_modified, :status_date_change, :status_id)
 
 		end
 

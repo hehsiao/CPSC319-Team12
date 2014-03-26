@@ -9,7 +9,7 @@ var data = google.visualization.arrayToDataTable([
 		<% @ideas.each do |idea| %>
 			<% if idea.user_id == user.id %>
 			<% owner_of += 1 %>
-				<% if idea.status == @status_size %>
+				<% if idea.status.id == @status_size %>
 				<% verified += 1 %>
 				<% end %>
 			<% end %>

@@ -21,7 +21,8 @@
 					<div class="panel-body">
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
-							<%= f.select(:status, options_from_collection_for_select(Status.all, :id, :status, @idea.status), {}, { :class => 'form-control' }) %>
+
+							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
 						</div>
 
 						<div class="form-group">
@@ -53,6 +54,7 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-users"></i> Partner Information 
+<<<<<<< HEAD
 					<%= link_to '<small><i class="fa fa-plus"></i> Add New Partners</small>'.html_safe, new_partner_path, :target => '_new' %>
 				</div>
 				<div class="panel-body">
@@ -65,6 +67,40 @@
 							<%= f.label :receiver_partner_id %><br>
 							<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
 						</div>
+=======
+				</div>
+				<div class="panel-body">
+					<div class="form-group">
+						<%= f.label :provider_partner_id %>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="provider_use" id="optionsRadios1" value="option1" checked="">
+	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "0"} %>
+	                        </label>
+	                    </div>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="provider_use" id="optionsRadios2" value="option2">
+								<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                        </label>
+	                    </div>
+	                </div>
+	                <div class="form-group">
+						<%= f.label :receiver_partner_id %>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="receiver_use" id="optionsRadios1" value="option1" checked="">
+	                            <%= render :partial => "partners/new_popup_form", :locals => { :form_number => "1"} %>
+	                        </label>
+	                    </div>
+	                    <div class="radio">
+	                        <label>
+	                            <input type="radio" name="receiver_use" id="optionsRadios2" value="option2">
+								<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+	                        </label>
+	                    </div>
+	                </div>
+>>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
 				</div>
 			</section>
 		</div>
@@ -154,6 +190,7 @@
 	</div>
 
 <% end %>
+<<<<<<< HEAD
 
 <script>
 	$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
@@ -237,4 +274,91 @@
 		selectize_particpants.addItem(data);
 	});
 
+=======
+
+<script>
+	$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
+		plugins: ['remove_button'],
+		delimiter: ',',
+		persist: false,
+		create: function(input) {return {value: input, text: input};}
+	});
+
+	var keywords_options = <%= raw @keywords %>;
+	$('#idea_keyword_list').selectize({
+		plugins: ['remove_button'],
+		delimiter: ',',
+		valueField: 'name',
+		searchField: ['name'],
+		options: keywords_options,
+		render: {
+			item: function(item, escape) {
+				return '<div>' +
+						(item.name ? '<span class="name selectize">' + escape(item.name) + ' </span>' : '') +
+				'</div>';
+			},
+			option: function(item, escape) {
+				var label = item.name || item.id;
+				return '<div>' +
+						'<span class="name selectize">' + escape(label) + ' </span>' +
+				'</div>';
+			}
+		},
+		create: function(input) {
+			return {name: input};
+		}
+
+	});
+
+	<%= @idea.keyword_list.split(',') %>
+
+
+	$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
+		sortField: 'text',
+	});
+
+
+	var participants_options = <%= raw @participants %>;
+
+	var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+										'(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+	
+	$('#idea_participants').selectize({
+		plugins: ['remove_button'],
+		delimiter: ',',
+		persist: false,
+		maxItems: null,
+		valueField: 'email',
+		labelField: 'name',
+		searchField: ['name', 'email'],
+		options:  participants_options,
+		preload: true,
+		render: {
+			item: function(item, escape) {
+				return '<div>' +
+						(item.name ? '<span class="name selectize">' + escape(item.name) + ' </span>' : '') +
+						(item.email ? '<span class="email caption selectize">' + escape(item.email) + '</span>' : '') +
+				'</div>';
+			},
+			option: function(item, escape) {
+				var label = item.name || item.email;
+				var caption = item.name ? item.email : null;
+				return '<div>' +
+						'<span class="name selectize">' + escape(label) + ' </span>' +
+						(caption ? '<span class="caption selectize">' + escape(caption) + '</span>' : '') +
+				'</div>';
+			}
+		},
+		create: function(input) {
+			return false;
+		}
+	});
+
+	var participants_list = [<%= raw @idea.participants.where(:is_active => 1).collect {|u| "'#{u.user.email}'"}.join "," %>]
+	var selectize_particpants = $('#idea_participants')[0].selectize;
+	$(participants_list).each(function(idx, data){
+		selectize_particpants.addItem(data);
+	});
+
+>>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
 </script>

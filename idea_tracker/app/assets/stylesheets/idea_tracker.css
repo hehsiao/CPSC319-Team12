@@ -89,6 +89,7 @@ div.dataTables_filter input {
     min-height: 568px;
 }
 
+<<<<<<< HEAD
 @media(min-width:768px) {
     #page-wrapper {
         position: inherit;
@@ -97,6 +98,8 @@ div.dataTables_filter input {
         min-height: 768px;
     }
 }
+=======
+>>>>>>> 44e62b5540baa28b00fd2240553f315c35644dfc
 
 @media(min-width:1200px) {
     #page-wrapper {
@@ -123,7 +126,6 @@ div.dataTables_filter input {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 }
-
 
 /* Idea Creation */
 
@@ -259,7 +261,7 @@ div.dataTables_filter input {
     padding-left: 52px;
 }
 
-@media(min-width:768px) {
+@media(min-width:1200px) {
     .navbar-static-side {
         z-index: 1;
         position: absolute;
@@ -275,6 +277,37 @@ div.dataTables_filter input {
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
+}
+@media (min-width: 900px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .navbar-static-top {
+    border-radius: 0;
+  }
+  .navbar {
+    border-radius: 4px;
+  }
+  .navbar-header {
+    float: left;
+  }
 }
 
 /* Buttons */

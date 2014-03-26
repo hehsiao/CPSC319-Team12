@@ -11,7 +11,9 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140324073149) do
+
+ActiveRecord::Schema.define(version: 20140326075618) do
+
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -49,15 +51,6 @@ ActiveRecord::Schema.define(version: 20140324073149) do
 
   create_table "category_types", force: true do |t|
     t.string   "type"
-    t.datetime "created_at"
-    t.datetime "updated_at"
-  end
-
-  create_table "comments", force: true do |t|
-    t.integer  "idea_id"
-    t.text     "comment"
-    t.integer  "user_id"
-    t.date     "comment_date"
     t.datetime "created_at"
     t.datetime "updated_at"
   end
@@ -122,20 +115,12 @@ ActiveRecord::Schema.define(version: 20140324073149) do
     t.integer  "receiver_partner_id"
     t.date     "submission_date"
     t.date     "last_modified"
-    t.date     "status_date_change"
+    t.datetime "status_date_change"
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "summary"
-    t.integer  "status",              default: 1, null: false
+    t.integer  "status_id",           default: 1, null: false
     t.integer  "owner_id"
-  end
-
-  create_table "notifications", force: true do |t|
-    t.integer  "user_id"
-    t.text     "notification_text"
-    t.boolean  "has_checked"
-    t.datetime "created_at"
-    t.datetime "updated_at"
   end
 
   create_table "partners", force: true do |t|

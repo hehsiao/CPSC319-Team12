@@ -75,7 +75,9 @@ class ReportsController < ApplicationController
 	@chart_type = params[:chart_type]
 	@sql2 = sql
 
-	if params[:aggregate1] == 'status'
+
+	if params[:aggregate1] == 'status_id'
+
 		@label1 = Status.all
 	elsif params[:aggregate1] == 'owner_id' or params[:aggregate1] == 'user_id'
 		@label1 = User.all
@@ -83,7 +85,9 @@ class ReportsController < ApplicationController
 		@label1 = Partner.all
 	end
 
-	if params[:aggregate2] == 'status'
+
+	if params[:aggregate2] == 'status_id'
+
 		@label2 = Status.all
 	elsif params[:aggregate2] == 'owner_id' or params[:aggregate2] == 'user_id'
 		@label2 = User.all
@@ -107,7 +111,7 @@ class ReportsController < ApplicationController
  end
  
  def status_show
-   @ideas = Idea.where(status: params[:id])
+   @ideas = Idea.where(status_id: params[:id])
    @status = Status.find(params[:id])
    @all_status = Status.all
  end
