@@ -6,13 +6,40 @@ class ReportsController < ApplicationController
   
   def success_rate
    @users = User.all
-   @ideas = Idea.all
-   @status_size = Status.all.size
+   status_size = Status.all.size
+   final_status = Status.where(position: status_size)
+   final_status_id = final_status.at(0).id
+   
+   @success_rate_array = Array.new
+   @users.each do |user|
+	ideas = Idea.where(user_id: user.id)
+	owner_of = ideas.size
+	verified = 0
+	ideas.each do |idea|
+		if idea.status_id == final_status_id
+			verified += 1
+		end
+	end
+	
+	if verified == 0
+		@success_rate_array << 0
+	else
+		rate = verified*100/owner_of
+		@success_rate_array << rate
+	end
+	
+   end
+   
   end
  
  def status
-   @status = Status.all
-   @ideas = Idea.all
+	@status = Status.all
+	ideas = Idea.all
+	@counter_array = Array.new
+	@status.each do |status|
+		ideas = Idea.where(status_id: status.id)
+		@counter_array << ideas.size
+	end
  end
  
  def chart
