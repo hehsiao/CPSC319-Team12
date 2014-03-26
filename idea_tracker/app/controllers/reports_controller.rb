@@ -27,9 +27,7 @@ class ReportsController < ApplicationController
 		rate = verified*100/owner_of
 		@success_rate_array << rate
 	end
-	
-   end
-   
+   end 
   end
  
  def status
@@ -139,10 +137,6 @@ class ReportsController < ApplicationController
    @all_status = Status.all
  end
  
- def status_pie
-   @status = Status.all
-   @ideas = Idea.all
- end
  
  def success_rate_show
 	@ideas = Idea.where(user_id: params[:id])
@@ -150,18 +144,12 @@ class ReportsController < ApplicationController
 	@all_status = Status.all
  end
  
- def success_rate_column_chart
-	@users = User.all
-	@ideas = Idea.all
-	@status_size = Status.all.size
- end
  
  def popularity
 	@categories = Category.top_categories
  end
  
-
- # TODO : Sort by idea_counter_array
+ 
  def popularity_show
 	idea_counter = idea_counter_array
 	category_children = Category.where(parent_id: params[:id])
@@ -192,11 +180,7 @@ class ReportsController < ApplicationController
 	@category_child = category_child
 	@all_status = Status.all
  end
- 
- def popularity_pie
-	#@idea_counter_array = idea_counter_array
-	#@category_children = Category.where(parent_id: params[:id])
- end
+
  
  private 
  

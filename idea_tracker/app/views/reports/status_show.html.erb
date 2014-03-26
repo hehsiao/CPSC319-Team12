@@ -1,5 +1,9 @@
 <h1 class="page-header">Reports <small>stagess</small></h1>
 
+<h5 class="widget">
+    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, {:action => 'status'} %> 
+</h5>
+
 <section class="widget">
 	<div class="panel-heading"><i class="fa fa-bars"></i> <%= @status.status %></div>
 	  
@@ -9,9 +13,6 @@
 <%= render 'idea_table' %>
 </div>
 </section>
-<div>
-<%= link_to("Back",{:action => 'status'}, :class => 'action status') %>
-</div>
 
 
 
