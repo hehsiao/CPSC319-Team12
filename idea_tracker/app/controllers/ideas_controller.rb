@@ -241,11 +241,14 @@ class IdeasController < ApplicationController
 
     def keyword_list
       @keywords = "["
-      Tag.all.each do |t|
-        @keywords += "{name: '" + t.name + "'}, "
-      end
-      @keywords = @keywords[0...-2]
-      @keywords += "]"
+      if Tag.exists?  
+	      Tag.all.each do |t|
+
+	        @keywords += "{name: '" + t.name + "'}, "
+	      end
+      	@keywords = @keywords[0...-2]
+    	end
+    	@keywords += "]"
     end
 	    
 	  def handle_partners

@@ -37,7 +37,7 @@
 
 						<div class="form-group">
 								<%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
-								<%= f.text_field :keyword_list, placeholder: 'Add keywords...', :value => "#{@idea.keyword_list.collect{|u| u }.join ","}" %>
+								<%= f.text_field :keyword_list, :placeholder => 'Add keywords...', :value => "#{ raw @idea.keyword_list.collect{|u| u }.join ","}" %>
 						</div>
 
 						<div class="form-group">
