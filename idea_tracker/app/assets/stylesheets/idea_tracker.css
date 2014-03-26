@@ -7,7 +7,7 @@ body {
     background-repeat:no-repeat;
     background-position: top left;
     background-attachment:fixed;
-    background-size: 120%;
+    background-size: 3840px 2160px;
     color: #f8f8f8;
     font-family: "Open Sans", sans-serif;
 }
@@ -61,12 +61,19 @@ input {
     color: black !important;
 }
 
+textarea {
+    color: #000;
+}
+
 div.dataTables_filter input {
     padding-left: 5px;
     background-color: rgb(255, 255, 255);
     color:black;
 }
 
+.dl-horizontal dt {
+    white-space: normal;
+}
 /* Panels */
 
 .panel-heading {
@@ -87,15 +94,6 @@ div.dataTables_filter input {
 #page-wrapper {
     padding: 0 15px;
     min-height: 568px;
-}
-
-@media(min-width:768px) {
-    #page-wrapper {
-        position: inherit;
-        margin: 0 25px 0 250px;
-        padding: 0 30px;
-        min-height: 768px;
-    }
 }
 
 @media(min-width:1200px) {
@@ -145,6 +143,7 @@ div.dataTables_filter input {
 .caption.selectize {
     color: #777; 
 }
+
 /* navigation */
 
 /* ------------------------------- */
@@ -275,6 +274,38 @@ div.dataTables_filter input {
     .navbar-top-links .dropdown-alerts {
         margin-left: auto;
     }
+}
+
+@media (min-width: 900px) {
+  .navbar-collapse {
+    width: auto;
+    border-top: 0;
+    box-shadow: none;
+  }
+  .navbar-collapse.collapse {
+    display: block !important;
+    height: auto !important;
+    padding-bottom: 0;
+    overflow: visible !important;
+  }
+  .navbar-collapse.in {
+    overflow-y: visible;
+  }
+  .navbar-fixed-top .navbar-collapse,
+  .navbar-static-top .navbar-collapse,
+  .navbar-fixed-bottom .navbar-collapse {
+    padding-right: 0;
+    padding-left: 0;
+  }
+  .navbar-static-top {
+    border-radius: 0;
+  }
+  .navbar {
+    border-radius: 4px;
+  }
+  .navbar-header {
+    float: left;
+  }
 }
 
 /* Buttons */

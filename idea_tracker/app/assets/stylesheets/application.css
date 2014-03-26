@@ -14,8 +14,3 @@
  *= require_tree .
  *= require idea_tracker
  */
-
-tr[onclick]
-{
-	cursor: pointer;
-}

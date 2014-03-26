@@ -1,7 +1,7 @@
 <h1 class="page-header">Chart</h1>
 
 <section class="widget">
-  <div class="panel-heading"><i class="fa fa-signal"></i> <%= params[:aggregate1] + " vs " + params[:aggregate2] %><!-- TODO: CHANGE TO NAME OF CHART --></div>
+  <div class="panel-heading"><i class="fa fa-signal"></i> <%= params[:aggregate1].titleize + " vs " + params[:aggregate2].titleize %><!-- TODO: CHANGE TO NAME OF CHART --></div>
   <div class="panel-body">
     <div id="container" style="min-width: 310px; height: 400px; margin: 0 auto"></div>
   </div>

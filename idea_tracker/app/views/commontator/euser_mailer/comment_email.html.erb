@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
+  </head>
+  <body>
+    <h1> <%= @user.first_name%> post a comment on idea: <%= @idea.summary %> on IdeaTracker</h1>
+    <p>
+      
+      <%= @user.first_name + " " + @user.last_name %> left a comment on the idea <%= @idea.summary %> 
+    </br>
+    </br>
+      <%=@comment%> 
+    </p>
+    <p>
+      To login to the site, just follow this link: "http://localhost:3000/ideas/<%= @idea.id%>".
+    </p>
+    <p>Thanks for using Idea Tracker and have a great day!</p>
+  </body>
+</html>
