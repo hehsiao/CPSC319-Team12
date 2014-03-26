@@ -56,15 +56,15 @@ class IdeasController < ApplicationController
 		#ronald's note: this is not right currently, because it resets the partner (obviously), just using it currently to debug.
 		@partner = Partner.new
 		@categories = Category.top_categories
-    	user_list
-    	keyword_list
+  	user_list
+  	keyword_list
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
 		@idea = Idea.new(idea_params)
-    	user_list
+  	user_list	
 
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
@@ -153,23 +153,23 @@ class IdeasController < ApplicationController
   end
 
 	private
-	    def user_list
-	      @participants = "["
-	      User.all.each do |u|
-	        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
-	      end
-	      @participants = @participants[0...-2]
-	      @participants += "]"
-	    end
+    def user_list
+      @participants = "["
+      User.all.each do |u|
+        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+      end
+      @participants = @participants[0...-2]
+      @participants += "]"
+    end
 
-	    def keyword_list
-	      @keywords = "["
-	      Tag.all.each do |t|
-	        @keywords += "{id: '" + t.id.to_s + "', name: '" + t.name + "'}, "
-	      end
-	      @keywords = @keywords[0...-2]
-	      @keywords += "]"
-	    end
+    def keyword_list
+      @keywords = "["
+      Tag.all.each do |t|
+        @keywords += "{name: '" + t.name + "'}, "
+      end
+      @keywords = @keywords[0...-2]
+      @keywords += "]"
+    end
 	    
 		def handle_participations
 			Subscription.where(:idea_id => params[:id]).destroy_all

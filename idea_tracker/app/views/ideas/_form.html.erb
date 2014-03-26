@@ -188,8 +188,7 @@
 		plugins: ['remove_button'],
 		delimiter: ',',
 		valueField: 'name',
-		labelField: 'id',
-		searchField: ['id','name'],
+		searchField: ['name'],
 		options: keywords_options,
 		render: {
 			item: function(item, escape) {
@@ -199,16 +198,23 @@
 			},
 			option: function(item, escape) {
 				var label = item.name || item.id;
-				var caption = item.name ? item.id : null;
 				return '<div>' +
 						'<span class="name selectize">' + escape(label) + ' </span>' +
-						(caption ? '<span class="caption selectize">' + escape(caption) + '</span>' : '') +
 				'</div>';
 			}
 		},
-		create: function(input) {return {value: input, text: input};}
+		create: function(input) {
+			return {name: input};
+		}
 
 	});
+
+	<%= @idea.keyword_list.split(',') %>
+	// var keyword_list
+	// var selectize_keywords = $('#idea_keyword_list')[0].selectize;
+	// $(keyword_list).each(function(idx, data){
+	// 	selectize_keywords.addItem(data);
+	// });
 
 	$('#idea_provider_partner_id, #idea_receiver_partner_id').selectize({
 		sortField: 'text',
