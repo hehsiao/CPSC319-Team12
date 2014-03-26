@@ -102,7 +102,7 @@ class ReportsController < ApplicationController
  
  def pending_ideas_show
 	@days = params[:submit]
-	@ideas = Idea.where(:submission_date => Time.now-(60*60*24*365*100)..Time.now - (60*60*24*@days.to_i))
+	@ideas = Idea.where(:created_at => Time.now-(60*60*24*365*100)..Time.now - (60*60*24*@days.to_i))
 	@all_status = Status.all
  end
  

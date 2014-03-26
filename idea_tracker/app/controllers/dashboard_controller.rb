@@ -42,6 +42,9 @@ class DashboardController < ApplicationController
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
 
+		ideas_within_month = Idea.where(:created_at => Time.now-(60*60*24*30)..Time.now)
+		@ideas_group_by_week = ideas_within_month.group_by { |m| m.created_at.beginning_of_week }
+	
 	end
- 
+
 end
