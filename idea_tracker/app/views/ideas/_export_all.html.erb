@@ -1,0 +1,14 @@
+<%= form_tag({:controller => "ideas", :action => "to_csv_all"}) do %>
+
+    <div class="panel-heading"><i class="fa fa-filter"></i> Export Ideas <i class="fa fa-chevron-down"></i> 
+      <div class="panel-body" id="export_idea_body">
+        <div id="export_idea">
+
+         <%= select_tag(:e_idea, options_for_select(@ideas.map{|p|[p.summary, p.id]}, selected: :e_idea ), {:multiple => true, :class => "form-control"})%>
+         </br>
+         <%= submit_tag 'generate CSV file', :class => "btn btn-outline btn-warning" %>
+       
+        </div>
+      </div>
+    </div>
+<% end %>

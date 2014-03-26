@@ -21,7 +21,7 @@ class UserMailer < ActionMailer::Base
     end
 
     if @all_email.present?
-    mail(to: @all_email, subject: 'someone edit idea on Ideal Tracker')
+    mail(to: @all_email, subject: 'Someone edit idea on Ideal Tracker')
     end
     #flash[:notice] = "sended successfully"
   end

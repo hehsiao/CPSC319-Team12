@@ -5,6 +5,7 @@ IdeaTracker::Application.routes.draw do
   get 'keywords/:keyword', to: 'ideas#index', as: :keyword
 
   match '/category/', :to => 'category#index', :as => :categories, :via => [:get]
+  #get 'ideas/' => 'ideas#to_csv' 
   resources :category  
   resources :partners
 
@@ -36,6 +37,8 @@ IdeaTracker::Application.routes.draw do
   resources :users do
     resources :ideas
        get 'sendemail', :on => :collection
+       get 'to_csv', :on => :collection
+       get 'to_csv_all', :on => :collection
   end
 
   root to: "home#index"

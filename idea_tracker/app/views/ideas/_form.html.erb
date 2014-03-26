@@ -22,6 +22,7 @@
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
 							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
+
 						</div>
 
 						<div class="form-group">
@@ -53,6 +54,7 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-users"></i> Partner Information 
+
 				</div>
 				<div class="panel-body">
 					<div class="form-group">
@@ -85,6 +87,7 @@
 	                        </label>
 	                    </div>
 	                </div>
+
 				</div>
 			</section>
 		</div>
@@ -258,5 +261,6 @@
 	$(participants_list).each(function(idx, data){
 		selectize_particpants.addItem(data);
 	});
+
 
 </script>

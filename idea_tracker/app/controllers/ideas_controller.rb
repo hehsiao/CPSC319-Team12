@@ -1,7 +1,6 @@
 class IdeasController < ApplicationController
 	before_action :check_user_permission
 	before_action :set_idea, only: [:show, :edit, :update, :destroy]
-
 	# GET /ideas
 	# GET /ideas.json
 	def index
@@ -12,6 +11,50 @@ class IdeasController < ApplicationController
 		end
 		# @user = User.find(params[:user_id])
 		# @ideas = @user.ideas
+		@e_ideas = []
+        @e_ideas << Idea.find_by_id('2')
+
+        
+     
+		#respond_to do |format|
+        #format.html 
+        #format.csv{ send_data to_csv(@e_ideas).encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''})}
+        #end
+
+	end
+
+    def to_csv_all
+
+    	    puts "-------------------------------------"+params[:e_idea].inspect+"----------------------------------------"
+        
+        	@export_ids = params[:e_idea]
+		    @export_ideas = []
+      
+            @export_ids.each do |export_id|
+              @export_ideas << Idea.find_by_id(export_id)
+            end 
+
+		header = ["summary", "description"]
+	    file = CSV.generate do |csv|
+	    	csv << header
+			@export_ideas.each do |export_idea|
+				csv << [export_idea.summary,export_idea.description]
+			end
+		end
+		send_data(file.encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''}), :type => 'text/csv', :filename => 'ideas.csv')  
+	end
+
+	def to_csv
+		  @idea = Idea.find(params[:id])
+
+    	    puts "-------------------------------------"+params[:id].inspect+"----------------------------------------"
+        
+		header = ["summary", "description"]
+	    file = CSV.generate do |csv|
+	    	csv << header
+			csv << [@idea.summary,@idea.description]
+		end
+		send_data(file.encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''}), :type => 'text/csv', :filename => 'idea.csv')  
 	end
 
 	# GET /ideas/1
@@ -32,7 +75,7 @@ class IdeasController < ApplicationController
 		else 
 			@receiver = "None Assigned"
 		end
-
+ 
 	end
 
 	# GET /ideas/new
@@ -69,6 +112,7 @@ class IdeasController < ApplicationController
 		@idea.owner_id = Setting.default_owner
 		@idea.user_id = current_user.id
 		@idea.status_date_change = Time.now
+
 #    @idea.provider_partner_id = params[:provider_partner_id]
 		respond_to do |format|
 			if @idea.save
@@ -153,6 +197,7 @@ class IdeasController < ApplicationController
   end
 
 	private
+	
     def user_list
       @participants = "["
       User.all.each do |u|
@@ -229,3 +274,4 @@ class IdeasController < ApplicationController
 			# params.require(:status).permit(:id)
 		end
 	end
+
