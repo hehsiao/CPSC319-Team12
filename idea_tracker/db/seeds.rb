@@ -19,7 +19,7 @@ User.create!([
 	{id: 5, email: "me@henrychsiao.com", password: "12341234", first_name: "Henry", last_name: "Hsiao", admin: "0"},
 	{id: 6, email: "jimmy.gnahz@gmail.com", password: "12341234", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
 	{id: 7, email: "jtsengyc@gmail.com", password: "12341234", first_name: "Jason", last_name: "Tseng", admin: "0"},
-	{id: 8, email: "ronaldho@alumni.ubc.ca", password: "12341234", first_name: "Ronald", last_name: "Ho", admin: "0"},
+	{id: 8, email: "ronldho@gmail.com", password: "12341234", first_name: "Ronald", last_name: "Ho", admin: "0"},
 	{id: 9, email: "tanat.ratana@gmail.com", password: "12341234", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
 ])
 
