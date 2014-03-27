@@ -321,28 +321,31 @@ class IdeasController < ApplicationController
     end
 	    
 	  def handle_partners
-	  	@provider = Partner.create(:partner_name => params[:provider_partner][:partner_name],
-						:contact_name => params[:provider_partner][:contact_name],
-						:email => params[:provider_partner][:email],
-						:phone_num => params[:provider_partner][:phone_num],
-						:secondary_contact_name => params[:provider_partner][:secondary_contact_name],
-						:secondary_email => params[:provider_partner][:secondary_email],
-						:secondary_phone_num => params[:provider_partner][:secondary_phone_num])
-	  	if @provider.save && params[:provider_use] == "provider_partner_form"
-	  		@idea.provider_partner_id = @provider.id
-	  		@idea.save
-	  	end
-
-	  	@receiver = Partner.create(:partner_name => params[:receiver_partner][:partner_name],
-						:contact_name => params[:receiver_partner][:contact_name],
-						:email => params[:receiver_partner][:email],
-						:phone_num => params[:receiver_partner][:phone_num],
-						:secondary_contact_name => params[:receiver_partner][:secondary_contact_name],
-						:secondary_email => params[:receiver_partner][:secondary_email],
-						:secondary_phone_num => params[:receiver_partner][:secondary_phone_num])
-	  	if @receiver.save && params[:receiver_use] == "receiver_partner_form"
-	  		@idea.receiver_partner_id = @receiver.id
-	  		@idea.save
+	  	if !params[:idea][:provider].nil?
+		  	@provider = Partner.create(:partner_name => params[:provider_partner][:partner_name],
+							:contact_name => params[:provider_partner][:contact_name],
+							:email => params[:provider_partner][:email],
+							:phone_num => params[:provider_partner][:phone_num],
+							:secondary_contact_name => params[:provider_partner][:secondary_contact_name],
+							:secondary_email => params[:provider_partner][:secondary_email],
+							:secondary_phone_num => params[:provider_partner][:secondary_phone_num])
+		  	if @provider.save && params[:provider_use] == "provider_partner_form"
+		  		@idea.provider_partner_id = @provider.id
+		  		@idea.save
+		  	end
+	  	end 
+	  	if !params[:idea][:receiver].nil?
+		  	@receiver = Partner.create(:partner_name => params[:receiver_partner][:partner_name],
+							:contact_name => params[:receiver_partner][:contact_name],
+							:email => params[:receiver_partner][:email],
+							:phone_num => params[:receiver_partner][:phone_num],
+							:secondary_contact_name => params[:receiver_partner][:secondary_contact_name],
+							:secondary_email => params[:receiver_partner][:secondary_email],
+							:secondary_phone_num => params[:receiver_partner][:secondary_phone_num])
+		  	if @receiver.save && params[:receiver_use] == "receiver_partner_form"
+		  		@idea.receiver_partner_id = @receiver.id
+		  		@idea.save
+		  	end
 	  	end
 
 	  end

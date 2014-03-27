@@ -12,9 +12,7 @@
             </section>
         </div>
         <div class = "col-lg-6">
-            <section class="widget">
-                <%= render 'notification' %>
-            </section>
+            <%= render 'notification'  %>
         </div>
         <div class="col-lg-12">
             <section class="widget">
@@ -61,7 +59,9 @@
         ykeys: ['count'],
         labels: ['Total'],
         xLabels: ['day'],
-        resize: true
+        resize: true,
+        gridTextColor: '#FFF',
+        gridTextFamily: '"Open Sans", sans-serif'
       });
 
   });
