@@ -2,7 +2,8 @@ class AdminController < ApplicationController
 
 	before_filter :check_admin_permission
 	
-	def index    
+	def index   
+    redirect_to '/dashboard' 
 	end
 
 	# GET /admin/edit
