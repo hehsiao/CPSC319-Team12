@@ -14,7 +14,37 @@ class ReportsController < ApplicationController
    @status = Status.all
    @ideas = Idea.all
  end
- 
+
+ def activity
+ 	if (test_exist params[:date_value1]) and !(test_exist params[:date_value2])
+ 		theDate = "WHERE created_at > '#{params[:date_value1]}' "
+ 	elsif !(test_exist params[:date_value1]) and (test_exist params[:date_value2])
+ 		theDate = "WHERE created_at < '#{params[:date_value2]}' "
+ 	elsif (test_exist params[:date_value1]) and (test_exist params[:date_value2])
+ 		theDate = "WHERE created_at BETWEEN '#{params[:date_value1]}' AND '#{params[:date_value2]}' "
+ 	else
+ 		theDate = ""
+ 	end
+
+ 	sql = 
+ 		"SELECT u.id, COUNT(DISTINCT(owner.id)), COUNT(DISTINCT(creator.id)), COUNT(DISTINCT(subscriber.id)), COUNT(DISTINCT(comment.id)) " +
+ 		"FROM ( " +
+ 			"SELECT id FROM users " + 
+ 			(params[:user_lists].nil? ? "" : "WHERE #{params[:user_lists].collect{|u| "id=#{u} "}.join 'OR '}") +
+ 		") as u " +
+		"LEFT JOIN (SELECT * FROM ideas #{theDate}) AS owner ON owner.owner_id = u.id " +
+		"LEFT JOIN (SELECT * FROM ideas #{theDate}) AS creator ON creator.user_id = u.id " +
+		"LEFT JOIN (SELECT * FROM commontator_comments #{theDate}) AS comment ON comment.creator_id = u.id " +
+		"LEFT JOIN (SELECT * FROM subscriptions #{theDate}) AS subscriber ON subscriber.user_id = u.id " +	
+		"GROUP BY u.id "
+	@result = ActiveRecord::Base.connection.execute(sql).to_a
+	@sql = sql
+	@users = params[:user_lists]
+	@date1 = params[:date_value1]
+	@date2 = params[:date_value2]
+
+ end
+
  def chart
  	if params[:chart_type] == "line"
  		if params[:date_type] == "day"
@@ -26,32 +56,100 @@ class ReportsController < ApplicationController
  		end
  		sql = 
  			"SELECT IFNULL(ac.count, 0), ad.d " + 
+ 			(params[:show_options3].nil? ? "" : ", ad.id ") +
  			"FROM ( " +
-	 			"SELECT DISTINCT(#{theDate}) as d " +
-	 			"FROM ( " +
-				    "SELECT curdate() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as created_at " + 
-				    "FROM (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a " +
-				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b " +
-				    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c " +
-				") a " + 
-				"WHERE a.created_at > '#{params[:date_value]}' " + 
+ 				(params[:show_options3].nil? ? "" : 
+ 				"SELECT * FROM ( ") +
+		 			"SELECT DISTINCT(#{theDate}) as d " +
+		 			"FROM ( " +
+					    "SELECT curdate() - INTERVAL (a.a + (10 * b.a) + (100 * c.a)) DAY as created_at " + 
+					    "FROM (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as a " +
+					    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as b " +
+					    "CROSS JOIN (select 0 as a union all select 1 union all select 2 union all select 3 union all select 4 union all select 5 union all select 6 union all select 7 union all select 8 union all select 9) as c " +
+					") a " + 
+					"WHERE a.created_at BETWEEN '#{params[:date_value1]}' AND '#{params[:date_value2]}' " + 
+				(params[:show_options3].nil? ? "" : 
+				") a CROSS JOIN ( " +
+					"SELECT b.#{params[:show_options3].first} as id FROM (" +
+						"SELECT " +
+						(params[:show_options3].collect {|u| "#{u} "}.join "UNION SELECT ") +
+					" )  b " +
+				") c "
+				) +
+
 			") ad " +
 			"LEFT JOIN (" +
 	 			"SELECT COUNT(*) as count, #{theDate} as theDate " +
+	 			(params[:show_options3].nil? ? "" : ", " + (params[:aggregate3] == "ideas" ? "user_id " : "creator_id ")) +
 	 			"FROM #{params[:aggregate3]} " + 
-	 			"WHERE #{params[:date_tag]} > #{params[:date_value]} " +
+	 			"WHERE #{params[:date_tag]} BETWEEN '#{params[:date_value1]}' AND '#{params[:date_value2]}' " +
+	 			(params[:show_options3].nil? ? "" : "AND ( " + 
+	 				(params[:aggregate3] == "ideas" ? 
+	 					(params[:show_options3].collect {|u| "user_id = #{u} "}.join "OR ")
+	 					: 
+	 					(params[:show_options3].collect {|u| "creator_id = #{u} "}.join "OR ")
+	 				) + ") "
+	 			) +
 	 			"GROUP BY theDate " + 
-	 			"ORDER BY theDate DESC " +
+	 			(params[:show_options3].nil? ? "" : ", " + (params[:aggregate3] == "ideas" ? "user_id " : "creator_id ")) +
+	 			"ORDER BY theDate " +
+	 			(params[:show_options3].nil? ? "" : ", " + (params[:aggregate3] == "ideas" ? "user_id " : "creator_id ")) +
+	 			"DESC " +
 	 		") ac ON ad.d = ac.theDate " +
+			(params[:show_options3].nil? ? "" : "AND ad.id = ac." + (params[:aggregate3] == "ideas" ? "user_id " : "creator_id ")) +
 			"ORDER BY ad.d DESC"
  		@date_type=params[:date_type]
  	else
 	 	sql = 
-	 		"SELECT COUNT(*) as count, #{params[:aggregate1]} " + 
-	 		(params[:chart_type] != "bar" ? "" : ", #{params[:aggregate2]} ") +
+	 		"SELECT COUNT(*) as count, " +
+	 		(
+	 			params[:aggregate1].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+	 			"a1_category_id "
+	 			:
+	 			"#{params[:aggregate1]} "
+	 		) +
+	 		(
+	 			params[:chart_type] != "bar" ? 
+	 			"" 
+	 			: 
+	 			", " + 
+	 			(
+	 				params[:aggregate2].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+	 				"a2_category_id "
+		 			:
+		 			"#{params[:aggregate2]} "
+	 			)
+	 		) +
 	 		"FROM ideas " +
-	 		"WHERE #{params[:date_tag]} > #{params[:date_value]}   " +
+	 		(
+	 			params[:aggregate1].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+	 			(
+	 				"INNER JOIN " +
+	 				"(SELECT itag.idea_id as a1_idea_id, itag.category_id as a1_category_id " +
+	 				"FROM idea_tags itag " + 
+	 				"INNER JOIN categories ctag ON ctag.id = itag.category_id " + 
+	 				"WHERE ctag.parent_id = #{Category.find_by_category_name(params[:aggregate1]).id}) as a1 " +
+	 				"ON a1.a1_idea_id = ideas.id "
+	 			)
+	 			:
+	 			""
+	 		) +
+	 		(
+	 			(params[:chart_type] == "bar" and params[:aggregate2].in?(Category.top_categories.collect{|u| u.to_s})) ? 
+	 			(
+	 				"INNER JOIN " +
+	 				"(SELECT itag.idea_id as a2_idea_id, itag.category_id as a2_category_id " +
+	 				"FROM idea_tags itag " + 
+	 				"INNER JOIN categories ctag ON ctag.id = itag.category_id " + 
+	 				"WHERE ctag.parent_id = #{Category.find_by_category_name(params[:aggregate2]).id}) as a2 " +
+	 				"ON a2.a2_idea_id = ideas.id "
+	 			)
+	 			:
+	 			""
+	 		) +
+	 		"WHERE ideas.#{params[:date_tag]} BETWEEN '#{params[:date_value1]}' AND '#{params[:date_value2]}'   " +
 	 		((params[:show_options1].nil? and (params[:chart_type] != "bar" or params[:show_options2].nil?)) ? "" : "AND ( ")
+
 	 	if(params[:show_options1])
 		 	params[:show_options1].each do |option|
 		 		sql << " #{params[:aggregate1]} = #{option} OR"
@@ -66,9 +164,45 @@ class ReportsController < ApplicationController
 	 		sql = sql[0..-3] + " ) "
 	 	end
 	 	sql << 
-	 		"GROUP BY #{params[:aggregate1]} " +
-			(params[:chart_type] != "bar" ? "" : ", #{params[:aggregate2]} ") +
-			"ORDER BY #{params[:aggregate1]} DESC"
+	 		"GROUP BY " +
+	 		(
+	 			params[:aggregate1].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+	 			"a1_category_id "
+	 			:
+	 			"#{params[:aggregate1]} "
+	 		) +
+			(
+				params[:chart_type] != "bar" ? 
+				"" : 
+				", " +
+				(
+					params[:aggregate2].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+		 			"a2_category_id "
+		 			:
+		 			"#{params[:aggregate2]} "
+				)
+
+			) +
+			"ORDER BY " +
+	 		(
+	 			params[:aggregate1].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+	 			"a1_category_id "
+	 			:
+	 			"#{params[:aggregate1]} "
+	 		) +
+	 		(
+				params[:chart_type] != "bar" ? 
+				"" : 
+				", " +
+				(
+					params[:aggregate2].in?(Category.top_categories.collect{|u| u.to_s}) ? 
+		 			"a2_category_id "
+		 			:
+		 			"#{params[:aggregate2]} "
+				)
+
+			) +
+	 		"DESC"
 	end
 
 	@result = ActiveRecord::Base.connection.execute(sql).to_a
@@ -81,6 +215,8 @@ class ReportsController < ApplicationController
 		@label1 = User.all
 	elsif params[:aggregate1] == 'provider_partner_id' or params[:aggregate1] == 'provider_partner_id'
 		@label1 = Partner.all
+	elsif params[:aggregate1].in?(Category.top_categories.collect{|u| u.to_s})
+		@label1 = Category.get_children_by_parent_name params[:aggregate1]
 	end
 
 	if params[:aggregate2] == 'status_id'
@@ -89,9 +225,12 @@ class ReportsController < ApplicationController
 		@label2 = User.all
 	elsif params[:aggregate2] == 'provider_partner_id' or params[:aggregate2] == 'provider_partner_id'
 		@label2 = Partner.all
+	elsif params[:aggregate2].in?(Category.top_categories.collect{|u| u.to_s})
+		@label2 = Category.get_children_by_parent_name params[:aggregate2]
 	end
-	@aggregate1 = params[:aggregate1]
-	@aggregate2 = params[:aggregate2]
+	@label3 = User.all
+	@aggregate1 = params[:chart_type] != "line" ? params[:aggregate1] : params[:aggregate3]
+	@aggregate2 = params[:chart_type] != "bar" ? nil : params[:aggregate2]
 
  end
 
@@ -250,5 +389,13 @@ end
 	return idea_counter_array
  end
 	
+ 	private
+ 		def test_exist val
+ 			if !val.nil?
+ 				!val.empty?
+ 			else
+ 				false
+ 			end
+ 		end
 end 
 

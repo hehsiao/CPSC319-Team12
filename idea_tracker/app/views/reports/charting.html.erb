@@ -1,131 +1,179 @@
-<%= form_tag("chart", method: "get") do %>
-	<%= label_tag(:chart_type, "Chart Type") %>
-	<%= select_tag(:chart_type, options_for_select([["Bar", "bar"], ["Line", "line"], ["Pie", "pie"], ["Table", "table"]])) %>
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-info"></i> Custom Report
+      </div>
+      <div class="panel-body">
+      	<%= form_tag("chart", method: "get") do %>
+			<%= label_tag(:chart_type, "Chart Type") %>
+			<%= select_tag(:chart_type, options_for_select([["Bar", "bar"], ["Line", "line"], ["Pie", "pie"], ["Table", "table"]])) %>
 
-	<div id="aggregate3_select">
-		<%= label_tag(:aggregate3, "Aggregate On") %>
-		<%= select_tag(:aggregate3, options_for_select([["Idea", "ideas"],["Comment", "commontator_comments"]])) %>
+			<div id="aggregate3_select">
+				<%= label_tag(:aggregate3, "Aggregate On") %>
+				<%= select_tag(:aggregate3, options_for_select([["Idea", "ideas"],["Comment", "commontator_comments"]])) %>
+				<%= label_tag(:show_options1, "Show Only (All unchecked = total)") %>
+				<div class="options3" id="user3">
+					<% User.all.each do |u| %>
+						<input type="checkbox" name="show_options3[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+					<% end %>
+				</div>
+				<%= label_tag(:date_type, "Aggregate By") %>
+				<%= select_tag(:date_type, options_for_select([["Daily", "day"],["Monthly", "month"], ["Yearly", "year"]])) %>
 
-		<%= label_tag(:date_type, "Aggregate By") %>
-		<%= select_tag(:date_type, options_for_select([["Daily", "day"],["Monthly", "month"], ["Yearly", "year"]])) %>
+			</div>
 
-	</div>
+			<div id="aggregate1_select">
+				<%= label_tag(:aggregate1, "Aggregate By") %>
+				<%= select_tag(:aggregate1, options_for_select([["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "provider_partner_id"]]) + options_from_collection_for_select(Category.top_categories, :category_name, :category_name)) %>
+				<br>
+				<%= label_tag(:show_options1, "Show Only") %>
+				<div class="options1" id="user1">
+					<% User.all.each do |u| %>
+						<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+					<% end %>
+				</div>
+				<div class="options1" id="stage1">
+					<% Status.all.each do |s| %>
+						<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %>
+					<% end %>
+				</div>
+				<div class="options1" id="partner1">
+					<% Partner.all.each do |p| %>
+						<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %>
+					<% end %>
+				</div>
+			</div>
+			<div id="aggregate2_select">
+				<%= label_tag(:aggregate2, "Aggregate By") %>
+				<%= select_tag(:aggregate2, options_for_select([["",""],["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]]) + options_from_collection_for_select(Category.top_categories, :category_name, :category_name)) %>
+				<br>
+				<%= label_tag(:show_options2, "Show Only") %>
+				<div class="options2" id="user2">
+					<% User.all.each do |u| %>
+						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+					<% end %>
+				</div>
+				<div class="options2" id="stage2">
+					<% Status.all.each do |s| %>
+						<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
+					<% end %>
+				</div>
+				<div class="options2" id="partner2">
+					<% Partner.all.each do |p| %>
+						<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
+					<% end %>
+				</div>
+			</div>
 
-	<div id="aggregate1_select">
-		<%= label_tag(:aggregate1, "Aggregate By") %>
-		<%= select_tag(:aggregate1, options_for_select([["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "provider_partner_id"]])) %>
-		<%= label_tag(:show_options1, "Show Only") %>
-		<div class="options1" id="user1">
-			<% User.all.each do |u| %>
-				<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
-			<% end %>
-		</div>
-		<div class="options1" id="stage1">
-			<% Status.all.each do |s| %>
-				<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %>
-			<% end %>
-		</div>
-		<div class="options1" id="partner1">
-			<% Partner.all.each do |p| %>
-				<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %>
-			<% end %>
-		</div>
-	</div>
-	<div id="aggregate2_select">
-		<%= label_tag(:aggregate2, "Aggregate By") %>
-		<%= select_tag(:aggregate2, options_for_select([["",""],["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]])) %>
-		<%= label_tag(:show_options2, "Show Only") %>
-		<div class="options2" id="user2">
-			<% User.all.each do |u| %>
-				<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
-			<% end %>
-		</div>
-		<div class="options2" id="stage2">
-			<% Status.all.each do |s| %>
-				<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
-			<% end %>
-		</div>
-		<div class="options2" id="partner2">
-			<% Partner.all.each do |p| %>
-				<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
-			<% end %>
-		</div>
-	</div>
+			<script>
+				function update_display()
+				{
+					$('#aggregate1_select').show();
+					$('#aggregate2_select, #aggregate3_select').hide();
 
-	<script>
-		function update_display()
-		{
-			$('#aggregate1_select').show();
-			$('#aggregate2_select, #aggregate3_select').hide();
-
-			switch($('#chart_type option:selected').val())
-			{
-				case "line":
-					$('#aggregate3_select').show();
-					$('#aggregate1_select, #aggregate2_select').hide();
-					break;
-
-				case "bar":
-					$('#aggregate2_select').show();
-					$('.options2').hide();
-			  		switch($('#aggregate2 option:selected').val())
-			  		{
-			  			case "status_id":
-			  				$('#stage2').show();
-			  				break;
-			  			case "owner_id":
-			  			case "user_id":
-			  				$('#user2').show();
-			  				break;
-			  			case "receiver_partner_id":
-			  			case "provider_partner_id":
-			  				$('#partner2').show();
-			  				break;
-			  			default:
-			  				break;
-			  		}
-
-			  	default:
-			  		$('.options1').hide();
-					switch($('#aggregate1 option:selected').val())
+					switch($('#chart_type option:selected').val())
 					{
-						case "status_id":
-							$('#stage1').show();
+						case "line":
+							$('#aggregate3_select').show();
+							$('#aggregate1_select, #aggregate2_select').hide();
 							break;
-						case "owner_id":
-						case "user_id":
-							$('#user1').show();
+
+						case "bar":
+							$('#aggregate2_select').show();
+							$('.options2').hide();
+					  		switch($('#aggregate2 option:selected').val())
+					  		{
+					  			case "status_id":
+					  				$('#stage2').show();
+					  				break;
+					  			case "owner_id":
+					  			case "user_id":
+					  				$('#user2').show();
+					  				break;
+					  			case "receiver_partner_id":
+					  			case "provider_partner_id":
+					  				$('#partner2').show();
+					  				break;
+					  			default:
+					  				break;
+					  		}
+
+					  	default:
+					  		$('.options1').hide();
+							switch($('#aggregate1 option:selected').val())
+							{
+								case "status_id":
+									$('#stage1').show();
+									break;
+								case "owner_id":
+								case "user_id":
+									$('#user1').show();
+									break;
+								case "receiver_partner_id":
+								case "provider_partner_id":
+									$('#partner1').show();
+									break;
+								default:
+									break;
+							}
 							break;
-						case "receiver_partner_id":
-						case "provider_partner_id":
-							$('#partner1').show();
-							break;
-						default:
-							break;
+					}		
+					
+				}
+				$('#chart_type').change(function(){
+					update_display();
+				});
+				$('#aggregate1, #aggregate2').change(function(){
+					var b = $(this).siblings();
+					var c = b.find('input:checkbox');
+					c.prop('checked', false);
+					update_display();
+				});
+
+				$(document).ready(function(){
+					update_display();
+				});
+				
+			</script>
+
+
+			<%= label_tag(:date_tag, "Filter By") %>
+			<%= select_tag(:date_tag, options_for_select([["Created Date", "created_at"], ["Updated Date", "updated_at"], ["Status Changed Date", "status_date_change"]])) %>
+			Between
+			<input type="date" name="date_value1" required />
+			To
+			<input type="date" name="date_value2" required />
+
+
+
+			<%= submit_tag("Generate Chart", :id => "gen_chart") %>
+		<% end %>
+		<script>
+			$('#gen_chart').click(function(e){
+				if($('#chart_type option:selected').val() == "bar" && !$('#aggregate2 option:selected').val())
+				{
+					e.preventDefault();
+					alert('please select a second aggregate option for bar chart type');
+					return;
+				}
+				if($('input[name="date_value1"]').val())
+				{
+					if(!$('input[name="date_value2"]').val())
+					{
+						var d = new Date();
+						var dstring = d.getFullYear()+"-"+('0' + (d.getMonth()+1)).slice(-2)+"-"+d.getDate();
+						$('input[name="date_value2"]').val(dstring);
 					}
-					break;
-			}		
-			
-		}
-		$('#chart_type').change(function(){
-			update_display();
-		});
-		$('#aggregate1, #aggregate2').change(function(){
-			var b = $(this).siblings();
-			var c = b.find('input:checkbox');
-			c.prop('checked', false);
-			update_display();
-		});
-
-		update_display();
-	</script>
-
-
-	<%= label_tag(:date_tag, "Filter By") %>
-	<%= select_tag(:date_tag, options_for_select([["Created After", "created_at"], ["Updated After", "updated_at"], ["Status Changed After", "status_date_change"]])) %>
-	<input type="date" name="date_value" required />
-
-
-
-	<%= submit_tag("Generate Chart") %>
-<% end %>
+					if($('input[name="date_value1"]').val() > $('input[name="date_value2"]').val())
+					{
+						var vtmp = $('input[name="date_value1"]').val();
+						$('input[name="date_value1"]').val($('input[name="date_value2"]').val());
+						$('input[name="date_value2"]').val(vtmp);
+					}
+				}
+			});
+		</script>
+	  </div>
+	</section>
+  </div>
+</div>

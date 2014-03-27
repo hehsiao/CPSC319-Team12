@@ -63,12 +63,12 @@ Idea.create!([
 Status.delete_all
 Status.create!([
 	{id: 1, position: 1, status: "New Submission" },
-	{id: 3, position: 2, status: "Removed"}, 	
-	{id: 4, position: 3, status: "Verified"},
-	{id: 5, position: 4, status: "Active Development"}, 
-	{id: 6, position: 5, status: "Referral Pending"},  
-	{id: 7, position: 6, status: "Confirmed"},
-	{id: 8, position: 7, status: "Archived"}
+	{id: 2, position: 2, status: "Removed"}, 	
+	{id: 3, position: 3, status: "Verified"},
+	{id: 4, position: 4, status: "Active Development"}, 
+	{id: 5, position: 5, status: "Referral Pending"},  
+	{id: 6, position: 6, status: "Confirmed"},
+	{id: 7, position: 7, status: "Archived"}
 ])
 
 CategoryType.delete_all
