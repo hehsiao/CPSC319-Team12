@@ -25,24 +25,24 @@ User.create!([
 
 Partner.delete_all
 Partner.create!([
-	{id: 1, partner_name: "UBC CPSC", contact_name: "Kurt", email: "kurt@ubc.ca", phone_num: "6048223920"},
+	{id: 1, partner_name: "UBC CPSC", contact_name: "Kurt Eiselt", email: "kurt@ubc.ca", phone_num: "6048223920"},
 	{id: 2, partner_name: "Systemsvista", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
 	{id: 3, partner_name: "MediaSource", contact_name: "Groucho Marx", email: "gmarx@it.com", phone_num: "6048182320"},
 	{id: 4, partner_name: "Pitch'n", contact_name: "Jason Tseng", email: "jtseng@pitchn.com", phone_num: "6048223920"},
 	{id: 5, partner_name: "Aircom", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
-	{id: 6, partner_name: "DevAll", contact_name: "Groucho Marx", email: "gmarx@it.com", phone_num: "6048182320"},	
+	{id: 6, partner_name: "DevAll", contact_name: "Greg Apodaca", email: "gregapodaca1@devall.com", phone_num: "65755585260"},	
 	{id: 7, partner_name: "TimeSystems", contact_name: "Jane Smith", email: "jsmith@cp1.com", phone_num: "6048223920"},
-	{id: 8, partner_name: "VentureWork", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
-	{id: 9, partner_name: "InfoFiber", contact_name: "Groucho Marx", email: "gmarx@it.com", phone_num: "6048182320"},
-	{id: 10, partner_name: "IntelliVirtual", contact_name: "Jane Smith", email: "jsmith@cp1.com", phone_num: "6048223920"},
-	{id: 11, partner_name: "Comm Partner 6", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
-	{id: 12, partner_name: "UBC CBEL", contact_name: "Justin", email: "Justin@ubc.ca", phone_num: "6048182320"},
-	{id: 13, partner_name: "LinkAmerican", contact_name: "Jane Smith", email: "jsmith@cp1.com", phone_num: "6048223920"},
-	{id: 14, partner_name: "NewPremiere", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
-	{id: 15, partner_name: "ACMECenter", contact_name: "Groucho Marx", email: "gmarx@it.com", phone_num: "6048182320"},
-	{id: 16, partner_name: "Siliconbridge", contact_name: "Jane Smith", email: "jsmith@cp1.com", phone_num: "6048223920"},
-	{id: 17, partner_name: "ExcelIcon", contact_name: "Marshall Ericson", email: "mericson@cp6.com", phone_num: "6048321320"},	
-	{id: 18, partner_name: "Dynozon", contact_name: "Groucho Marx", email: "gmarx@it.com", phone_num: "6048182320"},
+	{id: 8, partner_name: "VentureWork", contact_name: "Marijo Aquino", email: "marijoaquino@venturework.com", phone_num: "6048321320"},	
+	{id: 9, partner_name: "InfoFiber", contact_name: "John Baily", email: "johnbaily@InfoFiber.com", phone_num: "6048182320"},
+	{id: 10, partner_name: "IntelliVirtual", contact_name: "Kamaldeep Bal", email: "kamaldeepbal@IntelliVirtual.com", phone_num: "6048223920"},
+	{id: 11, partner_name: "Barberi Productions", contact_name: "Jessica Barbieri", email: "jbarbieri@me.com", phone_num: "6048321320"},	
+	{id: 12, partner_name: "UBC CBEL", contact_name: "Justin Ho", email: "justin.ho@ubc.ca", phone_num: "6048182320"},
+	{id: 13, partner_name: "LinkAmerican", contact_name: "Christian Bauer", email: "christianb@LinkAmerican.com", phone_num: "6048223920"},
+	{id: 14, partner_name: "NewPremiere", contact_name: "Eddy Bedock", email: "eddybedock@newprem.com", phone_num: "6048321320"},	
+	{id: 15, partner_name: "ACMECenter", contact_name: "Emily Bergendahl", email: "emilybergendahl@acme.com", phone_num: "6048182320"},
+	{id: 16, partner_name: "Siliconbridge", contact_name: "Jennifer Bonneau", email: "jbonneau1@sbridge.com", phone_num: "6048223920"},
+	{id: 17, partner_name: "ExcelIcon", contact_name: "Biki Berry", email: "bikib@ExcelIcon.com", phone_num: "6048321320"},	
+	{id: 18, partner_name: "Dynozon", contact_name: "Olivier Bonnet", email: "obonnet2@Dynozon.com", phone_num: "6048182320"},
 
 ])
 
