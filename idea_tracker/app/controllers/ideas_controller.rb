@@ -79,6 +79,45 @@ class IdeasController < ApplicationController
 		else 
 			@receiver = "None Assigned"
 		end
+       
+       #set participation automatically when the user commnet on the idea 
+
+       @comment_thread  = Commontator::Thread.where(commontable_id: params[:id]) 
+       @comment_idea_ids = Commontator::Comment.where(thread_id: @comment_thread)
+       @check_activities = []
+       if @comment_idea_ids.present?
+       	@comment_idea_ids.each do |cii|
+       	  @check_activities << PublicActivity::Activity.where(trackable_type: "Commontator::Comment", owner_id: current_user.id, trackable_id: cii)
+        end 
+       end 
+       
+       puts "------------------------------"+@check_activities.inspect+"----------------------------------------"
+       @check_activities.each do |c_a|
+	       if c_a.present?
+	            
+                @sub_list = Subscription.where(idea_id: params[:id])
+			
+                @sub_users = Subscription.where(user_id: current_user.id, idea_id: params[:id])
+                puts "------------------------------"+@sub_user.inspect+"----------------------------------------"
+                
+                if @sub_users.present?
+	                @sub_users.each do |sub_user|
+	                	puts "------------------------------"+@sub_list.include?(sub_user).inspect+"----------------------------------------"
+		                if @sub_list.include?(sub_user)
+		                	puts "------------------------------  dont need to add --------------------------------"
+		                else
+		                    puts "------------------------------  need to add --------------------------------"
+						    Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
+							
+					    end
+					end
+				else
+				   Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
+				end       
+	       end
+       end	
+
+
  
 	end
 
@@ -111,15 +150,16 @@ class IdeasController < ApplicationController
 	# GET /ideas/1/edit
 	def edit
 		@categories = Category.top_categories
+
   	user_list
   	keyword_list
   	idea_list
+
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
-
 		@idea = Idea.new(idea_params)
 		if(params[:provider_use] == "provider_partner_form")
 			@partner = Partner.new(params[partner_params])
@@ -131,6 +171,7 @@ class IdeasController < ApplicationController
 			@partner.save
 			@idea.receiver_partner_id = @partner.id
 		end
+
   	user_list	
 		idea_list    	
 		@idea.owner_id = Setting.default_owner
@@ -165,11 +206,37 @@ class IdeasController < ApplicationController
 			if @idea.update(idea_params)
 
 				params[:id] = @idea.id
+
 				handle_partners
+
 				# Category Tags
 				handle_category_tags
 				handle_associations
-				handle_participations
+                handle_participations
+
+                #set participation automatically when the user edit the idea
+
+                @sub_list = Subscription.where(idea_id: params[:id])
+			
+                @sub_users = Subscription.where(user_id: current_user.id, idea_id: params[:id])
+                puts "------------------------------"+@sub_user.inspect+"----------------------------------------"
+                
+                if @sub_users.present?
+	                @sub_users.each do |sub_user|
+	                	puts "------------------------------"+@sub_list.include?(sub_user).inspect+"----------------------------------------"
+		                if @sub_list.include?(sub_user)
+		                	puts "------------------------------  dont need to add --------------------------------"
+		                else
+		                    puts "------------------------------  need to add --------------------------------"
+						    Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
+							
+					    end
+					end
+				else
+				   Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
+				end         
+
+
 				keyword_list
 				idea_list
 				# Email Notification
@@ -219,6 +286,7 @@ class IdeasController < ApplicationController
   end
 
 	private
+
 	def idea_list
       @idea_selections = "["
       Idea.all.each do |u|
@@ -229,6 +297,7 @@ class IdeasController < ApplicationController
       @idea_selections = @idea_selections[0...-2]
       @idea_selections += "]"
     end
+
 
     def user_list
       @participants = "["

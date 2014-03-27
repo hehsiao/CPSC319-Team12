@@ -3,17 +3,7 @@
     <div id="notifications" class = "list-group">
 
         <% @activities.each do |activity| %>
-            <% @my_ideas.each do |my_idea| %>
-                <% if activity.trackable_id == my_idea.id && activity.owner_id == my_idea.user_id%>
-                    <div class = "list-group-item">
-                        <%= render_activity activity%>
-                        <span class = "pull-right text-muted small"> 
-                            <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
-                        </span>
-                    </div>
-                <% end %>
-            <% end %>
-
+         <% if @count < 20%>
             <% if activity.trackable_type == "Idea"%> 
                 <% @sub_ideas.each do |sub_idea| %>
                     <% if activity.trackable_id == sub_idea.idea_id%>
@@ -23,8 +13,9 @@
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>
+                        <% @count += 1%> 
                     <% end %>
-                <% end %>   
+                <% end %>  
             <% end %>
 
             <% if activity.trackable_type == "Commontator::Comment"%> 
@@ -45,10 +36,12 @@
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>
+                        <% @count += 1%>
                     <% end %>
                 <% end %> 
             <% end %> 
+          <%end%>  
         <% end %>      
-
+       <%puts "------------------------------------------"+@count.to_s+"-------------------------------------------"%>
     </div>
 </div>

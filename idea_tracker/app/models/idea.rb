@@ -5,6 +5,7 @@ class Idea < ActiveRecord::Base
 	belongs_to :partner
 	belongs_to :owner, :class_name => 'User' # this is the current owner of the idea
 	belongs_to :user, :class_name => 'User' # this is the creator of the idea
+
 	belongs_to :status
 	
 	has_many :partners
