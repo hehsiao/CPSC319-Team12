@@ -59,19 +59,17 @@ Idea.create!([
 	{id: 8, owner_id: 3, user_id: 2, provider_partner_id: 1, created_at: "2014-03-16", summary: "Fitness Program 3", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
 	{id: 9, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-19", summary: "Social Media 3", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},
 
-
 ])
 
 Status.delete_all
 Status.create!([
 	{id: 1, position: 1, status: "New Submission" },
-	{id: 2, position: 2, status: "New Ideas" },
-	{id: 3, position: 3, status: "Removed"}, 	
-	{id: 4, position: 4, status: "Verified"},
-	{id: 5, position: 5, status: "Active Development"}, 
-	{id: 6, position: 6, status: "Referral Pending"},  
-	{id: 7, position: 7, status: "Confirmed"},
-	{id: 8, position: 8, status: "Archived"}
+	{id: 2, position: 2, status: "Removed"}, 	
+	{id: 3, position: 3, status: "Verified"},
+	{id: 4, position: 4, status: "Active Development"}, 
+	{id: 5, position: 5, status: "Referral Pending"},  
+	{id: 6, position: 6, status: "Confirmed"},
+	{id: 7, position: 7, status: "Archived"}
 ])
 
 CategoryType.delete_all
@@ -167,6 +165,5 @@ Commontator::Comment.create(id:9, creator_type: "User", creator_id: "9", thread_
 Commontator::Comment.create(id:10, creator_type: "User", creator_id: "7", thread_id: "3", body: "Etiam nec augue vel magna interdum varius. Nunc elementum, erat non facilisis tempor, nisi massa gravida velit, in mollis orci tortor sit amet nisl. Nulla vel orci mi.", created_at: "2014-03-25 23:46:37", updated_at: "2014-03-25 23:46:37")
 Commontator::Comment.create(id:11, creator_type: "User", creator_id: "8", thread_id: "3", body: "Pellentesque eget vehicula ligula. Aenean nec venenatis erat. Praesent consequat, lacus sit amet fringilla bibendum, justo neque sagittis elit, fermentum tristique justo magna non ante. Duis eget urna neque. Interdum et malesuada fames ac ante ipsum primis in faucibus.", created_at: "2014-03-25 23:47:37", updated_at: "2014-03-25 23:47:45")
 Commontator::Comment.create(id:12, creator_type: "User", creator_id: "9", thread_id: "3", body: "Suspendisse eget enim vel orci faucibus semper. Ut tempus justo dolor, et volutpat magna scelerisque porttitor.", created_at: "2014-03-25 23:48:37", updated_at: "2014-03-25 23:48:37")
-
 
 

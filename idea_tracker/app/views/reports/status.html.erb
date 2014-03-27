@@ -15,32 +15,47 @@
       </thead>
       
       <tbody>
+		<% index = 0 %>
         <% @status.each do |status| %>
           <tr onclick="document.location = '/reports/status_show/<%=status.id%>';">
             <td><%= status.status %></td>
     		<td>
-    		<% counter = 0 %>
-    		<% @ideas.each do |idea| %>
-
-    			<% if idea.status.id == status.id %>
-
-    				<% counter += 1 %>
-    			<% end %>
-    		<%end%>	
-    		<%= counter %>
+    		<%= @counter_array.at(index) %>
     		</td>
-            
+            <% index += 1 %>
           </tr>
         <% end %>
       </tbody>
     </table>
   </div>
-</section>
+
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="status_pie"></script>
+<script type="text/javascript" >
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+	var data = google.visualization.arrayToDataTable([
+	  ['Status', 'Number of Ideas'],
+		<% index = 0 %>
+        <% @status.each do |status| %>
+			["<%= status.status %>", <%= @counter_array.at(index) %>],
+            <% index += 1 %>
+        <% end %>
+	]);
+
+	var options = {
+	  title: 'Status',
+	  is3D: true,
+	};
+
+	var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+	chart.draw(data, options);
+}
+</script>
 
 <div id="piechart_3d" style="width: 700px; height: 500px;"></div>
+</section>
 
 
 

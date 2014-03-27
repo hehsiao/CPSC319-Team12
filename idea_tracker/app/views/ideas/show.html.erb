@@ -3,10 +3,23 @@
     <%= link_to '<i class="fa fa-plus"> </i> Create a Sub Idea'.html_safe , new_idea_path(:parent_idea_id => @idea.id, :peer_idea_ids => (@idea.child_ideas_ids.join ", "))  %> | 
     <%= link_to '<i class="fa fa-pencil"></i> Edit Idea'.html_safe, edit_idea_path(@idea) %> |
 
-    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, ideas_path %> 
+    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, ideas_path %> | 
+    <a href="#"><i class="fa fa-share-square-o"></i> Share</a> |
+    <% if @idea.status.to_s == "Archived" %>
+      <%= link_to(
+          "Move to Active Development",
+          {:controller => "ideas/#{@idea.id}", :idea => {:status_id => (Status.find_by status: "Active Development").id}},
+          {:method => :put}
+      ) %>
+    <% else %>
+      <%= link_to(
+          "Archive This",
+          {:controller => "ideas/#{@idea.id}", :idea => {:status_id => (Status.find_by status: "Archived").id}},
+          {:method => :put}
+      ) %>
+    <% end %>
+
 </h5>
-
-
 
 <div class="row">
   <div class="col-md-12">
@@ -71,15 +84,19 @@
         <dl class="dl-horizontal">
           <dt>Creator:</dt>
           <dd>
-            <%= @idea.user.first_name+" "+@idea.user.last_name %>
+            <%= @idea.user %>
           </dd>
           <dt>Owner:</dt>
           <dd> 
-            <%= @idea.owner.first_name+" "+@idea.owner.last_name %>
+            <%= @idea.owner %>
           </dd>
           <dt>Participants:</dt>
           <dd>
-            <%= raw @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " "+ u.user.last_name}.join ', ' %>
+            <form id="participant_form">
+              <div class="form-group">
+                <input id="idea_participants" name="idea[participants]" type="text" value="<%= @idea.participants.where(:is_active => 1).collect {|u| u.user.email}.join "," %>">
+              </div>
+            </form>
           </dd>
         </dl>
       </div>
@@ -106,10 +123,9 @@
       </div>
       <div class="panel-body">
         <dl class="dl-horizontal">
-          <dt>Parents:</dt><dd><%= raw @idea.parent_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br> "  %></dd>
-          <dt>Childs:</dt><dd><%= raw @idea.child_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
-          <dt>Peers:</dt><dd><%= raw @idea.peer_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join "<br>" %></dd>
-
+          <dt>Big:</dt><dd><%= raw @idea.parent_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join ", "  %></dd>
+          <dt>Similar:</dt><dd><%= raw @idea.child_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join ", " %></dd>
+          <dt>Smaller:</dt><dd><%= raw @idea.peer_ideas_ids.collect{|u| link_to Idea.find(u).summary, id: u}.join ", " %></dd>
         </dl>
       </div>
     </section>
@@ -144,5 +160,55 @@
 
 
 
+<script>
 
+  var participants_options = <%= raw @participants %>;
+
+  var REGEX_EMAIL = '([a-z0-9!#$%&\'*+/=?^_`{|}~-]+(?:\.[a-z0-9!#$%&\'*+/=?^_`{|}~-]+)*@' +
+                    '(?:[a-z0-9](?:[a-z0-9-]*[a-z0-9])?\.)+[a-z0-9](?:[a-z0-9-]*[a-z0-9])?)';
+  
+  $('#idea_participants').selectize({
+    plugins: ['remove_button'],
+    delimiter: ',',
+    persist: false,
+    maxItems: null,
+    valueField: 'email',
+    labelField: 'name',
+    searchField: ['name', 'email'],
+    options:  participants_options,
+    preload: true,
+    render: {
+      item: function(item, escape) {
+        return '<div>' +
+            (item.name ? '<span class="name selectize">' + escape(item.name) + ' </span>' : '') +
+        '</div>';
+      },
+      option: function(item, escape) {
+        var label = item.name || item.email;
+        var caption = item.name ? item.email : null;
+        return '<div>' +
+            '<span class="name selectize">' + escape(label) + ' </span>' +
+            (caption ? '<span class="caption selectize">' + escape(caption) + '</span>' : '') +
+        '</div>';
+      }
+    },
+    create: function(input) {
+      return false;
+    }
+  });
+
+  selectize_participants.on('change', function(v){
+    $.ajax({
+      type: 'PUT',
+      url:  '/ideas/<%=@idea.id%>',
+      data: $('#participant_form').serializeArray(),
+      dataType: "JSON",
+      success: function(data) {
+          console.log(data);
+      }
+    });
+  });
+  
+
+</script>
 

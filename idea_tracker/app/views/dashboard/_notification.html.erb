@@ -4,13 +4,12 @@
 
         <% @activities.each do |activity| %>
          <% if @count < 20%>
-          
             <% if activity.trackable_type == "Idea"%> 
                 <% @sub_ideas.each do |sub_idea| %>
                     <% if activity.trackable_id == sub_idea.idea_id%>
                         <div class = "list-group-item">
                             <%= render_activity activity%>
-                            <span class = "text-muted small"> 
+                            <span class = "pull-right text-muted small"> 
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>
@@ -24,8 +23,7 @@
                     <% if activity.trackable_id == comment_id.id%>
                         <div class = "list-group-item">
                             <i class = "fa fa-comment fa-fw"> </i>
-                            <%= activity.owner.first_name if activity.owner%>
-                            <%= activity.owner.last_name if activity.owner%>
+                            <%= activity.owner if activity.owner%>
 
                             commented   
 
@@ -34,7 +32,7 @@
                             <% else %>
                                which has been removed!!
                             <% end %>
-                            <span class = "text-muted small"> 
+                            <span class = "pull-right text-muted small"> 
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>

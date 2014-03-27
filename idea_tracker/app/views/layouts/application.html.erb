@@ -22,9 +22,12 @@
 				<a class="navbar-brand" href="/">CBEL Online Idea Tracker</a>
 			</div>
 			<div class="nav navbar-username navbar-right">
+				<%= image_tag gravatar_url_small(current_user) %>
+
+   
 				<% if user_signed_in? %>
 					<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
-					<%=current_user.first_name + " " + current_user.last_name %>
+					<%=current_user %>
 					<% end %>
 
 					<%= "(Admin) " if current_user.try(:admin?) %>
@@ -43,31 +46,31 @@
 			<div class="sidebar-collapse">
 				<ul class="nav" id="side-menu">
 					<li>
-						<a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i> Submit an Idea!</a>
+						<a href="/ideas/new"><i class="fa fa-lightbulb-o fa-fw"></i><span class="name">Submit an Idea!</span></a>
 					</li>
 					<li>
-						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i> Dashboard</a>
+						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i><span class="name">Dashboard</span></a>
 					</li>
 					<li>
-						<a href="/ideas"><i class="fa fa-lightbulb-o fa-fw"></i> Ideas</a>
+						<a href="/ideas"><i class="fa fa-lightbulb-o fa-fw"></i><span class="name">Ideas</span></a>
 <!-- 						<ul class="nav nav-second-level">
 							<li>
-								<a href="/ideas"><i class=" fa fa-list fa-fw"></i> Recent Ideas</a>
+								<a href="/ideas"><i class=" fa fa-list fa-fw"></i><span class="name"> Recent Ideas</span></a>
 							</li>
 							<li>
 								<a href="/ideas">Assigned Ideas</a>
 							</li>
 							<li>
-								<a href="/ideas"><i class="fa fa-check fa-fw"></i> Subscribed Ideas</a>
+								<a href="/ideas"><i class="fa fa-check fa-fw"></i><span class="name"> Subscribed Ideas</span></a>
 							</li>
 						</ul> -->
 						<!-- /.nav-second-level -->
 					</li>
 					<li>
-						<a href="/partners"><i class="fa fa-users fa-fw"></i> Partners</a>
+						<a href="/partners"><i class="fa fa-users fa-fw"></i><span class="name">Partners</span></a>
 					</li>
 					<li>
-						<a href="#"><i class="fa fa-tasks fa-fw"></i> Reports <span class="fa arrow"></span></a>
+						<a href="#"><i class="fa fa-tasks fa-fw"></i><span class="name">Reports  <i class="fa fa-chevron-down"></i></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="/reports/status">Status Report</a>
@@ -84,12 +87,18 @@
 							<li>
 								<a href="/reports/charting">Custom Report</a>
 							</li>
+							<li>
+								<a href="/reports/activity">User Activity Report</a>
+							</li>
+							<li>
+								<a href="/reports/freshness">Stalling Idea Report</a>
+							</li>
 						</ul>
 						<!-- /.nav-second-level -->
 					</li>            
 					<% if current_user.try(:admin?) %>
 					<li>
-						<a href="#"><i class="fa fa-cog fa-fw"></i> Admin Settings <span class="fa arrow"></span></a>
+						<a href="#"><i class="fa fa-cog fa-fw"></i><span class="name"> Admin Settings <i class="fa fa-chevron-down"></i></span></a>
 						<ul class="nav nav-second-level">
 							<li>
 								<a href="/settings">Site Settings</a>
@@ -151,6 +160,7 @@ $(document).ready(function(){
 	if($('.dataTable').length > 0)
 	{
 		$('.dataTable').dataTable({
+			"aaSorting": [],
 			"aoColumnDefs" : [ {
 				"bSortable" : false,
 				"aTargets" : [ "no-sort" ]

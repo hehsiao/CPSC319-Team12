@@ -15,7 +15,7 @@ class DashboardController < ApplicationController
 		@threads = Commontator::Thread.all
 		@thread_ids = []
 		@comment_ids =[]
-
+		
 		@sub_ideas.each do |sub_idea|
 			@threads.each do |thread|
 				if  sub_idea.idea_id == thread.commontable_id 
@@ -35,6 +35,9 @@ class DashboardController < ApplicationController
 		@activities = PublicActivity::Activity.order("created_at desc").where.not(owner_id: current_user.id)
 	    @count = 0
 
+		ideas_within_month = Idea.where(:created_at => Time.now-(60*60*24*30)..Time.now)
+		@ideas_group_by_week = ideas_within_month.group_by { |m| m.created_at.beginning_of_week }
+	
 	end
- 
+
 end

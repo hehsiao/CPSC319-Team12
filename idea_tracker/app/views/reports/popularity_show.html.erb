@@ -1,5 +1,9 @@
 <h1 class="page-header">Reports</h1>
 
+<h5 class="widget">
+    <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, {:action => 'popularity'} %> 
+</h5>
+
 <section class="widget">
 	<div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Popularity Report</div>
 	  
@@ -25,7 +29,35 @@
 		  </tbody>
 		</table>
 	</div>
+	
+	<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+
+	
 </section>
   
-<%= link_to("Back",{:action => 'popularity'}, :class => 'action popularity') %>
 
+
+<script type="text/javascript" src="https://www.google.com/jsapi"></script>
+<script type="text/javascript">
+	google.load("visualization", "1", {packages:["corechart"]});
+	google.setOnLoadCallback(drawChart);
+	function drawChart() {
+		var data = google.visualization.arrayToDataTable([
+		  ["<%= @category.category_name %>", 'Number of Ideas'],
+		  
+			<% index = 0 %>
+			<% @category_children.each do |category| %>
+			  ["<%= category.category_name %>" , <%= @idea_counter_array[index] %>],
+			  <% index += 1 %>
+			<% end %>
+		]);
+
+		var options = {
+		  title: "<%= @category.category_name %>",
+		  is3D: true,
+		};
+
+		var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+		chart.draw(data, options);
+	}
+</script>

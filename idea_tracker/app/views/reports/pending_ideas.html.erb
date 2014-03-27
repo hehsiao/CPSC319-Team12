@@ -1,9 +1,13 @@
 
 <h1>Pending Ideas</h1>
 
-<label>Number of Days</label>
-<%= form_tag({:action=>"pending_ideas_show"}, method: :get) do %>
-  <%= number_field_tag :submit, params[:submit]%>
-  <%= submit_tag :submit %> <!-- TODO will need to refactor this... -->
-<% end %>
+<section class="widget">
+
+	<label>Number of Days</label>
+	<%= form_tag({:action=>"pending_ideas_show"}, method: :get) do %>
+	  <%= number_field_tag :submit, params[:submit]%>
+	  <%= submit_tag :submit %> <!-- TODO will need to refactor this... -->
+	<% end %>
+
+</section>
 

@@ -9,8 +9,8 @@
 
   <tbody>
     <% @my_ideas.each do |idea| %>
-    <tr onclick="document.location = '/ideas/<%=idea.id%>';">
-      <td><%= idea.summary %></td>
+    <tr>
+      <td><%= link_to idea.summary, idea_path(idea) %></td>
       <td><%= truncate(idea.description, length:70) %></td>
       <td><abbr title="<%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(idea.created_at) %> ago</abbr></td>
       <td><%= link_to 'Show', idea %></td>

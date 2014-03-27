@@ -7,6 +7,8 @@ class Idea < ActiveRecord::Base
 	belongs_to :user, :class_name => 'User' # this is the creator of the idea
 
 	belongs_to :status
+	
+	has_many :partners
 	has_many :comments
 	has_many :child_ideas, :class_name => 'Association', :foreign_key => 'parent_idea_id'
 	has_many :parent_ideas, :class_name => 'Association', :foreign_key => 'tagged_idea_id'
@@ -32,6 +34,9 @@ class Idea < ActiveRecord::Base
 		self.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}
 	end
 
+	def to_s
+		self.summary.truncate(30)
+	end
 
 	# scope :recent, order("created_at desc").limit(5)
 	scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }
