@@ -107,7 +107,8 @@
 								</div>
             </div>
             <div id="provider_partner_pulldown" class="form-group">
-							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
+            	<%= "My name is:" %>
+							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, (@idea.provider_partner_id) ), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
             </div> 
           </div>
           <div class="form-group">
