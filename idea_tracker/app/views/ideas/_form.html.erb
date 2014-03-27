@@ -21,6 +21,7 @@
 					<div class="panel-body">
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
+
 							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
 
 						</div>
@@ -119,6 +120,7 @@
 	                            <input type="radio" name="receiver_use" id="optionsRadiosInline2" value="receiver_partner_pulldown" checked>Existing
 	                        </label>
 	                    </div>
+
 	                
 		                <div id="receiver_partner_form" class="form-group" style="display: none; width: 681px; top: 34px; left: 0px; visibility: visible;">
 		                    <div class="form-group">
@@ -171,8 +173,8 @@
 				<div class="panel-body">
 					<div class="form-group" >
 						<% if @idea.owner_id %>
-							<label for="idea_user_id">Idea Owner</label>            
-							<input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id) ? "" : "disabled" %> />
+							<label for="idea_user_id">Idea Owner</label>
+							<input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id or current_user.admin) ? "" : "disabled" %> />
 						<% end %>
 						<input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
 					</div>
@@ -253,6 +255,7 @@
 <% end %>
 
 <script>
+
     $('#provider_partner_form', '#receiver_partner_form').hide();
 
     $("[name=provider_use]").each(function(i) {
@@ -272,10 +275,12 @@
     });
 	// Idea Associations
 	var ideas_options = <%= raw @idea_selections %>;
+
 	$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
 		plugins: ['remove_button'],
 		delimiter: ',',
 		persist: false,
+
 		maxItems: null,
 		valueField: 'id',
 		labelField: 'summary',
@@ -361,5 +366,4 @@
 		},
 		create: false
 	});
-
 </script>

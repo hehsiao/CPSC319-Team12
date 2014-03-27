@@ -55,7 +55,7 @@
     </table>
     <input type="checkbox" name="require_other" value="1" <%= hasOtherField ? "checked" : "" %> /> Require Other Field <br />
 
-    <button id="addTag" class="btn btn-default">Add New</button>
+    <div id="addTag" class="btn btn-default">Add New</div>
   </div>
 
   <!-- js to handle child items -->
@@ -67,7 +67,7 @@
 
 <script>
 var newTagCount = 0;
-window.onload=function()
+$(document).ready(function()
 {
   $('#addTag').click(function(e){
     e.preventDefault();
@@ -86,5 +86,5 @@ window.onload=function()
     dropdownParent: 'body'
   });
 
-}
+});
 </script>

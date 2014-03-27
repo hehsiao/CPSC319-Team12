@@ -6,6 +6,7 @@
                     <i class = "fa fa-bar-chart-o fa-fw"></i> "Idea Statistics"
                 </div>
                 <div class = "panel-body">
+				<div id="chart_div"></div>
                 </div>
             </section>
         </div>
@@ -45,3 +46,26 @@
             </section>
         </div>
 </div>
+
+    <script type="text/javascript" src="https://www.google.com/jsapi"></script>
+    <script type="text/javascript">
+      google.load("visualization", "1", {packages:["corechart"]});
+      google.setOnLoadCallback(drawChart);
+      function drawChart() {
+        var data = google.visualization.arrayToDataTable([
+			['Date', 'ideas'],
+		<% @ideas_group_by_week.each do |group| %>
+          <% week = group[0].to_s.split(" ").at(0) %>
+		  <% x_label = "week of "+ week.split("-").at(1) + "-" + week.split("-").at(2) %>
+          ["<%= x_label %>",  <%= group[1].size %>],
+		<% end %>
+        ]);
+		
+        var options = {
+          title: 'New Ideas in the past 30 days aggregated by week'
+        };
+
+        var chart = new google.visualization.LineChart(document.getElementById('chart_div'));
+        chart.draw(data, options);
+      }
+    </script>
