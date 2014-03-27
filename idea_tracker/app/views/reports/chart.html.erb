@@ -33,6 +33,7 @@
             "},"
           }.join %> 
         ],
+        resize: true,
         xkey: 'x',
         ykeys: [<%=ykeys.join ","%>],
         labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>],
@@ -64,12 +65,14 @@
         xkey: 'x',
         ykeys: [<%=raw (ykeys.none? ? "'a'" : (ykeys.join ","))%>],
         labels: [<%=raw (ykeys.none? ? "'Total'" : (ykeys.collect{|u| "'#{@label3.find(u)}'"}.join ","))%>],
-        xLabels: ['<%= @date_type %>']
+        xLabels: ['<%= @date_type %>'],
+        resize: true
       });
     <% elsif @chart_type.casecmp("pie") == 0 %>
       new Morris.Donut({
         element: 'container',
-        data:[<%= raw @result.collect{|row| "{label: '#{@label1.find(row[1]).to_s }', value: '#{row[0]}'},"}.join %>]
+        data:[<%= raw @result.collect{|row| "{label: '#{@label1.find(row[1]).to_s }', value: '#{row[0]}'},"}.join %>],
+        resize: true
       });
     <% elsif @chart_type.casecmp("table") == 0 %>
       $('#container').html(

@@ -16,7 +16,7 @@ class IdeasController < ApplicationController
 
     @recent_ideas = Idea.order("created_at desc").limit(5)
 		@my_ideas = Idea.where(user_id: current_user.id)
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user)
 		@sub_ideas = Subscription.where(user_id: current_user.id)  
         
      

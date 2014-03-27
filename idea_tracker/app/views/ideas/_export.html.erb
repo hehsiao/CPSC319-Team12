@@ -1,5 +1,5 @@
 <%= form_tag({:controller => "ideas", :action => "to_csv", :id => @idea.id}) do %>
 
-<%= submit_tag 'generate CSV file', :class => "btn btn-outline btn-warning" %>
+<dt>Share as CSV</dt><dd><%= submit_tag 'Export', :class => 'btn' %></dd>
       
 <% end %>

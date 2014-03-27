@@ -26,13 +26,13 @@
 						</div>
 
 						<div class="form-group">
-								<label for="idea_summary">Idea Name</label>
-								<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary (Max 40 Characters', maxlength: '40' %>
+								<label for="idea_summary">Idea Name<small> <i class="fa fa-question-circle fa-fw"></i> Short Title. Limited to 40 Characters</small></label>
+								<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary (Max 40 Characters)', maxlength: '40' %>
 						</div>
 
 						<div class="form-group">
 								<%= f.label :description %>
-								<%= f.text_area :description, class: 'form-control', :rows => 5, placeholder: 'Long Descriptions' %>
+								<%= f.text_area :description, class: 'form-control', :rows => 5, placeholder: 'Full Descriptions' %>
 						</div>
 
 						<div class="form-group">
@@ -59,69 +59,68 @@
 					<div class="form-group">
 						<div class="control-group">
 							<%= f.label :provider_partner_id %>
-	                        <label class="radio-inline">
-	                            <input type="radio" name="provider_use" id="optionsRadiosInline1" value="provider_partner_form">New
-	                        </label>
-	                        <label class="radio-inline">
-	                            <input type="radio" name="provider_use" id="optionsRadiosInline2" value="provider_partner_pulldown" checked>Existing
-	                        </label>
-	                    </div>
+                <label class="radio-inline">
+                    <input type="radio" name="provider_use" id="optionsRadiosInline1" value="provider_partner_form">New
+                </label>
+                <label class="radio-inline">
+                    <input type="radio" name="provider_use" id="optionsRadiosInline2" value="provider_partner_pulldown" checked>Existing
+                </label>
+            </div>
 	                
-		                <div id="provider_partner_form" class="form-group" style="display: none; width: 681px; top: 34px; left: 0px; visibility: visible;">
-		                    <div class="form-group">
-							  <%= label_tag :partner_name, "Partner Name" %><br>
-							  <%= text_field :"provider_partner", :partner_name, :class => 'form-control' %>
-							</div>
-							<div class="row">
-							  <div class="col-md-6">
-							    <h4>Primary Contact</h4>
-							    <div class="form-group">
-							      <%= label :contact_name, "Contact Name" %><br>
-							      <%= text_field :"provider_partner", :contact_name, :class => 'form-control' %>
-							    </div>
-							    <div class="form-group">
-							      <%= label :email, "Email" %><br>
-							      <%= email_field :"provider_partner", :email, :class => 'form-control' %>
-							    </div>
-							    <div class="form-group">
-							      <%= label :phone_num, "Phone" %><br>
-							      <%= phone_field :"provider_partner", :phone_num, :class => 'form-control' %>
-							    </div>
-							  </div>
-							  <div class="col-md-6">
-							    <h4>Secondary Contact</h4>
-							    <div class="form-group">
-							      <%= label :contact_name, "Contact Name" %><br>
-							      <%= text_field :"provider_partner", :secondary_contact_name, :class => 'form-control' %>
-							    </div>
-							    <div class="form-group">
-							      <%= label :email, "Email" %><br>
-							      <%= text_field :"provider_partner", :secondary_email, :class => 'form-control' %>
-							    </div>
-							    <div class="form-group">
-							      <%= label :phone_num, "Phone" %><br>
-							      <%= text_field :"provider_partner", :secondary_phone_num, :class => 'form-control' %>
-							    </div>
-							  </div>
-							</div>
-		                </div>
-		                <div id="provider_partner_pulldown" class="form-group">
+            <div id="provider_partner_form" class="form-group" style="display: none;  visibility: visible;">
+                <div class="form-group">
+								  <%= label_tag :partner_name, "Partner Name" %><br>
+								  <%= text_field :"provider_partner", :partner_name, :class => 'form-control' %>
+								</div>
+								<div class="row">
+							  	<div class="col-md-6">
+								    <h4>Primary Contact</h4>
+								    <div class="form-group">
+								      <%= label :contact_name, "Contact Name" %><br>
+								      <%= text_field :"provider_partner", :contact_name, :class => 'form-control' %>
+								    </div>
+								    <div class="form-group">
+								      <%= label :email, "Email" %><br>
+								      <%= email_field :"provider_partner", :email, :class => 'form-control' %>
+								    </div>
+								    <div class="form-group">
+								      <%= label :phone_num, "Phone" %><br>
+								      <%= phone_field :"provider_partner", :phone_num, :class => 'form-control' %>
+								    </div>
+							  	</div>
+								  <div class="col-md-6">
+								    <h4>Secondary Contact</h4>
+								    <div class="form-group">
+								      <%= label :contact_name, "Contact Name" %><br>
+								      <%= text_field :"provider_partner", :secondary_contact_name, :class => 'form-control' %>
+								    </div>
+								    <div class="form-group">
+								      <%= label :email, "Email" %><br>
+								      <%= text_field :"provider_partner", :secondary_email, :class => 'form-control' %>
+								    </div>
+								    <div class="form-group">
+								      <%= label :phone_num, "Phone" %><br>
+								      <%= text_field :"provider_partner", :secondary_phone_num, :class => 'form-control' %>
+								    </div>
+								  </div>
+								</div>
+            </div>
+            <div id="provider_partner_pulldown" class="form-group">
 							<%= f.select(:provider_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.provider_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-	                    </div> 
-                    </div>
-                    <div class="form-group">
+            </div> 
+          </div>
+          <div class="form-group">
 						<div class="control-group">
 							<%= f.label :receiver_partner_id %>
-	                        <label class="radio-inline">
-	                            <input type="radio" name="receiver_use" id="optionsRadiosInline1" value="receiver_partner_form">New
-	                        </label>
-	                        <label class="radio-inline">
-	                            <input type="radio" name="receiver_use" id="optionsRadiosInline2" value="receiver_partner_pulldown" checked>Existing
-	                        </label>
-	                    </div>
-	                
-		                <div id="receiver_partner_form" class="form-group" style="display: none; width: 681px; top: 34px; left: 0px; visibility: visible;">
-		                    <div class="form-group">
+              <label class="radio-inline">
+                  <input type="radio" name="receiver_use" id="optionsRadiosInline1" value="receiver_partner_form">New
+              </label>
+              <label class="radio-inline">
+                  <input type="radio" name="receiver_use" id="optionsRadiosInline2" value="receiver_partner_pulldown" checked>Existing
+              </label>
+            </div>
+            <div id="receiver_partner_form" class="form-group" style="display: none; visibility: visible;">
+		          <div class="form-group">
 							  <%= label_tag :partner_name, "Partner Name" %><br>
 							  <%= text_field :"receiver_partner", :partner_name, :class => 'form-control' %>
 							</div>
@@ -157,12 +156,12 @@
 							    </div>
 							  </div>
 							</div>
-		                </div>
-		                <div id="receiver_partner_pulldown" class="form-group">
+            </div>
+            <div id="receiver_partner_pulldown" class="form-group">
 							<%= f.select(:receiver_partner_id, options_from_collection_for_select(Partner.all, :id, :partner_name, @idea.receiver_partner_id), {}, { :placeholder => "Select Partner...", :class => 'form-control'}) %>
-	                    </div> 
-                    </div>
-	            </div>
+            </div> 
+          </div>
+        </div>
 			</section>
 		</div>
 		<div class="col-md-6">
@@ -180,6 +179,7 @@
 					<div class="form-group">
 						<%= f.label :participants %><br>
 						<%= f.text_field :participants, :value => "#{@idea.participants.where(:is_active => 1).collect {|u| u.user.email}.join ","}" %>
+						<div><i class="fa fa-question-circle fa-fw"></i> You can add other staff as participants to promote discussion.</div>
 					</div>
 				</div>
 			</section>
@@ -190,7 +190,8 @@
 		<div class="col-md-12">
 			<section class="widget">
 				<div class="panel-heading">
-					<i class="fa fa-link"></i> Idea Associations
+					<i class="fa fa-link"></i> Idea Relationships
+					<small>[Connect the ideas]</small>
 				</div>
 				<div class="panel-body">
 					<% if @idea.id.nil? #new idea, may have peer/parent id%>
@@ -207,20 +208,19 @@
 					<% end %>
 
 					<div class="form-group">
-						<label for="idea_association_parents">The Big Idea</label><br>
+						<label for="idea_association_parents">The Parent Idea<small> <i class="fa fa-question-circle fa-fw"></i> Link this idea to the bigger goal.</small></label><br>
 						<%= f.text_field :association_parents, :value => parent_ideas %>
 					</div>
 
 					<div class="form-group">
-						<label for="idea_association_peers">Similiar Ideas</label><br>
-						<%= f.text_field :association_peers, :value => peer_ideas %>
-					</div>
-
-					<div class="form-group">
-						<label for="idea_association_childs">Smaller Ideas</label></br>
+						<label for="idea_association_childs">The Child Ideas<small> <i class="fa fa-question-circle fa-fw"></i> Add the child ideas to this idea. </small></label></br>
 						<%= f.text_field :association_childs, :value => child_ideas %>
 					</div>
 
+					<div class="form-group">
+						<label for="idea_association_peers">Similiar Ideas<small> <i class="fa fa-question-circle fa-fw"></i> Link this idea to other similar idea or eventually merge them together.</small></label><br>
+						<%= f.text_field :association_peers, :value => peer_ideas %>
+					</div>
 				</div>
 			</section>
 		</div>
@@ -229,8 +229,9 @@
 	<div class="row">
 		<div class="col-md-12">
 			<section class="widget">
-				<div class="panel-heading"><i class="fa fa-tags"></i> Categories</div>
-
+				<div class="panel-heading">
+					<i class="fa fa-tags"></i> Categories <small>[<kbd>cmd</kbd> or <kbd>ctrl</kbd> + <kbd>click</kbd> to select multiple from selected fields]</small>
+				</div>
 				<div class="panel-body">
 				 <%= render :partial => "category_utils/category_form", :locals => {:idea_id => @idea.id, :categories => @categories} %> <!-- TODO: this needs to be joined better with the way idea is created -->
 
@@ -259,7 +260,7 @@
         $(this).change(function(){
             $('#provider_partner_form, #provider_partner_pulldown').hide();
             divId = $(this).val();
-            $("#"+divId).show('fast');
+            $("#"+divId).show('slow');
         });
     });
 
@@ -267,7 +268,7 @@
         $(this).change(function(){
             $('#receiver_partner_form, #receiver_partner_pulldown').hide();
             divId = $(this).val();
-            $("#"+divId).show('fast');
+            $("#"+divId).show('slow');
         });
     });
 	// Idea Associations

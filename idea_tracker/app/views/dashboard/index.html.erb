@@ -5,7 +5,7 @@
                 <div class = "panel-heading">
                     <i class = "fa fa-bar-chart-o fa-fw"></i> "Idea Statistics"
                 </div>
-                <div class = "panel-body">
+                <div class = "panel-body" style="height:300px">
 				<div id="chart_div"></div>
                 </div>
             </section>
@@ -62,7 +62,9 @@
         ]);
 		
         var options = {
-          title: 'New Ideas in the past 30 days aggregated by week'
+          title: 'New Ideas in the past 30 days aggregated by week',
+          backgroundColor: 'transparent',
+          height: '300px'
         };
 
         var chart = new google.visualization.LineChart(document.getElementById('chart_div'));

@@ -5,7 +5,7 @@
     
   <div class="panel-body">
 
-    <table class="table table-hover dataTable" summary="User list">
+    <table class="table table-hover" summary="User list">
       <thead>
         <tr>
           <th>Status</th>
@@ -29,34 +29,34 @@
     </table>
   </div>
 
+<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
+</section>
+
+
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
 <script type="text/javascript" >
 google.load("visualization", "1", {packages:["corechart"]});
 google.setOnLoadCallback(drawChart);
 function drawChart() {
-	var data = google.visualization.arrayToDataTable([
-	  ['Status', 'Number of Ideas'],
-		<% index = 0 %>
+  var data = google.visualization.arrayToDataTable([
+    ['Status', 'Number of Ideas'],
+    <% index = 0 %>
         <% @status.each do |status| %>
-			["<%= status.status %>", <%= @counter_array.at(index) %>],
+      ["<%= status.status %>", <%= @counter_array.at(index) %>],
             <% index += 1 %>
         <% end %>
-	]);
+  ]);
 
-	var options = {
-	  title: 'Status',
-	  is3D: true,
-	};
+  var options = {
+    title: 'Status',
+    backgroundColor: 'transparent',
+    pieHole: 0.4
+  };
 
-	var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-	chart.draw(data, options);
+  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
+  chart.draw(data, options);
 }
 </script>
-
-<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
-</section>
-
-
 
 
