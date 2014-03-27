@@ -48,6 +48,7 @@ Partner.create!([
 
 Idea.delete_all
 Idea.create!([
+
 	{id: 1, owner_id: 3, user_id: 3, provider_partner_id: 1, created_at: "2014-03-1", summary: "Youth in Transition in Psychology 1", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status_id: 1 },
 	{id: 2, owner_id: 3, user_id: 2, provider_partner_id: 2, created_at: "2014-03-3", summary: "Fitness Program 1", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
 	{id: 3, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-3", summary: "Social Media 1", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},

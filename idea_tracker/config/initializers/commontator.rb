@@ -47,7 +47,6 @@ Commontator.configure do |config|
   # Default: lambda { |user| true } (always receive subscription emails)
   config.subscription_email_enable_proc = lambda { |user| true }
 
-
   # Commontable (acts_as_commontable) Configuration
 
   # What a comment is called in your application

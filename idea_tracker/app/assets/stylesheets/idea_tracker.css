@@ -96,7 +96,9 @@ div.dataTables_filter input {
     min-height: 568px;
 }
 
+
 @media(min-width: 768px) {
+
     #page-wrapper {
         position: inherit;
         margin: 0 25px 0 90px;
@@ -104,6 +106,7 @@ div.dataTables_filter input {
         min-height: 768px;
     }
 }
+
 
 @media(min-width: 1048px) {
     #page-wrapper {
@@ -132,7 +135,6 @@ div.dataTables_filter input {
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
 }
 }
-
 
 /* Idea Creation */
 
