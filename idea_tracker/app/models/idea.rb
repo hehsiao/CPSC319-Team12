@@ -33,6 +33,9 @@ class Idea < ActiveRecord::Base
 		self.child_ideas.where(:is_hierarchy => 0).collect {|u| u.tagged_idea_id}
 	end
 
+	def to_s
+		self.summary.truncate(30)
+	end
 
 	# scope :recent, order("created_at desc").limit(5)
 	scope :search, lambda {|query| where(["name LIKE ?", "%#{query}%"]) }

@@ -14,7 +14,7 @@
 				<%= label_tag(:show_options1, "Show Only (All unchecked = total)") %>
 				<div class="options3" id="user3">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options3[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+						<input type="checkbox" name="show_options3[]" value="<%= u.id %>" > <%= u %>
 					<% end %>
 				</div>
 				<%= label_tag(:date_type, "Aggregate By") %>
@@ -29,7 +29,7 @@
 				<%= label_tag(:show_options1, "Show Only") %>
 				<div class="options1" id="user1">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+						<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= u %>
 					<% end %>
 				</div>
 				<div class="options1" id="stage1">
@@ -50,7 +50,7 @@
 				<%= label_tag(:show_options2, "Show Only") %>
 				<div class="options2" id="user2">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= "#{u.first_name}  #{u.last_name}" %>
+						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= u %>
 					<% end %>
 				</div>
 				<div class="options2" id="stage2">

@@ -233,7 +233,7 @@ class IdeasController < ApplicationController
     def user_list
       @participants = "["
       User.all.each do |u|
-        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+        @participants += "{email: '" + u.email + "', name: '#{u}'}, "
       end
       @participants = @participants[0...-2]
       @participants += "]"

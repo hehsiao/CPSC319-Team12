@@ -8,19 +8,19 @@
       	<div id="container"></div>
       	<%= form_tag("activity", method: "get") do %>
       		<div>
-	      		<%= label_tag(:show_options2, "Show Only (No check = All Users)") %>
+	      		<%= label_tag(:user_lists, "Show Only (No check = All Users)") %>
 	      		<br>
 	      		<% User.all.each do |u| %>
-					<input type="checkbox" name="user_lists[]" value="<%= u.id %>" <%= "#{u.id}".in?(@users.to_a) ? "checked" : ""%> > <%= "#{u.first_name}  #{u.last_name}" %>
-				<% end %>
-			</div>
-			<div>
-				From
-				<input type="date" name="date_value1" value="<%=@date1%>" />
-				To
-				<input type="date" name="date_value2" value="<%=@date2%>" />
-			</div>
-			<%= submit_tag("Update Report", :id => "gen_chart") %>
+    					<input type="checkbox" name="user_lists[]" value="<%= u.id %>" <%= "#{u.id}".in?(@users.to_a) ? "checked" : ""%> > <%= "#{u}" %>
+    				<% end %>
+			    </div>
+          <div>
+    				From
+    				<input type="date" name="date_value1" value="<%=@date1%>" />
+    				To
+    				<input type="date" name="date_value2" value="<%=@date2%>" />
+    			</div>
+    			<%= submit_tag("Update Report", :id => "gen_chart") %>
       	<% end %>
       	<%= debug(@result) %>
       	<%= debug(@sql) %>

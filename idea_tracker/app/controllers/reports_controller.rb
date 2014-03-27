@@ -40,6 +40,30 @@ class ReportsController < ApplicationController
 	end
  end
 
+ def freshness
+ 	@ndays = params[:ndays]
+ 	@check_status = params[:status_list]
+ 	@check_status = Status.where.not(:status => ['Removed', 'Archived']).pluck(:id).map(&:to_s) if !(test_exist @check_status)
+ 	sql = 
+ 		((test_exist @ndays) ? "SELECT * FROM ( " : "") +
+ 		"SELECT i.id, GREATEST(i.updated_at, IFNULL(c.dt, i.created_at)) as latest_activity, " +
+ 		"i.updated_at as latest_idea_update, c.dt as latest_comment, i.created_at as idea_create " +
+ 		"FROM ideas as i " +
+ 		"LEFT JOIN ( " +
+ 			"SELECT commontable_id as id, MAX(cc.created_at) as dt " +
+ 			"FROM commontator_threads as ct " +
+ 			"JOIN commontator_comments as cc " +
+ 			"ON ct.id = cc.thread_id " +
+ 			"GROUP BY commontable_id " +
+ 		") c ON i.id = c.id " +
+		((test_exist @check_status) ? ("WHERE " + (@check_status.collect{|u| "i.status_id=#{u} "}.join 'OR ')) : "" ) +
+		"ORDER BY latest_activity ASC, latest_idea_update ASC, latest_comment ASC" +
+		((test_exist @ndays) ? ") r WHERE latest_activity < DATE_SUB(curdate(), INTERVAL #{(@ndays.to_i - 1)} DAY) " : "")
+	@result = ActiveRecord::Base.connection.execute(sql).to_a
+	@sql = sql
+
+ end
+
  def activity
  	if (test_exist params[:date_value1]) and !(test_exist params[:date_value2])
  		theDate = "WHERE created_at > '#{params[:date_value1]}' "

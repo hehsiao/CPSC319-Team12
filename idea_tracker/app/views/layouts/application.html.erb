@@ -27,7 +27,7 @@
    
 				<% if user_signed_in? %>
 					<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
-					<%=current_user.first_name + " " + current_user.last_name %>
+					<%=current_user %>
 					<% end %>
 
 					<%= "(Admin) " if current_user.try(:admin?) %>
@@ -89,6 +89,9 @@
 							</li>
 							<li>
 								<a href="/reports/activity">User Activity Report</a>
+							</li>
+							<li>
+								<a href="/reports/freshness">Stalling Idea Report</a>
 							</li>
 						</ul>
 						<!-- /.nav-second-level -->
@@ -157,6 +160,7 @@ $(document).ready(function(){
 	if($('.dataTable').length > 0)
 	{
 		$('.dataTable').dataTable({
+			"aaSorting": [],
 			"aoColumnDefs" : [ {
 				"bSortable" : false,
 				"aTargets" : [ "no-sort" ]

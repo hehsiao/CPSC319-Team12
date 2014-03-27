@@ -171,8 +171,8 @@
 				<div class="panel-body">
 					<div class="form-group" >
 						<% if @idea.owner_id %>
-							<label for="idea_user_id">Idea Owner</label>            
-							<input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id) ? "" : "disabled" %> />
+							<label for="idea_user_id">Idea Owner</label>
+							<input class="form-control" type="text" placeholder="<%= @idea.owner.first_name %>" <%= (@idea.owner_id == current_user.id or current_user.admin) ? "" : "disabled" %> />
 						<% end %>
 						<input class="form-control" id="idea_user_id" name="idea[user_id]" type="hidden" value="<%= current_user.id %>" style="margin:0;padding:0;display:inline">
 					</div>

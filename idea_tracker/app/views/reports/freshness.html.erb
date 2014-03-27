@@ -1,0 +1,61 @@
+<div class="row">
+  <div class="col-md-12">
+    <section class="widget">
+      <div class="panel-heading"><i class="fa fa-info"></i> Idea Stalling List
+      </div>
+      <div class="panel-body">
+      	
+      	<div id="container"></div>
+      	<%= form_tag("freshness", method: "get") do %>
+          <div>
+            <%= label_tag(:ndays, "Show only ideas without activities for at least n days") %>
+            <br>
+            <input type="text" name="ndays" value="<%= @ndays %>" />
+          </div>
+          <div>
+            <%= label_tag(:user_lists, "Show Only (No check = All Stages)") %>
+            <br>
+            
+            <% Status.all.each do |u| %>
+              <input type="checkbox" name="status_list[]" value="<%= u.id %>" <%= "checked" if "#{u.id}".in?(@check_status) %> > <%= "#{u}" %>
+            <% end %>
+          </div>
+          <%= submit_tag("Update Report", :id => "submit_btn") %>
+        <% end %>
+
+        <%= debug(@check_status) %>
+      	<%= debug(@result) %>
+      	<%= debug(@sql) %>
+
+      </div>
+      <script>
+        $('#container').html(
+          "<table class='table table-hover dataTable'>" + 
+            "<thead>" +
+              "<tr>" +
+                "<th>Idea</th>" +
+                "<th>Latest Activity</th>" + 
+                "<th>Latest Idea Update</th>" + 
+                "<th>Latest Comment</th>" + 
+                "<th>Created On</th>" + 
+                "<th>Stage</th>" + 
+              "</tr>" +
+            "</thead>" +
+            "<tbody>" +
+              <% @result.each do |row| %>
+                "<tr>" + 
+                  "<td><%=Idea.find(row[0])%></td>" + 
+                  "<td><%=row[1].in_time_zone('Pacific Time (US & Canada)').to_s(:long)%></td>" + 
+                  "<td><%=row[2].in_time_zone('Pacific Time (US & Canada)').to_s(:long)%></td>" +
+                  "<td><%=row[3].in_time_zone('Pacific Time (US & Canada)').to_s(:long) if row[3]%></td>" + 
+                  "<td><%=row[4].in_time_zone('Pacific Time (US & Canada)').to_s(:long)%></td>" + 
+                  "<td><%=Idea.find(row[0]).status%></td>" + 
+                "</tr>" +
+              <% end %>
+            "</tbody>" +
+          "</table>"
+        );
+      </script>
+    </section>
+  </div>
+</div>

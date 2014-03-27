@@ -28,7 +28,7 @@ Commontator.configure do |config|
   # Proc called with user as argument
   # Returns the user's name
   # Default: lambda { |user| 'Anonymous' } (all users are Anonymous)
-  config.user_name_proc = lambda { |user| user.first_name+" "+user.last_name }
+  config.user_name_proc = lambda { |user| user.to_s }
 
   # Proc called with user as argument
   # Returns the user's email address

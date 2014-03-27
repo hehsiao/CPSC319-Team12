@@ -19,7 +19,7 @@
 			<% index = 0 %>
 			<% @users.each do |user| %>
 			<tr onclick="document.location = '/reports/success_rate_show/<%=user.id%>';">
-			  <td><%= user.first_name + " " + user.last_name %></td>
+			  <td><%= user %></td>
 			  <td><%= user.email %></td>
 			  <td>
 				<%= @success_rate_array.at(index) %>%
@@ -40,7 +40,7 @@ var data = google.visualization.arrayToDataTable([
 	['User', 'Success Rate (%)'],
 	<% index = 0 %>
 	<% @users.each do |user| %>
-		["<%= user.first_name + " " + user.last_name %>", <%= @success_rate_array.at(index) %>],
+		["<%= user %>", <%= @success_rate_array.at(index) %>],
 		<% index += 1 %>
 	<% end %>
 ]);
