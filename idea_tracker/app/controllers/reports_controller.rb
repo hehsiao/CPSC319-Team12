@@ -6,13 +6,38 @@ class ReportsController < ApplicationController
   
   def success_rate
    @users = User.all
-   @ideas = Idea.all
-   @status_size = Status.all.size
+   status_size = Status.all.size
+   final_status = Status.where(position: status_size)
+   final_status_id = final_status.at(0).id
+   
+   @success_rate_array = Array.new
+   @users.each do |user|
+	ideas = Idea.where(user_id: user.id)
+	owner_of = ideas.size
+	verified = 0
+	ideas.each do |idea|
+		if idea.status_id == final_status_id
+			verified += 1
+		end
+	end
+	
+	if verified == 0
+		@success_rate_array << 0
+	else
+		rate = verified*100/owner_of
+		@success_rate_array << rate
+	end
+   end 
   end
  
  def status
-   @status = Status.all
-   @ideas = Idea.all
+	@status = Status.all
+	ideas = Idea.all
+	@counter_array = Array.new
+	@status.each do |status|
+		ideas = Idea.where(status_id: status.id)
+		@counter_array << ideas.size
+	end
  end
 
  def activity
@@ -241,7 +266,7 @@ class ReportsController < ApplicationController
  
  def pending_ideas_show
 	@days = params[:submit]
-	@ideas = Idea.where(:submission_date => Time.now-(60*60*24*365*100)..Time.now - (60*60*24*@days.to_i))
+	@ideas = Idea.where(:created_at => Time.now-(60*60*24*365*100)..Time.now - (60*60*24*@days.to_i))
 	@all_status = Status.all
  end
  
@@ -251,10 +276,6 @@ class ReportsController < ApplicationController
    @all_status = Status.all
  end
  
- def status_pie
-   @status = Status.all
-   @ideas = Idea.all
- end
  
  def success_rate_show
 	@ideas = Idea.where(user_id: params[:id])
@@ -262,18 +283,12 @@ class ReportsController < ApplicationController
 	@all_status = Status.all
  end
  
- def success_rate_column_chart
-	@users = User.all
-	@ideas = Idea.all
-	@status_size = Status.all.size
- end
  
  def popularity
 	@categories = Category.top_categories
  end
  
-
- # TODO : Sort by idea_counter_array
+ 
  def popularity_show
 	idea_counter = idea_counter_array
 	category_children = Category.where(parent_id: params[:id])
@@ -304,11 +319,7 @@ class ReportsController < ApplicationController
 	@category_child = category_child
 	@all_status = Status.all
  end
- 
- def popularity_pie
-	#@idea_counter_array = idea_counter_array
-	#@category_children = Category.where(parent_id: params[:id])
- end
+
  
  private 
  

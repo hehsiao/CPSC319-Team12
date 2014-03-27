@@ -1,13 +1,15 @@
 <% categories.each do |category| %>
-<tr>
-	<td><%= category.category_name %></td>
-	<td>
+<dl class="dl-horizontal">
+	<dt><%= category.category_name %>:</dt>
+	<dd>
+		<% tag_string = "" %>
 		<% category.children.each do |category_tag| %>
 			<% tag = category_tag.tag.where(idea_id: idea_id).first %>
 			<% if tag %>
-				| <%= category_tag.category_name %> <%= tag[:additional_text] %>
+				<% tag_string += category_tag.category_name[0...-1] + ", " %> 
 			<% end %>
 		<% end %>
-	</td>
-</tr>
+		<%= tag_string[0...-2] %>
+	</dd>
+</dl>
 <% end %>

@@ -16,14 +16,13 @@ class DashboardController < ApplicationController
 		@thread_ids = []
 		@comment_ids =[]
 
-
-        @my_ideas.each do |my_idea|
-        	@threads.each do |thread|
+		@my_ideas.each do |my_idea|
+			@threads.each do |thread|
 				if  my_idea.id == thread.commontable_id
-				    @thread_ids << thread
-                end 
-            end	
-	    end	
+					@thread_ids << thread
+				end 
+			end	
+		end	
       
 		@sub_ideas.each do |sub_idea|
 			@threads.each do |thread|
@@ -43,6 +42,9 @@ class DashboardController < ApplicationController
 		#@notifications = Notification.all
 		@activities = PublicActivity::Activity.order("created_at desc")
 
+		ideas_within_month = Idea.where(:created_at => Time.now-(60*60*24*30)..Time.now)
+		@ideas_group_by_week = ideas_within_month.group_by { |m| m.created_at.beginning_of_week }
+	
 	end
- 
+
 end
