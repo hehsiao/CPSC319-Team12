@@ -2,6 +2,7 @@
 <h5 class="widget">
     <%= link_to '<i class="fa fa-plus"> </i> Create a Sub Idea'.html_safe , new_idea_path(:parent_idea_id => @idea.id, :peer_idea_ids => (@idea.child_ideas_ids.join ", "))  %> | 
     <%= link_to '<i class="fa fa-pencil"></i> Edit Idea'.html_safe, edit_idea_path(@idea) %> |
+
     <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, ideas_path %> | 
     <a href="#share"><i class="fa fa-share-square-o"></i> Share</a> |
     <% if @idea.status.to_s == "Archived" %>
@@ -28,8 +29,10 @@
       <div class="panel-body">
         <dl class="dl-horizontal">
         
+
           <dt>Stage:</dt>
           <dd><%= @idea.status %></dd>
+
         
           <dt>Summary:</dt>
           <dd><%= @idea.summary %></dd>
@@ -38,7 +41,9 @@
           <dd><%= @idea.description %></dd>
         
           <dt>Keywords:</dt>
+
           <dd><%= raw @idea.keyword_list.map {|k| link_to k, keyword_path(k) }.join(', ') %></dd>
+
         </br>
           <small>
           <dt>Submission date:</dt>

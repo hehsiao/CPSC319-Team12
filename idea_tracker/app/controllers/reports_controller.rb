@@ -259,6 +259,7 @@ class ReportsController < ApplicationController
 	@sql2 = sql
 
 	if params[:aggregate1] == 'status_id'
+
 		@label1 = Status.all
 	elsif params[:aggregate1] == 'owner_id' or params[:aggregate1] == 'user_id'
 		@label1 = User.all
@@ -268,7 +269,9 @@ class ReportsController < ApplicationController
 		@label1 = Category.get_children_by_parent_name params[:aggregate1]
 	end
 
+
 	if params[:aggregate2] == 'status_id'
+
 		@label2 = Status.all
 	elsif params[:aggregate2] == 'owner_id' or params[:aggregate2] == 'user_id'
 		@label2 = User.all

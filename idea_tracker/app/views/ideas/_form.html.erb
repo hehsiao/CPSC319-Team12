@@ -21,6 +21,7 @@
 					<div class="panel-body">
 					 <div class="form-group">
 							<label for="idea_status">Stage of Idea</label>
+
 							<%= f.select(:status_id, options_from_collection_for_select(Status.all, :id, :status, @idea.status_id), {}, { :class => 'form-control' }) %>
 
 						</div>
@@ -254,6 +255,7 @@
 <% end %>
 
 <script>
+
     $('#provider_partner_form', '#receiver_partner_form').hide();
 
     $("[name=provider_use]").each(function(i) {
@@ -273,10 +275,12 @@
     });
 	// Idea Associations
 	var ideas_options = <%= raw @idea_selections %>;
+
 	$('#idea_association_parents, #idea_association_childs, #idea_association_peers').selectize({
 		plugins: ['remove_button'],
 		delimiter: ',',
 		persist: false,
+
 		maxItems: null,
 		valueField: 'id',
 		labelField: 'summary',
@@ -362,5 +366,4 @@
 		},
 		create: false
 	});
-
 </script>

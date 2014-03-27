@@ -18,6 +18,7 @@
 
 <script>
   $(function () {
+    <% if !@result.empty? %>
     <% if @chart_type.casecmp("bar") == 0 %>
 
       Morris.Bar({
@@ -92,7 +93,9 @@
           "</table>"
         );
     <% end %>
-
+    <% else %>
+      $('#container').html("No result for the selection");
+    <% end %>
 
   });
     

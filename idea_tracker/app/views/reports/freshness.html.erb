@@ -22,7 +22,6 @@
           </div>
           <%= submit_tag("Update Report", :id => "submit_btn") %>
         <% end %>
-
         <%= debug(@check_status) %>
       	<%= debug(@result) %>
       	<%= debug(@sql) %>
@@ -43,7 +42,7 @@
             "</thead>" +
             "<tbody>" +
               <% @result.each do |row| %>
-                "<tr>" + 
+                "<tr onclick=\'document.location=\"/ideas/<%=row[0]%>\"\'>" + 
                   "<td><%=Idea.find(row[0])%></td>" + 
                   "<td><%=row[1].in_time_zone('Pacific Time (US & Canada)').to_s(:long)%></td>" + 
                   "<td><%=row[2].in_time_zone('Pacific Time (US & Canada)').to_s(:long)%></td>" +
