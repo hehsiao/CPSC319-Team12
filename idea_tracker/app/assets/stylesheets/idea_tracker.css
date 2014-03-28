@@ -22,6 +22,10 @@ a:hover, a:focus {
     text-decoration: underline;
 }
 
+input[type="checkbox"] {
+    margin: 0 10px 5px 0;
+}
+
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
     font-weight: normal;
     line-height: 1;
@@ -39,13 +43,6 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
 
 .filter {
     padding: 0px 0px 0px 15px;
-}
-
-#page-wrapper > div > h5 {
-    position: fixed;
-    right: 15px;
-    z-index: 1;
-    top: 75px;
 }
 
 /* Breadcrumb */
@@ -114,7 +111,6 @@ div.dataTables_filter input {
     position: relative;
     -webkit-box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
     box-shadow: 0 5px 15px rgba(0, 0, 0, 0.5);
-}
 }
 
 /* Idea Creation */
@@ -286,6 +282,13 @@ div.dataTables_filter input {
         margin: 0 25px 0 250px;
         padding: 0 30px;
         min-height: 768px;
+    }
+
+    #page-wrapper > div > h5 {
+        position: fixed;
+        right: 15px;
+        z-index: 1;
+        top: 75px;
     }
 
     .navbar-static-side {
@@ -550,6 +553,10 @@ table.dataTable thead .sorting:after {
     margin: 0 0 20px 0;
     border-radius: 0px; 
     text-align: left;
+    top: 0px;   
+    width: 50%;
+    position: fixed;
+    z-index: 1001;
 }
 
 .alert-info {
