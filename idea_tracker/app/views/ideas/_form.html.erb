@@ -177,7 +177,7 @@
 
 					<div class="form-group">
 						<%= f.label :participants %><br>
-						<%= f.text_field :participants, :value => "#{@idea.participants.where(:is_active => 1).collect {|u| u.user.email}.join ","}" %>
+						<%= f.text_field :participants, :value => "#{(@idea.participants.where(:is_active => 1).collect {|u| u.user.email} << current_user.email).join ","}" %>	
 						<div><i class="fa fa-question-circle fa-fw"></i> You can add other staff as participants to promote discussion.</div>
 					</div>
 				</div>

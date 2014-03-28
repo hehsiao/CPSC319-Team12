@@ -78,47 +78,7 @@ class IdeasController < ApplicationController
 			@receiver = Partner.find(@idea.receiver_partner_id).partner_name
 		else 
 			@receiver = "None Assigned"
-		end
-       
-       #set participation automatically when the user commnet on the idea 
-
-       @comment_thread  = Commontator::Thread.where(commontable_id: params[:id]) 
-       @comment_idea_ids = Commontator::Comment.where(thread_id: @comment_thread)
-       @check_activities = []
-       if @comment_idea_ids.present?
-       	@comment_idea_ids.each do |cii|
-       	  @check_activities << PublicActivity::Activity.where(trackable_type: "Commontator::Comment", owner_id: current_user.id, trackable_id: cii)
-        end 
-       end 
-       
-       puts "------------------------------"+@check_activities.inspect+"----------------------------------------"
-       @check_activities.each do |c_a|
-	       if c_a.present?
-	            
-                @sub_list = Subscription.where(idea_id: params[:id])
-			
-                @sub_users = Subscription.where(user_id: current_user.id, idea_id: params[:id])
-                puts "------------------------------"+@sub_user.inspect+"----------------------------------------"
-                
-                if @sub_users.present?
-	                @sub_users.each do |sub_user|
-	                	puts "------------------------------"+@sub_list.include?(sub_user).inspect+"----------------------------------------"
-		                if @sub_list.include?(sub_user)
-		                	puts "------------------------------  dont need to add --------------------------------"
-		                else
-		                    puts "------------------------------  need to add --------------------------------"
-						    Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
-							
-					    end
-					end
-				else
-				   Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
-				end       
-	       end
-       end	
-
-
- 
+		end 
 	end
 
 	# GET /ideas/new
@@ -213,30 +173,6 @@ class IdeasController < ApplicationController
 				handle_category_tags
 				handle_associations
                 handle_participations
-
-                #set participation automatically when the user edit the idea
-
-                @sub_list = Subscription.where(idea_id: params[:id])
-			
-                @sub_users = Subscription.where(user_id: current_user.id, idea_id: params[:id])
-                puts "------------------------------"+@sub_user.inspect+"----------------------------------------"
-                
-                if @sub_users.present?
-	                @sub_users.each do |sub_user|
-	                	puts "------------------------------"+@sub_list.include?(sub_user).inspect+"----------------------------------------"
-		                if @sub_list.include?(sub_user)
-		                	puts "------------------------------  dont need to add --------------------------------"
-		                else
-		                    puts "------------------------------  need to add --------------------------------"
-						    Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
-							
-					    end
-					end
-				else
-				   Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
-				end         
-
-
 				keyword_list
 				idea_list
 				# Email Notification
