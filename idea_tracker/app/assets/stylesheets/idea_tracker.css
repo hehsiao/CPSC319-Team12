@@ -41,6 +41,13 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     padding: 0px 0px 0px 15px;
 }
 
+#page-wrapper > div > h5 {
+    position: fixed;
+    right: 15px;
+    z-index: 1;
+    top: 75px;
+}
+
 /* Breadcrumb */
 
 .widget>.breadcrumb {

@@ -1,9 +1,9 @@
+<section class="widget">
 <div class = "panel-heading"><i class = "fa fa-bell fa-fw"></i> "Notification"</div>
 <div class = "panel-body">
     <div id="notifications" class = "list-group">
 
         <% @activities.each do |activity| %>
-         <% if @count < 20%>
             <% if activity.trackable_type == "Idea"%> 
                 <% @sub_ideas.each do |sub_idea| %>
                     <% if activity.trackable_id == sub_idea.idea_id%>
@@ -13,7 +13,6 @@
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>
-                        <% @count += 1%> 
                     <% end %>
                 <% end %>  
             <% end %>
@@ -36,12 +35,10 @@
                                 <abbr title="<%= activity.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(activity.created_at) %> ago</abbr>
                             </span>
                         </div>
-                        <% @count += 1%>
                     <% end %>
                 <% end %> 
             <% end %> 
-          <%end%>  
         <% end %>      
-       <%puts "------------------------------------------"+@count.to_s+"-------------------------------------------"%>
-    </div>
+      </div>
 </div>
+</section>

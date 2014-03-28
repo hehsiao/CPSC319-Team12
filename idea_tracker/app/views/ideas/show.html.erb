@@ -92,12 +92,13 @@
           </dd>
           <dt>Participants:</dt>
           <dd>
-            <form id="participant_form">
+            <%= @idea.participants.where(:is_active => 1).collect {|u| u.user.first_name + " " + u.user.last_name}.join ", " %>
+          </dd>            
+<!--           <form id="participant_form">
               <div class="form-group">
                 <input id="idea_participants" name="idea[participants]" type="text" value="<%= @idea.participants.where(:is_active => 1).collect {|u| u.user.email}.join "," %>">
               </div>
-            </form>
-          </dd>
+            </form> -->
         </dl>
       </div>
     </section>
@@ -159,8 +160,8 @@
 <br><br>
 
 
-
-<script>
+<!-- 
+ <script>
 
   var participants_options = <%= raw @participants %>;
 
@@ -210,5 +211,6 @@
   });
   
 
-</script>
+ </script>
 
+ -->
