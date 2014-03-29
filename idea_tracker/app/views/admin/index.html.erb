@@ -1,7 +1,12 @@
-<%= @b %>
- 	<div class="admin index">
-		<h1>This is admin's dashboard</h1>
+<h1 class="page-header">Administrator Dashboard</h1>
+<!-- <h5 class="widget">
+    <%= link_to '<i class="fa fa-plus"> </i> Add a New Partner'.html_safe, new_partner_path %>
+</h5> -->
 
+<section class="widget">
+  <!-- <div class="panel-heading"><i class="fa fa-bars"></i> List of Partners</div> -->
+    
+  <div class="panel-body">
 		<tr>      
 			<td class="actions">
 				<%= link_to("Show Users", {:controller => 'users', :action => 'index'}, :class => 'action show') %>

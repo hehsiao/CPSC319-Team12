@@ -59,7 +59,7 @@ class UsersController < ApplicationController
     def participant_list
       @plist = "["
       User.all.each do |u|
-        @plist += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+        @plist += "{email: '" + u.email + "', name: '#{u}'}, "
       end
       @plist = @b[0...-2]
       @plist += "]"

@@ -16,36 +16,45 @@
 	
 	<tbody>
 		<% if @users %>
-		<% @users.each do |user| %>
-		<tr onclick="document.location = '/reports/success_rate_show/<%=user.id%>';">
-		  <td><%= user.first_name + " " + user.last_name %></td>
-		  <td><%= user.email %></td>
-		  <td>
-			<% verified = 0 %>
-			<% owner_of = 0 %>
-			<% @ideas.each do |idea| %>
-				<% if idea.user_id == user.id %>
-				<% owner_of += 1 %>
-					<% if idea.status.id == @status_size %>
-					<% verified += 1 %>
-					<% end %>
-				<% end %>
+			<% index = 0 %>
+			<% @users.each do |user| %>
+			<tr onclick="document.location = '/reports/success_rate_show/<%=user.id%>';">
+			  <td><%= user %></td>
+			  <td><%= user.email %></td>
+			  <td>
+				<%= @success_rate_array.at(index) %>%
+				<% index += 1 %>
+			  </td>
+			</tr>
 			<% end %>
-			<% if verified == 0 %>
-				0%
-			<% else %>
-				<%= verified*100/owner_of %>%
-			<% end %>
-		  </td>
-		</tr>
-		<% end %>
 		<% end %>
 	</tbody>
 </table>
 
 <script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" src="success_rate_column_chart"></script>
+<script type="text/javascript">
+google.load("visualization", "1", {packages:["corechart"]});
+google.setOnLoadCallback(drawChart);
+function drawChart() {
+var data = google.visualization.arrayToDataTable([
+	['User', 'Success Rate (%)'],
+	<% index = 0 %>
+	<% @users.each do |user| %>
+		["<%= user %>", <%= @success_rate_array.at(index) %>],
+		<% index += 1 %>
+	<% end %>
+]);
+
+var options = {
+  title: 'Success Rate',
+  hAxis: {title: 'Users', titleTextStyle: {color: 'red'}}
+};
+
+var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
+chart.draw(data, options);
+}
+</script>
 
 <div id="chart_div" style="width: 700px; height: 500px;"></div>
-
+</section>
 

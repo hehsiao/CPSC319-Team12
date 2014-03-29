@@ -16,7 +16,7 @@ class IdeasController < ApplicationController
 
     @recent_ideas = Idea.order("created_at desc").limit(5)
 		@my_ideas = Idea.where(user_id: current_user.id)
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user)
 		@sub_ideas = Subscription.where(user_id: current_user.id)  
         
      
@@ -78,8 +78,7 @@ class IdeasController < ApplicationController
 			@receiver = Partner.find(@idea.receiver_partner_id).partner_name
 		else 
 			@receiver = "None Assigned"
-		end
- 
+		end 
 	end
 
 	# GET /ideas/new
@@ -111,15 +110,16 @@ class IdeasController < ApplicationController
 	# GET /ideas/1/edit
 	def edit
 		@categories = Category.top_categories
+
   	user_list
   	keyword_list
   	idea_list
+
 	end
 
 	# POST /ideas
 	# POST /ideas.json
 	def create
-
 		@idea = Idea.new(idea_params)
 		if(params[:provider_use] == "provider_partner_form")
 			@partner = Partner.new(params[partner_params])
@@ -131,6 +131,7 @@ class IdeasController < ApplicationController
 			@partner.save
 			@idea.receiver_partner_id = @partner.id
 		end
+
   	user_list	
 		idea_list    	
 		@idea.owner_id = Setting.default_owner
@@ -165,11 +166,13 @@ class IdeasController < ApplicationController
 			if @idea.update(idea_params)
 
 				params[:id] = @idea.id
+
 				handle_partners
+
 				# Category Tags
 				handle_category_tags
 				handle_associations
-				handle_participations
+                handle_participations
 				keyword_list
 				idea_list
 				# Email Notification
@@ -219,6 +222,7 @@ class IdeasController < ApplicationController
   end
 
 	private
+
 	def idea_list
       @idea_selections = "["
       Idea.all.each do |u|
@@ -230,10 +234,11 @@ class IdeasController < ApplicationController
       @idea_selections += "]"
     end
 
+
     def user_list
       @participants = "["
       User.all.each do |u|
-        @participants += "{email: '" + u.email + "', name: '" + u.first_name + " " + u.last_name + "'}, "
+        @participants += "{email: '" + u.email + "', name: '#{u}'}, "
       end
       @participants = @participants[0...-2]
       @participants += "]"
@@ -252,28 +257,31 @@ class IdeasController < ApplicationController
     end
 	    
 	  def handle_partners
-	  	@provider = Partner.create(:partner_name => params[:provider_partner][:partner_name],
-						:contact_name => params[:provider_partner][:contact_name],
-						:email => params[:provider_partner][:email],
-						:phone_num => params[:provider_partner][:phone_num],
-						:secondary_contact_name => params[:provider_partner][:secondary_contact_name],
-						:secondary_email => params[:provider_partner][:secondary_email],
-						:secondary_phone_num => params[:provider_partner][:secondary_phone_num])
-	  	if @provider.save && params[:provider_use] == "provider_partner_form"
-	  		@idea.provider_partner_id = @provider.id
-	  		@idea.save
-	  	end
-
-	  	@receiver = Partner.create(:partner_name => params[:receiver_partner][:partner_name],
-						:contact_name => params[:receiver_partner][:contact_name],
-						:email => params[:receiver_partner][:email],
-						:phone_num => params[:receiver_partner][:phone_num],
-						:secondary_contact_name => params[:receiver_partner][:secondary_contact_name],
-						:secondary_email => params[:receiver_partner][:secondary_email],
-						:secondary_phone_num => params[:receiver_partner][:secondary_phone_num])
-	  	if @receiver.save && params[:receiver_use] == "receiver_partner_form"
-	  		@idea.receiver_partner_id = @receiver.id
-	  		@idea.save
+	  	if !params[:idea][:provider].nil?
+		  	@provider = Partner.create(:partner_name => params[:provider_partner][:partner_name],
+							:contact_name => params[:provider_partner][:contact_name],
+							:email => params[:provider_partner][:email],
+							:phone_num => params[:provider_partner][:phone_num],
+							:secondary_contact_name => params[:provider_partner][:secondary_contact_name],
+							:secondary_email => params[:provider_partner][:secondary_email],
+							:secondary_phone_num => params[:provider_partner][:secondary_phone_num])
+		  	if @provider.save && params[:provider_use] == "provider_partner_form"
+		  		@idea.provider_partner_id = @provider.id
+		  		@idea.save
+		  	end
+	  	end 
+	  	if !params[:idea][:receiver].nil?
+		  	@receiver = Partner.create(:partner_name => params[:receiver_partner][:partner_name],
+							:contact_name => params[:receiver_partner][:contact_name],
+							:email => params[:receiver_partner][:email],
+							:phone_num => params[:receiver_partner][:phone_num],
+							:secondary_contact_name => params[:receiver_partner][:secondary_contact_name],
+							:secondary_email => params[:receiver_partner][:secondary_email],
+							:secondary_phone_num => params[:receiver_partner][:secondary_phone_num])
+		  	if @receiver.save && params[:receiver_use] == "receiver_partner_form"
+		  		@idea.receiver_partner_id = @receiver.id
+		  		@idea.save
+		  	end
 	  	end
 
 	  end

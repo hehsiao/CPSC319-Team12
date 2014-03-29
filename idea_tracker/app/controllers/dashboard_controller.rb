@@ -6,8 +6,7 @@ class DashboardController < ApplicationController
 		@ideas = Idea.all  
 		@recent_ideas = Idea.order("created_at desc").limit(5)
 		@my_ideas = Idea.where(user_id: current_user.id)
-		# Need to fix to make sure ideas gets updated from cache
-
+		@idea_by_day_past_month = Idea.where("Date(created_at) >= ?", 1.month.ago).group("Date(created_at)").count
 		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
 		@sub_ideas = Subscription.where(user_id: current_user.id)  
 
@@ -15,15 +14,7 @@ class DashboardController < ApplicationController
 		@threads = Commontator::Thread.all
 		@thread_ids = []
 		@comment_ids =[]
-
-		@my_ideas.each do |my_idea|
-			@threads.each do |thread|
-				if  my_idea.id == thread.commontable_id
-					@thread_ids << thread
-				end 
-			end	
-		end	
-      
+		
 		@sub_ideas.each do |sub_idea|
 			@threads.each do |thread|
 				if  sub_idea.idea_id == thread.commontable_id 
@@ -40,8 +31,12 @@ class DashboardController < ApplicationController
             end
         end	 
 		#@notifications = Notification.all
-		@activities = PublicActivity::Activity.order("created_at desc")
+		@count = 0
+		@activities = PublicActivity::Activity.order("created_at desc").where.not(owner_id: current_user.id)
 
+		ideas_within_month = Idea.where(:created_at => Time.now-(60*60*24*30)..Time.now)
+		@ideas_group_by_week = ideas_within_month.group_by { |m| m.created_at.beginning_of_week }
+	
 	end
- 
+
 end

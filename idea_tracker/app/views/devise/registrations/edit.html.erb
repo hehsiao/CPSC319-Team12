@@ -1,12 +1,16 @@
 <h1 class="page-header">Update Your Profile</h1>
 <h5 class="widget">
-  <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe , users_path  %> 
+  <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe , "/"  %> 
 </h5>
 <section class="widget">
     <div class="page-body">
       <%= form_for(resource, :as => resource_name, :url => registration_path(resource_name), :html => { :method => :put }) do |f| %>
       <%= devise_error_messages! %>
         <fieldset>
+          <div class="form-group">
+            <%= image_tag gravatar_url(current_user), :style => 'border-radius: 50%;' %>
+            <%= @user %>
+          </div>
           <p>To update your profile, please enter your current password.</p>
           <div class="form-group input-group">
             <span class="input-group-addon"><i class="fa fa-key fa-fw"></i></span>
@@ -21,13 +25,14 @@
           <% if devise_mapping.confirmable? && resource.pending_reconfirmation? %>
           <div>Currently waiting confirmation for: <%= resource.unconfirmed_email %></div>
           <% end %>
-          <p>Name</p>
           <div class="form-group">
             <div class="row">
               <div class="col-md-6">
+                <label for="user_first_name">First Name</label>
                 <%= f.text_field :first_name, :autofocus => true, :placeholder => "First Name", :class => "form-control" %>
               </div>
               <div class="col-md-6">
+                <label for="user_last_name">Last Name</label>
                 <%= f.text_field :last_name, :autofocus => true, :placeholder => "Last Name", :class => "form-control" %>
               </div>
             </div>

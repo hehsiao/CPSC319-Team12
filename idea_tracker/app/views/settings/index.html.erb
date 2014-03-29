@@ -19,7 +19,7 @@
           <td>
           <% if c.name == "Default Owner" %>
             <% owner = User.find(c.data) %>
-            <%= owner.first_name + " " + owner.last_name %>
+            <%= owner %>
           <% else %>
             <%= c.data %>
           <% end %>
