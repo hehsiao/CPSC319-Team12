@@ -1,9 +1,2 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  type_id: 1
-  type: 
-
-two:
-  type_id: 1
-  type: 

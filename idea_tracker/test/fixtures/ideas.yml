@@ -1,19 +1,19 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
-one:
-  user_id: 1
-  description: MyText
-  provider_id: 1
-  receiver_id: 1
-  submission_date: 2014-03-04
-  last_modified: 2014-03-04
-  status_date_change: 2014-03-04
+# one:
+#   user_id: 1
+#   description: MyText
+#   provider_id: 1
+#   receiver_id: 1
+#   submission_date: 2014-03-04
+#   last_modified: 2014-03-04
+#   status_date_change: 2014-03-04
 
-two:
-  user_id: 1
-  description: MyText
-  provider_id: 1
-  receiver_id: 1
-  submission_date: 2014-03-04
-  last_modified: 2014-03-04
-  status_date_change: 2014-03-04
+# two:
+#   user_id: 1
+#   description: MyText
+#   provider_id: 1
+#   receiver_id: 1
+#   submission_date: 2014-03-04
+#   last_modified: 2014-03-04
+#   status_date_change: 2014-03-04
