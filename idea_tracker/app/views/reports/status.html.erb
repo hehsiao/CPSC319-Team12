@@ -29,34 +29,47 @@
     </table>
   </div>
 
-<div id="piechart_3d" style="width: 700px; height: 500px;"></div>
+<div id="donut_graph" style="height: 500px;"></div>
+
+<div id="line_graph" style="height: 500px;"></div>
 </section>
 
-
-
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript" >
-google.load("visualization", "1", {packages:["corechart"]});
-google.setOnLoadCallback(drawChart);
-function drawChart() {
-  var data = google.visualization.arrayToDataTable([
-    ['Status', 'Number of Ideas'],
-    <% index = 0 %>
+<script>
+  $(function () {
+      new Morris.Bar({
+        element: 'line_graph',
+        data:[
+		<% index = 0 %>
         <% @status.each do |status| %>
-      ["<%= status.status %>", <%= @counter_array.at(index) %>],
-            <% index += 1 %>
+                {status: "<%= status.status %>", count: <%= @counter_array.at(index) %> },
+				<% index += 1 %>
         <% end %>
-  ]);
+        ],
+        xkey: 'status',
+        ykeys: ['count'],
+        labels: ['Total'],
+        xLabels: ['day'],
+        resize: true,
+        gridTextColor: '#FFF',
+        gridTextFamily: '"Open Sans", sans-serif'
+      });
 
-  var options = {
-    title: 'Status',
-    backgroundColor: 'transparent',
-    pieHole: 0.4
-  };
-
-  var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-  chart.draw(data, options);
-}
+  });
 </script>
 
+<script>
+  $(function () {
+    new Morris.Donut({
+        element: 'donut_graph',
+        data: [
+		<% index = 0 %>
+		<% @status.each do |status| %>
+			{<%= raw "label: '#{status.status}', value: '#{@counter_array.at(index)}'" %>},
+			<% index += 1 %>
+		<% end %>
+		],
+        resize: true
+    });
 
+  });
+</script>
