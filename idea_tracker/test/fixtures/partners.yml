@@ -1,13 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  partner_name: MyString
-  contact_name: MyString
-  email: MyString
-  phone_num: 1
-
-two:
-  partner_name: MyString
-  contact_name: MyString
-  email: MyString
-  phone_num: 1
+  partner_name: UBC CBEL
+  contact_name: Justin Ho
+  email: jho@ubc.ca
+  phone_num: 6048209384
+  secondary_contact_name: Jill 
+  secondary_email: jill@ubc.ca
+  secondary_phone_num: 6048209384

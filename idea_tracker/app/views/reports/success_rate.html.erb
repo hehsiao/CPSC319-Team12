@@ -31,30 +31,28 @@
 	</tbody>
 </table>
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-google.load("visualization", "1", {packages:["corechart"]});
-google.setOnLoadCallback(drawChart);
-function drawChart() {
-var data = google.visualization.arrayToDataTable([
-	['User', 'Success Rate (%)'],
-	<% index = 0 %>
-	<% @users.each do |user| %>
-		["<%= user %>", <%= @success_rate_array.at(index) %>],
-		<% index += 1 %>
-	<% end %>
-]);
-
-var options = {
-  title: 'Success Rate',
-  hAxis: {title: 'Users', titleTextStyle: {color: 'red'}}
-};
-
-var chart = new google.visualization.ColumnChart(document.getElementById('chart_div'));
-chart.draw(data, options);
-}
-</script>
-
 <div id="chart_div" style="width: 700px; height: 500px;"></div>
 </section>
 
+<script>
+  $(function () {
+      new Morris.Bar({
+        element: 'chart_div',
+        data:[
+		<% index = 0 %>
+		<% @users.each do |user| %>
+            {user: "<%= user %>", rate: <%= @success_rate_array.at(index) %> },
+			<% index += 1 %>
+        <% end %>
+        ],
+        xkey: 'user',
+        ykeys: ['rate'],
+        labels: ['Total'],
+        xLabels: ['users'],
+        resize: true,
+        gridTextColor: '#FFF',
+        gridTextFamily: '"Open Sans", sans-serif'
+      });
+
+  });
+</script>

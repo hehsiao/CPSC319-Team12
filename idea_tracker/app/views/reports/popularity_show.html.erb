@@ -30,34 +30,47 @@
 		</table>
 	</div>
 	
-	<div id="piechart_3d" style="width: 900px; height: 500px;"></div>
+<div id="donut_graph" style="height: 500px;"></div>
 
-	
+<div id="line_graph" style="height: 500px;"></div>
 </section>
-  
 
+<script>
+  $(function () {
+      new Morris.Bar({
+        element: 'line_graph',
+        data:[
+		<% index = 0 %>
+        <% @category_children.each do |category| %>
+            {cat_name: "<%= category.category_name %>", count: <%= @idea_counter_array[index] %> },
+			<% index += 1 %>
+        <% end %>
+        ],
+        xkey: 'cat_name',
+        ykeys: ['count'],
+        labels: ['Total'],
+        xLabels: ['categories'],
+        resize: true,
+        gridTextColor: '#FFF',
+        gridTextFamily: '"Open Sans", sans-serif'
+      });
 
-<script type="text/javascript" src="https://www.google.com/jsapi"></script>
-<script type="text/javascript">
-	google.load("visualization", "1", {packages:["corechart"]});
-	google.setOnLoadCallback(drawChart);
-	function drawChart() {
-		var data = google.visualization.arrayToDataTable([
-		  ["<%= @category.category_name %>", 'Number of Ideas'],
-		  
-			<% index = 0 %>
-			<% @category_children.each do |category| %>
-			  ["<%= category.category_name %>" , <%= @idea_counter_array[index] %>],
-			  <% index += 1 %>
-			<% end %>
-		]);
+  });
+</script>
 
-		var options = {
-		  title: "<%= @category.category_name %>",
-		  is3D: true,
-		};
+<script>
+  $(function () {
+    new Morris.Donut({
+        element: 'donut_graph',
+        data: [
+		<% index = 0 %>
+        <% @category_children.each do |category| %>
+            {label: "<%= category.category_name %>", value: <%= @idea_counter_array[index] %> },
+			<% index += 1 %>
+        <% end %>
+		],
+        resize: true
+    });
 
-		var chart = new google.visualization.PieChart(document.getElementById('piechart_3d'));
-		chart.draw(data, options);
-	}
+  });
 </script>
