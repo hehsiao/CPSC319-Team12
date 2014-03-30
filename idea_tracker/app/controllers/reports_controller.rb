@@ -9,10 +9,12 @@ class ReportsController < ApplicationController
 		@my_ideas = Idea.where(user_id: current_user.id)
 	end
   
+	# Will probably move this later, doesn't belong here
 	def subscribed_ideas
 		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
 	end
 	
+	# Will probably move this later, doesn't belong here
 	def recent_ideas
 		@recent_ideas = Idea.order("created_at desc")
 	end
