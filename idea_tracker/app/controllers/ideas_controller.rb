@@ -33,10 +33,11 @@ class IdeasController < ApplicationController
         
         	@export_ids = params[:e_idea]
 		    @export_ideas = []
-      
-            @export_ids.each do |export_id|
-              @export_ideas << Idea.find_by_id(export_id)
-            end 
+            if @export_ids.present?
+	            @export_ids.each do |export_id|
+	              @export_ideas << Idea.find_by_id(export_id)
+	            end
+            end  
 
 		header = ["summary", "description"]
 	    file = CSV.generate do |csv|
@@ -78,7 +79,20 @@ class IdeasController < ApplicationController
 			@receiver = Partner.find(@idea.receiver_partner_id).partner_name
 		else 
 			@receiver = "None Assigned"
-		end 
+		end
+
+		   
+
+         @sub_list = Subscription.where(idea_id: params[:id])
+		 @sub_user = Subscription.where(user_id: current_user.id, idea_id: params[:id])
+
+		 unless @sub_list.include?(@sub_user)
+		    @thread = Commontator::Thread.find_by_commontable_id(params[:id])
+			    if @thread.is_subscribed?(current_user)
+			    	@thread.unsubscribe(current_user)
+			    	Subscription.create(:idea_id => params[:id], :user_id => current_user.id, :is_active => 1)
+			    end   
+		end    
 	end
 
 	# GET /ideas/new
