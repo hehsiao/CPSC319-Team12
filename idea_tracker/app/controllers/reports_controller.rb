@@ -4,6 +4,19 @@ class ReportsController < ApplicationController
   def index
   end
   
+	# Will probably move this later, doesn't belong here
+	def assigned_ideas
+		@my_ideas = Idea.where(user_id: current_user.id)
+	end
+  
+	def subscribed_ideas
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
+	end
+	
+	def recent_ideas
+		@recent_ideas = Idea.order("created_at desc")
+	end
+	
   def success_rate
    @users = User.all
    status_size = Status.all.size
