@@ -7,15 +7,15 @@ Setting.create(id: 2, name: 'Default Owner', data: '3')
 
 User.delete_all
 User.create!([
-	{id: 1, email: "janeadminseed@ubc.ca", password: "12341234", first_name: "Jane", last_name: "Adminseed", admin: "1"},
-	{id: 2, email: "johnappleseed@a.a", password: "12341234", first_name: "Jonny", last_name: "Appleseed", admin: "0"},
-	{id: 3, email: "justin@a.a", password: "12341234", first_name: "Justin", last_name: "Ho", admin: "1"},
-	{id: 4, email: "bryliov@gmail.com", password: "12341234", first_name: "Ilya", last_name: "Bryliov", admin: "0"},
-	{id: 5, email: "me@henrychsiao.com", password: "12341234", first_name: "Henry", last_name: "Hsiao", admin: "0"},
-	{id: 6, email: "jimmy.gnahz@gmail.com", password: "12341234", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
-	{id: 7, email: "jtsengyc@gmail.com", password: "12341234", first_name: "Jason", last_name: "Tseng", admin: "0"},
-	{id: 8, email: "ronldho@gmail.com", password: "12341234", first_name: "Ronald", last_name: "Ho", admin: "0"},
-	{id: 9, email: "tanat.ratana@gmail.com", password: "12341234", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
+	{id: 1, email: "janeadminseed@ubc.ca", password: "Cpsc3192014", first_name: "Jane", last_name: "Adminseed", admin: "1"},
+	{id: 2, email: "johnappleseed@a.a", password: "Cpsc3192014", first_name: "Jonny", last_name: "Appleseed", admin: "0"},
+	{id: 3, email: "justin@a.a", password: "Cpsc3192014", first_name: "Justin", last_name: "Ho", admin: "1"},
+	{id: 4, email: "bryliov@gmail.com", password: "Cpsc3192014", first_name: "Ilya", last_name: "Bryliov", admin: "0"},
+	{id: 5, email: "me@henrychsiao.com", password: "Cpsc3192014", first_name: "Henry", last_name: "Hsiao", admin: "0"},
+	{id: 6, email: "jimmy.gnahz@gmail.com", password: "Cpsc3192014", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
+	{id: 7, email: "jtsengyc@gmail.com", password: "Cpsc3192014", first_name: "Jason", last_name: "Tseng", admin: "0"},
+	{id: 8, email: "ronldho@gmail.com", password: "Cpsc3192014", first_name: "Ronald", last_name: "Ho", admin: "0"},
+	{id: 9, email: "tanat.ratana@gmail.com", password: "Cpsc3192014", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
 ])
 
 Partner.delete_all
