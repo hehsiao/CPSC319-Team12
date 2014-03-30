@@ -6,7 +6,7 @@
 		<% category.children.each do |category_tag| %>
 			<% tag = category_tag.tag.where(idea_id: idea_id).first %>
 			<% if tag %>
-				<% tag_string += category_tag.category_name[0...-1] + ", " %> 
+				<% tag_string += category_tag.category_name + ", " %> 
 			<% end %>
 		<% end %>
 		<%= tag_string[0...-2] %>
