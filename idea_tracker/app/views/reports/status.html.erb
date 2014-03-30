@@ -1,7 +1,6 @@
-<h1 class="page-header">Reports</h1>
+<h1 class="page-header">Ideas by Status</h1>
 
 <section class="widget">
-  <div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Stage Report</div>
     
   <div class="panel-body">
 
@@ -29,8 +28,6 @@
     </table>
   </div>
 
-<div id="donut_graph" style="height: 500px;"></div>
-
 <div id="line_graph" style="height: 500px;"></div>
 </section>
 
@@ -53,23 +50,6 @@
         gridTextColor: '#FFF',
         gridTextFamily: '"Open Sans", sans-serif'
       });
-
-  });
-</script>
-
-<script>
-  $(function () {
-    new Morris.Donut({
-        element: 'donut_graph',
-        data: [
-		<% index = 0 %>
-		<% @status.each do |status| %>
-			{<%= raw "label: '#{status.status}', value: '#{@counter_array.at(index)}'" %>},
-			<% index += 1 %>
-		<% end %>
-		],
-        resize: true
-    });
 
   });
 </script>

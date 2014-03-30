@@ -1,10 +1,13 @@
 <h1 class="page-header">Reports</h1>
 
+
 <section class="widget">
 	<div class="panel-heading"><i class="fa fa-bar-chart-o"></i> Success Rate Report</div>
-	  
+	<br>
+	<div>The success rates for each staff member is calculated as the number of ideas in the final stage the staff member has been assigned, divided by the total number of ideas the staff member has been assigned</div>  
+	<br>
 	<div class="panel-body">
-
+<!--
 <table class="table table-hover dataTable" summary="User list">
 	<thead>
 		<tr class="header">
@@ -30,8 +33,32 @@
 		<% end %>
 	</tbody>
 </table>
+-->
 
-<div id="chart_div" style="width: 700px; height: 500px;"></div>
+<div style="width: 50%">
+	<% index = 0 %>
+	<% @users.each do |user| %>
+	<div>
+		<a href="/reports/success_rate_show/<%=user.id%>">
+			<div>
+
+				<%= user %>  (<%= user.email %>)
+				<span class="pull-right text-muted"><%= @success_rate_array.at(index) %>% success rate</span>
+
+				<div class="progress progress-striped active">
+					<div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="<%= @success_rate_array.at(index) %>" aria-valuemin="0" aria-valuemax="100" style="width: <%= @success_rate_array.at(index) %>%">
+						<span class="sr-only"><%= @success_rate_array.at(index) %>% Complete (success)</span>
+					</div>
+				</div>
+			</div>
+		</a>
+	</div>
+	<div class="divider"></div>
+	<% index += 1 %>
+	<% end %>
+</div>
+
+<!--<div id="chart_div" style="width: 700px; height: 500px;"></div>-->
 </section>
 
 <script>

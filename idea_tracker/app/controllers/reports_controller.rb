@@ -339,6 +339,7 @@ class ReportsController < ApplicationController
 	@category = Category.find(params[:id])
 	@idea_counter_array = idea_counter.reverse
 	@category_children = category_children.reverse
+	
  end
  
  def popularity_show_ideas
