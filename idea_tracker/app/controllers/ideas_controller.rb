@@ -33,17 +33,34 @@ class IdeasController < ApplicationController
         
         	@export_ids = params[:e_idea]
 		    @export_ideas = []
+		    @types = []
             if @export_ids.present?
 	            @export_ids.each do |export_id|
 	              @export_ideas << Idea.find_by_id(export_id)
 	            end
             end  
 
-		header = ["summary", "description"]
+		header = ["required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project name", "description","Project Website","Receiver Contact"]
 	    file = CSV.generate do |csv|
 	    	csv << header
 			@export_ideas.each do |export_idea|
-				csv << [export_idea.summary,export_idea.description]
+				#get type
+                @idea_tags = IdeaTag.where(idea_id: export_idea.id)
+                if @idea_tags.present?
+                   @idea_tags.each do |idea_tag|
+                   		@project_types = Category.where(id: idea_tag.category_id)
+                   		@project_types.each do |pt|
+                   			@types << pt.category_name
+                   		end 	
+                   end   	
+                end
+                #get Community Partner
+                @c_partners = Partner.find_by_id(export_idea.provider_partner_id).partner_name
+                if !Partner.find_by_id(export_idea.receiver_partner_id).nil?
+                  @c_receiver_name = Partner.find_by_id(export_idea.receiver_partner_id).contact_name
+                end
+				csv << [" "," ",@types,@c_partners," "," ",export_idea.summary,export_idea.description," ",@c_receiver_name]
+				@types = []
 			end
 		end
 		send_data(file.encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''}), :type => 'text/csv', :filename => 'ideas.csv')  
@@ -51,13 +68,30 @@ class IdeasController < ApplicationController
 
 	def to_csv
 		  @idea = Idea.find(params[:id])
+		  @types = []
 
     	    puts "-------------------------------------"+params[:id].inspect+"----------------------------------------"
         
-		header = ["summary", "description"]
+		header = ["required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project name", "description","Project Website","Receiver Contact"]
 	    file = CSV.generate do |csv|
 	    	csv << header
-			csv << [@idea.summary, @idea.description]
+	    	    #get type
+                @idea_tags = IdeaTag.where(idea_id: @idea.id)
+                if @idea_tags.present?
+                   @idea_tags.each do |idea_tag|
+                   		@project_types = Category.where(id: idea_tag.category_id)
+                   		@project_types.each do |pt|
+                   			@types << pt.category_name
+                   		end 	
+                   end   	
+                end
+
+                #get Community Partner
+                @c_partners = Partner.find_by_id(@idea.provider_partner_id).partner_name
+                if !Partner.find_by_id(@idea.receiver_partner_id).nil?
+                  @c_receiver_name = Partner.find_by_id(@idea.receiver_partner_id).contact_name
+                end
+			csv << [" "," ",@types,@c_partners," "," ",@idea.summary,@idea.description," ",@c_receiver_name]
 		end
 		send_data(file.encode('ISO-8859-1', {:invalid => :replace, :undef => :replace, :replace => ''}), :type => 'text/csv', :filename => 'idea.csv')  
 	end

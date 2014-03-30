@@ -2,6 +2,8 @@ require 'test_helper'
 
 class IdeasControllerTest < ActionController::TestCase
   setup do
+    @user = User.create(id: 1, email: "janeadminseed@ubc.ca", password: "12341234", first_name: "Jane", last_name: "Adminseed", admin: "1")
+    sign_in @user
     @idea = ideas(:one)
   end
 
@@ -18,7 +20,7 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "should create idea" do
     assert_difference('Idea.count') do
-      post :create, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
+      post :create, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_partner_id: @idea.provider_partner_id, receiver_partner_id: @idea.receiver_partner_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
     end
 
     assert_redirected_to idea_path(assigns(:idea))
@@ -35,7 +37,7 @@ class IdeasControllerTest < ActionController::TestCase
   end
 
   test "should update idea" do
-    patch :update, id: @idea, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_id: @idea.provider_id, receiver_id: @idea.receiver_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
+    patch :update, id: @idea, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_partner_id: @idea.provider_partner_id, receiver_partner_id: @idea.receiver_partner_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
     assert_redirected_to idea_path(assigns(:idea))
   end
 
