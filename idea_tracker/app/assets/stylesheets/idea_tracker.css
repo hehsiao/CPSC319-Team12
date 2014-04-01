@@ -18,8 +18,8 @@ a {
 }  
 
 a:hover, a:focus {
-    color: #54aff0;
-    text-decoration: underline;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 input[type="checkbox"] {

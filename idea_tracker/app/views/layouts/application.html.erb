@@ -22,17 +22,19 @@
 				<a class="navbar-brand" href="/">CBEL Online Idea Tracker</a>
 			</div>
 			<div class="nav navbar-username navbar-right">
-				<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" style="color:#6D9F00;text-decoration:none;" class="printfriendly" onclick="window.print();return false;" title="Printer Friendly and PDF"><img style="border:none;-webkit-box-shadow:none;box-shadow:none;" src="http://cdn.printfriendly.com/button-print-blu20.png" alt="Print Friendly and PDF"/></a>
-				<%= image_tag gravatar_url_small(current_user) %>
-
-   
+				
 				<% if user_signed_in? %>
 					<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
-					<%=current_user %>
-					<% end %>
+					<a href="/users/edit">
+						<%= image_tag gravatar_url_small(current_user), :style => 'border-radius: 50%;'%>
+						<%= current_user %>
+						<% end %>
 
-					<%= "(Admin) " if current_user.try(:admin?) %>
-					<a href="/users/edit"><i class="fa fa-user fa-fw"></i></a> | 
+						<%= "(Admin) " if current_user.try(:admin?) %>
+						<i class="fa fa-user fa-fw"></i>
+					</a> 
+					| 
+					<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" onclick="window.print();return false;" title="Printer Friendly and PDF"><i class="fa fa-print fa-fw"></i></a> | 
 					<%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, destroy_user_session_path, :method => :delete %>
 
 				<% else %>
