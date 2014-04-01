@@ -29,7 +29,7 @@
                             commented   
 
                             <% if activity.trackable%>
-                               <a href = "/ideas/<%= Commontator::Thread.find_by_id(comment_id.thread_id).commontable_id%>"><%= activity.trackable.body%></a>
+                               <a href = "/ideas/<%= Commontator::Thread.find_by_id(comment_id.thread_id).commontable_id%>"><%= truncate(activity.trackable.body, length:20)%></a>
                             <% else %>
                                which has been removed!!
                             <% end %>
