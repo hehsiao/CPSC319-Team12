@@ -93,6 +93,9 @@
 								<a href="/reports/popularity">Popularity Report</a>
 							</li>
 							<li>
+								<a href="/reports/freshness">Stalling Idea Report</a>
+							</li>
+							<li>
 								<a href="/reports/charting">Custom Report</a>
 							</li>
 							<% if current_user.try(:admin?) %>
@@ -100,9 +103,6 @@
 								<a href="/reports/activity">User Activity Report</a>
 							</li>
 							<% end %>
-							<li>
-								<a href="/reports/freshness">Stalling Idea Report</a>
-							</li>
 						</ul>
 						<!-- /.nav-second-level -->
 					</li>            

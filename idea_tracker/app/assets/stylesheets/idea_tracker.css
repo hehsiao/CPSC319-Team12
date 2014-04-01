@@ -22,6 +22,10 @@ a:hover, a:focus {
     text-decoration: none;
 }
 
+input[type="number"] {
+   width: 40px;
+}
+
 input[type="checkbox"] {
     margin: 0 10px 5px 0;
 }
@@ -301,7 +305,7 @@ div.dataTables_filter input {
     #page-wrapper > div > h5 {
         position: fixed;
         right: 15px;
-        z-index: 1;
+        z-index: 999;
         top: 40px;
     }
 
