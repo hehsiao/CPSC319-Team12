@@ -66,11 +66,11 @@
       new Morris.Bar({
         element: 'chart_div',
         data:[
-		<% index = 0 %>
-		<% @users.each do |user| %>
-            {user: "<%= user %>", rate: <%= @success_rate_array.at(index) %> },
-			<% index += 1 %>
-        <% end %>
+					<% index = 0 %>
+					<% @users.each do |user| %>
+			      {user: "<%= user %>", rate: <%= @success_rate_array.at(index) %> },
+						<% index += 1 %>
+	        <% end %>
         ],
         xkey: 'user',
         ykeys: ['rate'],
