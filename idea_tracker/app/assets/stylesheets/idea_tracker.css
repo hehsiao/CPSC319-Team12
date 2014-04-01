@@ -415,7 +415,7 @@ a.list-group-item:hover, a.list-group-item:focus {
 
 #notifications {
     min-height: 300px;
-    max-height: 300px;
+    max-height: 250px;
     overflow-y: scroll;
 }
 
