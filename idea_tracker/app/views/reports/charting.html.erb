@@ -1,8 +1,8 @@
-<h1 class="page-header">Reports</h1>
+<h1 class="page-header">Customized Reports</h1>
 <div class="row">
   <div class="col-md-12">
     <section class="widget">
-      <div class="panel-heading"><i class="fa fa-info"></i> Custom Report
+      <div class="panel-heading"><i class="fa fa-info"></i> Custom Report Options
       </div>
       <div class="panel-body">
       	<%= form_tag("chart", method: "get") do %>
@@ -15,7 +15,7 @@
 				<%= label_tag(:show_options1, "Show Only (All unchecked = total)") %>
 				<div class="options3" id="user3">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options3[]" value="<%= u.id %>" > <%= u %>
+						<input type="checkbox" name="show_options3[]" value="<%= u.id %>" > <%= u %><br>
 					<% end %>
 				</div>
 				<%= label_tag(:date_type, "Aggregate By") %>
@@ -30,17 +30,17 @@
 				<%= label_tag(:show_options1, "Show Only") %>
 				<div class="options1" id="user1">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= u %>
+						<input type="checkbox" name="show_options1[]" value="<%= u.id %>" > <%= u %><br>
 					<% end %>
 				</div>
 				<div class="options1" id="stage1">
 					<% Status.all.each do |s| %>
-						<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %>
+						<input type="checkbox" name="show_options1[]" value="<%= s.id %>" > <%= s.status %><br>
 					<% end %>
 				</div>
 				<div class="options1" id="partner1">
 					<% Partner.all.each do |p| %>
-						<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %>
+						<input type="checkbox" name="show_options1[]" value="<%= p.id %>" > <%= p.partner_name %><br>
 					<% end %>
 				</div>
 			</div>
@@ -51,17 +51,17 @@
 				<%= label_tag(:show_options2, "Show Only") %>
 				<div class="options2" id="user2">
 					<% User.all.each do |u| %>
-						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= u %>
+						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= u %><br>
 					<% end %>
 				</div>
 				<div class="options2" id="stage2">
 					<% Status.all.each do |s| %>
-						<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %>
+						<input type="checkbox" name="show_options2[]" value="<%= s.id %>" > <%= s.status %><br>
 					<% end %>
 				</div>
 				<div class="options2" id="partner2">
 					<% Partner.all.each do |p| %>
-						<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %>
+						<input type="checkbox" name="show_options2[]" value="<%= p.id %>" > <%= p.partner_name %><br>
 					<% end %>
 				</div>
 			</div>
