@@ -5,9 +5,9 @@ class IdeasController < ApplicationController
 	# GET /ideas.json
 	def index
 		if params[:keyword]
-			@ideas = Idea.tagged_with(params[:keyword])
+			@ideas = Idea.tagged_with(params[:keyword]).order("created_at desc")
 		else
-			@ideas = Idea.all
+			@ideas = Idea.all.order("created_at desc")
 		end
 		# @user = User.find(params[:user_id])
 		# @ideas = @user.ideas
