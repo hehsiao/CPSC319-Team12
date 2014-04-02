@@ -8,7 +8,10 @@ html{
 
 body {
     font-family: "Open Sans", sans-serif;
-    background: -webkit-radial-gradient(110% 0, farthest-side ellipse, rgba(110, 143, 132, 0.9), rgba(41, 69, 79, 0.89), rgba(110, 123, 149, 0.9)),url("./bgnoise.png");
+    background-color: rgba(119, 140, 166, 0.9);
+    background: radial-gradient(farthest-side ellipse at 10% 0, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url(".bgnoise.png"); 
+    background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url("./bgnoise.png");
+    background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url("./bgnoise.png");
     background-attachment:fixed;
 }
 
@@ -33,7 +36,7 @@ input[type="checkbox"] {
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
     font-weight: normal;
     line-height: 1;
-    color: rgb(192, 192, 192);
+    color: #CCECE7;
 }
 
 .page-header {
@@ -574,9 +577,6 @@ table.dataTable thead .sorting:after {
     margin: 0 0 20px 0;
     border-radius: 0px; 
     text-align: left;
-    top: 0px;   
-    width: 50%;
-    position: fixed;
     z-index: 1001;
 }
 
@@ -632,4 +632,18 @@ button.close {
     text-shadow: 0 1px 0 rgb(255, 255, 255);
     opacity: 0.2;
     filter: alpha(opacity=20);
+}
+
+@media (min-width: 768px) {
+    .alert {
+        text-shadow: none;
+        border: none;
+        margin: 0 0 20px 0;
+        border-radius: 0px; 
+        text-align: left;
+        top: 0px;   
+        width: 50%;
+        position: fixed;
+        z-index: 1001;
+    }
 }
