@@ -16,7 +16,8 @@ body {
 }
 
 a {
-    color: #9bd0f6;
+    color: #B9DDFF;
+
     text-decoration: none;
 }  
 
@@ -37,6 +38,10 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     font-weight: normal;
     line-height: 1;
     color: #CCECE7;
+}
+
+.text-muted {
+    color: #CDCDCD;
 }
 
 .page-header {
