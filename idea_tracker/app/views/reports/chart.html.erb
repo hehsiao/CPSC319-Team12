@@ -69,6 +69,9 @@
         labels: [<%=raw (ykeys.none? ? "'Total'" : (ykeys.collect{|u| "'#{@label3.find(u)}'"}.join ","))%>],
         xLabels: ['<%= @date_type %>'],
         gridIntegers: true,
+        smooth: false,
+        gridTextColor: '#FFF',
+        gridTextFamily: '"Open Sans", sans-serif',
         resize: true
       });
     <% elsif @chart_type.casecmp("pie") == 0 %>

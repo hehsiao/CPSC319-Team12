@@ -161,7 +161,7 @@
 					if(!$('input[name="date_value2"]').val())
 					{
 						var d = new Date();
-						var dstring = d.getFullYear()+"-"+('0' + (d.getMonth()+1)).slice(-2)+"-"+d.getDate();
+						var dstring = d.getFullYear()+"-"+('0' + (d.getMonth()+1)).slice(-2)+"-"+('0' + (d.getDate())).slice(-2);
 						$('input[name="date_value2"]').val(dstring);
 					}
 					if($('input[name="date_value1"]').val() > $('input[name="date_value2"]').val())
