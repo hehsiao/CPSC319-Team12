@@ -15,9 +15,9 @@ class IdeasController < ApplicationController
         @e_ideas << Idea.find_by_id('2')
 
     @recent_ideas = Idea.order("created_at desc").limit(5)
-		@my_ideas = Idea.where(user_id: current_user.id).order("created_at desc")
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user).order("created_at desc")
-		@sub_ideas = Subscription.where(user_id: current_user.id).order("created_at desc") 
+		@my_ideas = Idea.where(user_id: current_user.id).order("updated_at desc")
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user).order("updated_at desc")
+		@sub_ideas = Subscription.where(user_id: current_user.id).order("updated_at desc") 
         
      
 		#respond_to do |format|
