@@ -33,4 +33,16 @@ IdeaTracker::Application.configure do
 
   # Print deprecation notices to the stderr.
   config.active_support.deprecation = :stderr
+
+  #setup email 
+  config.action_mailer.perform_deliveries = true
+  config.action_mailer.default_url_options = {:host => 'localhost:3000'}
+  config.action_mailer.smtp_settings = {
+  :address              => 'smtp.gmail.com',
+  :port                 => 25,
+  :domain               => 'gmail.com',
+  :user_name            => 'cpsc3192014',
+  :password             => 'Gem3192014',
+  :authentication       => 'plain',
+  :enable_starttls_auto => true}
 end
