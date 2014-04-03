@@ -40,6 +40,7 @@
         labels: [<%=raw ykeys.collect{|u| "'#{@label2.find(u)}'"}.join ","%>],
         gridTextColor: '#F8F8F8',
         gridTextFamily: 'Open Sans, sans-serif',
+        gridIntegers: true,
         stacked: true
       });
       
@@ -67,6 +68,7 @@
         ykeys: [<%=raw (ykeys.none? ? "'a'" : (ykeys.join ","))%>],
         labels: [<%=raw (ykeys.none? ? "'Total'" : (ykeys.collect{|u| "'#{@label3.find(u)}'"}.join ","))%>],
         xLabels: ['<%= @date_type %>'],
+        gridIntegers: true,
         resize: true
       });
     <% elsif @chart_type.casecmp("pie") == 0 %>

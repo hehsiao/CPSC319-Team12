@@ -26,23 +26,20 @@
 						</div>
 
 						<div class="form-group">
-								<label for="idea_summary">Idea Name<small> <i class="fa fa-question-circle fa-fw"></i> Short Title. Limited to 40 Characters</small></label>
+								<label for="idea_summary">Idea Name* <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Short Summary. Limited to 40 Characters" ></i> </label>
 								<%= f.text_field :summary, class: 'form-control', placeholder: 'Enter a Short Summary (Max 40 Characters)', maxlength: '40' %>
 						</div>
 
 						<div class="form-group">
-								<%= f.label :description %>
+								<%= f.label :description %>* <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Idea Description" ></i> 
 								<%= f.text_area :description, class: 'form-control', :rows => 5, placeholder: 'Full Descriptions' %>
 						</div>
 
 						<div class="form-group">
-								<%= f.label :keyword_list, "Keywords (separated by commas)" %><br />
+								<%= f.label :keyword_list, "Keywords" %>
+								<i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Choose existing or enter new ones" ></i> 
 								<%= f.text_field :keyword_list, :placeholder => 'Add keywords...', :value => "#{ raw @idea.keyword_list.collect{|u| u }.join ","}" %>
 						</div>
-
-						<div class="form-group">
-
-				</div>
 			</section>
 		</div>
 	</div> 
@@ -57,6 +54,7 @@
 					<div class="form-group">
 						<div class="control-group">
 							<%= f.label :provider_partner_id %>
+							<i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Choose existing or enter new ones" ></i><br>
                 <label class="radio-inline">
                     <input type="radio" name="provider_use" id="optionsRadiosInline1" value="provider_partner_form">New
                 </label>
@@ -110,6 +108,7 @@
           <div class="form-group">
 						<div class="control-group">
 							<%= f.label :receiver_partner_id %>
+							<i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Choose existing or enter new ones" ></i><br>
               <label class="radio-inline">
                   <input type="radio" name="receiver_use" id="optionsRadiosInline1" value="receiver_partner_form">New
               </label>
@@ -175,9 +174,10 @@
 					</div>
 
 					<div class="form-group">
-						<%= f.label :participants %><br>
+						<%= f.label :participants %>
+						<i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Participants will receive emails notifications when Ideas are updated." ></i>
 						<%= f.text_field :participants, :value => "#{(@idea.participants.where(:is_active => 1).collect {|u| u.user.email} << current_user.email).join ","}" %>	
-						<div><i class="fa fa-question-circle fa-fw"></i> You can add other staff as participants to promote discussion.</div>
+						<div> Add other staff as participants to promote discussion.</div>
 					</div>
 				</div>
 			</section>
@@ -189,7 +189,7 @@
 			<section class="widget">
 				<div class="panel-heading">
 					<i class="fa fa-link"></i> Idea Relationships
-					<small>[Connect the ideas]</small>
+					<small>- connecting the ideas</small>
 				</div>
 				<div class="panel-body">
 					<% if @idea.id.nil? #new idea, may have peer/parent id%>
@@ -206,17 +206,17 @@
 					<% end %>
 
 					<div class="form-group">
-						<label for="idea_association_parents">The Parent Idea<small> <i class="fa fa-question-circle fa-fw"></i> Link this idea to the bigger goal.</small></label><br>
+						<label for="idea_association_parents">The Parent Idea <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Link this idea to the bigger goal." ></i> </label><br>
 						<%= f.text_field :association_parents, :value => parent_ideas %>
 					</div>
 
 					<div class="form-group">
-						<label for="idea_association_childs">The Child Ideas<small> <i class="fa fa-question-circle fa-fw"></i> Add the child ideas to this idea. </small></label></br>
+						<label for="idea_association_childs">The Child Ideas  <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Add the child ideas to this idea." ></i> </label></br>
 						<%= f.text_field :association_childs, :value => child_ideas %>
 					</div>
 
 					<div class="form-group">
-						<label for="idea_association_peers">Similiar Ideas<small> <i class="fa fa-question-circle fa-fw"></i> Link this idea to other similar idea or eventually merge them together.</small></label><br>
+						<label for="idea_association_peers">Similiar Ideas <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="Link this idea to other similar idea or eventually merge them together." ></i> </label><br>
 						<%= f.text_field :association_peers, :value => peer_ideas %>
 					</div>
 				</div>
