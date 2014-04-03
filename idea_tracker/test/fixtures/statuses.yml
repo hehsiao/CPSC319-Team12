@@ -1,9 +1,10 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: MyString
+  status: Archived
   position: 1
 
 two:
-  status: MyString
+  status: Active Development
   position: 2
+

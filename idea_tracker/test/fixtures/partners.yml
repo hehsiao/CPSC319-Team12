@@ -1,6 +1,7 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
+  id: 1
   partner_name: UBC CBEL
   contact_name: Justin Ho
   email: jho@ubc.ca
@@ -8,3 +9,4 @@ one:
   secondary_contact_name: Jill 
   secondary_email: jill@ubc.ca
   secondary_phone_num: 6048209384
+

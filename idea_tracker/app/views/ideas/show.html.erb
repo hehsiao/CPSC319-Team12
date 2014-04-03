@@ -14,7 +14,8 @@
     <% else %>
       <%= link_to(
           "Archive This",
-          {:controller => "ideas/#{@idea.id}", :idea => {:status_id => (Status.find_by status: "Archived").id}},
+          {:controller => "ideas/#{@idea.id}", 
+          :idea => {:status_id => (Status.find_by status: "Archived").id}},
           {:method => :put}
       ) %>
     <% end %>
