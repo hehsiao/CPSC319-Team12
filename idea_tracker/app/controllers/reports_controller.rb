@@ -332,8 +332,8 @@ class ReportsController < ApplicationController
  
  
  def popularity_show
-	idea_counter = idea_counter_array
-	category_children = Category.where(parent_id: params[:id])
+	category_children = Category.where(parent_id: params[:id]).where(type_id: '1')
+	idea_counter = idea_counter_array category_children
 	quicksort idea_counter, 0, nil, category_children
 	
 	@category = Category.find(params[:id])
@@ -419,8 +419,7 @@ def quicksort(array,from=0, to=nil, accompany_array)
 end	
  
  # TODO : There must be a simpler way 
- def idea_counter_array
-	category_children = Category.where(parent_id: params[:id])
+ def idea_counter_array category_children
 	
 	# get all the idea_tags where the category_id == any of category_child.id
 	idea_tags = Array.new
