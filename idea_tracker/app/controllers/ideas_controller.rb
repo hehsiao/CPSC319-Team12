@@ -5,9 +5,9 @@ class IdeasController < ApplicationController
 	# GET /ideas.json
 	def index
 		if params[:keyword]
-			@ideas = Idea.tagged_with(params[:keyword])
+			@ideas = Idea.tagged_with(params[:keyword]).order("created_at desc")
 		else
-			@ideas = Idea.all
+			@ideas = Idea.all.order("created_at desc")
 		end
 		# @user = User.find(params[:user_id])
 		# @ideas = @user.ideas
@@ -15,9 +15,9 @@ class IdeasController < ApplicationController
         @e_ideas << Idea.find_by_id('2')
 
     @recent_ideas = Idea.order("created_at desc").limit(5)
-		@my_ideas = Idea.where(user_id: current_user.id)
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user)
-		@sub_ideas = Subscription.where(user_id: current_user.id)  
+		@my_ideas = Idea.where(user_id: current_user.id).order("created_at desc")
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user).order("created_at desc")
+		@sub_ideas = Subscription.where(user_id: current_user.id).order("created_at desc") 
         
      
 		#respond_to do |format|

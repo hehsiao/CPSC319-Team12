@@ -1,4 +1,4 @@
-<h1 class="page-header">Reports</h1>
+<h1 class="page-header">Popularity Reports</h1>
 
 <h5 class="widget">
     <%= link_to '<i class="fa fa-reply"></i> Back'.html_safe, {:action => 'popularity'} %> 
@@ -29,8 +29,6 @@
 		  </tbody>
 		</table>
 	</div>
-	
-<div id="donut_graph" style="height: 500px;"></div>
 
 <div id="line_graph" style="height: 500px;"></div>
 </section>
@@ -50,6 +48,7 @@
         ykeys: ['count'],
         labels: ['Total'],
         xLabels: ['categories'],
+        gridIntegers: true,
         resize: true,
         gridTextColor: '#FFF',
         gridTextFamily: '"Open Sans", sans-serif'
@@ -58,19 +57,3 @@
   });
 </script>
 
-<script>
-  $(function () {
-    new Morris.Donut({
-        element: 'donut_graph',
-        data: [
-		<% index = 0 %>
-        <% @category_children.each do |category| %>
-            {label: "<%= category.category_name %>", value: <%= @idea_counter_array[index] %> },
-			<% index += 1 %>
-        <% end %>
-		],
-        resize: true
-    });
-
-  });
-</script>

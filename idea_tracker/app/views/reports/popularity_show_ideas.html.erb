@@ -1,4 +1,4 @@
-<h1>Popularity Reports</h1>
+<h1 class="page-header">Popularity Reports</h1>
 
 
 <h5 class="widget">
@@ -7,7 +7,8 @@
 
 <section class="widget">
 
-	<h2><%= @category_child.category_name %> </h2>
-	<%= render 'idea_table' %>
-
+	<div class="panel-heading"><i class="fa fa-list-alt"></i> <%= @category_child.category_name %> </div>
+	<div class="panel-body">
+		<%= render 'idea_table' %>
+	</div>
 </section>

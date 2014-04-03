@@ -7,15 +7,15 @@ Setting.create(id: 2, name: 'Default Owner', data: '3')
 
 User.delete_all
 User.create!([
-	{id: 1, email: "janeadminseed@ubc.ca", password: "12341234", first_name: "Jane", last_name: "Adminseed", admin: "1"},
-	{id: 2, email: "johnappleseed@a.a", password: "12341234", first_name: "Jonny", last_name: "Appleseed", admin: "0"},
-	{id: 3, email: "justin@a.a", password: "12341234", first_name: "Justin", last_name: "Ho", admin: "1"},
-	{id: 4, email: "bryliov@gmail.com", password: "12341234", first_name: "Ilya", last_name: "Bryliov", admin: "0"},
-	{id: 5, email: "me@henrychsiao.com", password: "12341234", first_name: "Henry", last_name: "Hsiao", admin: "0"},
-	{id: 6, email: "jimmy.gnahz@gmail.com", password: "12341234", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
-	{id: 7, email: "jtsengyc@gmail.com", password: "12341234", first_name: "Jason", last_name: "Tseng", admin: "0"},
-	{id: 8, email: "ronldho@gmail.com", password: "12341234", first_name: "Ronald", last_name: "Ho", admin: "0"},
-	{id: 9, email: "tanat.ratana@gmail.com", password: "12341234", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
+	{id: 1, email: "janeadminseed@ubc.ca", password: "Cpsc3192014", first_name: "Jane", last_name: "Adminseed", admin: "1"},
+	{id: 2, email: "johnappleseed@a.a", password: "Cpsc3192014", first_name: "Jonny", last_name: "Appleseed", admin: "0"},
+	{id: 3, email: "justin@a.a", password: "Cpsc3192014", first_name: "Justin", last_name: "Ho", admin: "1"},
+	{id: 4, email: "bryliov@gmail.com", password: "Cpsc3192014", first_name: "Ilya", last_name: "Bryliov", admin: "0"},
+	{id: 5, email: "me@henrychsiao.com", password: "Cpsc3192014", first_name: "Henry", last_name: "Hsiao", admin: "0"},
+	{id: 6, email: "jimmy.gnahz@gmail.com", password: "Cpsc3192014", first_name: "Jimmy", last_name: "Zhang", admin: "0"},
+	{id: 7, email: "jtsengyc@gmail.com", password: "Cpsc3192014", first_name: "Jason", last_name: "Tseng", admin: "0"},
+	{id: 8, email: "ronldho@gmail.com", password: "Cpsc3192014", first_name: "Ronald", last_name: "Ho", admin: "0"},
+	{id: 9, email: "tanat.ratana@gmail.com", password: "Cpsc3192014", first_name: "Tanat", last_name: "Ratanakosum", admin: "0"},
 ])
 
 Partner.delete_all
@@ -44,15 +44,15 @@ Partner.create!([
 Idea.delete_all
 Idea.create!([
 
-	{id: 1, owner_id: 3, user_id: 3, provider_partner_id: 1, created_at: "2014-03-1", summary: "Youth in Transition in Psychology 1", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status_id: 1 },
-	{id: 2, owner_id: 2, user_id: 2, provider_partner_id: 2, created_at: "2014-03-3", summary: "Fitness Program 1", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
-	{id: 3, owner_id: 1, user_id: 1, provider_partner_id: 1, created_at: "2014-03-3", summary: "Social Media 1", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},
-	{id: 4, owner_id: 4, user_id: 3, provider_partner_id: 1, created_at: "2014-03-4", summary: "Youth in Transition in Psychology 2", description: "Psychology professor at UBC, Dr ****** ****** has approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status_id: 1 },
-	{id: 5, owner_id: 5, user_id: 2, provider_partner_id: 2, created_at: "2014-03-8", summary: "Fitness Program 2" , description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
-	{id: 6, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-10", summary: "Social Media 2 ", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},
+	{id: 1, owner_id: 3, user_id: 3, provider_partner_id: 1, created_at: "2014-03-1", summary: "Youth in Transition in Psychology", description: "Psychology professor at UBC, Dr as approval for funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status_id: 1 },
+	{id: 2, owner_id: 2, user_id: 2, provider_partner_id: 2, created_at: "2014-03-3", summary: "Spam", description: "Chicken Chicken Chicken", status_id: 2},
+	{id: 3, owner_id: 1, user_id: 1, provider_partner_id: 1, created_at: "2014-03-3", summary: "Social Media", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},
+	{id: 4, owner_id: 4, user_id: 3, provider_partner_id: 1, created_at: "2014-03-4", summary: "Psychology", description: "funding to work on a Youth in Transitions research project with Community Partner 1. There is a PhD student overseeing the project and there may be an opportunity for 1-2 grad students to help with data collection / subject identification and interviews, etc.", status_id: 1 },
+	{id: 5, owner_id: 5, user_id: 2, provider_partner_id: 2, created_at: "2014-03-8", summary: "Marketing" , description: "a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
+	{id: 6, owner_id: 3, user_id: 1, provider_partner_id: 1, created_at: "2014-03-10", summary: "Twitter Advertisement ", description: "Twitter Advertising: social media activities – they aren’t reaching their full potential", status_id: 4},
 	{id: 7, owner_id: 3, user_id: 3, provider_partner_id: 12, receiver_partner_id: 10,  created_at: "2014-03-12", summary: "CBEL", description: "Idea tracker project for CBEL", status_id: 1 },
-	{id: 8, owner_id: 2, user_id: 2, provider_partner_id: 1, created_at: "2014-03-16", summary: "Fitness Program 3", description: "Engagement Studios part 2: to carry on the work of a previous group of CHD students who created a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
-	{id: 9, owner_id: 1, user_id: 1, provider_partner_id: 1, created_at: "2014-03-19", summary: "Social Media 3", description: "come up with a better plan for their current social media activities – they aren’t reaching their full potential", status_id: 4},
+	{id: 8, owner_id: 2, user_id: 2, provider_partner_id: 1, created_at: "2014-03-16", summary: "Facebook Integration", description: "a plan for a sustainable health and fitness program for individuals with developmental disabilities who are accessing the 4 Day Programs delivered by Community Partner 1; students will develop and implement new group fitness activities to support the long term goal of a sustainable program that can be delivered by staff", status_id: 2},
+	{id: 9, owner_id: 1, user_id: 1, provider_partner_id: 1, created_at: "2014-03-19", summary: "Book Club", description: "Primary School is looking for volunteer to start a bookclub for their school program", status_id: 4},
 
 ])
 

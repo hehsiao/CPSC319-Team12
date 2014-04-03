@@ -2,7 +2,7 @@
 <html>
 <head>
 	<title>Idea Tracker</title>
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
 	<%= csrf_meta_tag %>
 	<%= javascript_include_tag "application", "data-turbolinks-track" => true %>
 	<%= stylesheet_link_tag    "application", media: "all", "data-turbolinks-track" => true %>
@@ -22,16 +22,19 @@
 				<a class="navbar-brand" href="/">CBEL Online Idea Tracker</a>
 			</div>
 			<div class="nav navbar-username navbar-right">
-				<%= image_tag gravatar_url_small(current_user) %>
-
-   
+				
 				<% if user_signed_in? %>
 					<% unless current_user.first_name.nil? or current_user.last_name.nil? %>
-					<%=current_user %>
-					<% end %>
+					<a href="/users/edit">
+						<%= image_tag gravatar_url_small(current_user), :style => 'border-radius: 50%;'%>
+						<%= current_user %>
+						<% end %>
 
-					<%= "(Admin) " if current_user.try(:admin?) %>
-					<a href="/users/edit"><i class="fa fa-user fa-fw"></i></a> | 
+						<%= "(Admin) " if current_user.try(:admin?) %>
+						<i class="fa fa-user fa-fw"></i>
+					</a> 
+					| 
+					<script>var pfHeaderImgUrl = '';var pfHeaderTagline = '';var pfdisableClickToDel = 0;var pfHideImages = 0;var pfImageDisplayStyle = 'right';var pfDisablePDF = 0;var pfDisableEmail = 0;var pfDisablePrint = 0;var pfCustomCSS = '';var pfBtVersion='1';(function(){var js, pf;pf = document.createElement('script');pf.type = 'text/javascript';if('https:' == document.location.protocol){js='https://pf-cdn.printfriendly.com/ssl/main.js'}else{js='http://cdn.printfriendly.com/printfriendly.js'}pf.src=js;document.getElementsByTagName('head')[0].appendChild(pf)})();</script><a href="http://www.printfriendly.com" onclick="window.print();return false;" title="Printer Friendly and PDF"><i class="fa fa-print fa-fw"></i></a> | 
 					<%= link_to '<i class="fa fa-sign-out"></i>'.html_safe, destroy_user_session_path, :method => :delete %>
 
 				<% else %>
@@ -52,18 +55,24 @@
 						<a href="/dashboard"><i class="fa fa-dashboard fa-fw"></i><span class="name">Dashboard</span></a>
 					</li>
 					<li>
-						<a href="/ideas"><i class="fa fa-lightbulb-o fa-fw"></i><span class="name">Ideas</span></a>
-<!-- 						<ul class="nav nav-second-level">
+						<a href="#"><i class="fa fa-lightbulb-o fa-fw"></i><span class="name">Ideas <i class="fa fa-chevron-down"></i></span></a>
+						<ul class="nav nav-second-level">
 							<li>
-								<a href="/ideas"><i class=" fa fa-list fa-fw"></i><span class="name"> Recent Ideas</span></a>
+								<a href="/ideas"><span class="name"> All Ideas</span></a>
 							</li>
 							<li>
-								<a href="/ideas">Assigned Ideas</a>
+								<a href="/reports/status"><span class="name"> Ideas By Status</span></a>
 							</li>
 							<li>
-								<a href="/ideas"><i class="fa fa-check fa-fw"></i><span class="name"> Subscribed Ideas</span></a>
+								<a href="/reports/assigned_ideas"><span class="name"> My Ideas</span></a>
 							</li>
-						</ul> -->
+							<li>
+								<a href="/reports/subscribed_ideas"><span class="name"> Subscribed Ideas</span></a>
+							</li>
+							<li>
+								<a href="/reports/recent_ideas"><span class="name"> Recent Ideas</span></a>
+							</li>
+						</ul> 
 						<!-- /.nav-second-level -->
 					</li>
 					<li>
@@ -72,24 +81,28 @@
 					<li>
 						<a href="#"><i class="fa fa-tasks fa-fw"></i><span class="name">Reports  <i class="fa fa-chevron-down"></i></span></a>
 						<ul class="nav nav-second-level">
-							<li>
+							<!--<li>
 								<a href="/reports/status">Status Report</a>
-							</li>
+							</li>-->
+<!-- 							<% if current_user.try(:admin?) %>
 							<li>
 								<a href="/reports/success_rate">Success Rate Report</a>
 							</li>
+							<% end %> -->
 							<li>
 								<a href="/reports/popularity">Popularity Report</a>
 							</li>
 							<li>
+								<a href="/reports/freshness">Stalling Idea Report</a>
+							</li>
+							<li>
 								<a href="/reports/charting">Custom Report</a>
 							</li>
+							<% if current_user.try(:admin?) %>
 							<li>
 								<a href="/reports/activity">User Activity Report</a>
 							</li>
-							<li>
-								<a href="/reports/freshness">Stalling Idea Report</a>
-							</li>
+							<% end %>
 						</ul>
 						<!-- /.nav-second-level -->
 					</li>            
