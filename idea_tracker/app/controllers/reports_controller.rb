@@ -6,17 +6,17 @@ class ReportsController < ApplicationController
   
 	# Will probably move this later, doesn't belong here
 	def assigned_ideas
-		@my_ideas = Idea.where(user_id: current_user.id)
+		@my_ideas = Idea.where(user_id: current_user.id).order("created_at desc")
 	end
   
 	# Will probably move this later, doesn't belong here
 	def subscribed_ideas
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1)
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1).order("created_at desc")
 	end
 	
 	# Will probably move this later, doesn't belong here
 	def recent_ideas
-		@recent_ideas = Idea.order("created_at desc")
+		@recent_ideas = Idea.order("created_at desc").order("created_at desc")
 	end
 	
   def success_rate
@@ -27,7 +27,7 @@ class ReportsController < ApplicationController
    
    @success_rate_array = Array.new
    @users.each do |user|
-	ideas = Idea.where(user_id: user.id)
+	ideas = Idea.where(user_id: user.id).order("created_at desc")
 	owner_of = ideas.size
 	verified = 0
 	ideas.each do |idea|
