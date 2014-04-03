@@ -31,7 +31,11 @@ input[type="number"] {
 }
 
 input[type="checkbox"] {
-    margin: 0 10px 5px 0;
+    margin: 10px 10px 5px 0;
+}
+
+input[type="radio"]{
+    margin: 4px 0 10px 0;
 }
 
 h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small, .h3 small, .h4 small, .h5 small, .h6 small, h1 .small, h2 .small, h3 .small, h4 .small, h5 .small, h6 .small, .h1 .small, .h2 .small, .h3 .small, .h4 .small, .h5 .small, .h6 .small {
@@ -39,6 +43,11 @@ h1 small, h2 small, h3 small, h4 small, h5 small, h6 small, .h1 small, .h2 small
     line-height: 1;
     color: #CCECE7;
 }
+
+.fa-info-circle {
+    font-size:  85%;
+}
+
 
 .text-muted {
     color: #CDCDCD;
