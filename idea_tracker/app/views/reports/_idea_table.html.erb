@@ -15,8 +15,8 @@
 	<tbody>
 	  <% @ideas.each do |idea| %>
 	  <tr onclick="document.location = '/ideas/<%=idea.id%>';">
-		<td><%= idea.user_id %></td>
-		<td><%= idea.summary %></td>
+		<td><%= idea.owner %></td>
+    <td><%= link_to idea.summary, idea_path(idea) %></td>
 		<td><%= truncate(idea.description, length:70) %></td>
 		<td><%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %></td>
 		<td><%= idea.last_modified %></td>
