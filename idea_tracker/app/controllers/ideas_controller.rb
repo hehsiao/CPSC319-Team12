@@ -7,17 +7,17 @@ class IdeasController < ApplicationController
 		if params[:keyword]
 			@ideas = Idea.tagged_with(params[:keyword]).order("created_at desc")
 		else
-			@ideas = Idea.all.order("created_at desc")
+			@ideas = Idea.all.order("created_at desc").where("status_id != 2")
 		end
 		# @user = User.find(params[:user_id])
 		# @ideas = @user.ideas
 		@e_ideas = []
         @e_ideas << Idea.find_by_id('2')
 
-    @recent_ideas = Idea.order("created_at desc").limit(5)
-		@my_ideas = Idea.where(user_id: current_user.id).order("updated_at desc")
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user).order("updated_at desc")
-		@sub_ideas = Subscription.where(user_id: current_user.id).order("updated_at desc") 
+    @recent_ideas = Idea.where("status_id != 2").order("created_at desc").limit(5)
+		@my_ideas = Idea.where(user_id: current_user.id).where("status_id != 2").order("updated_at desc")
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", current_user).where("status_id != 2").order("updated_at desc")
+		@sub_ideas = Subscription.where(user_id: current_user.id).where("status_id != 2").order("updated_at desc") 
         
      
 		#respond_to do |format|

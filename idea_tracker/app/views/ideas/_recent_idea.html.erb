@@ -3,7 +3,8 @@
       <th>Summary</th>
       <th>Description</th>
       <th>Submission date</th>
-      <th></th>
+      <th>Status</th>
+      <th class="no-sort"></th>
     </tr>
   </thead>
 
@@ -13,7 +14,8 @@
       <td><%= link_to idea.summary, idea_path(idea) %></td>
       <td><%= truncate(idea.description, length:70) %></td>
       <td><abbr title="<%= idea.created_at.in_time_zone('Pacific Time (US & Canada)').to_s(:long) %>" ><%= time_ago_in_words(idea.created_at) %> ago</abbr></td>
-      <td><%= link_to 'Show', idea %></td>
+      <td><%= idea.status %></td>
+      <td><%= link_to '<i class="fa fa-search"></i>'.html_safe, idea, title: 'Show', ref: 'tooltip' %></td>
     </tr>
     <% end %>
   </tbody>
