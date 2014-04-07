@@ -7,7 +7,7 @@ class DashboardController < ApplicationController
 		@recent_ideas = Idea.order("created_at desc").limit(5)
 		@my_ideas = Idea.where(user_id: current_user.id).order("created_at desc").limit(5)
 		@idea_by_day_past_month = Idea.where("Date(created_at) >= ?", 1.month.ago).group("Date(created_at)").count
-		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1).order("created_at desc").limit(5)
+		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1).order("updated_at desc").limit(5)
 		@sub_ideas = Subscription.where(user_id: current_user.id)  
 
 		@comments = Commontator::Comment.all 

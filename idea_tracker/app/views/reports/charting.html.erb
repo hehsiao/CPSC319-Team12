@@ -65,6 +65,7 @@
 					<% end %>
 				</div>
 			</div>
+			
 			<script>
 				function update_display()
 				{
@@ -145,8 +146,8 @@
 			<input type="date" name="date_value2" required />
 
 
-
-			<%= submit_tag("Generate Chart", :id => "gen_chart") %>
+			<br>
+			<%= submit_tag("Generate Chart", :id => "gen_chart" , :class => 'btn btn-primary') %>
 		<% end %>
 		<script>
 			$('#gen_chart').click(function(e){

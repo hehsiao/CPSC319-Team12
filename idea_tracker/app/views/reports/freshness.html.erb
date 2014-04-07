@@ -27,7 +27,8 @@
               <input type="checkbox" name="status_list[]" value="<%= u.id %>" <%= "checked" if "#{u.id}".in?(@check_status) %> > <%= "#{u}" %> <br>
             <% end %>
           </div>
-          <%= submit_tag("Update Report", :id => "submit_btn") %>
+		  <br>
+          <%= submit_tag("Update Report", :id => "submit_btn", :class => 'btn btn-primary') %>
         <% end %>
       </div>
     </section>

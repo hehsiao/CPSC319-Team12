@@ -29,13 +29,15 @@
               <input type="checkbox" name="user_lists[]" value="<%= u.id %>" <%= "#{u.id}".in?(@users.to_a) ? "checked" : ""%> > <%= "#{u}" %><br>
             <% end %>
           </div>
+		  <br>
           <div>
             From
             <input type="date" name="date_value1" value="<%=@date1%>" />
             To
             <input type="date" name="date_value2" value="<%=@date2%>" />
           </div>
-          <%= submit_tag("Update Report", :id => "gen_chart") %>
+		  <br>
+          <%= submit_tag("Update Report", :id => "gen_chart", :class => 'btn btn-primary') %>
         <% end %>
 
       </div>
