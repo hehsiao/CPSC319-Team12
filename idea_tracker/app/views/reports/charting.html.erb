@@ -66,76 +66,7 @@
 				</div>
 			</div>
 			
-			<script>
-				function update_display()
-				{
-					$('#aggregate1_select').show();
-					$('#aggregate2_select, #aggregate3_select').hide();
 
-					switch($('#chart_type option:selected').val())
-					{
-						case "line":
-							$('#aggregate3_select').show();
-							$('#aggregate1_select, #aggregate2_select').hide();
-							break;
-
-						case "bar":
-							$('#aggregate2_select').show();
-							$('.options2').hide();
-					  		switch($('#aggregate2 option:selected').val())
-					  		{
-					  			case "status_id":
-					  				$('#stage2').show();
-					  				break;
-					  			case "owner_id":
-					  			case "user_id":
-					  				$('#user2').show();
-					  				break;
-					  			case "receiver_partner_id":
-					  			case "provider_partner_id":
-					  				$('#partner2').show();
-					  				break;
-					  			default:
-					  				break;
-					  		}
-
-					  	default:
-					  		$('.options1').hide();
-							switch($('#aggregate1 option:selected').val())
-							{
-								case "status_id":
-									$('#stage1').show();
-									break;
-								case "owner_id":
-								case "user_id":
-									$('#user1').show();
-									break;
-								case "receiver_partner_id":
-								case "provider_partner_id":
-									$('#partner1').show();
-									break;
-								default:
-									break;
-							}
-							break;
-					}		
-					
-				}
-				$('#chart_type').change(function(){
-					update_display();
-				});
-				$('#aggregate1, #aggregate2').change(function(){
-					var b = $(this).siblings();
-					var c = b.find('input:checkbox');
-					c.prop('checked', false);
-					update_display();
-				});
-
-				$(document).ready(function(){
-					update_display();
-				});
-				
-			</script>
 
 
 			<%= label_tag(:date_tag, "Filter By") %>
@@ -149,7 +80,97 @@
 			<br>
 			<%= submit_tag("Generate Chart", :id => "gen_chart" , :class => 'btn btn-primary') %>
 		<% end %>
+
 		<script>
+			function update_display()
+			{
+				$('#aggregate1_select').show();
+				$('#aggregate2_select, #aggregate3_select').hide();
+
+				switch($('#chart_type option:selected').val())
+				{
+					case "line":
+						$('#aggregate3_select').show();
+						$('#aggregate1_select, #aggregate2_select').hide();						
+						if($('#aggregate3').val() == "commontator_comments")
+						{
+							$('#date_tag option[value="status_date_change"]').attr('disabled','disabled');
+						}
+						break;
+
+					case "bar":
+						$('#aggregate2_select').show();
+						$('.options2').hide();
+				  		switch($('#aggregate2 option:selected').val())
+				  		{
+				  			case "status_id":
+				  				$('#stage2').show();
+				  				break;
+				  			case "owner_id":
+				  			case "user_id":
+				  				$('#user2').show();
+				  				break;
+				  			case "receiver_partner_id":
+				  			case "provider_partner_id":
+				  				$('#partner2').show();
+				  				break;
+				  			default:
+				  				break;
+				  		}
+
+				  	default:
+				  		$('#date_tag option:disabled').removeAttr('disabled');
+				  		$('.options1').hide();
+						switch($('#aggregate1 option:selected').val())
+						{
+							case "status_id":
+								$('#stage1').show();
+								break;
+							case "owner_id":
+							case "user_id":
+								$('#user1').show();
+								break;
+							case "receiver_partner_id":
+							case "provider_partner_id":
+								$('#partner1').show();
+								break;
+							default:
+								break;
+						}
+						break;
+				}		
+				
+			}
+			$('#chart_type').change(function(){
+				update_display();
+			});
+			$('#aggregate1, #aggregate2').change(function(){
+				var b = $(this).siblings();
+				var c = b.find('input:checkbox');
+				c.prop('checked', false);
+				update_display();
+			});
+
+			$(document).ready(function(){
+				update_display();
+			});
+			
+		</script>
+
+		<script>
+
+			$('#aggregate3').change(function(){
+				if($(this).val() == "commontator_comments")
+				{
+					$('#date_tag option[value="status_date_change"]').attr('disabled','disabled');
+				}
+				else
+				{
+					$('#date_tag option[value="status_date_change"]').removeAttr('disabled');
+				}
+				
+			});
+
 			$('#gen_chart').click(function(e){
 				if($('#chart_type option:selected').val() == "bar" && !$('#aggregate2 option:selected').val())
 				{
