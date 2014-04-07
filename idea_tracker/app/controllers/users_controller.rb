@@ -29,9 +29,11 @@ class UsersController < ApplicationController
   def update
   end
 
-  def destroy
-    user = User.find(params[:id]).destroy
-    flash[:notice] = "User '#{user.email}' destroyed successfully."
+  def delete
+    user = User.find(params[:id])
+    if user.destroy
+      flash[:notice] = "User '#{user.email}' removed successfully."
+    end
     redirect_to(:action => 'index')
   end
 
