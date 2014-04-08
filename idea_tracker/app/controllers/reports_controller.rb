@@ -1,49 +1,20 @@
 class ReportsController < ApplicationController
   before_action :check_user_permission
-
-  def index
-  end
   
 	# Will probably move this later, doesn't belong here
 	def assigned_ideas
 		@my_ideas = Idea.where(user_id: current_user.id).order("created_at desc")
 	end
-  
+
 	# Will probably move this later, doesn't belong here
 	def subscribed_ideas
 		@subscribed_ideas = Idea.joins(:participants).where("subscriptions.user_id = ?", 1).order("created_at desc")
 	end
-	
+
 	# Will probably move this later, doesn't belong here
 	def recent_ideas
 		@recent_ideas = Idea.order("created_at desc").order("created_at desc")
 	end
-	
-  def success_rate
-   @users = User.all
-   status_size = Status.all.size
-   final_status = Status.where(position: status_size)
-   final_status_id = final_status.at(0).id
-   
-   @success_rate_array = Array.new
-   @users.each do |user|
-	ideas = Idea.where(user_id: user.id).order("created_at desc")
-	owner_of = ideas.size
-	verified = 0
-	ideas.each do |idea|
-		if idea.status_id == final_status_id
-			verified += 1
-		end
-	end
-	
-	if verified == 0
-		@success_rate_array << 0
-	else
-		rate = verified*100/owner_of
-		@success_rate_array << rate
-	end
-   end 
-  end
  
  def status
 	@status = Status.all
@@ -301,28 +272,11 @@ class ReportsController < ApplicationController
 
  end
 
-
- def pending_ideas
-	
- end
- 
- def pending_ideas_show
-	@days = params[:submit]
-	@ideas = Idea.where(:created_at => Time.now-(60*60*24*365*100)..Time.now - (60*60*24*@days.to_i))
-	@all_status = Status.all
- end
  
  def status_show
    @ideas = Idea.where(status_id: params[:id])
    @status = Status.find(params[:id])
    @all_status = Status.all
- end
- 
- 
- def success_rate_show
-	@ideas = Idea.where(user_id: params[:id])
-	@user = User.find(params[:id])
-	@all_status = Status.all
  end
  
  
