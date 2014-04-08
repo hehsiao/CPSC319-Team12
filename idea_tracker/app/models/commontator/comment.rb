@@ -64,13 +64,13 @@ module Commontator
     def created_timestamp
       config = thread.config
       "#{config.comment_create_verb_past.capitalize} on " + \
-        created_at.strftime(config.timestamp_format)
+        created_at.in_time_zone('Pacific Time (US & Canada)').strftime(config.timestamp_format)
     end
 
     def updated_timestamp
       config = thread.config
       is_modified? ? ("Last #{config.comment_edit_verb_past} on " + \
-        updated_at.strftime(config.timestamp_format)) : ''
+        updated_at.in_time_zone('Pacific Time (US & Canada)').strftime(config.timestamp_format)) : ''
     end
 
     ##################
