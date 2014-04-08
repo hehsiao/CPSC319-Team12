@@ -104,12 +104,12 @@ class IdeasController < ApplicationController
 		@categories = Category.top_categories
 		user_list
 		commontator_thread_show(@idea) 
-		if @idea.provider_partner_id != nil
+		if @idea.provider_partner_id != nil and Partner.exists?(@idea.provider_partner_id)
 			@provider = Partner.find(@idea.provider_partner_id).partner_name
 		else 
 			@provider = "None Assigned"
 		end
-		if @idea.receiver_partner_id != nil
+		if @idea.receiver_partner_id != nil and Partner.exists?(@idea.receiver_partner_id)
 			@receiver = Partner.find(@idea.receiver_partner_id).partner_name
 		else 
 			@receiver = "None Assigned"
@@ -220,7 +220,7 @@ class IdeasController < ApplicationController
 				# Category Tags
 				handle_category_tags
 				handle_associations
-                handle_participations
+        handle_participations
 				keyword_list
 				idea_list
 				# Email Notification
