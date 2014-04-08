@@ -2,7 +2,7 @@ require 'test_helper'
 
 class ReportsControllerTest < ActionController::TestCase
   setup do
-    @user = User.create(id: 2, email: "janeadminseed@ubc.ca", password: "12341234", first_name: "Jane", last_name: "Adminseed", admin: "1")
+    @user = User.create(id: 1, email: "janeadminseed@ubc.ca", password: "12341234", first_name: "Jane", last_name: "Adminseed", admin: "1")
     sign_in @user
   end
 
@@ -45,5 +45,32 @@ class ReportsControllerTest < ActionController::TestCase
   	get :freshness
   	assert_response :success
   	assert_select '.dataTable'
+  end
+
+  test "should get assigned ideas" do
+    get :assigned_ideas
+    assert_response :success
+  end
+
+  test "should get subscribed ideas" do
+    get :subscribed_ideas
+    assert_response :success
+  end
+
+  test "should get recent ideas" do
+    get :recent_ideas
+    assert_response :success
+  end
+
+  test "should get status" do
+    get :status
+    assert_response :success
+    get :status_show, id:"1"
+    assert_response :success
+  end
+
+  test "should get popularity" do
+    get :popularity
+    assert_response :success
   end
 end
