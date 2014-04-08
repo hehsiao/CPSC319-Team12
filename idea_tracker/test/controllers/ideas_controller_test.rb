@@ -39,8 +39,8 @@ class IdeasControllerTest < ActionController::TestCase
 
   test "should update idea" do
     patch :update, id: @idea, idea: { description: @idea.description, last_modified: @idea.last_modified, provider_partner_id: @idea.provider_partner_id, receiver_partner_id: @idea.receiver_partner_id, status_date_change: @idea.status_date_change, submission_date: @idea.created_at, user_id: @idea.user_id }
-    #assert_redirected_to idea_path(@idea.id)
-    assert_response :success
+    assert_redirected_to idea_path(@idea.id)
+    # assert_response :success
   end
 
   test "should destroy idea" do
