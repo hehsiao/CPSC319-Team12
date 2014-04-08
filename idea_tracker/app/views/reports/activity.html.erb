@@ -23,7 +23,7 @@
         
         <%= form_tag("activity", method: "get") do %>
           <div>
-            <%= label_tag(:user_lists, "Show Only (No check = All Users)") %>
+            <label> Show only the selected users: <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="No check = All Users" ></i></label>
             <br>
             <% User.all.each do |u| %>
               <input type="checkbox" name="user_lists[]" value="<%= u.id %>" <%= "#{u.id}".in?(@users.to_a) ? "checked" : ""%> > <%= "#{u}" %><br>

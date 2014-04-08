@@ -8,7 +8,7 @@
       	<%= form_tag("chart", method: "get") do %>
 			<%= label_tag(:chart_type, "Chart Type") %>
 			<%= select_tag(:chart_type, options_for_select([["Bar", "bar"], ["Line", "line"], ["Pie", "pie"], ["Table", "table"]])) %>
-
+			<br>
 			<div id="aggregate3_select">
 				<%= label_tag(:aggregate3, "Aggregate On") %>
 				<%= select_tag(:aggregate3, options_for_select([["Idea", "ideas"],["Comment", "commontator_comments"]])) %>
@@ -22,10 +22,11 @@
 				<%= select_tag(:date_type, options_for_select([["Daily", "day"],["Monthly", "month"], ["Yearly", "year"]])) %>
 
 			</div>
-
+			<br>
 			<div id="aggregate1_select">
 				<%= label_tag(:aggregate1, "Aggregate By") %>
 				<%= select_tag(:aggregate1, options_for_select([["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "provider_partner_id"]]) + options_from_collection_for_select(Category.top_categories, :category_name, :category_name)) %>
+				<br>
 				<br>
 				<%= label_tag(:show_options1, "Show Only") %>
 				<div class="options1" id="user1">
@@ -44,11 +45,13 @@
 					<% end %>
 				</div>
 			</div>
+			<br>
 			<div id="aggregate2_select">
 				<%= label_tag(:aggregate2, "Aggregate By") %>
 				<%= select_tag(:aggregate2, options_for_select([["",""],["Stage", "status_id"], ["Owner", "owner_id"], ["Creator", "user_id"], ["Provider", "provider_partner_id"], ["Receiver", "receiver_partner_id"]]) + options_from_collection_for_select(Category.top_categories, :category_name, :category_name)) %>
-				<br>
+				<br><br>
 				<%= label_tag(:show_options2, "Show Only") %>
+				<br>
 				<div class="options2" id="user2">
 					<% User.all.each do |u| %>
 						<input type="checkbox" name="show_options2[]" value="<%= u.id %>" > <%= u %><br>

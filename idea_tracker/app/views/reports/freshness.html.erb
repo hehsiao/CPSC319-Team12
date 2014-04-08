@@ -19,8 +19,9 @@
             <%= label_tag(:ndays, "Show only ideas without activities for at least") %>
             <input type="number" name="ndays" value="<%= @ndays %>" size="2" min="0"/> days
           </div>
+		  <br>
           <div>
-            <%= label_tag(:user_lists, "Show Only (No check = All Stages)") %>
+            <label for="user_list">Show only ideas in the selected stages: <i class="fa fa-info-circle fa-fw"  rel="tooltip" title="All Stages will be selected if none are checked"></i> </label>
             <br>
             
             <% Status.all.each do |u| %>
