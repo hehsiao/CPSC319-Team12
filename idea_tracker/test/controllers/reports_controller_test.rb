@@ -35,4 +35,15 @@ class ReportsControllerTest < ActionController::TestCase
   	assert_select "#container"
   end
 
+  test "should get user activity" do
+  	get :activity
+  	assert_response :success
+  	assert_select '.dataTable'
+  end
+
+  test "should get stalling ideas" do
+  	get :freshness
+  	assert_response :success
+  	assert_select '.dataTable'
+  end
 end
