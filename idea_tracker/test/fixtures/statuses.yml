@@ -1,10 +1,37 @@
 # Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
 
 one:
-  status: Archived
-  position: 1
+    status: New Submission
+    position: 1
+    id: 1
 
 two:
-  status: Active Development
-  position: 2
+    status: Removed
+    position: 2
+    id: 2
+
+three:
+    status: Verified
+    position: 3
+    id: 3
+
+five:
+    status: Referral Pending
+    position: 5
+    id: 5
+
+four:
+    status: Active Development
+    position: 4
+    id: 4
+
+six:
+    status: Confirmed
+    position: 6
+    id: 6
+
+seven:
+    status: Archived
+    position: 7
+    id: 7
 
