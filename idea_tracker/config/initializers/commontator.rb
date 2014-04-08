@@ -116,7 +116,7 @@ Commontator.configure do |config|
   #   :ve (highest voted first; earliest first if tied)
   #   :vl (highest voted first; latest first if tied)
   # Default: :e (earliest comment first)
-  config.comments_order = :e
+  config.comments_order = :l
 
   # Whether users can read threads closed by moderators
   # Default: true
@@ -125,7 +125,7 @@ Commontator.configure do |config|
   # Whether to show that comments deleted by a moderator actually existed
   # (the content will be hidden either way)
   # Default: true
-  config.deleted_comments_are_visible = true
+  config.deleted_comments_are_visible = false
 
   # Proc called with thread and user as arguments
   # Returns true iif the user should be allowed to read that thread
