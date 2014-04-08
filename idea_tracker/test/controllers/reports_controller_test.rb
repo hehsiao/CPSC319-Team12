@@ -35,4 +35,34 @@ class ReportsControllerTest < ActionController::TestCase
   	assert_select "#container"
   end
 
+    test "should show status_show" do
+	get :status_show,id: 1
+    assert_response :success
+  end  
+
+  test "should show popularity" do 
+	get :popularity
+	assert_response :success
+  end
+  
+  test "should show popularity_show" do
+	get :popularity_show,id: 1
+	assert_response :success  
+  end
+
+   test "should show assigned_ideas" do 
+	get :assigned_ideas
+	assert_response :success
+  end
+
+    test "should show subscribed_ideas" do 
+	get :subscribed_ideas
+	assert_response :success
+  end
+
+    test "should show recent_ideas" do 
+	get :recent_ideas
+	assert_response :success
+  end
+
 end
