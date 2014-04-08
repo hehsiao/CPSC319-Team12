@@ -51,11 +51,4 @@ class IdeasControllerTest < ActionController::TestCase
     assert_redirected_to ideas_path
   end
 
-  # test "add participant" do
-  #   assert_difference('Partipant.count') do
-  #     post :handle_participations, participant: 
-  #   end
-
-  # end
-
 end
