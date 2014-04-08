@@ -1,9 +1,13 @@
 class Partner < ActiveRecord::Base
 	has_many :ideas
 	
-	validates_presence_of :partner_name
-	validates_presence_of :contact_name
-	validates_presence_of :email
+	validates :partner_name, :presence => true,
+					  :length => { :maximum => 100 }					  
+	validates :contact_name, :presence => true,
+					  :length => { :maximum => 100 }						  
+	validates :email, :presence => true,
+					  :length => { :maximum => 100 },
+                      :confirmation => true
 
 	def to_s
 		self.partner_name
