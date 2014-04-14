@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140326075618) do
+ActiveRecord::Schema.define(version: 20140326074627) do
 
   create_table "activities", force: true do |t|
     t.integer  "trackable_id"
@@ -113,11 +113,11 @@ ActiveRecord::Schema.define(version: 20140326075618) do
     t.integer  "receiver_partner_id"
     t.date     "submission_date"
     t.date     "last_modified"
-    t.datetime "status_date_change"
+    t.datetime "status_date_change",  default: '2014-04-01 06:44:16'
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "summary"
-    t.integer  "status_id",           default: 1, null: false
+    t.integer  "status_id",           default: 1,                     null: false
     t.integer  "owner_id"
   end
 
