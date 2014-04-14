@@ -14,6 +14,22 @@ class IdeasControllerTest < ActionController::TestCase
     assert_not_nil assigns(:ideas)
   end
 
+  test "should get index with keyword" do
+    get :index, keyword: "social"
+    assert_response :success
+    assert_not_nil assigns(:ideas)
+  end
+
+  test "should export to csv" do
+    get :to_csv, id: "1"
+    assert_response :success
+  end
+
+  test "should send email" do
+    get :sendemail, id: "1", send_mail: "janeadminseed@ubc.ca"
+    assert_redirected_to idea_path(1)
+  end
+
   test "should get new" do
     get :new
     assert_response :success

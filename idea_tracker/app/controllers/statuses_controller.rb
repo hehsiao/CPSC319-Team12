@@ -6,7 +6,7 @@ class StatusesController < ApplicationController
   # GET /statuses
   # GET /statuses.json
   def index
-    @statuses = Status.all
+    @statuses = Status.all.order("position asc")
   end
 
   # GET /statuses/1
