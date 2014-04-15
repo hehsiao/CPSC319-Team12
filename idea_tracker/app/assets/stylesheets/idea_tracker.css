@@ -9,7 +9,7 @@ html{
 body {
     font-family: "Open Sans", sans-serif;
     background-color: rgba(119, 140, 166, 0.9);
-    background: radial-gradient(farthest-side ellipse at 10% 0, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url(".bgnoise.png"); 
+    background: radial-gradient(farthest-side ellipse at 10% 0, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url("./bgnoise.png"); 
     background: -webkit-radial-gradient(10% 0, farthest-side ellipse, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url("./bgnoise.png");
     background: -moz-radial-gradient(10% 0, farthest-side ellipse, rgba(129, 164, 211, 0.9) 20%, rgba(139, 180, 195, 0.95)40%, rgba(121, 144, 192, 0.9)120%),url("./bgnoise.png");
     background-attachment:fixed;
