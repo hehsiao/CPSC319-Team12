@@ -23,7 +23,7 @@
       </div>
     </section>
   </div>
-  <% if @partner.secondary_contact_name != (nil || "") %>
+  <% if @partner.secondary_contact_name.present? %>
   <div class="col-md-4">
     <section class="widget">
       <div class="panel-header"><i class="fa fa-user"></i> <%= @partner.secondary_contact_name %></div>
