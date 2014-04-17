@@ -40,7 +40,7 @@ class IdeasController < ApplicationController
 	            end
             end  
 
-		header = ["required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project name", "description","Project Website","Receiver Contact"]
+		header = ["Required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project Name", "Description","Project Website","Receiver Contact"]
 	    file = CSV.generate do |csv|
 	    	csv << header
 			@export_ideas.each do |export_idea|
@@ -72,7 +72,7 @@ class IdeasController < ApplicationController
 
     	    puts "-------------------------------------"+params[:id].inspect+"----------------------------------------"
         
-		header = ["required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project name", "description","Project Website","Receiver Contact"]
+		header = ["Required/Optional","Major","Project Type","Community Parner","Additional Community Partner","Name of the Partners","Project Name", "Description","Project Website","Receiver Contact"]
 	    file = CSV.generate do |csv|
 	    	csv << header
 	    	    #get type
