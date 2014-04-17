@@ -6,8 +6,7 @@
   <body>
     <h2>Idea Tracker</h2>
     <p>
-      <h3> <%= @user %> commented on an <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a> you are subscribed to. </h3>
-    </br>
+      <%= @user %> commented on <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a>, an idea that you are subscribed to.
     </br>
       <%= @user.first_name %> wrote: "<%=@comment%>"
     </p>

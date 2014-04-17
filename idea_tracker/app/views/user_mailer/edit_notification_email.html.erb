@@ -5,12 +5,8 @@
   </head>
   <body>
     <h2> Idea Tracker </h2>
-    <h3>
-      <%= @user %> has made edited an <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a> you are subscribed to.
-    </h3>
-<!--       <p>
-      Project: <%= @idea.summary %> </br>
-      Description: <%= @idea.description%>  </br>
-    </p> -->
+    <p>
+      <%= @user %> has edited <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a>, an idea that you are subscribed to.
+    </p>
   </body>
 </html>
