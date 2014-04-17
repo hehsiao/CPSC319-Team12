@@ -4,17 +4,12 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1> <%= @user.first_name%> post a comment on idea: <%= @idea.summary %> on IdeaTracker</h1>
+    <h2>Idea Tracker</h2>
     <p>
-      
-      <%= @user %> left a comment on the idea <%= @idea.summary %> 
+      <h3> <%= @user %> commented on an <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a> you are subscribed to. </h3>
     </br>
     </br>
-      <%=@comment%> 
+      <%= @user.first_name %> wrote: "<%=@comment%>"
     </p>
-    <p>
-      To login to the site, just follow this link: "http://localhost:3000/ideas/<%= @idea.id%>".
-    </p>
-    <p>Thanks for using Idea Tracker and have a great day!</p>
   </body>
 </html>

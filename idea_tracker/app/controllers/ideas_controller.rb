@@ -255,12 +255,12 @@ class IdeasController < ApplicationController
      
       puts "to this email" + " " + params[:send_mail].inspect
 
-      UserMailer.idea_email(@idea, params[:send_mail]).deliver
+      UserMailer.idea_email(@idea, params[:send_mail], @user).deliver
 
       
       respond_to do |format|
       if params[:send_mail].present?
-        format.html { redirect_to @idea, notice: 'Idea was successfully send.' }
+        format.html { redirect_to @idea, notice: 'Idea was successfully sent.' }
         format.json { render action: 'show', status: :created, location: @idea }
       else
         format.html { redirect_to @idea, notice: 'require to enter email address' }

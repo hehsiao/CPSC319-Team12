@@ -4,20 +4,13 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <div class = "col-lg-4">
-      <div class = "panel panel-primary">
-        <div class = "panel-heading"> idea <%= @idea.summary %> has been edited on IdeaTracker</div>
-        <div class = "panel-body">
-          <p>
-            
-            <%= @user %> edit the idea <%= @idea.id %> 
-          </p>
-          <p>
-            To login to the site, just follow this link: "http://localhost:3000/ideas/<%= @idea.id%>".
-          </p>
-        </div>
-        <dic class = "panel-footer"> Thanks for using Idea Tracker and have a great day! </div>
-      </div>
-    </div>  
+    <h2> Idea Tracker </h2>
+    <h3>
+      <%= @user %> has made edited an <a href="http://it.henrychsiao.com/ideas/<%= @idea.id%>"><%= @idea.summary %></a> you are subscribed to.
+    </h3>
+<!--       <p>
+      Project: <%= @idea.summary %> </br>
+      Description: <%= @idea.description%>  </br>
+    </p> -->
   </body>
 </html>

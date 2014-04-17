@@ -113,11 +113,11 @@ ActiveRecord::Schema.define(version: 20140415190135) do
     t.integer  "receiver_partner_id"
     t.date     "submission_date"
     t.date     "last_modified"
-    t.datetime "status_date_change"
+    t.datetime "status_date_change",  default: '2014-04-17 07:22:21'
     t.datetime "created_at"
     t.datetime "updated_at"
     t.string   "summary"
-    t.integer  "status_id",           default: 1, null: false
+    t.integer  "status_id",           default: 1,                     null: false
     t.integer  "owner_id"
   end
 

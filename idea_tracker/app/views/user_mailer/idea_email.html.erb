@@ -4,14 +4,14 @@
     <meta content='text/html; charset=UTF-8' http-equiv='Content-Type' />
   </head>
   <body>
-    <h1>CBEL: This particular idea might suit your interest</h1>
+    <h2>Idea Tracker</h2>
     <p>
-      
-      idea <%= @idea.summary %> 
+      <h3>
+      <%=@user.first_name%> thinks that this project is of interest to you!
+      </h3>
       </br>
-      <%= @idea.description%> 
+      Project: <%= @idea.summary %> </br>
+      Description: <%= @idea.description%>  </br>
     </p>
-
-    <p>Thanks for using Idea Tracker and have a great day!</p>
   </body>
 </html>

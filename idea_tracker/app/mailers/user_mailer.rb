@@ -3,8 +3,8 @@ class UserMailer < ActionMailer::Base
 
   def welcome_email(user)
   	@user = user
-  	@url = 'http://localhost:3000/'
-  	mail(to: user.email, subject: 'welcome to the Ideal Tracker')
+  	@url = 'http://it.henrychsiao.com/'
+  	mail(to: user.email, subject: 'Welcome to Idea Tracker')
     #flash[:notice] = "sended successfully"
   end
 
@@ -21,12 +21,13 @@ class UserMailer < ActionMailer::Base
     end
 
     if @all_email.present?
-    mail(to: @all_email, subject: 'Someone edit idea on Ideal Tracker')
+    mail(to: @all_email, subject: @user.first_name + ' has updated ' + @idea.summary +  ' on Idea Tracker')
     end
     #flash[:notice] = "sended successfully"
   end
 
-  def idea_email(idea, email)
+  def idea_email(idea, email, user)
+    @user = user
     @email = email
     @idea = idea
     @related_users = Subscription.where(idea_id: idea.id)
@@ -34,7 +35,7 @@ class UserMailer < ActionMailer::Base
     end
 
     if @email.present?
-    mail(to: @email, subject: 'Idea for YOU!!!')
+    mail(to: @email, subject: @user.first_name + ' thinks you might be interested in this project!')
     end
     #flash[:notice] = "sended successfully"
   end
@@ -54,7 +55,7 @@ class UserMailer < ActionMailer::Base
     end
 
     if @all_email.present?
-      mail(to: @all_email, subject: 'Someone post a comment on Ideal Tracker')
+      mail(to: @all_email, subject: @user.first_name + ' has posted a comment on Idea Tracker')
     end
   end
 end
